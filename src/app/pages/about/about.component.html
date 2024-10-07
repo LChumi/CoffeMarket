@@ -1,3 +1,13 @@
+<div id="page-container"
+     class="mx-auto flex min-h-dvh w-full min-w[320px] flex-col bg-gray-100 dark:bg-gray-900 dark:text-gar-100">
+  <header
+    id="page-header"
+    class="z-1 flex flex-none items-center bg-white shadow-sm dark:bg-gray-700">
+    <div class="container mx-auto px-8 lg:px-8 xl:max-w-7xl">
+      <app-navbar></app-navbar>
+    </div>
+
+  </header>
 <main>
     <div class="relative pt-16 pb-32 flex content-center items-center justify-center min-h-screen-75">
         <div class="absolute top-0 w-full h-full bg-center bg-cover" style="background-image: url('/images/slidebar/coffe_slide1.jpeg');">
@@ -36,7 +46,7 @@
                                 </svg>
                             </div>
                             <h6 class="text-xl font-semibold">Misión</h6>
-                            <p class="mt-2 mb-4 text-gray-400">Nuestra misión: Hacer que cada taza de café sea una experiencia excepcional</p>
+                            <p class="mt-2 mb-4 text-gray-400">En Bunna Café de Especialidad, nuestra misión es ofrecer una experiencia cafetera que inspire a nuestros clientes a descubrir y apreciar la riqueza del café ecuatoriano. Nos dedicamos a educar sobre el arte del filtrado, promover prácticas sostenibles y apoyar a los productores locales, mientras brindamos un espacio acogedor donde cada taza refleja la pasión por la calidad y la tradición.</p>
                         </div>
                     </div>
                 </div>
@@ -50,7 +60,7 @@
                                 </svg>
                             </div>
                             <h6 class="text-xl font-semibold">Visión</h6>
-                            <p class="mt-2 mb-4 text-gray-400">Convertirnos en el destino favorito para los amantes del café en todo el mundo</p>
+                            <p class="mt-2 mb-4 text-gray-400">Ser reconocidos como el referente del café de especialidad en Ecuador, difundiendo una cultura cafetera consciente y sostenible. Queremos liderar el mercado creando una comunidad unida por el amor al café, donde cada experiencia impulse el respeto por el origen, la innovación en la preparación y el compromiso con el desarrollo sostenible</p>
                         </div>
                     </div>
                 </div>
@@ -77,7 +87,7 @@
                     <div class="text-gray-500 p-3 text-center inline-flex items-center justify-center w-16 h-16 mb-6 shadow-lg rounded-full bg-white">
                         <svg class="w-6 h-6 text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                             <path fill-rule="evenodd" d="M9.586 2.586A2 2 0 0 1 11 2h2a2 2 0 0 1 2 2v.089l.473.196.063-.063a2.002 2.002 0 0 1 2.828 0l1.414 1.414a2 2 0 0 1 0 2.827l-.063.064.196.473H20a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2h-.089l-.196.473.063.063a2.002 2.002 0 0 1 0 2.828l-1.414 1.414a2 2 0 0 1-2.828 0l-.063-.063-.473.196V20a2 2 0 0 1-2 2h-2a2 2 0 0 1-2-2v-.089l-.473-.196-.063.063a2.002 2.002 0 0 1-2.828 0l-1.414-1.414a2 2 0 0 1 0-2.827l.063-.064L4.089 15H4a2 2 0 0 1-2-2v-2a2 2 0 0 1 2-2h.09l.195-.473-.063-.063a2 2 0 0 1 0-2.828l1.414-1.414a2 2 0 0 1 2.827 0l.064.063L9 4.089V4a2 2 0 0 1 .586-1.414ZM8 12a4 4 0 1 1 8 0 4 4 0 0 1-8 0Z" clip-rule="evenodd"/>
-                          </svg>                          
+                          </svg>
                     </div>
                     <h3 class="text-3xl mb-2 font-semibold leading-normal">
                         Enfocamos nuestros esfuerzos para dar una experiencia agradable
@@ -139,7 +149,7 @@
                                             clip-rule="evenodd" />
                                     </svg>
                                 </button>
-                                <button 
+                                <button
                                     type="button"
                                     title="Instagram"
                                     class="bg-pink-500 text-white w-8 h-8 rounded-full flex items-center justify-center outline-none focus:outline-none mr-1 mb-1">
@@ -153,5 +163,9 @@
                 </div>
             </div>
         </div>
-    </section>    
+    </section>
 </main>
+  <footer>
+    <app-footer></app-footer>
+  </footer>
+</div>

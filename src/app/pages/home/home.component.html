@@ -1,27 +1,23 @@
-<div id="page-container"
-class="mx-auto flex min-h-dvh w-full min-w[320px] flex-col bg-gray-100 dark:bg-gray-900 dark:text-gar-100">
-<header 
-id="page-header"
-class="z-1 flex flex-none items-center bg-white shadow-sm dark:bg-gray-700">
-<div class="container mx-auto px-8 lg:px-8 xl:max-w-7xl">
-    <app-navbar></app-navbar>
-</div>
+<div id="page-container" class="mx-auto flex min-h-screen w-full flex-col bg-gray-100 dark:bg-gray-900 dark:text-gray-100">
+  <header id="page-header" class="flex-none z-10 bg-white shadow-sm dark:bg-gray-700 w-full">
+    <div class="px-4 lg:px-8 xl:px-8">
+      <app-navbar></app-navbar>
+    </div>
+  </header>
 
-</header>
-<main id="page-content" class="flex max-w-full flex-auto flex-col" >
-    <!-- Page Content-->
-     <div class="container mx-auto p-4 lg:p-8 xl:max-w-7xl">
+  <main class="flex-grow w-full">
+    <!-- Page Content -->
+    <div class="px-4 lg:px-8">
+      <app-carousel></app-carousel>
 
-        <app-carousel></app-carousel>
+      <div class="flex flex-col items-center justify-center bg-gray-50 py-16 text-gray-400 dark:bg-gray-800 w-full">
+        <app-boxes-icons></app-boxes-icons>
+        <app-categories-grid></app-categories-grid>
+      </div>
+    </div>
+  </main>
 
-        <div class="flex flex-col items-center justify-center rounded-xl border-2 border-dashed border-gray-200 bg-gray-50 py-64 text-gray-400 dark:border-gray-700 dark:bg-gray-800">
-            <app-boxes-icons></app-boxes-icons>
-            <app-categories-grid></app-categories-grid>
-        </div>
-
-     </div>
-</main>
-<footer>
+  <footer class="mt-auto w-full bg-white dark:bg-gray-700">
     <app-footer></app-footer>
-</footer>
+  </footer>
 </div>
