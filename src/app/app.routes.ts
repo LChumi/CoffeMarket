@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 
 export const routes: Routes = [
     {
-        path:'coffe-shop',
+        path:'bunna',
         children:[
             {
                 path: 'home',
@@ -18,6 +18,6 @@ export const routes: Routes = [
             }
         ]
     },
-    {path:'', redirectTo:'coffe-shop/home',pathMatch:'full'},
-    {path:'**', redirectTo:'coffe-shop/home', pathMatch:'full'}
+    {path:'', redirectTo:'bunna/home',pathMatch:'full'},
+    {path:'**', redirectTo:'bunna/home', pathMatch:'full'}
 ];
