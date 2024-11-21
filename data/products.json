@@ -1,0 +1,9 @@
+[
+    {
+        "id": 1,
+        "name": "Cafetera",
+        "price": 10.99,
+        "category": "Categoria 1",
+        "image": "producto1.jpg"
+    }
+]
