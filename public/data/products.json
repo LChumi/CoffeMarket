@@ -1,9 +1,47 @@
 [
-    {
-        "id": 1,
-        "name": "Cafetera",
-        "price": 10.99,
-        "category": "Categoria 1",
-        "image": "producto1.jpg"
-    }
+  {
+    "id": 1,
+    "codigo_barras": "6981606489809",
+    "sku": "PT91-009",
+    "nombre": "Prensa Francesa 350ml",
+    "descripcion": "Prensa francesa de vidrio y acero inoxidable.",
+    "precio": 25.99,
+    "categoria_id": 101
+  },
+  {
+    "id": 2,
+    "codigo_barras": "6981606489816",
+    "sku": "PT91-010",
+    "nombre": "Prensa Francesa 600ml",
+    "descripcion": "Prensa francesa grande para café filtrado.",
+    "precio": 35.50,
+    "categoria_id": 101
+  },
+  {
+    "id": 3,
+    "codigo_barras": "6981606489823",
+    "sku": "PT92-001",
+    "nombre": "Sifón para Café",
+    "descripcion": "Método de extracción de café al vacío.",
+    "precio": 75.00,
+    "categoria_id": 102
+  },
+  {
+    "id": 4,
+    "codigo_barras": "6981606489847",
+    "sku": "PT92-003",
+    "nombre": "Filtro de Café Metálico",
+    "descripcion": "Filtro reutilizable de acero inoxidable.",
+    "precio": 15.00,
+    "categoria_id": 103
+  },
+  {
+    "id": 5,
+    "codigo_barras": "6981606490256",
+    "sku": "PT92-044",
+    "nombre": "Tetera de Hierro Fundido",
+    "descripcion": "Tetera tradicional japonesa con filtro de acero.",
+    "precio": 45.99,
+    "categoria_id": 3
+  }
 ]

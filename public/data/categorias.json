@@ -1,0 +1,39 @@
+[
+  {
+    "id": 1,
+    "nombre": "Cafeteras",
+    "subcategorias": [
+      { "id": 101, "nombre": "Prensas Francesas" },
+      { "id": 102, "nombre": "Sifones" },
+      { "id": 103, "nombre": "Filtrados" }
+    ]
+  },
+  {
+    "id": 2,
+    "nombre": "Jarros Café",
+    "subcategorias": [
+      { "id": 201, "nombre": "Cerámica" },
+      { "id": 202, "nombre": "Cristal" }
+    ]
+  },
+  {
+    "id": 3,
+    "nombre": "Teteras"
+  },
+  {
+    "id": 4,
+    "nombre": "Molinos"
+  },
+  {
+    "id": 5,
+    "nombre": "Accesorios"
+  },
+  {
+    "id": 6,
+    "nombre": "Café (Paquetes)",
+    "subcategorias": [
+      { "id": 601, "nombre": "Molido (gramos)" },
+      { "id": 602, "nombre": "En grano (gramos)" }
+    ]
+  }
+]
