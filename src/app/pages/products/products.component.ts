@@ -1,5 +1,8 @@
-import { Component } from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {NavbarComponent} from "@shared/navbar/navbar.component";
+import {Products} from "@models/data/products";
+import {DataService} from "@services/data/data.service";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-products',
@@ -10,6 +13,25 @@ import {NavbarComponent} from "@shared/navbar/navbar.component";
   templateUrl: './products.component.html',
   styles: ``
 })
-export default class ProductsComponent {
+export default class ProductsComponent implements OnInit {
+
+  private dataService = inject(DataService);
+  private route = inject(ActivatedRoute)
+
+  productos: Products[] =[]
+  categoryId!: number;
+
+  ngOnInit(): void {
+    this.route.params.subscribe(params => {
+      this.categoryId = +params['categoryId'];
+      this.loadProducts();
+    });
+  }
+
+  loadProducts() {
+    this.dataService.getProductos().subscribe(data => {
+      this.productos = data.filter(producto => producto.categoria_id === this.categoryId);
+    })
+  }
 
 }

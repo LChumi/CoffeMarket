@@ -10,7 +10,7 @@
   },
   {
     "id": 2,
-    "nombre": "Jarros Café",
+    "nombre": "Jarros",
     "subcategorias": [
       { "id": 201, "nombre": "Cerámica" },
       { "id": 202, "nombre": "Cristal" }
@@ -30,10 +30,10 @@
   },
   {
     "id": 6,
-    "nombre": "Café (Paquetes)",
+    "nombre": "Café",
     "subcategorias": [
-      { "id": 601, "nombre": "Molido (gramos)" },
-      { "id": 602, "nombre": "En grano (gramos)" }
+      { "id": 601, "nombre": "Molido" },
+      { "id": 602, "nombre": "En grano" }
     ]
   }
 ]
