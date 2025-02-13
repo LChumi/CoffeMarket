@@ -30,7 +30,6 @@ export class CategoriesGridComponent implements OnInit {
   }
 
   goToProducts(categoryId: number) {
-    console.log(categoryId);
     this.router.navigate(['/bunna', 'productos', categoryId]).then(r => {})
   }
 

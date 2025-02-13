@@ -24,13 +24,22 @@ export default class ProductsComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.categoryId = +params['categoryId'];
-      this.loadProducts();
     });
+    if (this.categoryId){
+      this.loadProductsByCategory(this.categoryId);
+    }else {
+      this.loadProducts()
+    }
   }
 
-  loadProducts() {
+  loadProductsByCategory(categoryId: number) {
     this.dataService.getProductos().subscribe(data => {
-      this.productos = data.filter(producto => producto.categoria_id === this.categoryId);
+      this.productos = data.filter(producto => producto.categoria_id === categoryId);
+    })
+  }
+  loadProducts(){
+    this.dataService.getProductos().subscribe(data => {
+      this.productos = data
     })
   }
 
