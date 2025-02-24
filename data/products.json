@@ -6,7 +6,7 @@
     "nombre": "Prensa Francesa 350ml",
     "descripcion": "Prensa francesa de vidrio y acero inoxidable.",
     "precio": 25.99,
-    "categoria_id": 101
+    "categoria_id": 1
   },
   {
     "id": 2,
@@ -15,7 +15,7 @@
     "nombre": "Prensa Francesa 600ml",
     "descripcion": "Prensa francesa grande para café filtrado.",
     "precio": 35.50,
-    "categoria_id": 101
+    "categoria_id": 1
   },
   {
     "id": 3,
@@ -24,7 +24,7 @@
     "nombre": "Sifón para Café",
     "descripcion": "Método de extracción de café al vacío.",
     "precio": 75.00,
-    "categoria_id": 102
+    "categoria_id": 1
   },
   {
     "id": 4,
@@ -33,7 +33,7 @@
     "nombre": "Filtro de Café Metálico",
     "descripcion": "Filtro reutilizable de acero inoxidable.",
     "precio": 15.00,
-    "categoria_id": 103
+    "categoria_id": 1
   },
   {
     "id": 5,
