@@ -34,9 +34,9 @@ export class SingleProductComponent  implements OnInit {
 
   loadProductsByCategory(categoryId: number) {
     this.dataService.getProductos().subscribe(data => {
-      console.log(data)
       console.log(categoryId);
       this.productoFiltrado = data.filter(producto => producto.categoria_id === categoryId);
+      console.log(this.productoFiltrado)
     })
   }
 

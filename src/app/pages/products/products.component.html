@@ -29,8 +29,9 @@
                   <div class="flex justify-between items-center mt-2">
                     <p class="text-primary-600 font-bold">${{producto.precio}}</p>
                   </div>
-                  <button class="mt-4 w-full bg-primary-500 text-white py-2 px-4 rounded-lg hover:bg-primary-600 transition-colors">
-                    Solicitar
+                  <button (click)="goToProducts(producto.id)"
+                    class="mt-4 w-full bg-primary-500 text-white py-2 px-4 rounded-lg hover:bg-primary-600 transition-colors">
+                    Ver
                   </button>
                 </div>
               </div>

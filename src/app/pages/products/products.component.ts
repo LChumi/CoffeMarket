@@ -2,7 +2,7 @@ import {Component, inject, OnInit} from '@angular/core';
 import {NavbarComponent} from "@shared/navbar/navbar.component";
 import {Products} from "@models/data/products";
 import {DataService} from "@services/data/data.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-products',
@@ -17,6 +17,8 @@ export default class ProductsComponent implements OnInit {
 
   private dataService = inject(DataService);
   private route = inject(ActivatedRoute)
+  private router = inject(Router)
+
 
   productos: Products[] =[]
   categoryId!: number;
@@ -41,6 +43,10 @@ export default class ProductsComponent implements OnInit {
     this.dataService.getProductos().subscribe(data => {
       this.productos = data
     })
+  }
+
+  goToProducts(productoId: number) {
+    this.router.navigate(['/bunna', 'producto', productoId]).then(r => {})
   }
 
 }
