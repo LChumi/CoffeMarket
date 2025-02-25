@@ -56,7 +56,7 @@ export class SingleProductComponent implements OnInit {
   }
 
   openWhatsApp(producto: Products) {
-    const telefono = '+593984980840'; // Reemplaza con tu número de teléfono en formato internacional
+    const telefono = '+593979126861'; //
     const mensaje = `Hola, quiero más información sobre el producto ${producto.nombre}.`;
     window.open(`https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`, '_blank');
   }
