@@ -5,28 +5,28 @@
 
 @font-face {
   font-family: 'BricolageGrotesque';
-  src: url('/fonts/BricolageGrotesque-VariableFont_opsz,wdth,wght.ttf') format('truetype');
+  src: url('../public/fonts/BricolageGrotesque-VariableFont_opsz,wdth,wght.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'GillSans';
-  src: url('/fonts/GillSans.ttc') format('truetype');
+  src: url('../public/fonts/GillSans.ttc') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'TAN-PEARL';
-  src: url('/fonts/TAN-PEARL.otf') format('opentype');
+  src: url('../public/fonts/TAN-PEARL.otf') format('opentype');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'TimesNewRomma';
-  src: url('/fonts/Times New Romma.ttf') format('truetype');
+  src: url('../public/fonts/TimesNewRoman.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
