@@ -21,7 +21,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               <!-- Grid de Porductos -->
               @for (producto of productos; track $index) {
-                <div
+                <div (click)="goToProducts(producto.id)"
                   class="bg-white dark:bg-gray-700 rounded-2xl shadow-lg overflow-hidden transform transition-all hover:-translate-y-2 hover:shadow-2xl">
                   <img [src]="'images/products/'+producto.codigo_barras+'.png'"
                        alt="producto" class="w-full h-64 object-cover">
