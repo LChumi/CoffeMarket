@@ -15,7 +15,7 @@ export class CategoriesGridComponent implements OnInit {
   private dataService = inject(DataService);
   private router = inject(Router)
 
-  protected categorias: Categorias[] =[]
+  protected categorias: Categorias[] = []
 
   ngOnInit(): void {
     this.loadCategories()
@@ -30,7 +30,8 @@ export class CategoriesGridComponent implements OnInit {
   }
 
   goToProducts(categoryId: number) {
-    this.router.navigate(['/bunna', 'productos', categoryId]).then(r => {})
+    this.router.navigate(['/bunna', 'productos', categoryId]).then(r => {
+    })
   }
 
 }

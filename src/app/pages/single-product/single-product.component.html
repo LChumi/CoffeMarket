@@ -12,42 +12,53 @@
     <div class="relative pt-16 pb-32 flex content-center  items-center justify-center min-h-screen-75">
       <div
         class="mx-auto px-4 sm:container">
-        @if (producto){
+        @if (producto) {
           <div class="container mx-auto px-6">
             <div class="md:flex md:items-center">
               <div class="w-full md:w-1/2 lg:h-96">
                 <img [src]="'images/products/'+producto.codigo_barras+'.png'"
-                     alt="producto" class="w-full h-full object-contain max-w-xs transition duration-300 ease-in-out hover:scale-110">
+                     alt="producto"
+                     class="w-full h-full object-contain max-w-xs transition duration-300 ease-in-out hover:scale-110">
               </div>
               <div class="w-full max-w-lg mx-auto mt-5 md:ml-8 md:mt-0 md:w-1/2">
-                <h3 class="text-gray-700 uppercase text-lg">{{producto.nombre}}</h3>
-                <span class="text-gray-500 mt-3">{{producto.precio}}</span>
+                <h3 class="text-gray-700 uppercase text-lg">{{ producto.nombre }}</h3>
+                <span class="text-gray-500 mt-3">{{ producto.precio }}</span>
                 <hr class="my-3">
                 <div class="flex items-center mt-6">
                   <button (click)="openWhatsApp(producto)"
-                    style="background-color: #B3977E; color: white; font-weight: bold; padding: 0.5rem 1rem; border: 1px solid #B3977E; border-radius: 0.25rem;">Solicitar</button>
+                          style="background-color: #B3977E; color: white; font-weight: bold; padding: 0.5rem 1rem; border: 1px solid #B3977E; border-radius: 0.25rem;">
+                    Solicitar
+                  </button>
                   <button (click)="openWhatsApp(producto)"
                           class="mx-2 text-gray-600 border rounded-md p-2 hover:bg-gray-200 focus:outline-none">
-                    <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                    <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                         viewBox="0 0 24 24" stroke="currentColor">
+                      <path
+                        d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                    </svg>
                   </button>
                 </div>
               </div>
             </div>
-            @if (productoFiltrado){
+            @if (productoFiltrado) {
               <div class="mt-16">
                 <h3 class="text-gray-600 text-2xl font-medium">Mas Productos</h3>
                 <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-6">
-                  @for (prod of productoFiltrado; track $index){
+                  @for (prod of productoFiltrado; track $index) {
                     <div class="w-full max-w-sm mx-auto rounded-md shadow-md overflow-hidden">
                       <div class="flex items-end justify-end h-56 w-full bg-cover"
                            [style.background-image]="'url(\'images/products/' + prod.codigo_barras + '.png\')'">
                         <button (click)="goToProducts(prod.id)"
                                 style="background-color: #B3977E; color: white; font-weight: bold; padding: 0.5rem 1rem; border: 1px solid #B3977E; border-radius: 0.25rem;">
-                          <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                          <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round"
+                               stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
+                            <path
+                              d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                          </svg>
                         </button>
                       </div>
                       <div class="px-5 py-3">
-                        <h3 class="text-gray-700 uppercase">{{prod.nombre}}</h3>
+                        <h3 class="text-gray-700 uppercase">{{ prod.nombre }}</h3>
                       </div>
                     </div>
                   }

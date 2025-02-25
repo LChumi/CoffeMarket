@@ -20,16 +20,16 @@ export default class ProductsComponent implements OnInit {
   private router = inject(Router)
 
 
-  productos: Products[] =[]
+  productos: Products[] = []
   categoryId!: number;
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.categoryId = +params['categoryId'];
     });
-    if (this.categoryId){
+    if (this.categoryId) {
       this.loadProductsByCategory(this.categoryId);
-    }else {
+    } else {
       this.loadProducts()
     }
   }
@@ -39,14 +39,16 @@ export default class ProductsComponent implements OnInit {
       this.productos = data.filter(producto => producto.categoria_id === categoryId);
     })
   }
-  loadProducts(){
+
+  loadProducts() {
     this.dataService.getProductos().subscribe(data => {
       this.productos = data
     })
   }
 
   goToProducts(productoId: number) {
-    this.router.navigate(['/bunna', 'producto', productoId]).then(r => {})
+    this.router.navigate(['/bunna', 'producto', productoId]).then(r => {
+    })
   }
 
 }

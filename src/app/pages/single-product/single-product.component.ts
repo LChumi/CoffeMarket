@@ -6,20 +6,20 @@ import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-single-product',
-    imports: [
-        NavbarComponent
-    ],
+  imports: [
+    NavbarComponent
+  ],
   templateUrl: './single-product.component.html',
   styles: ``
 })
-export class SingleProductComponent  implements OnInit {
+export class SingleProductComponent implements OnInit {
 
   private dataService = inject(DataService);
   private route = inject(ActivatedRoute)
   private router = inject(Router);
 
   productos: Products[] = [];
-  productoFiltrado: Products[] =[];
+  productoFiltrado: Products[] = [];
   producto: Products = {} as Products
   productoId: any
 
@@ -28,7 +28,7 @@ export class SingleProductComponent  implements OnInit {
       this.productoId = +params['productoId'];
     });
 
-    if (this.productoId){
+    if (this.productoId) {
       this.loadProductsById(this.productoId);
     }
   }
@@ -50,7 +50,9 @@ export class SingleProductComponent  implements OnInit {
   }
 
   goToProducts(productoId: number) {
-    this.router.navigate(['/bunna', 'producto', productoId]).then(r => {window.location.reload();})
+    this.router.navigate(['/bunna', 'producto', productoId]).then(r => {
+      window.location.reload();
+    })
   }
 
   openWhatsApp(producto: Products) {

@@ -8,60 +8,65 @@
     </div>
 
   </header>
-<main>
-  <div class="relative pt-16 pb-32 flex content-center  items-center justify-center min-h-screen-75">
-    <div
-      class="mx-auto px-4 sm:container">
+  <main>
+    <div class="relative pt-16 pb-32 flex content-center  items-center justify-center min-h-screen-75">
+      <div
+        class="mx-auto px-4 sm:container">
 
-      <div class="relative bg-gradient-to-br from-primary-50 to-white dark:from-gray-800 dark:to-gray-900">
-        <div class="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
-          <h1 class="text-4xl font-bold text-primary-800 dark:text-white mb-8 animate-bounce-slow">
-            Nuestros Productos
-          </h1>
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <!-- Grid de Porductos -->
-            @for (producto of productos; track $index){
-              <div class="bg-white dark:bg-gray-700 rounded-2xl shadow-lg overflow-hidden transform transition-all hover:-translate-y-2 hover:shadow-2xl">
-                <img [src]="'images/products/'+producto.codigo_barras+'.png'"
-                     alt="producto" class="w-full h-64 object-cover">
-                <div class="p-6">
-                  <h3 class="text-xl font-semibold text-primary-800 dark:text-white">{{producto.nombre}}</h3>
-                  <div class="flex justify-between items-center mt-2">
-                    <p class="text-primary-600 font-bold">${{producto.precio}}</p>
+        <div class="relative bg-gradient-to-br from-primary-50 to-white dark:from-gray-800 dark:to-gray-900">
+          <div class="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
+            <h1 class="text-4xl font-bold text-primary-800 dark:text-white mb-8 animate-bounce-slow">
+              Nuestros Productos
+            </h1>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+              <!-- Grid de Porductos -->
+              @for (producto of productos; track $index) {
+                <div
+                  class="bg-white dark:bg-gray-700 rounded-2xl shadow-lg overflow-hidden transform transition-all hover:-translate-y-2 hover:shadow-2xl">
+                  <img [src]="'images/products/'+producto.codigo_barras+'.png'"
+                       alt="producto" class="w-full h-64 object-cover">
+                  <div class="p-6">
+                    <h3 class="text-xl font-semibold text-primary-800 dark:text-white">{{ producto.nombre }}</h3>
+                    <div class="flex justify-between items-center mt-2">
+                      <p class="text-primary-600 font-bold">${{ producto.precio }}</p>
+                    </div>
+                    <button (click)="goToProducts(producto.id)"
+                            style="background-color: #B3977E; color: white; font-weight: bold; padding: 0.5rem 1rem; border: 1px solid #B3977E; border-radius: 0.25rem;">
+                      Ver
+                    </button>
                   </div>
-                  <button (click)="goToProducts(producto.id)"
-                          style="background-color: #B3977E; color: white; font-weight: bold; padding: 0.5rem 1rem; border: 1px solid #B3977E; border-radius: 0.25rem;">
-                    Ver
-                  </button>
                 </div>
-              </div>
-            }
+              }
             </div>
 
-          <div class="bg-white dark:bg-gray-900 py-12">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <h2 class="text-3xl font-bold text-primary-800 dark:text-white mb-8">Categorías destacadas</h2>
-              <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-                <div class="relative category-overlay overflow-hidden rounded-2xl shadow-lg">
-                  <img src="images/categories/Accesorios.jpeg"
-                       alt="Men's Wear" class="w-full h-64 object-cover">
-                  <div class="absolute inset-0 bg-primary-500 bg-opacity-40 hover:bg-opacity-50 transition-all duration-300 rounded-2xl"></div>
-                  <span class="absolute bottom-4 left-4 text-white font-semibold text-xl drop-shadow-lg">Accesorios</span>
-                </div>
-                <div class="relative category-overlay overflow-hidden rounded-2xl shadow-lg">
-                  <img src="images/categories/Cafeteras.jpeg"
-                       alt="Accessories" class="w-full h-64 object-cover">
-                  <div class="absolute inset-0 bg-primary-500 bg-opacity-40 hover:bg-opacity-50 transition-all duration-300 rounded-2xl"></div>
-                  <span class="absolute bottom-4 left-4 text-white font-semibold text-xl drop-shadow-lg">Cafeteras</span>
+            <div class="bg-white dark:bg-gray-900 py-12">
+              <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl font-bold text-primary-800 dark:text-white mb-8">Categorías destacadas</h2>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                  <div class="relative category-overlay overflow-hidden rounded-2xl shadow-lg">
+                    <img src="images/categories/Accesorios.jpeg"
+                         alt="Men's Wear" class="w-full h-64 object-cover">
+                    <div
+                      class="absolute inset-0 bg-primary-500 bg-opacity-40 hover:bg-opacity-50 transition-all duration-300 rounded-2xl"></div>
+                    <span
+                      class="absolute bottom-4 left-4 text-white font-semibold text-xl drop-shadow-lg">Accesorios</span>
+                  </div>
+                  <div class="relative category-overlay overflow-hidden rounded-2xl shadow-lg">
+                    <img src="images/categories/Cafeteras.jpeg"
+                         alt="Accessories" class="w-full h-64 object-cover">
+                    <div
+                      class="absolute inset-0 bg-primary-500 bg-opacity-40 hover:bg-opacity-50 transition-all duration-300 rounded-2xl"></div>
+                    <span
+                      class="absolute bottom-4 left-4 text-white font-semibold text-xl drop-shadow-lg">Cafeteras</span>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
 
+      </div>
     </div>
-  </div>
-</main>
+  </main>
 
 </div>

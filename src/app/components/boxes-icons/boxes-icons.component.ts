@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'app-boxes-icons',
@@ -8,5 +8,5 @@ import { Component } from '@angular/core';
   styles: ``
 })
 export class BoxesIconsComponent {
-  
+
 }

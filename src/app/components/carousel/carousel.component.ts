@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-carousel',
@@ -7,7 +7,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
   templateUrl: './carousel.component.html',
   styleUrl: './carousel.component.css'
 })
-export class CarouselComponent implements OnInit,OnDestroy {
+export class CarouselComponent implements OnInit, OnDestroy {
   private intervalId: any;
 
   ngOnInit() {
@@ -21,7 +21,7 @@ export class CarouselComponent implements OnInit,OnDestroy {
   startCarousel() {
     const slides = document.querySelectorAll('.carousel-open');
     let currentIndex = 0;
-    
+
     this.intervalId = setInterval(() => {
       slides[currentIndex].removeAttribute('checked');
       currentIndex = (currentIndex + 1) % slides.length;

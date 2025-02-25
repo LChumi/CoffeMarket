@@ -11,7 +11,8 @@ export class DataService {
 
   private http = inject(HttpClient)
 
-  constructor() { }
+  constructor() {
+  }
 
   getCategorias(): Observable<Categorias[]> {
     return this.http.get<Categorias[]>('data/categorias.json');
