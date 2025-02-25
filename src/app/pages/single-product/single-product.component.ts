@@ -52,4 +52,10 @@ export class SingleProductComponent  implements OnInit {
   goToProducts(productoId: number) {
     this.router.navigate(['/bunna', 'producto', productoId]).then(r => {window.location.reload();})
   }
+
+  openWhatsApp(producto: Products) {
+    const telefono = '+593984980840'; // Reemplaza con tu número de teléfono en formato internacional
+    const mensaje = `Hola, quiero más información sobre el producto ${producto.nombre}.`;
+    window.open(`https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`, '_blank');
+  }
 }
