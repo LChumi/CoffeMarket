@@ -1,37 +1,59 @@
 <footer class="bg-white rounded-lg shadow dark:bg-gray-900 m-4">
   <div class="w-full max-w-screen-xl mx-auto p-4 md:py-8">
-    <div class="sm:flex sm:items-center sm:justify-between">
-      <div class="flex items-center mb-4 sm:mb-0 space-x-3 rtl:space-x-reverse">
-        <img
-          src="images/logos/caffeCirc.png"
-          class="h-8 rounded-full self-center"
-          alt="Bunna Logo"
-        />
-        <span
-          class="text-2xl font-semibold whitespace-nowrap dark:text-white"
-        >Bunna,<br>Cafe de Especialidad</span>
+
+    <div class="grid grid-cols-1 sm:grid-cols-3 items-center text-center sm:text-left gap-y-6">
+
+      <div class="sm:mb-0 flex flex-col items-center sm:items-start">
+        <img src="images/logos/caffeCirc.png" class="h-10 rounded-full" alt="Bunna Logo" />
+        <p class="text-lg text-gray-700 dark:text-white">Bunna,</p>
+        <p class="text-sm text-gray-500 dark:text-gray-400">Café de Especialidad</p>
       </div>
-      <nav>
-        <ul class="flex flex-wrap items-center text-sm font-medium text-gray-500 dark:text-gray-400">
+
+      <div class="flex flex-col items-center">
+        <h4 class="text-lg text-gray-700 dark:text-white">Compañía</h4>
+        <ul class="mt-2 space-y-1 text-sm text-gray-500 dark:text-gray-400">
           <li>
-            <a [routerLink]="['/bunna', 'about']" class="hover:text-gray-700 dark:hover:text-white me-4 md:me-6">
-              Acerca de nosotros
+            <a [routerLink]="['/bunna', 'about']" class="hover:text-gray-900 dark:hover:text-white">
+              Acerca de Nosotros
             </a>
           </li>
-          <li>
-            <a href="mailto:info@bunnacafe.com" class="hover:text-gray-700 dark:hover:text-white flex items-center space-x-2">
-              <svg class="w-4 h-4" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M2.038 5.61A2.01 2.01 0 0 0 2 6v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6c0-.12-.01-.238-.03-.352l-.866.65-7.89 6.032a2 2 0 0 1-2.429 0L2.884 6.288l-.846-.677Z"/>
-                <path d="M20.677 4.117A1.996 1.996 0 0 0 20 4H4c-.225 0-.44.037-.642.105l.758.607L12 10.742 19.9 4.7l.777-.583Z"/>
-              </svg>
-              <span>Contacto</span>
+          <li class="flex items-center justify-center sm:justify-start space-x-2">
+            <svg class="w-4 h-4" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M2.038 5.61A2.01 2.01 0 0 0 2 6v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6c0-.12-.01-.238-.03-.352l-.866.65-7.89 6.032a2 2 0 0 1-2.429 0L2.884 6.288l-.846-.677Z"/>
+              <path d="M20.677 4.117A1.996 1.996 0 0 0 20 4H4c-.225 0-.44.037-.642.105l.758.607L12 10.742 19.9 4.7l.777-.583Z"/>
+            </svg>
+            <a href="mailto:bunnacoffeemp@gmail.com" class="hover:text-gray-900 dark:hover:text-white">
+              {{ mail }}
             </a>
           </li>
         </ul>
-      </nav>
+      </div>
+
+      <div class="flex flex-col items-center sm:items-end">
+        <h4 class="text-lg text-gray-700 dark:text-white">Síguenos</h4>
+        <div class="flex space-x-4 mt-2">
+          <a href="#" class="text-gray-500 hover:text-gray-900 dark:hover:text-white">
+            <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+              <path fill-rule="evenodd"
+                    d="M3 8a5 5 0 0 1 5-5h8a5 5 0 0 1 5 5v8a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5V8Zm5-3a3 3 0 0 0-3 3v8a3 3 0 0 0 3 3h8a3 3 0 0 0 3-3V8a3 3 0 0 0-3-3H8Zm7.597 2.214a1 1 0 0 1 1-1h.01a1 1 0 1 1 0 2h-.01a1 1 0 0 1-1-1ZM12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm-5 3a5 5 0 1 1 10 0 5 5 0 0 1-10 0Z"
+                    clip-rule="evenodd"/>
+            </svg>
+          </a>
+          <a href="#" class="text-gray-500 hover:text-gray-900 dark:hover:text-white">
+            <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+              <path fill-rule="evenodd"
+                    d="M13.135 6H15V3h-1.865a4.147 4.147 0 0 0-4.142 4.142V9H7v3h2v9.938h3V12h2.021l.592-3H12V6.591A.6.6 0 0 1 12.592 6h.543Z"
+                    clip-rule="evenodd"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
     </div>
-    <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8"/>
-    <span class="block text-sm text-gray-500 sm:text-center dark:text-gray-400"
-    >© 2024. Bunna Cafe Derechos Reservados.</span>
+
+    <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
+    <span class="block text-sm text-gray-500 sm:text-center dark:text-gray-400">
+      © 2024. Bunna Cafe Derechos Reservados.
+    </span>
   </div>
 </footer>

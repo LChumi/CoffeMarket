@@ -12,4 +12,5 @@ import {RouterLink} from "@angular/router";
 })
 export class FooterComponent {
 
+  mail: string= 'bunnacoffeemp@gmail.com'
 }
