@@ -1,6 +1,6 @@
 import {Component, inject} from '@angular/core';
 import {Router, RouterLink, RouterLinkActive} from "@angular/router";
-import {NgClass, NgStyle} from "@angular/common";
+import {NgClass} from "@angular/common";
 
 @Component({
   selector: 'app-navbar',
@@ -8,7 +8,6 @@ import {NgClass, NgStyle} from "@angular/common";
   imports: [
     RouterLink,
     RouterLinkActive,
-    NgStyle,
     NgClass
   ],
   templateUrl: './navbar.component.html',
