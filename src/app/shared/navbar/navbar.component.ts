@@ -18,13 +18,9 @@ import {NgClass} from "@angular/common";
       transition: color 0.3s ease, text-decoration 0.3s ease;
     }
 
-    a {
-      color: #333;
-      transition: color 0.3s ease;
-    }
-
-    a:hover {
+    svg-shop {
       color: #c4b89b;
+      transition: color 0.3s ease;
     }
 
   `]
