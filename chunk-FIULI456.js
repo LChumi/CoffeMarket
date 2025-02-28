@@ -1,1 +1,0 @@
-import{M as e,d as r,f as o}from"./chunk-GATWDMQ2.js";var f=(()=>{class t{constructor(){this.http=o(e)}getCategorias(){return this.http.get("data/categorias.json")}getProductos(){return this.http.get("data/products.json")}static{this.\u0275fac=function(i){return new(i||t)}}static{this.\u0275prov=r({token:t,factory:t.\u0275fac,providedIn:"root"})}}return t})();export{f as a};
