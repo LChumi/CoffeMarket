@@ -1,20 +1,11 @@
 [
   {
     "id": 1,
-    "nombre": "Cafeteras",
-    "subcategorias": [
-      { "id": 101, "nombre": "Prensas Francesas" },
-      { "id": 102, "nombre": "Sifones" },
-      { "id": 103, "nombre": "Filtrados" }
-    ]
+    "nombre": "Cafeteras"
   },
   {
     "id": 2,
-    "nombre": "Jarros",
-    "subcategorias": [
-      { "id": 201, "nombre": "Cerámica" },
-      { "id": 202, "nombre": "Cristal" }
-    ]
+    "nombre": "Jarros"
   },
   {
     "id": 3,
@@ -30,10 +21,6 @@
   },
   {
     "id": 6,
-    "nombre": "Café",
-    "subcategorias": [
-      { "id": 601, "nombre": "Molido" },
-      { "id": 602, "nombre": "En grano" }
-    ]
+    "nombre": "Café"
   }
 ]

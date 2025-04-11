@@ -5,13 +5,17 @@
       @for (categoria of categorias; track $index) {
         <a href="javascript:void(0)" (click)="goToProducts(categoria.id)"
            class="group relative block overflow-hidden transition ease-out active:opacity-75 sm:col-span-2 md:col-span-1">
-          <img [src]="'images/categories/'+categoria.nombre+'.jpeg'" alt="coffee maker"
-               class="transition ease-out group-hover:scale-110"/>
-          <div class="absolute inset-0 bg-black/25 transition ease-out group-hover:bg-black/0"></div>
-          <div class="absolute inset-0 flex items-center justify-center p-4">
-            <div
-              class="rounded-3xl bg-white/95 px-4 py-3 text-sm font-semibold uppercase tracking-wide transition ease-out group-hover:bg-yellow-700 group-hover:text-white dark:border-gray-800 dark:bg-gray-900/90">
-              {{ categoria.nombre }}
+          <!-- Imagen con tamaño uniforme -->
+          <div class="relative aspect-[3/2] w-full">
+            <img [src]="'images/categories/' + categoria.nombre + '.jpeg'"
+                 alt="{{ categoria.nombre }}"
+                 class="w-full h-full object-cover transition ease-out group-hover:scale-110 duration-300"/>
+            <div class="absolute inset-0 bg-black/25 transition ease-out group-hover:bg-black/0"></div>
+            <div class="absolute inset-0 flex items-center justify-center p-4">
+              <div
+                class="rounded-3xl bg-white/95 px-4 py-3 text-sm font-semibold uppercase tracking-wide transition ease-out group-hover:bg-yellow-700 group-hover:text-white dark:border-gray-800 dark:bg-gray-900/90">
+                {{ categoria.nombre }}
+              </div>
             </div>
           </div>
         </a>

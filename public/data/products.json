@@ -1,47 +1,359 @@
 [
   {
-    "id": 1,
-    "codigo_barras": "6981606489809",
-    "sku": "PT91-009",
-    "nombre": "Prensa Francesa 350ml",
-    "descripcion": "Prensa francesa de vidrio y acero inoxidable.",
-    "precio": 25.99,
-    "categoria_id": 1
+    "sku": "6981606489809",
+    "item": "PT91-009",
+    "descripcion": "PRENSA FRANCESA X1 Cap: 600ML",
+    "precio": 5.28,
+    "categoria_id": 7
   },
   {
-    "id": 2,
-    "codigo_barras": "6981606489816",
-    "sku": "PT91-010",
-    "nombre": "Prensa Francesa 600ml",
-    "descripcion": "Prensa francesa grande para café filtrado.",
-    "precio": 35.50,
-    "categoria_id": 1
+    "sku": "6981606489816",
+    "item": "PT91-010",
+    "descripcion": "PRENSA FRANCESA X1 Cap: 1000ML",
+    "precio": 6.64,
+    "categoria_id": 7
   },
   {
-    "id": 3,
-    "codigo_barras": "6981606489823",
-    "sku": "PT92-001",
-    "nombre": "Sifón para Café",
-    "descripcion": "Método de extracción de café al vacío.",
-    "precio": 75.00,
-    "categoria_id": 1
+    "sku": "6981606489823",
+    "item": "PT92-001",
+    "descripcion": "SIFON BELGA DORADO",
+    "precio": 138.48,
+    "categoria_id": 8
   },
   {
-    "id": 4,
-    "codigo_barras": "6981606489847",
-    "sku": "PT92-003",
-    "nombre": "Filtro de Café Metálico",
-    "descripcion": "Filtro reutilizable de acero inoxidable.",
-    "precio": 15.00,
-    "categoria_id": 1
+    "sku": "6981606489847",
+    "item": "PT92-003",
+    "descripcion": "FILTRADO COLD BREW X1",
+    "precio": 85.56,
+    "categoria_id": 5
   },
   {
-    "id": 5,
-    "codigo_barras": "6981606490256",
-    "sku": "PT92-044",
-    "nombre": "Tetera de Hierro Fundido",
-    "descripcion": "Tetera tradicional japonesa con filtro de acero.",
-    "precio": 45.99,
+    "sku": "6981606489854",
+    "item": "PT92-004",
+    "descripcion": "FILTRADO COLD BREW X1 Cap: 2TAZAS",
+    "precio": 97.72,
+    "categoria_id": 5
+  },
+  {
+    "sku": "6981606489861",
+    "item": "PT92-005",
+    "descripcion": "FILTRADO COLD BREW X1",
+    "precio": 38.71,
+    "categoria_id": 8
+  },
+  {
+    "sku": "6981606489885",
+    "item": "PT92-007",
+    "descripcion": "SIFON JAPONES X1 Cap: 5TAZAS",
+    "precio": 29.09,
+    "categoria_id": 8
+  },
+  {
+    "sku": "6981606489892",
+    "item": "PT92-008",
+    "descripcion": "SIFON JAPONES DORADO X1 Cap: 3TAZAS",
+    "precio": 35.24,
+    "categoria_id": 8
+  },
+  {
+    "sku": "6981606489908",
+    "item": "PT92-009",
+    "descripcion": "FILTRADO AERO EXPRES X1 Cap: 4TAZAS",
+    "precio": 21.95,
+    "categoria_id": 5
+  },
+  {
+    "sku": "6981606489953",
+    "item": "PT92-014",
+    "descripcion": "FILTRADO JARRO FILTRO X1 Cap: 350ML",
+    "precio": 10.19,
+    "categoria_id": 5
+  },
+  {
+    "sku": "6981606489984",
+    "item": "PT92-017",
+    "descripcion": "FILTRADO CHEMES X1 Cap: 400ML",
+    "precio": 18.69,
+    "categoria_id": 5
+  },
+  {
+    "sku": "6981606489991",
+    "item": "PT92-018",
+    "descripcion": "FILTRADO CHEMES X1 Cap: 600ML",
+    "precio": 19.96,
+    "categoria_id": 5
+  },
+  {
+    "sku": "6981606490003",
+    "item": "PT92-019",
+    "descripcion": "FILTADO V60 X1 Cap: 4TAZAS",
+    "precio": 11.2,
+    "categoria_id": 8
+  },
+  {
+    "sku": "6981606490027",
+    "item": "PT92-021",
+    "descripcion": "MOLINO MANUAL CAFE 2COL X1",
+    "precio": 13.28,
+    "categoria_id": 4
+  },
+  {
+    "sku": "6981606490119",
+    "item": "PT92-030",
+    "descripcion": "BATIDOR X1",
+    "precio": 8.24,
+    "categoria_id": 5
+  },
+  {
+    "sku": "6981606490133",
+    "item": "PT92-032",
+    "descripcion": "JARRA METALICA LECHE X1 Cap: 600ML",
+    "precio": 10.19,
+    "categoria_id": 5
+  },
+  {
+    "sku": "6981606490171",
+    "item": "PT92-036",
+    "descripcion": "JARRA CREMERA CRISTAL X1 Cap: 500ML",
+    "precio": 14.55,
+    "categoria_id": 5
+  },
+  {
+    "sku": "6981606490188",
+    "item": "PT92-037",
+    "descripcion": "PRENSA FRANCESA DORADA X1 Cap: 350ML",
+    "precio": 8.31,
+    "categoria_id": 7
+  },
+  {
+    "sku": "6981606490195",
+    "item": "PT92-038",
+    "descripcion": "PRENSA FRANCESA DORADA X1 Cap: 600ML",
+    "precio": 9.15,
+    "categoria_id": 7
+  },
+  {
+    "sku": "6981606490218",
+    "item": "PT92-040",
+    "descripcion": "MECHERO X1",
+    "precio": 3.32,
+    "categoria_id": 5
+  },
+  {
+    "sku": "6981606490256",
+    "item": "PT92-044",
+    "descripcion": "TETERA METALICA X1 Cap: 650ML",
+    "precio": 31.16,
     "categoria_id": 3
+  },
+  {
+    "sku": "8679874000267",
+    "item": "IC87400026",
+    "descripcion": "MAQUINA/ DE EXPRESO PORTATIL X1",
+    "precio": 88.83,
+    "categoria_id": 1
+  },
+  {
+    "sku": "8679874000304",
+    "item": "IC87400030",
+    "descripcion": "FILTRO V60 X1 Alto: 9.50CM Largo: 10.450CM",
+    "precio": 5.12,
+    "categoria_id": 5
+  },
+  {
+    "sku": "8679874000311",
+    "item": "IC87400031",
+    "descripcion": "FILTRO V60 X1 Alto: 10CM Largo: D12.50CM",
+    "precio": 11.39,
+    "categoria_id": 5
+  },
+  {
+    "sku": "8679874000328",
+    "item": "IC87400032",
+    "descripcion": "MOLINOS/ MANUALES BASE VIDRIO X1 Alto: 16CM",
+    "precio": 9.21,
+    "categoria_id": 4
+  },
+  {
+    "sku": "8679874000328",
+    "item": "IC87400033",
+    "descripcion": "MOLINOS/ MANUALES BASE VIDRIO X1 Alto: 16CM",
+    "precio": 9.21,
+    "categoria_id": 4
+  },
+  {
+    "sku": "8679874000342",
+    "item": "IC87400034",
+    "descripcion": "MOLINOS/ MANUALES ACERO INOXIDABLE X1 Alto: 14CM",
+    "precio": 39.45,
+    "categoria_id": 4
+  },
+  {
+    "sku": "8679874000359",
+    "item": "IC87400035",
+    "descripcion": "MOLINO/ MANUALES X1 Alto: 25CM Largo: 11CM Ancho: 11CM",
+    "precio": 18.57,
+    "categoria_id": 4
+  },
+  {
+    "sku": "8679874000366",
+    "item": "IC87400036",
+    "descripcion": "MOLINO/ MANUALES X1 Alto: 17CM Largo: 9.50CM",
+    "precio": 11.41,
+    "categoria_id": 4
+  },
+  {
+    "sku": "8679874000373",
+    "item": "IC87400037",
+    "descripcion": "METAL/ VASO DOBLE MEDIDA X1 Alto: 8.50CM",
+    "precio": 3.39,
+    "categoria_id": 5
+  },
+  {
+    "sku": "8679874000380",
+    "item": "IC87400038",
+    "descripcion": "METAL/ BATIDOR BATERIA X1",
+    "precio": 3.17,
+    "categoria_id": 5
+  },
+  {
+    "sku": "8679874000397",
+    "item": "IC87400039",
+    "descripcion": "CREMERA X1 Cap: 800ML",
+    "precio": 10.65,
+    "categoria_id": 5
+  },
+  {
+    "sku": "8679874000403",
+    "item": "IC87400040",
+    "descripcion": "JARRA METALICA X1 Cap: 600ML",
+    "precio": 7.69,
+    "categoria_id": 5
+  },
+  {
+    "sku": "8679874000410",
+    "item": "IC87400041",
+    "descripcion": "JARRA VIDRIO MEDIDORA X1 Cap: 500ML",
+    "precio": 3.62,
+    "categoria_id": 5
+  },
+  {
+    "sku": "8679874000427",
+    "item": "IC87400042",
+    "descripcion": "JARRA VIDRIO MEDIDORA X1 Cap: 800ML",
+    "precio": 5.41,
+    "categoria_id": 5
+  },
+  {
+    "sku": "8679874000434",
+    "item": "IC87400043",
+    "descripcion": "CAFETERA PRENSA X1 Cap: 800ML",
+    "precio": 11.95,
+    "categoria_id": 1
+  },
+  {
+    "sku": "8679874000441",
+    "item": "IC87400044",
+    "descripcion": "MECHERO X1",
+    "precio": 33.3,
+    "categoria_id": 5
+  },
+  {
+    "sku": "8679874000458",
+    "item": "IC87400045",
+    "descripcion": "TETERA ACERO INOXIDABLE CUELLO DE GANZO X1 Cap: 1200ML",
+    "precio": 20.98,
+    "categoria_id": 3
+  },
+  {
+    "sku": "8679874000465",
+    "item": "IC87400046",
+    "descripcion": "TETERA ELECTRICA CUELLO DE GANZO 110V X1 Cap: 1000ML",
+    "precio": 79.31,
+    "categoria_id": 3
+  },
+  {
+    "sku": "8679874000472",
+    "item": "IC87400047",
+    "descripcion": "BASCULA DIGITAL BATERIA X1 Largo: 19.50CM Ancho: 13CM",
+    "precio": 8.66,
+    "categoria_id": 5
+  },
+  {
+    "sku": "8679874000489",
+    "item": "IC87400048",
+    "descripcion": "BASCULA DIGITAL BATERIA X1 Largo: 18.50CM Ancho: 13CM",
+    "precio": 11.93,
+    "categoria_id": 5
+  },
+  {
+    "sku": "8679874000496",
+    "item": "IC87400049",
+    "descripcion": "MAQUINA MOCA EXPRESSO 2COL X1 Cap: 300ML",
+    "precio": 10.8,
+    "categoria_id": 1
+  },
+  {
+    "sku": "8679874000502",
+    "item": "IC87400050",
+    "descripcion": "MOLINO PIMIENTO X1 Alto: 15CM",
+    "precio": 3.41,
+    "categoria_id": 5
+  },
+  {
+    "sku": "8679874000519",
+    "item": "IC87400051",
+    "descripcion": "PRENSA FRANCESA VIDRIO X1 Cap: 600ML",
+    "precio": 3.5,
+    "categoria_id": 1
+  },
+  {
+    "sku": "8679874000526",
+    "item": "IC87400052",
+    "descripcion": "PRENSA FRANCESA VIDRIO X1 Cap: 1000ML",
+    "precio": 4.61,
+    "categoria_id": 1
+  },
+  {
+    "sku": "8679874000533",
+    "item": "IC87400053",
+    "descripcion": "PRENSA FRANCESA VIDRIO X1 Cap: 600ML",
+    "precio": 4.18,
+    "categoria_id": 1
+  },
+  {
+    "sku": "8679874000540",
+    "item": "IC87400054",
+    "descripcion": "PRENSA FRANCESA VIDRIO X1 Cap: 1000ML",
+    "precio": 4.59,
+    "categoria_id": 1
+  },
+  {
+    "sku": "8679874000557",
+    "item": "IC87400055",
+    "descripcion": "PRENSA FRANCESA VIDRIO X1 Cap: 600ML",
+    "precio": 8.1,
+    "categoria_id": 1
+  },
+  {
+    "sku": "8679874000564",
+    "item": "IC87400056",
+    "descripcion": "PRENSA FRANCESA VIDRIO X1 Cap: 1000ML",
+    "precio": 10.24,
+    "categoria_id": 1
+  },
+  {
+    "sku": "8679874000571",
+    "item": "IC87400057",
+    "descripcion": "PRENSA FRANCESA VIDRIO X1 Cap: 600ML",
+    "precio": 6.83,
+    "categoria_id": 1
+  },
+  {
+    "sku": "8679874000588",
+    "item": "IC87400058",
+    "descripcion": "PRENSA FRANCESA VIDRIO X1 Cap: 1000ML",
+    "precio": 9.15,
+    "categoria_id": 1
   }
 ]

@@ -31,6 +31,7 @@ export class CategoriesGridComponent implements OnInit {
 
   goToProducts(categoryId: number) {
     this.router.navigate(['/bunna', 'productos', categoryId]).then(r => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     })
   }
 

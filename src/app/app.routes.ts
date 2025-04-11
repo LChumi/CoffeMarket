@@ -19,10 +19,12 @@ export const routes: Routes = [
         loadComponent: () => import('./pages/products/products.component')
       },
       {
-        path: 'productos/:categoryId', component: ProductsComponent
+        path: 'productos/:categoryId', component: ProductsComponent,
+        runGuardsAndResolvers: 'always'
       },
       {
-        path: 'producto/:productoId', component: SingleProductComponent
+        path: 'producto/:productoId', component: SingleProductComponent,
+        runGuardsAndResolvers: 'always'
       }
     ]
   },
