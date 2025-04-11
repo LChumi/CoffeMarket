@@ -20,6 +20,7 @@ export default class ProductsComponent implements OnInit {
   private router = inject(Router)
 
 
+  isLoading = false;
   productos: Products[] = []
   categoryId!: number;
 
@@ -35,14 +36,18 @@ export default class ProductsComponent implements OnInit {
   }
 
   loadProductsByCategory(categoryId: number) {
+    this.isLoading = true;
     this.dataService.getProductos().subscribe(data => {
       this.productos = data.filter(producto => producto.categoria_id === categoryId);
+      this.isLoading = false;
     })
   }
 
   loadProducts() {
+    this.isLoading = true;
     this.dataService.getProductos().subscribe(data => {
       this.productos = data
+      this.isLoading = false;
     })
   }
 

@@ -18,6 +18,7 @@ export class SingleProductComponent implements OnInit {
   private route = inject(ActivatedRoute)
   private router = inject(Router);
 
+  isLoading = false;
   zoomImage: boolean = false;
 
   productos: Products[] = [];
@@ -37,19 +38,16 @@ export class SingleProductComponent implements OnInit {
 
   loadProductsByCategory(categoryId: number) {
     this.dataService.getProductos().subscribe(data => {
-      console.log(categoryId);
       this.productoFiltrado = data.filter(producto => producto.categoria_id === categoryId);
-      console.log(this.productoFiltrado)
+      this.isLoading = false;
     })
   }
 
   loadProductsById(id: any) {
-    console.log(id)
+    this.isLoading = true;
     this.dataService.getProductos().subscribe(data => {
-      console.log(data);
       this.productos = data.filter(producto => producto.sku.toString() === id.toString());
       this.producto = this.productos[0];
-      console.log(this.producto);
       this.loadProductsByCategory(this.producto.categoria_id);
     })
   }

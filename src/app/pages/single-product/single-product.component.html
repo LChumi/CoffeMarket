@@ -10,78 +10,90 @@
 
   <main>
     <div class="relative pt-16 pb-32 flex content-center  items-center justify-center min-h-screen-75">
-      <div
-        class="mx-auto px-4 sm:container">
-        @if (producto) {
-          <div class="container mx-auto px-6 relative">
-            <!-- Imagen Ampliada (Zoom Modal) -->
-            @if (zoomImage){
-              <div (click)="zoomImage = false"
-                   class="fixed inset-0 bg-black/70 flex items-center justify-center z-50 cursor-zoom-out">
-                <img [src]="'images/products/' + producto.sku + '.webp'"
-                     class="max-w-4xl max-h-[90vh] rounded-xl shadow-2xl transition-transform duration-300 scale-100 hover:scale-105"
-                     alt="Producto ampliado"/>
-              </div>
-            }
+      @if (isLoading){
+        <div class="absolute inset-0 bg-white/70 flex items-center justify-center z-10">
+          <img
+            [src]="'images/loading/loading.gif'"
+            alt="Cargando..." class="w-20 h-20 rounded-full object-cover object-center" />
+        </div>
+      } @else {
+        <div
+          class="mx-auto px-4 sm:container">
+          @if (producto) {
+            <div class="container mx-auto px-6 relative">
+              <!-- Imagen Ampliada (Zoom Modal) -->
+              @if (zoomImage){
+                <div
+                  (click)="zoomImage = false"
+                  class="fixed inset-0 bg-black/70 flex items-center justify-center z-50 cursor-zoom-out p-4 sm:p-8"
+                >
+                  <img
+                    [src]="'images/products/' + producto.sku + '.webp'"
+                    class="object-contain w-full max-w-[90vw] max-h-[60vh] sm:max-w-3xl sm:max-h-[80vh] md:max-w-2xl md:max-h-[70vh] rounded-xl shadow-2xl transition-transform duration-300 scale-100 hover:scale-105 animate-zoomIn"
+                    alt="Producto ampliado"
+                  />
+                </div>
+              }
 
-            <!-- Vista normal -->
-            <div class="md:flex md:items-center z-10 relative">
-              <div class="w-full md:w-1/2 lg:h-[500px] flex justify-center">
-                <img (click)="zoomImage = true"
-                     [src]="'images/products/' + producto.sku + '.webp'"
-                     alt="producto"
-                     class="w-full h-full max-w-[300px] sm:max-w-[400px] md:max-w-md object-contain transition duration-300 ease-in-out hover:scale-105 cursor-zoom-in">
-              </div>
-              <div class="w-full max-w-lg mx-auto mt-5 md:ml-8 md:mt-0 md:w-1/2">
-                <h3 class="text-gray-700 uppercase text-lg dark:text-gray-200">{{ producto.descripcion }}</h3>
-                <span class="text-gray-500 mt-3 dark:text-gray-200">{{ producto.precio }}</span>
-                <hr class="my-3">
-                <div class="flex items-center mt-6">
-                  <button (click)="openWhatsApp(producto)"
-                          style="background-color: #B3977E; color: white; font-weight: bold; padding: 0.5rem 1rem; border: 1px solid #B3977E; border-radius: 0.25rem;">
-                    Solicitar
-                  </button>
-                  <button (click)="openWhatsApp(producto)"
-                          class="mx-2 text-gray-600 border rounded-md p-2 hover:bg-gray-200 focus:outline-none dark:text-gray-200">
-                    <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                         viewBox="0 0 24 24" stroke="currentColor">
-                      <path
-                        d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                    </svg>
-                  </button>
+              <!-- Vista normal -->
+              <div class="md:flex md:items-center z-10 relative">
+                <div class="w-full md:w-1/2 lg:h-[500px] flex justify-center">
+                  <img (click)="zoomImage = true"
+                       [src]="'images/products/' + producto.sku + '.webp'"
+                       alt="producto"
+                       class="w-full h-full max-w-[300px] sm:max-w-[400px] md:max-w-md object-contain transition duration-300 ease-in-out hover:scale-105 cursor-zoom-in">
+                </div>
+                <div class="w-full max-w-lg mx-auto mt-5 md:ml-8 md:mt-0 md:w-1/2">
+                  <h3 class="text-gray-700 uppercase text-lg dark:text-gray-200">{{ producto.descripcion }}</h3>
+                  <span class="text-gray-500 mt-3 dark:text-gray-200">{{ producto.precio }}</span>
+                  <hr class="my-3">
+                  <div class="flex items-center mt-6">
+                    <button (click)="openWhatsApp(producto)"
+                            style="background-color: #B3977E; color: white; font-weight: bold; padding: 0.5rem 1rem; border: 1px solid #B3977E; border-radius: 0.25rem;">
+                      Solicitar
+                    </button>
+                    <button (click)="openWhatsApp(producto)"
+                            class="mx-2 text-gray-600 border rounded-md p-2 hover:bg-gray-200 focus:outline-none dark:text-gray-200">
+                      <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                           viewBox="0 0 24 24" stroke="currentColor">
+                        <path
+                          d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                      </svg>
+                    </button>
+                  </div>
                 </div>
               </div>
+              @if (productoFiltrado) {
+                <div class="mt-16">
+                  <h3 class="text-gray-600 text-2xl font-medium dark:text-gray-200">Mas Productos</h3>
+                  <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-6">
+                    @for (prod of productoFiltrado; track $index) {
+                      <div (click)="goToProducts(prod.sku)"
+                           class="w-full max-w-sm mx-auto rounded-md shadow-md overflow-hidden">
+                        <div class="flex items-end justify-end h-56 w-full bg-cover"
+                             [style.background-image]="'url(\'images/products/' + prod.sku + '.webp\')'">
+                          <button (click)="goToProducts(prod.sku)"
+                                  style="background-color: #B3977E; color: white; font-weight: bold; padding: 0.5rem 1rem; border: 1px solid #B3977E; border-radius: 0.25rem;">
+                            <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round"
+                                 stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
+                              <path
+                                d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                            </svg>
+                          </button>
+                        </div>
+                        <div class="px-5 py-3">
+                          <h3 class="text-gray-700 dark:text-gray-200 uppercase">{{ prod.descripcion }}</h3>
+                        </div>
+                      </div>
+                    }
+                  </div>
+                </div>
+              }
             </div>
-            @if (productoFiltrado) {
-              <div class="mt-16">
-                <h3 class="text-gray-600 text-2xl font-medium dark:text-gray-200">Mas Productos</h3>
-                <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-6">
-                  @for (prod of productoFiltrado; track $index) {
-                    <div (click)="goToProducts(prod.sku)"
-                      class="w-full max-w-sm mx-auto rounded-md shadow-md overflow-hidden">
-                      <div class="flex items-end justify-end h-56 w-full bg-cover"
-                           [style.background-image]="'url(\'images/products/' + prod.sku + '.webp\')'">
-                        <button (click)="goToProducts(prod.sku)"
-                                style="background-color: #B3977E; color: white; font-weight: bold; padding: 0.5rem 1rem; border: 1px solid #B3977E; border-radius: 0.25rem;">
-                          <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round"
-                               stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
-                            <path
-                              d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                          </svg>
-                        </button>
-                      </div>
-                      <div class="px-5 py-3">
-                        <h3 class="text-gray-700 dark:text-gray-200 uppercase">{{ prod.descripcion }}</h3>
-                      </div>
-                    </div>
-                  }
-                </div>
-              </div>
-            }
-          </div>
-        }
+          }
 
-      </div>
+        </div>
+      }
     </div>
   </main>
 </div>
