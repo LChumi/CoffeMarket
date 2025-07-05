@@ -3,6 +3,7 @@ import {NavbarComponent} from "@shared/navbar/navbar.component";
 import {Products} from "@models/data/products";
 import {DataService} from "@services/data/data.service";
 import {ActivatedRoute, Router} from "@angular/router";
+import {Meta, Title} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-products',
@@ -19,12 +20,19 @@ export default class ProductsComponent implements OnInit {
   private route = inject(ActivatedRoute)
   private router = inject(Router)
 
+  titleService = inject(Title);
+  metaService = inject(Meta);
 
   isLoading = false;
   productos: Products[] = []
   categoryId!: number;
 
   ngOnInit(): void {
+    this.titleService.setTitle('Catálogo de Productos | Bunna Café');
+    this.metaService.updateTag({
+      name: 'description',
+      content: 'Explora nuestra variedad de productos Bunna: café gourmet, accesorios y más.'
+    });
     this.route.params.subscribe(params => {
       this.categoryId = +params['categoryId'];
     });

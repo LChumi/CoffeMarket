@@ -1,0 +1,27 @@
+User-agent: *
+Disallow: /bunna/productos/
+Disallow: /bunna/producto/
+
+Allow: /bunna/home
+Allow: /bunna/about
+Allow: /bunna/products
+
+Sitemap: https://www.bunnashop.com/sitemap.xml
+
+User-agent: EtaoSpider
+Disallow: /
+
+User-agent: GPTBot
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: PerplexityBot
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: GoogleAgent-Mariner
+Disallow: /

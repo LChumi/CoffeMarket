@@ -1,6 +1,7 @@
-import {Component} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {FooterComponent} from "@shared/footer/footer.component";
 import {NavbarComponent} from "@shared/navbar/navbar.component";
+import {Meta, Title} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-about',
@@ -12,6 +13,16 @@ import {NavbarComponent} from "@shared/navbar/navbar.component";
   templateUrl: './about.component.html',
   styles: ``
 })
-export default class AboutComponent {
+export default class AboutComponent implements OnInit {
 
+  titleService = inject(Title);
+  metaService = inject(Meta);
+
+  ngOnInit(): void {
+    this.titleService.setTitle('Sobre Nosotros | Bunna Café de Especialidad');
+    this.metaService.updateTag({
+      name: 'description',
+      content: 'Conoce mas acerca de nosotros'
+    });
+  }
 }
