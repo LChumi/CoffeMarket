@@ -63,28 +63,16 @@ export class SingleProductComponent implements OnInit {
 
   openWhatsApp(producto: Products) {
     const telefono = '+593979126861';
-    const mensaje = `Hola, estoy interesado(a) en adquirir el siguiente producto:
-  *${producto.descripcion}*
-  item: ${producto.item}
-  Precio: $${producto.precio.toFixed(2)}
-
-  ¿Podrías brindarme más información? ¡Gracias!`;
-
+    const mensaje = `Hola, estoy interesado(a) en adquirir el siguiente producto: *${producto.descripcion}* item: ${producto.item} Precio: $${producto.precio.toFixed(2)} ¿Podrías brindarme más información? ¡Gracias!`;
     const url = `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`;
-
-    const callback = () => {
-      window.open(url, '_blank');
-    };
 
     gtag('event', 'conversion', {
       'send_to': 'AW-17007241092/OVscCMv0jNcaEITP160_',
       'value': producto.precio,
       'currency': 'USD',
       'transaction_id': producto.item,
-      'event_callback': callback
+      'event_callback': () => window.open(url, '_blank')
     });
-
-    setTimeout(callback, 1000);
   }
 
 }
