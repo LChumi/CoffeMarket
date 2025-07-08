@@ -3,6 +3,7 @@ import {NavbarComponent} from "@shared/navbar/navbar.component";
 import {DataService} from "@services/data/data.service";
 import {Products} from "@models/data/products";
 import {ActivatedRoute, Router} from "@angular/router";
+import {ConsentService} from "@services/consent.service";
 
 declare var gtag: (...args: any[]) => void;
 
@@ -19,6 +20,7 @@ export class SingleProductComponent implements OnInit {
   private dataService = inject(DataService);
   private route = inject(ActivatedRoute)
   private router = inject(Router);
+  private consentService = inject(ConsentService);
 
   isLoading = false;
   zoomImage: boolean = false;
@@ -66,13 +68,17 @@ export class SingleProductComponent implements OnInit {
     const mensaje = `Hola, estoy interesado(a) en adquirir el siguiente producto: *${producto.descripcion}* item: ${producto.item} Precio: $${producto.precio.toFixed(2)} ¿Podrías brindarme más información? ¡Gracias!`;
     const url = `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`;
 
-    gtag('event', 'conversion', {
-      'send_to': 'AW-17007241092/OVscCMv0jNcaEITP160_',
-      'value': producto.precio,
-      'currency': 'USD',
-      'transaction_id': producto.item,
-      'event_callback': () => window.open(url, '_blank')
-    });
+    if (this.consentService.hasConsented() && typeof window.gtag === 'function') {
+      window.gtag('event', 'conversion', {
+        send_to: 'AW-17007241092/OVscCMv0jNcaEITP160_',
+        value: producto.precio,
+        currency: 'USD',
+        transaction_id: producto.item,
+        event_callback: () => window.open(url, '_blank'),
+      });
+    } else {
+      window.open(url, '_blank');
+    }
   }
 
 }
