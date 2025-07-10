@@ -15,8 +15,8 @@ import {Meta, Title} from "@angular/platform-browser";
 })
 export default class AboutComponent implements OnInit {
 
-  titleService = inject(Title);
-  metaService = inject(Meta);
+  private titleService = inject(Title);
+  private metaService = inject(Meta);
 
   ngOnInit(): void {
     this.titleService.setTitle('Sobre Nosotros | Bunna Café de Especialidad');

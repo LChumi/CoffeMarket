@@ -16,8 +16,8 @@ import {Meta, Title} from "@angular/platform-browser";
 })
 export default class HomeComponent implements OnInit {
 
-  titleService = inject(Title);
-  metaService = inject(Meta);
+  private titleService = inject(Title);
+  private metaService = inject(Meta);
 
     ngOnInit(): void {
       this.titleService.setTitle('Inicio | Bunna');

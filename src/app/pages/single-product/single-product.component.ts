@@ -4,6 +4,7 @@ import {DataService} from "@services/data/data.service";
 import {Products} from "@models/data/products";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ConsentService} from "@services/consent.service";
+import {Meta, Title} from "@angular/platform-browser";
 
 declare var gtag: (...args: any[]) => void;
 
@@ -22,6 +23,9 @@ export class SingleProductComponent implements OnInit {
   private router = inject(Router);
   private consentService = inject(ConsentService);
 
+  private titleService = inject(Title);
+  private metaService = inject(Meta);
+
   isLoading = false;
   zoomImage: boolean = false;
 
@@ -31,6 +35,11 @@ export class SingleProductComponent implements OnInit {
   productoId: any
 
   ngOnInit(): void {
+    this.titleService.setTitle('Producto | Bunna Café');
+    this.metaService.updateTag({
+      name: 'description',
+      content: 'Productos de calidad '
+    });
     this.route.params.subscribe(params => {
       this.productoId = +params['productoId'];
     });

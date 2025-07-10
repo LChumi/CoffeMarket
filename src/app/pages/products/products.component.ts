@@ -20,8 +20,8 @@ export default class ProductsComponent implements OnInit {
   private route = inject(ActivatedRoute)
   private router = inject(Router)
 
-  titleService = inject(Title);
-  metaService = inject(Meta);
+  private titleService = inject(Title);
+  private metaService = inject(Meta);
 
   isLoading = false;
   productos: Products[] = []
