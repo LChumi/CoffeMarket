@@ -1,4 +1,5 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, Inject, OnDestroy, OnInit, PLATFORM_ID} from '@angular/core';
+import {isPlatformBrowser} from "@angular/common";
 
 @Component({
   selector: 'app-carousel',
@@ -9,13 +10,22 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 })
 export class CarouselComponent implements OnInit, OnDestroy {
   private intervalId: any;
+  private isBrowser: boolean;
+
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {
+    this.isBrowser = isPlatformBrowser(platformId);
+  }
 
   ngOnInit() {
-    this.startCarousel();
+    if (this.isBrowser) {
+      this.startCarousel();
+    }
   }
 
   ngOnDestroy() {
-    clearInterval(this.intervalId);
+    if (this.intervalId) {
+      clearInterval(this.intervalId);
+    }
   }
 
   startCarousel() {

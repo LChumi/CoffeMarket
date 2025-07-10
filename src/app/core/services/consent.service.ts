@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import {Inject, Injectable, PLATFORM_ID} from '@angular/core';
+import {isPlatformBrowser} from "@angular/common";
 
 declare global {
   interface Window {
@@ -13,15 +14,20 @@ declare global {
 })
 export class ConsentService {
 
-  private consentKey = 'userConsent';
+  private isBrowser: boolean;
+  private consentKey = 'user-consent';
 
-  constructor() { }
+  constructor(@Inject(PLATFORM_ID) platformId: Object) {
+    this.isBrowser = isPlatformBrowser(platformId);
+  }
 
   hasConsented(): boolean {
+    if (!this.isBrowser) return false;
     return localStorage.getItem(this.consentKey) === 'true';
   }
 
   setConsent(consent: boolean) {
+    if (!this.isBrowser) return;
     localStorage.setItem(this.consentKey, consent ? 'true' : 'false');
     if (consent) {
       this.loadGtagScript();
