@@ -2,7 +2,7 @@
   position: fixed;
   width: 60px;
   height: 60px;
-  bottom: 70px;
+  bottom: 100px;
   right: 40px;
   background-color: #25d366;
   color: #FFF;
@@ -18,8 +18,4 @@
 
 .float:hover {
   transform: scale(1.1);
-}
-
-.my-float {
-  margin: 0;
 }
