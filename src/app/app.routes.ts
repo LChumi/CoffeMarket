@@ -25,7 +25,9 @@ export const routes: Routes = [
       {
         path: 'producto/:productoId', component: SingleProductComponent,
         runGuardsAndResolvers: 'always'
-      }
+      },
+      {path: 'producto', redirectTo: 'products', pathMatch: 'full'},
+      {path: 'productos', redirectTo: 'products', pathMatch: 'full'},
     ]
   },
   {path: '', redirectTo: 'bunna/home', pathMatch: 'full'},

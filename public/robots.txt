@@ -19,8 +19,5 @@ Disallow: /
 User-agent: PerplexityBot
 Disallow: /
 
-User-agent: Google-Extended
-Disallow: /
-
 User-agent: GoogleAgent-Mariner
 Disallow: /
