@@ -26,10 +26,10 @@ export const routes: Routes = [
         path: 'producto/:productoId', component: SingleProductComponent,
         runGuardsAndResolvers: 'always'
       },
-      {path: 'producto', redirectTo: 'bunna/products', pathMatch: 'full'},
-      {path: 'productos', redirectTo: 'bunna/products', pathMatch: 'full'},
+      {path: 'producto', redirectTo: '/bunna/products', pathMatch: 'full'},
+      {path: 'productos', redirectTo: '/bunna/products', pathMatch: 'full'},
     ]
   },
-  {path: '', redirectTo: 'bunna/home', pathMatch: 'full'},
-  {path: '**', redirectTo: 'bunna/home', pathMatch: 'full'}
+  {path: '', redirectTo: '/bunna/home', pathMatch: 'full'},
+  {path: '**', redirectTo: '/bunna/home', pathMatch: 'full'}
 ];
