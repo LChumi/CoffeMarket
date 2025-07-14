@@ -4,7 +4,9 @@ import {DataService} from "@services/data/data.service";
 import {Products} from "@models/data/products";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ConsentService} from "@services/consent.service";
-import {Meta, Title} from "@angular/platform-browser";
+import { Meta, Title } from '@angular/platform-browser';
+import {DOCUMENT} from "@angular/common";
+import {environment} from "../../../environments/environment";
 
 declare var gtag: (...args: any[]) => void;
 
@@ -25,6 +27,9 @@ export class SingleProductComponent implements OnInit {
 
   private titleService = inject(Title);
   private metaService = inject(Meta);
+  private document = inject(DOCUMENT);
+
+  private domain = environment.domain;
 
   isLoading = false;
   zoomImage: boolean = false;
@@ -35,40 +40,39 @@ export class SingleProductComponent implements OnInit {
   productoId: any
 
   ngOnInit(): void {
+    const currentUrl = `${this.domain}${this.router.url}`;
+
     this.titleService.setTitle('Producto | Bunna Café');
     this.metaService.updateTag({
       name: 'description',
       content: 'Productos de calidad '
     });
-    this.route.params.subscribe(params => {
-      this.productoId = +params['productoId'];
+
+    const link:HTMLLinkElement = this.document.createElement('link')
+    link.setAttribute('rel', 'canonical');
+    link.setAttribute('href', currentUrl);
+    this.document.head.appendChild(link);
+
+    this.route.data.subscribe(({ producto }) => {
+      if (producto) {
+        this.producto = producto;
+        this.loadProductsByCategory(producto.categoria_id)
+      }
     });
 
-    if (this.productoId) {
-      this.loadProductsById(this.productoId);
-    }
-  }
-
-  loadProductsByCategory(categoryId: number) {
-    this.dataService.getProductos().subscribe(data => {
-      this.productoFiltrado = data.filter(producto => producto.categoria_id === categoryId);
-      this.isLoading = false;
-    })
-  }
-
-  loadProductsById(id: any) {
-    this.isLoading = true;
-    this.dataService.getProductos().subscribe(data => {
-      this.productos = data.filter(producto => producto.sku.toString() === id.toString());
-      this.producto = this.productos[0];
-      this.loadProductsByCategory(this.producto.categoria_id);
-    })
   }
 
   goToProducts(productoId: any) {
     this.router.navigate(['/bunna', 'producto', productoId]).then(r => {
       window.location.reload();
       window.scrollTo({ top: 0, behavior: 'smooth' });
+    })
+  }
+
+  loadProductsByCategory(categoryId: number) {
+    this.dataService.getProductos().subscribe(data => {
+      this.productoFiltrado = data.filter(producto => producto.categoria_id === categoryId);
+      this.isLoading = false;
     })
   }
 
