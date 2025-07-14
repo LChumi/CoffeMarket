@@ -5,8 +5,8 @@ import {Products} from "@models/data/products";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ConsentService} from "@services/consent.service";
 import { Meta, Title } from '@angular/platform-browser';
-import {DOCUMENT} from "@angular/common";
 import {environment} from "../../../environments/environment";
+import {MetaService} from "@services/meta.service";
 
 declare var gtag: (...args: any[]) => void;
 
@@ -25,9 +25,10 @@ export class SingleProductComponent implements OnInit {
   private router = inject(Router);
   private consentService = inject(ConsentService);
 
+
   private titleService = inject(Title);
   private metaService = inject(Meta);
-  private document = inject(DOCUMENT);
+  private canonicalService = inject(MetaService)
 
   private domain = environment.domain;
 
@@ -41,17 +42,13 @@ export class SingleProductComponent implements OnInit {
 
   ngOnInit(): void {
     const currentUrl = `${this.domain}${this.router.url}`;
+    this.canonicalService.updateCanonical(currentUrl);
 
     this.titleService.setTitle('Producto | Bunna Café');
     this.metaService.updateTag({
       name: 'description',
       content: 'Productos de calidad '
     });
-
-    const link:HTMLLinkElement = this.document.createElement('link')
-    link.setAttribute('rel', 'canonical');
-    link.setAttribute('href', currentUrl);
-    this.document.head.appendChild(link);
 
     this.route.data.subscribe(({ producto }) => {
       if (producto) {

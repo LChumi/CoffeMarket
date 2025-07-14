@@ -5,7 +5,7 @@ import {DataService} from "@services/data/data.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Meta, Title} from "@angular/platform-browser";
 import {environment} from "../../../environments/environment";
-import {DOCUMENT} from "@angular/common";
+import {MetaService} from "@services/meta.service";
 
 @Component({
   selector: 'app-products',
@@ -24,7 +24,8 @@ export default class ProductsComponent implements OnInit {
 
   private titleService = inject(Title);
   private metaService = inject(Meta);
-  private document = inject(DOCUMENT);
+  private canonicalService = inject(MetaService)
+
   private domain = environment.domain;
 
   isLoading = false;
@@ -33,17 +34,13 @@ export default class ProductsComponent implements OnInit {
 
   ngOnInit(): void {
     const currentUrl = `${this.domain}${this.router.url}`;
+    this.canonicalService.updateCanonical(currentUrl);
 
     this.titleService.setTitle('Catálogo de Productos | Bunna Café');
     this.metaService.updateTag({
       name: 'description',
       content: 'Explora nuestra variedad de productos Bunna: café gourmet, accesorios y más.'
     });
-
-    const link:HTMLLinkElement = this.document.createElement('link')
-    link.setAttribute('rel', 'canonical');
-    link.setAttribute('href', currentUrl);
-    this.document.head.appendChild(link);
 
     const categoryId = this.route.snapshot.paramMap.get('categoryId');
 

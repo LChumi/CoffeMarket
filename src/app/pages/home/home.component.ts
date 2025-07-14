@@ -6,9 +6,9 @@ import {BoxesIconsComponent} from '@components/boxes-icons/boxes-icons.component
 import {CategoriesGridComponent} from '@components/categories-grid/categories-grid.component';
 import {WhatsappButtonComponent} from "@components/whatsapp-button/whatsapp-button.component";
 import {Meta, Title} from "@angular/platform-browser";
-import {DOCUMENT} from "@angular/common";
 import {environment} from "../../../environments/environment";
 import {Router} from "@angular/router";
+import {MetaService} from "@services/meta.service";
 
 @Component({
   selector: 'app-home',
@@ -22,21 +22,20 @@ export default class HomeComponent implements OnInit {
   private titleService = inject(Title);
   private metaService = inject(Meta);
   private router = inject(Router);
+  private canonicalService = inject(MetaService)
   private domain = environment.domain;
-  private document = inject(DOCUMENT);
 
     ngOnInit(): void {
       const currentUrl = `${this.domain}${this.router.url}`;
+      this.canonicalService.updateCanonical(currentUrl);
+
       this.titleService.setTitle('Inicio | Bunna');
       this.metaService.updateTag({
           name: 'description',
           content: 'Bienvenidos a Bunna Caffe'
         });
 
-      const link:HTMLLinkElement = this.document.createElement('link')
-      link.setAttribute('rel', 'canonical');
-      link.setAttribute('href', currentUrl);
-      this.document.head.appendChild(link);
+
     }
 
 }
