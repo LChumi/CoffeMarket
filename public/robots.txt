@@ -2,8 +2,8 @@ User-agent: *
 Allow: /bunna/home
 Allow: /bunna/about
 Allow: /bunna/products
-Allow: /bunna/productos/
-Allow: /bunna/producto/
+Disallow: /bunna/productos/
+Disallow: /bunna/producto/
 
 Sitemap: https://www.bunnashop.com/sitemap.xml
 
