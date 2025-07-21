@@ -29,10 +29,8 @@ export default class HomeComponent implements OnInit {
 
     ngOnInit(): void {
       const currentUrl = `${this.domain}${this.router.url}`;
-      const schema = this.schemaService.generateWebSiteSchema(this.domain);
 
       this.canonicalService.updateCanonical(currentUrl);
-      this.schemaService.insertSchema(schema, 'WebSite');
 
       this.titleService.setTitle('Inicio | Bunna');
       this.metaService.updateTag({

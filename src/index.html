@@ -23,6 +23,22 @@
   base-uri 'self';
   form-action 'self';"
   >
+
+  <!-- index.html -->
+  <script type="application/ld+json" data-schema-type="WebSite">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Bunna Café",
+      "url": "https://www.bunnashop.com",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://www.bunnashop.com/bunna/products?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+  </script>
+
 </head>
 <body>
   <app-root></app-root>

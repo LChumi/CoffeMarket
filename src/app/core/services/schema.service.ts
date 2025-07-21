@@ -14,16 +14,21 @@ export class SchemaService {
   /**
    * Inserta el schema JSON-LD en el <head>
    */
-  insertSchema(schema: object, type: 'WebSite' | 'Product' | 'Organization'): void {
-    // Si NO es WebSite, eliminamos los anteriores del mismo tipo
-    if (type !== 'WebSite') {
-      const existingSchemas = this.document.head.querySelectorAll(
-        'script[type="application/ld+json"][data-schema-type="' + type + '"]'
-      );
-      existingSchemas.forEach(tag => tag.remove());
-    }
+  insertSchema(schema: object, type: 'Product' | 'Organization'): void {
 
-    // Insertar el nuevo schema con tipo marcado
+    this.document.head.querySelectorAll('script[type="application/ld+json"]')
+      .forEach(script => {
+        try {
+          const json = JSON.parse(script.textContent ?? '');
+          if (json['@type'] !== 'WebSite') {
+            script.remove();
+          }
+        } catch (e) {
+          // No es un JSON válido, lo ignoramos
+        }
+      });
+
+
     const script = this.document.createElement('script');
     script.type = 'application/ld+json';
     script.text = JSON.stringify(schema);
@@ -66,23 +71,6 @@ export class SchemaService {
         "price": product.precio,
         "availability": "https://schema.org/InStock",
         "url": currentUrl
-      }
-    };
-  }
-
-  /**
-   * Crea schema tipo WebSite
-   */
-  generateWebSiteSchema(domain: string): object {
-    return {
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      "name": "Bunna Café",
-      "url": domain,
-      "potentialAction": {
-        "@type": "SearchAction",
-        "target": `${domain}/bunna/products?q={search_term_string}`,
-        "query-input": "required name=search_term_string"
       }
     };
   }
