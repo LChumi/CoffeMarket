@@ -14,10 +14,20 @@ export class SchemaService {
   /**
    * Inserta el schema JSON-LD en el <head>
    */
-  insertSchema(schema: object): void {
+  insertSchema(schema: object, type: 'WebSite' | 'Product' | 'Organization'): void {
+    // Si NO es WebSite, eliminamos los anteriores del mismo tipo
+    if (type !== 'WebSite') {
+      const existingSchemas = this.document.head.querySelectorAll(
+        'script[type="application/ld+json"][data-schema-type="' + type + '"]'
+      );
+      existingSchemas.forEach(tag => tag.remove());
+    }
+
+    // Insertar el nuevo schema con tipo marcado
     const script = this.document.createElement('script');
     script.type = 'application/ld+json';
     script.text = JSON.stringify(schema);
+    script.setAttribute('data-schema-type', type);
     this.document.head.appendChild(script);
   }
 

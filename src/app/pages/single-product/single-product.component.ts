@@ -56,7 +56,7 @@ export class SingleProductComponent implements OnInit {
       if (producto) {
         const schema = this.schemaService.generateProductSchema(producto, this.domain , currentUrl)
         this.producto = producto;
-        this.schemaService.insertSchema(schema);
+        this.schemaService.insertSchema(schema, 'Product');
         this.loadProductsByCategory(producto.categoria_id)
       }
     });

@@ -30,7 +30,7 @@ export default class AboutComponent implements OnInit {
     const currentUrl = `${this.domain}${this.router.url}`;
     const schema = this.schemaService.generateOrganizationSchema(currentUrl);
     this.canonicalService.updateCanonical(currentUrl);
-    this.schemaService.insertSchema(schema);
+    this.schemaService.insertSchema(schema, 'Organization');
 
     this.titleService.setTitle('Sobre Nosotros | Bunna Café de Especialidad');
     this.metaService.updateTag({
