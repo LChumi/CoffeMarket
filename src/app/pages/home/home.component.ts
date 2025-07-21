@@ -32,6 +32,7 @@ export default class HomeComponent implements OnInit {
       const schema = this.schemaService.generateWebSiteSchema(this.domain);
 
       this.canonicalService.updateCanonical(currentUrl);
+      this.schemaService.insertSchema(schema);
 
       this.titleService.setTitle('Inicio | Bunna');
       this.metaService.updateTag({
