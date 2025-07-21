@@ -7,6 +7,7 @@ import {ConsentService} from "@services/consent.service";
 import { Meta, Title } from '@angular/platform-browser';
 import {environment} from "../../../environments/environment";
 import {MetaService} from "@services/meta.service";
+import {SchemaService} from "@services/schema.service";
 
 declare var gtag: (...args: any[]) => void;
 
@@ -29,6 +30,7 @@ export class SingleProductComponent implements OnInit {
   private titleService = inject(Title);
   private metaService = inject(Meta);
   private canonicalService = inject(MetaService)
+  private schemaService = inject(SchemaService);
 
   private domain = environment.domain;
 
@@ -52,7 +54,9 @@ export class SingleProductComponent implements OnInit {
 
     this.route.data.subscribe(({ producto }) => {
       if (producto) {
+        const schema = this.schemaService.generateProductSchema(producto, this.domain , currentUrl)
         this.producto = producto;
+        this.schemaService.insertSchema(schema);
         this.loadProductsByCategory(producto.categoria_id)
       }
     });

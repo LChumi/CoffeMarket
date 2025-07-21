@@ -9,6 +9,7 @@ import {Meta, Title} from "@angular/platform-browser";
 import {environment} from "../../../environments/environment";
 import {Router} from "@angular/router";
 import {MetaService} from "@services/meta.service";
+import {SchemaService} from "@services/schema.service";
 
 @Component({
   selector: 'app-home',
@@ -23,10 +24,13 @@ export default class HomeComponent implements OnInit {
   private metaService = inject(Meta);
   private router = inject(Router);
   private canonicalService = inject(MetaService)
+  private schemaService = inject(SchemaService)
   private domain = environment.domain;
 
     ngOnInit(): void {
       const currentUrl = `${this.domain}${this.router.url}`;
+      const schema = this.schemaService.generateWebSiteSchema(this.domain);
+
       this.canonicalService.updateCanonical(currentUrl);
 
       this.titleService.setTitle('Inicio | Bunna');
@@ -34,8 +38,6 @@ export default class HomeComponent implements OnInit {
           name: 'description',
           content: 'Bienvenidos a Bunna Caffe'
         });
-
-
     }
 
 }

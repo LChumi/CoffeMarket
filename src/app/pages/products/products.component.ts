@@ -6,12 +6,14 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {Meta, Title} from "@angular/platform-browser";
 import {environment} from "../../../environments/environment";
 import {MetaService} from "@services/meta.service";
+import {FormsModule} from "@angular/forms";
 
 @Component({
   selector: 'app-products',
   standalone: true,
   imports: [
-    NavbarComponent
+    NavbarComponent,
+    FormsModule
   ],
   templateUrl: './products.component.html',
   styles: ``
@@ -30,7 +32,9 @@ export default class ProductsComponent implements OnInit {
 
   isLoading = false;
   productos: Products[] = []
+  productosFiltrados : Products[] = [];
   categoryId!: number;
+  searchTerm: string = "";
 
   ngOnInit(): void {
     const currentUrl = `${this.domain}${this.router.url}`;
@@ -51,7 +55,6 @@ export default class ProductsComponent implements OnInit {
     } else {
       this.loadProducts(); // Navegación directa → catálogo completo
     }
-
   }
 
   goToProducts(productoId: any) {
@@ -64,7 +67,14 @@ export default class ProductsComponent implements OnInit {
     this.isLoading = true;
     this.dataService.getProductos().subscribe(data => {
       this.productos = data
+      this.productosFiltrados = data
       this.isLoading = false;
+
+      const termFromQuery = this.route.snapshot.queryParamMap.get('q')
+      if (termFromQuery) {
+        this.searchTerm = termFromQuery;
+        this.filtrarProductos()
+      }
     })
   }
 
@@ -82,6 +92,13 @@ export default class ProductsComponent implements OnInit {
     });
   }
 
+  filtrarProductos() {
+    const filtro = this.searchTerm.trim().toLowerCase();
 
+    this.productos = this.productosFiltrados.filter(p =>
+      p.item.toLowerCase().includes(filtro) ||
+      p.descripcion.toLowerCase().includes(filtro)
+    )
+  }
 
 }

@@ -9,21 +9,37 @@
   </header>
   <main>
     <div class="relative pt-16 pb-32 flex content-center  items-center justify-center min-h-screen-75">
-      @if (isLoading){
+      @if (isLoading) {
         <div class="absolute inset-0  flex items-center justify-center z-10">
           <img
             [src]="'images/loading/loading.gif'"
-            alt="Cargando..." class="w-60 h-60 mt-52 rounded-full object-cover object-center" />
+            alt="Cargando..." class="w-60 h-60 mt-52 rounded-full object-cover object-center"/>
         </div>
       } @else {
-        <div
-          class="mx-auto px-4 sm:container">
+        <div class="mx-auto px-4 sm:container">
 
           <div class="relative bg-gradient-to-br from-primary-50 to-white dark:from-gray-800 dark:to-gray-900">
             <div class="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
               <h1 class="text-4xl font-bold text-primary-800 dark:text-white mb-8 animate-bounce-slow">
                 Nuestros Productos
               </h1>
+
+              <div class="max-w-md w-full mx-auto mt-4 md:mt-0 mb-8">
+                <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Buscar</label>
+                <div class="relative">
+                  <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                    <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                         xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+                    </svg>
+                  </div>
+                  <input type="search" id="default-search" [(ngModel)]="searchTerm" (input)="filtrarProductos()"
+                         class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-offset-yellow-700 focus:border-offset-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-offset-500 dark:focus:border-offset-500"
+                         placeholder="Buscar cafeteras, sifones..." required/>
+                </div>
+              </div>
+
               <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                 <!-- Grid de Porductos -->
                 @for (producto of productos; track $index) {
@@ -49,7 +65,8 @@
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                   <h2 class="text-3xl font-bold text-primary-800 dark:text-white mb-8">Categorías destacadas</h2>
                   <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-                    <div class="relative category-overlay overflow-hidden rounded-2xl shadow-lg cursor-pointer" (click)="goToAccesorios()">
+                    <div class="relative category-overlay overflow-hidden rounded-2xl shadow-lg cursor-pointer"
+                         (click)="goToAccesorios()">
                       <img src="images/categories/Accesorios.webp"
                            alt="Men's Wear" class="w-full h-64 object-cover">
                       <div
@@ -57,7 +74,8 @@
                       <span
                         class="absolute bottom-4 left-4 text-white font-semibold text-xl drop-shadow-lg">Accesorios</span>
                     </div>
-                    <div class="relative category-overlay overflow-hidden rounded-2xl shadow-lg cursor-pointer" (click)="goToCafeteras()">
+                    <div class="relative category-overlay overflow-hidden rounded-2xl shadow-lg cursor-pointer"
+                         (click)="goToCafeteras()">
                       <img src="images/categories/Cafeteras.webp"
                            alt="Accessories" class="w-full h-64 object-cover">
                       <div

@@ -5,6 +5,7 @@ import {Meta, Title} from "@angular/platform-browser";
 import {environment} from "../../../environments/environment";
 import {Router} from "@angular/router";
 import {MetaService} from "@services/meta.service";
+import {SchemaService} from "@services/schema.service";
 
 @Component({
   selector: 'app-about',
@@ -22,11 +23,14 @@ export default class AboutComponent implements OnInit {
   private metaService = inject(Meta);
   private router = inject(Router);
   private canonicalService = inject(MetaService)
+  private schemaService = inject(SchemaService);
   private domain = environment.domain;
 
   ngOnInit(): void {
     const currentUrl = `${this.domain}${this.router.url}`;
+    const schema = this.schemaService.generateOrganizationSchema(currentUrl);
     this.canonicalService.updateCanonical(currentUrl);
+    this.schemaService.insertSchema(schema);
 
     this.titleService.setTitle('Sobre Nosotros | Bunna Café de Especialidad');
     this.metaService.updateTag({
