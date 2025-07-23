@@ -3,7 +3,7 @@ Allow: /bunna/home
 Allow: /bunna/about
 Allow: /bunna/products
 Disallow: /bunna/productos/
-Disallow: /bunna/producto/
+Allow: /bunna/producto/
 
 Sitemap: https://www.bunnashop.com/sitemap.xml
 
