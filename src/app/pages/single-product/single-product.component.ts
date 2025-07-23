@@ -1,4 +1,4 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, inject, OnInit, TransferState} from '@angular/core';
 import {NavbarComponent} from "@shared/navbar/navbar.component";
 import {DataService} from "@services/data/data.service";
 import {Products} from "@models/data/products";
@@ -31,6 +31,7 @@ export class SingleProductComponent implements OnInit {
   private metaService = inject(Meta);
   private canonicalService = inject(MetaService)
   private schemaService = inject(SchemaService);
+  private transferState = inject(TransferState)
 
   private domain = environment.domain;
 
@@ -44,23 +45,23 @@ export class SingleProductComponent implements OnInit {
 
   ngOnInit(): void {
     const currentUrl = `${this.domain}${this.router.url}`;
-    this.canonicalService.updateCanonical(currentUrl);
+    const producto = this.route.snapshot.data['producto']; // accede directamente
 
-    this.titleService.setTitle('Producto | Bunna Café');
-    this.metaService.updateTag({
-      name: 'description',
-      content: 'Productos de calidad '
-    });
+    if (producto) {
+      this.producto = producto;
 
-    this.route.data.subscribe(({ producto }) => {
-      if (producto) {
-        const schema = this.schemaService.generateProductSchema(producto, this.domain , currentUrl)
-        this.producto = producto;
-        this.schemaService.insertSchema(schema, 'Product');
-        this.loadProductsByCategory(producto.categoria_id)
-      }
-    });
+      this.titleService.setTitle(`Producto | ${producto.descripcion}`);
+      this.metaService.updateTag({
+        name: 'description',
+        content: `Compra ${producto.descripcion} en Bunna Café`
+      });
 
+      const schema = this.schemaService.generateProductSchema(producto, this.domain, currentUrl);
+      this.schemaService.insertSchema(schema, 'Product');
+
+      this.canonicalService.updateCanonical(currentUrl);
+      this.loadProductsByCategory(producto.categoria_id);
+    }
   }
 
   goToProducts(productoId: any) {
