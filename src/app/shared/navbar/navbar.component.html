@@ -19,7 +19,7 @@
       </div>
       <div class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
         <div class="flex-shrink-0 flex items-center">
-          <a [routerLink]="['/bunna', 'home']" routerLinkActive="active-link" aria-label="Ir a Inicio">
+          <a [routerLink]="['home']" routerLinkActive="active-link" aria-label="Ir a Inicio">
             <img
               src="/images/logos/caffeCirc.webp"
               alt=""
@@ -28,7 +28,7 @@
               class="block lg:hidden h-12 w-auto transition-all duration-300 ease-in-out transform hover:scale-105"
             />
           </a>
-          <a [routerLink]="['/bunna', 'home']" routerLinkActive="active-link" aria-label="Ir a Inicio">
+          <a [routerLink]="['home']" routerLinkActive="active-link" aria-label="Ir a Inicio">
             <img
               src="/images/logos/caffeCirc.webp"
               alt=""
@@ -41,12 +41,12 @@
         </div>
 
         <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
-          <a [routerLink]="['/bunna', 'home']" routerLinkActive="active-link"
+          <a [routerLink]="['/home']" routerLinkActive="active-link"
              class="text-gray-900 dark:text-white inline-flex items-center px-1 pt-1 text-sm font-medium">Inicio</a>
-          <a [routerLink]="['/bunna', 'about']" routerLinkActive="active-link"
+          <a [routerLink]="['/about']" routerLinkActive="active-link"
              class="border-transparent text-gray-500 dark:text-white hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Quienes
             Somos</a>
-          <a [routerLink]="['/bunna', 'products']" routerLinkActive="active-link"
+          <a [routerLink]="['/products']" routerLinkActive="active-link"
              class="border-transparent text-gray-500 dark:text-white hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Productos
             <svg class="w-5 h-5 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                  width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
@@ -90,17 +90,17 @@
     <!-- Vista Móvil -->
     <div class="sm:hidden" id="mobile-menu">
       <div class="pt-2 pb-4 space-y-1">
-        <a [routerLink]="['/bunna', 'home']" routerLinkActive="active-link"
+        <a [routerLink]="['/home']" routerLinkActive="active-link"
            [routerLinkActiveOptions]="{ exact: true }"
-           [ngClass]="{ 'active-link': router.url === '/bunna/home' }"
+           [ngClass]="{ 'active-link': router.url === '/home' }"
            class="block pl-3 pr-4 py-2 text-base font-medium text-gray-900 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-600 transition-all duration-300">Inicio</a>
-        <a [routerLink]="['/bunna', 'about']" routerLinkActive="active-link"
+        <a [routerLink]="['/about']" routerLinkActive="active-link"
            [routerLinkActiveOptions]="{ exact: true }"
-           [ngClass]="{ 'active-link': router.url === '/bunna/about' }"
+           [ngClass]="{ 'active-link': router.url === '/about' }"
            class="block pl-3 pr-4 py-2 text-base font-medium text-gray-900 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-600 transition-all duration-300">Quienes Somos</a>
-        <a [routerLink]="['/bunna', 'products']" routerLinkActive="active-link"
+        <a [routerLink]="['/products']" routerLinkActive="active-link"
            [routerLinkActiveOptions]="{ exact: true }"
-           [ngClass]="{ 'active-link': router.url === '/bunna/products' }"
+           [ngClass]="{ 'active-link': router.url === '/products' }"
            class="block pl-3 pr-4 py-2 text-base font-medium text-gray-900 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-600 transition-all duration-300">Productos
           <svg class="w-5 h-5 inline-block text-gray-900 dark:text-white ml-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                width="24" height="24" fill="currentColor" viewBox="0 0 24 24">

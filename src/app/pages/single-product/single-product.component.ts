@@ -31,7 +31,6 @@ export class SingleProductComponent implements OnInit {
   private metaService = inject(Meta);
   private canonicalService = inject(MetaService)
   private schemaService = inject(SchemaService);
-  private transferState = inject(TransferState)
 
   private domain = environment.domain;
 
@@ -65,7 +64,7 @@ export class SingleProductComponent implements OnInit {
   }
 
   goToProducts(productoId: any) {
-    this.router.navigate(['/bunna', 'producto', productoId]).then(r => {
+    this.router.navigate(['/producto', productoId]).then(r => {
       window.location.reload();
       window.scrollTo({ top: 0, behavior: 'smooth' });
     })

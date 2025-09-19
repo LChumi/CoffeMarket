@@ -58,7 +58,7 @@ export default class ProductsComponent implements OnInit {
   }
 
   goToProducts(productoId: any) {
-    this.router.navigate(['/bunna', 'producto', productoId]).then(r => {
+    this.router.navigate(['/producto', productoId]).then(r => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     })
   }
@@ -79,14 +79,14 @@ export default class ProductsComponent implements OnInit {
   }
 
   goToCafeteras() {
-    this.router.navigate(['/bunna/productos', 1]).then(() => {
+    this.router.navigate(['/productos', 1]).then(() => {
       window.location.reload();
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
   }
 
   goToAccesorios() {
-    this.router.navigate(['/bunna/productos', 5]).then(() => {
+    this.router.navigate(['/productos', 5]).then(() => {
       window.location.reload();
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
