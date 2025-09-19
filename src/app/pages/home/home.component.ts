@@ -32,11 +32,11 @@ export default class HomeComponent implements OnInit {
 
       this.canonicalService.updateCanonical(currentUrl);
 
-      this.titleService.setTitle('Inicio | Bunna');
+      this.titleService.setTitle('Bienvenido a Bunna Shop ☕| Accesorios para Cafe ');
       this.metaService.updateTag({
-          name: 'description',
-          content: 'Bienvenidos a Bunna Caffe'
-        });
+        name: 'description',
+        content: 'Bienvenido a Bunna Shop: cafeteras, molinos, filtros V60 y más para preparar café como un experto en casa.'
+      });
     }
 
 }

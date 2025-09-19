@@ -1,364 +1,363 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">
-
   <url>
     <loc>https://www.bunnashop.com/bunna/home</loc>
+    <lastmod>2025-09-01</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>1.0</priority>
-    <changefreq>yearly</changefreq>
   </url>
-
   <url>
     <loc>https://www.bunnashop.com/bunna/about</loc>
-    <changefreq>never</changefreq>
+    <lastmod>2025-09-01</lastmod>
+    <changefreq>yearly</changefreq>
     <priority>0.8</priority>
   </url>
-
   <url>
     <loc>https://www.bunnashop.com/bunna/products</loc>
+    <lastmod>2025-09-01</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.8</priority>
   </url>
-
   <url>
     <loc>https://www.bunnashop.com/bunna/productos/1</loc>
+    <lastmod>2025-09-01</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <changefreq>yearly</changefreq>
   </url>
-
   <url>
     <loc>https://www.bunnashop.com/bunna/productos/2</loc>
+    <lastmod>2025-09-01</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <changefreq>yearly</changefreq>
   </url>
-
   <url>
     <loc>https://www.bunnashop.com/bunna/productos/3</loc>
+    <lastmod>2025-09-01</lastmod>
     <priority>0.8</priority>
     <changefreq>yearly</changefreq>
   </url>
-
   <url>
     <loc>https://www.bunnashop.com/bunna/productos/4</loc>
+    <lastmod>2025-09-01</lastmod>
     <priority>0.8</priority>
     <changefreq>yearly</changefreq>
   </url>
-
   <url>
     <loc>https://www.bunnashop.com/bunna/productos/5</loc>
+    <lastmod>2025-09-01</lastmod>
     <priority>0.8</priority>
     <changefreq>yearly</changefreq>
   </url>
-
   <url>
     <loc>https://www.bunnashop.com/bunna/productos/6</loc>
+    <lastmod>2025-09-01</lastmod>
     <priority>0.8</priority>
     <changefreq>yearly</changefreq>
   </url>
-
   <url>
     <loc>https://www.bunnashop.com/bunna/producto/6981606489809</loc>
+    <lastmod>2025-09-01</lastmod>
     <priority>0.8</priority>
     <changefreq>yearly</changefreq>
   </url>
-
   <url>
     <loc>https://www.bunnashop.com/bunna/producto/6981606489816</loc>
+    <lastmod>2025-09-01</lastmod>
     <priority>0.8</priority>
     <changefreq>yearly</changefreq>
   </url>
-
   <url>
     <loc>https://www.bunnashop.com/bunna/producto/6981606489823</loc>
+    <lastmod>2025-09-01</lastmod>
     <priority>0.8</priority>
     <changefreq>yearly</changefreq>
   </url>
-
   <url>
     <loc>https://www.bunnashop.com/bunna/producto/6981606489847</loc>
+    <lastmod>2025-09-01</lastmod>
     <priority>0.8</priority>
     <changefreq>yearly</changefreq>
   </url>
-
   <url>
     <loc>https://www.bunnashop.com/bunna/producto/6981606489854</loc>
+    <lastmod>2025-09-01</lastmod>
     <priority>0.8</priority>
     <changefreq>yearly</changefreq>
   </url>
-
   <url>
     <loc>https://www.bunnashop.com/bunna/producto/6981606489861</loc>
+    <lastmod>2025-09-01</lastmod>
     <priority>0.8</priority>
     <changefreq>yearly</changefreq>
   </url>
-
   <url>
     <loc>https://www.bunnashop.com/bunna/producto/6981606489885</loc>
+    <lastmod>2025-09-01</lastmod>
     <priority>0.8</priority>
     <changefreq>yearly</changefreq>
   </url>
-
   <url>
     <loc>https://www.bunnashop.com/bunna/producto/6981606489892</loc>
+    <lastmod>2025-09-01</lastmod>
     <priority>0.8</priority>
     <changefreq>yearly</changefreq>
   </url>
-
   <url>
     <loc>https://www.bunnashop.com/bunna/producto/6981606489908</loc>
+    <lastmod>2025-09-01</lastmod>
     <priority>0.8</priority>
     <changefreq>yearly</changefreq>
   </url>
-
   <url>
     <loc>https://www.bunnashop.com/bunna/producto/6981606489953</loc>
+    <lastmod>2025-09-01</lastmod>
     <priority>0.8</priority>
     <changefreq>yearly</changefreq>
   </url>
-
   <url>
     <loc>https://www.bunnashop.com/bunna/producto/6981606489984</loc>
+    <lastmod>2025-09-01</lastmod>
     <priority>0.8</priority>
     <changefreq>yearly</changefreq>
   </url>
-
   <url>
     <loc>https://www.bunnashop.com/bunna/producto/6981606489991</loc>
+    <lastmod>2025-09-01</lastmod>
     <priority>0.8</priority>
     <changefreq>yearly</changefreq>
   </url>
-
   <url>
     <loc>https://www.bunnashop.com/bunna/producto/6981606490003</loc>
+    <lastmod>2025-09-01</lastmod>
     <priority>0.8</priority>
     <changefreq>yearly</changefreq>
   </url>
-
   <url>
     <loc>https://www.bunnashop.com/bunna/producto/6981606490027</loc>
+    <lastmod>2025-09-01</lastmod>
     <priority>0.8</priority>
     <changefreq>yearly</changefreq>
   </url>
-
   <url>
     <loc>https://www.bunnashop.com/bunna/producto/6981606490119</loc>
+    <lastmod>2025-09-01</lastmod>
     <priority>0.8</priority>
     <changefreq>yearly</changefreq>
   </url>
-
   <url>
     <loc>https://www.bunnashop.com/bunna/producto/6981606490133</loc>
+    <lastmod>2025-09-01</lastmod>
     <priority>0.8</priority>
     <changefreq>yearly</changefreq>
   </url>
-
   <url>
     <loc>https://www.bunnashop.com/bunna/producto/6981606490171</loc>
+    <lastmod>2025-09-01</lastmod>
     <priority>0.8</priority>
     <changefreq>yearly</changefreq>
   </url>
-
   <url>
     <loc>https://www.bunnashop.com/bunna/producto/6981606490188</loc>
+    <lastmod>2025-09-01</lastmod>
     <priority>0.8</priority>
     <changefreq>yearly</changefreq>
   </url>
-
   <url>
     <loc>https://www.bunnashop.com/bunna/producto/6981606490195</loc>
+    <lastmod>2025-09-01</lastmod>
     <priority>0.8</priority>
     <changefreq>yearly</changefreq>
   </url>
-
   <url>
     <loc>https://www.bunnashop.com/bunna/producto/6981606490218</loc>
+    <lastmod>2025-09-01</lastmod>
     <priority>0.8</priority>
     <changefreq>yearly</changefreq>
   </url>
-
   <url>
     <loc>https://www.bunnashop.com/bunna/producto/6981606490256</loc>
+    <lastmod>2025-09-01</lastmod>
     <priority>0.8</priority>
     <changefreq>yearly</changefreq>
   </url>
-
   <url>
     <loc>https://www.bunnashop.com/bunna/producto/8679874000267</loc>
+    <lastmod>2025-09-01</lastmod>
     <priority>0.8</priority>
     <changefreq>yearly</changefreq>
   </url>
-
   <url>
     <loc>https://www.bunnashop.com/bunna/producto/8679874000304</loc>
+    <lastmod>2025-09-01</lastmod>
     <priority>0.8</priority>
     <changefreq>yearly</changefreq>
   </url>
-
   <url>
     <loc>https://www.bunnashop.com/bunna/producto/8679874000311</loc>
+    <lastmod>2025-09-01</lastmod>
     <priority>0.8</priority>
     <changefreq>yearly</changefreq>
   </url>
-
   <url>
     <loc>https://www.bunnashop.com/bunna/producto/8679874000328</loc>
+    <lastmod>2025-09-01</lastmod>
     <priority>0.8</priority>
     <changefreq>yearly</changefreq>
   </url>
-
   <url>
     <loc>https://www.bunnashop.com/bunna/producto/8679874000328</loc>
+    <lastmod>2025-09-01</lastmod>
     <priority>0.8</priority>
     <changefreq>yearly</changefreq>
   </url>
-
   <url>
     <loc>https://www.bunnashop.com/bunna/producto/8679874000342</loc>
+    <lastmod>2025-09-01</lastmod>
     <priority>0.8</priority>
     <changefreq>yearly</changefreq>
   </url>
-
   <url>
     <loc>https://www.bunnashop.com/bunna/producto/8679874000359</loc>
+    <lastmod>2025-09-01</lastmod>
     <priority>0.8</priority>
     <changefreq>yearly</changefreq>
   </url>
-
   <url>
     <loc>https://www.bunnashop.com/bunna/producto/8679874000366</loc>
+    <lastmod>2025-09-01</lastmod>
     <priority>0.8</priority>
     <changefreq>yearly</changefreq>
   </url>
-
   <url>
     <loc>https://www.bunnashop.com/bunna/producto/8679874000373</loc>
+    <lastmod>2025-09-01</lastmod>
     <priority>0.8</priority>
     <changefreq>yearly</changefreq>
   </url>
-
   <url>
     <loc>https://www.bunnashop.com/bunna/producto/8679874000380</loc>
+    <lastmod>2025-09-01</lastmod>
     <priority>0.8</priority>
     <changefreq>yearly</changefreq>
   </url>
-
   <url>
     <loc>https://www.bunnashop.com/bunna/producto/8679874000397</loc>
+    <lastmod>2025-09-01</lastmod>
     <priority>0.8</priority>
     <changefreq>yearly</changefreq>
   </url>
-
   <url>
     <loc>https://www.bunnashop.com/bunna/producto/8679874000403</loc>
+    <lastmod>2025-09-01</lastmod>
     <priority>0.8</priority>
     <changefreq>yearly</changefreq>
   </url>
-
   <url>
     <loc>https://www.bunnashop.com/bunna/producto/8679874000410</loc>
+    <lastmod>2025-09-01</lastmod>
     <priority>0.8</priority>
     <changefreq>yearly</changefreq>
   </url>
-
   <url>
     <loc>https://www.bunnashop.com/bunna/producto/8679874000427</loc>
+    <lastmod>2025-09-01</lastmod>
     <priority>0.8</priority>
     <changefreq>yearly</changefreq>
   </url>
-
   <url>
     <loc>https://www.bunnashop.com/bunna/producto/8679874000434</loc>
+    <lastmod>2025-09-01</lastmod>
     <priority>0.8</priority>
     <changefreq>yearly</changefreq>
   </url>
-
   <url>
     <loc>https://www.bunnashop.com/bunna/producto/8679874000441</loc>
+    <lastmod>2025-09-01</lastmod>
     <priority>0.8</priority>
     <changefreq>yearly</changefreq>
   </url>
-
   <url>
     <loc>https://www.bunnashop.com/bunna/producto/8679874000458</loc>
+    <lastmod>2025-09-01</lastmod>
     <priority>0.8</priority>
     <changefreq>yearly</changefreq>
   </url>
-
   <url>
     <loc>https://www.bunnashop.com/bunna/producto/8679874000465</loc>
+    <lastmod>2025-09-01</lastmod>
     <priority>0.8</priority>
     <changefreq>yearly</changefreq>
   </url>
-
   <url>
     <loc>https://www.bunnashop.com/bunna/producto/8679874000472</loc>
+    <lastmod>2025-09-01</lastmod>
     <priority>0.8</priority>
     <changefreq>yearly</changefreq>
   </url>
-
   <url>
     <loc>https://www.bunnashop.com/bunna/producto/8679874000489</loc>
+    <lastmod>2025-09-01</lastmod>
     <priority>0.8</priority>
     <changefreq>yearly</changefreq>
   </url>
-
   <url>
     <loc>https://www.bunnashop.com/bunna/producto/8679874000496</loc>
+    <lastmod>2025-09-01</lastmod>
     <priority>0.8</priority>
     <changefreq>yearly</changefreq>
   </url>
-
   <url>
     <loc>https://www.bunnashop.com/bunna/producto/8679874000502</loc>
+    <lastmod>2025-09-01</lastmod>
     <priority>0.8</priority>
     <changefreq>yearly</changefreq>
   </url>
-
   <url>
     <loc>https://www.bunnashop.com/bunna/producto/8679874000519</loc>
+    <lastmod>2025-09-01</lastmod>
     <priority>0.8</priority>
     <changefreq>yearly</changefreq>
   </url>
-
   <url>
     <loc>https://www.bunnashop.com/bunna/producto/8679874000526</loc>
+    <lastmod>2025-09-01</lastmod>
     <priority>0.8</priority>
     <changefreq>yearly</changefreq>
   </url>
-
   <url>
     <loc>https://www.bunnashop.com/bunna/producto/8679874000533</loc>
+    <lastmod>2025-09-01</lastmod>
     <priority>0.8</priority>
     <changefreq>yearly</changefreq>
   </url>
-
   <url>
     <loc>https://www.bunnashop.com/bunna/producto/8679874000540</loc>
+    <lastmod>2025-09-01</lastmod>
     <priority>0.8</priority>
     <changefreq>yearly</changefreq>
   </url>
-
   <url>
     <loc>https://www.bunnashop.com/bunna/producto/8679874000557</loc>
+    <lastmod>2025-09-01</lastmod>
     <priority>0.8</priority>
     <changefreq>yearly</changefreq>
   </url>
-
   <url>
     <loc>https://www.bunnashop.com/bunna/producto/8679874000564</loc>
+    <lastmod>2025-09-01</lastmod>
     <priority>0.8</priority>
     <changefreq>yearly</changefreq>
   </url>
-
   <url>
     <loc>https://www.bunnashop.com/bunna/producto/8679874000571</loc>
+    <lastmod>2025-09-01</lastmod>
     <priority>0.8</priority>
     <changefreq>yearly</changefreq>
   </url>
-
   <url>
     <loc>https://www.bunnashop.com/bunna/producto/8679874000588</loc>
+    <lastmod>2025-09-01</lastmod>
     <priority>0.8</priority>
     <changefreq>yearly</changefreq>
   </url>
-
 </urlset>

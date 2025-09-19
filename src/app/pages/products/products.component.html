@@ -8,6 +8,8 @@
     </div>
   </header>
   <main>
+    <h1 class="sr-only">Nuestros Productos – Accesorios para Café</h1>
+
     <div class="relative pt-16 pb-32 flex content-center  items-center justify-center min-h-screen-75">
       @if (isLoading) {
         <div class="absolute inset-0  flex items-center justify-center z-10">
@@ -17,7 +19,6 @@
         </div>
       } @else {
         <div class="mx-auto px-4 sm:container">
-
           <div class="relative bg-gradient-to-br from-primary-50 to-white dark:from-gray-800 dark:to-gray-900">
             <div class="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
               <h1 class="text-4xl font-bold text-primary-800 dark:text-white mb-8 animate-bounce-slow">
@@ -88,7 +89,6 @@
               </div>
             </div>
           </div>
-
         </div>
       }
     </div>

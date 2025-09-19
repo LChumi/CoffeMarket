@@ -5,7 +5,7 @@
   },
   {
     "id": 2,
-    "nombre": "Jarros"
+    "nombre": "Jarras y cremeras"
   },
   {
     "id": 3,
@@ -13,14 +13,14 @@
   },
   {
     "id": 4,
-    "nombre": "Molinos"
+    "nombre": "Molinillos"
   },
   {
     "id": 5,
-    "nombre": "Accesorios"
+    "nombre": "Utensilios y herramientas"
   },
   {
-    "id": 6,
-    "nombre": "Café"
+    "id": 7,
+    "nombre": "Accesorios de filtrado"
   }
 ]

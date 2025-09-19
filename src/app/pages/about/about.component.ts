@@ -32,10 +32,10 @@ export default class AboutComponent implements OnInit {
     this.canonicalService.updateCanonical(currentUrl);
     this.schemaService.insertSchema(schema, 'Organization');
 
-    this.titleService.setTitle('Sobre Nosotros | Bunna Café de Especialidad');
+    this.titleService.setTitle('Quiénes Somos | Bunna Accesorios para Café');
     this.metaService.updateTag({
       name: 'description',
-      content: 'Conoce mas acerca de nosotros'
+      content: 'Conoce la historia de Bunna y nuestra pasión por los accesorios de café: calidad, diseño y experiencia barista.'
     });
 
   }

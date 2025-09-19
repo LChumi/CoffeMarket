@@ -40,10 +40,10 @@ export default class ProductsComponent implements OnInit {
     const currentUrl = `${this.domain}${this.router.url}`;
     this.canonicalService.updateCanonical(currentUrl);
 
-    this.titleService.setTitle('Catálogo de Productos | Bunna Café');
+    this.titleService.setTitle('Catálogo de Accesorios para Café | Bunna Shop');
     this.metaService.updateTag({
       name: 'description',
-      content: 'Explora nuestra variedad de productos Bunna: café gourmet, accesorios y más.'
+      content: 'Explora nuestro catálogo: cafeteras V60, molinos manuales, filtros, balanzas y todo lo que necesitas para preparar café en casa.'
     });
 
     const categoryId = this.route.snapshot.paramMap.get('categoryId');

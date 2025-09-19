@@ -50,10 +50,10 @@ export class SingleProductComponent implements OnInit {
     if (producto) {
       this.producto = producto;
 
-      this.titleService.setTitle(`Producto | ${producto.descripcion}`);
+      this.titleService.setTitle(`${producto.descripcion} | Accesorio para Café | Bunna`);
       this.metaService.updateTag({
         name: 'description',
-        content: `Compra ${producto.descripcion} en Bunna Café`
+        content: `Descubre el accesorio ${producto.descripcion} en Bunna Shop: calidad premium, ideal para baristas caseros y amantes del café.`
       });
 
       const schema = this.schemaService.generateProductSchema(producto, this.domain, currentUrl);
