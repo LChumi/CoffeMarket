@@ -8,7 +8,7 @@
   <link rel="icon" type="image/x-icon" href="favicon.webp">
   <meta name="google" content="notranslate">
   <meta name="google-site-verification" content="BNqEIBdZFe4xttJeJoxFr19jT6lhTndlQau_c0Cr8dE"/>
-  <meta name="msvalidate.01" content="E8C9D25B0039740BC9CC71E825C7A00F" />
+  <meta name="msvalidate.01" content="E8C9D25B0039740BC9CC71E825C7A00F"/>
 
   <meta http-equiv="Content-Security-Policy" content="
   default-src 'self';
@@ -72,12 +72,28 @@
 
   <!-- Clarity tracking code for https://www.bunnashop.com/ -->
   <script>
-    (function(c,l,a,r,i,t,y){
-      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i+"?ref=bwt";
-      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    (function (c, l, a, r, i, t, y) {
+      c[a] = c[a] || function () {
+        (c[a].q = c[a].q || []).push(arguments)
+      };
+      t = l.createElement(r);
+      t.async = 1;
+      t.src = "https://www.clarity.ms/tag/" + i + "?ref=bwt";
+      y = l.getElementsByTagName(r)[0];
+      y.parentNode.insertBefore(t, y);
     })(window, document, "clarity", "script", "suvx12kr5z");
   </script>
+
+  <!-- Metricol -->
+  <script>
+    function loadScript(a) {
+      var b = document.getElementsByTagName("head")[0], c = document.createElement("script");
+      c.type = "text/javascript", c.src = "https://tracker.metricool.com/resources/be.js", c.onreadystatechange = a, c.onload = a, b.appendChild(c)
+    }
+
+    loadScript(function () {
+      beTracker.t({hash: "91a1c07ec0644fbdcf7e6742fc458a5"})
+    });</script>
 
 </head>
 <body>
