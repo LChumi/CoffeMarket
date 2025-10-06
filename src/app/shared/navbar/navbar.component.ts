@@ -29,5 +29,6 @@ export class NavbarComponent {
 
   router = inject(Router)
   mobileMenu = false;
+  visibleSidebar = false;
 
 }

@@ -9,13 +9,6 @@
   </header>
   <main>
     <div class="relative pt-16 pb-32 flex content-center  items-center justify-center min-h-screen-75">
-      @if (isLoading) {
-        <div class="absolute inset-0  flex items-center justify-center z-10">
-          <img
-            [src]="'images/loading/loading.gif'"
-            alt="Cargando..." class="w-60 h-60 mt-52 rounded-full object-cover object-center"/>
-        </div>
-      } @else {
         <div class="mx-auto px-4 sm:container">
           <div class="relative bg-gradient-to-br from-primary-50 to-white dark:from-gray-800 dark:to-gray-900">
             <div class="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
@@ -41,6 +34,7 @@
 
               <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                 <!-- Grid de Porductos -->
+                @defer {
                 @for (producto of productos; track $index) {
                   <div (click)="goToProducts(producto.sku)"
                        class="bg-white dark:bg-gray-700 rounded-2xl shadow-lg overflow-hidden transform transition-all hover:-translate-y-2 hover:shadow-2xl">
@@ -56,6 +50,13 @@
                         Ver
                       </button>
                     </div>
+                  </div>
+                }
+                } @placeholder (minimum 200ms){
+                  <div class="absolute inset-0  flex items-center justify-center z-10">
+                    <img
+                      [src]="'images/loading/loading.gif'"
+                      alt="Cargando..." class="w-60 h-60 mt-52 rounded-full object-cover object-center"/>
                   </div>
                 }
               </div>
@@ -88,7 +89,6 @@
             </div>
           </div>
         </div>
-      }
     </div>
   </main>
 
