@@ -1,6 +1,7 @@
 import {Component, inject} from '@angular/core';
 import {Router, RouterLink, RouterLinkActive} from "@angular/router";
 import {NgClass} from "@angular/common";
+import {ShoppingCartSidebarComponent} from "@components/shopping-cart-sidebar/shopping-cart-sidebar.component";
 
 @Component({
   selector: 'app-navbar',
@@ -8,7 +9,8 @@ import {NgClass} from "@angular/common";
   imports: [
     RouterLink,
     RouterLinkActive,
-    NgClass
+    NgClass,
+    ShoppingCartSidebarComponent
   ],
   templateUrl: './navbar.component.html',
   styles: [`

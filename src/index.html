@@ -29,15 +29,77 @@
   <!-- index.html -->
   <script type="application/ld+json" data-schema-type="WebSite">
     {
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      "name": "Bunna Shop",
-      "url": "https://www.bunnashop.com",
-      "potentialAction": {
-        "@type": "SearchAction",
-        "target": "https://www.bunnashop.com/products?q={search_term_string}",
-        "query-input": "required name=search_term_string"
-      }
+      "@context": "https:\/\/schema.org",
+      "@graph": [
+        {
+          "@type": "BreadcrumbList",
+          "@id": "https:\/\/www.bunnashop.com\/#breadcrumblist",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "@id": "https:\/\/www.bunnashop.com\/#listItem",
+              "position": 1,
+              "name": "Inicio"
+            }
+          ]
+        },
+        {
+          "@type": "Organization",
+          "@id": "https:\/\/www.bunnashop.com\/#organization",
+          "name": "Bunna Cafe de Especialidad",
+          "description": "Cafe de especialidad y accesorios únicos desde Cuenca, Ecuador.",
+          "url": "https:\/\/www.bunnashop.com\/",
+          "email": "bunnacoffeemp@gmail.com",
+          "telephone": "+593979126861",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https:\/\/www.bunnashop.com\/favicon.ico",
+            "@id": "https:\/\/www.bunnashop.com\/#organizationLogo",
+            "width": 1200,
+            "height": 900
+          },
+          "image": {
+            "@id": "https:\/\/www.bunnashop.com\/#organizationLogo"
+          },
+          "sameAs": [
+            "https:\/\/www.facebook.com\/BunnaCafeEspecialidad",
+            "https:\/\/www.instagram.com\/bunnacafeec\/"
+          ]
+        },
+        {
+          "@type": "WebPage",
+          "@id": "https:\/\/www.bunnashop.com\/#webpage",
+          "url": "https:\/\/www.bunnashop.com\/",
+          "name": "Bunna Cafe de Especialidad | Accesorios para Cafe ",
+          "description": "Explora nuestro universo cafetero: cafeteras, jarros, molinillos y más. Calidad y sabor desde Cuenca.",
+          "inLanguage": "es-EC",
+          "isPartOf": {
+            "@id": "https:\/\/www.bunnashop.com\/#website"
+          },
+          "breadcrumb": {
+            "@id": "https:\/\/www.bunnashop.com\/#breadcrumblist"
+          },
+          "datePublished": "2021-08-26T12:13:00-05:00",
+          "dateModified": "2025-10-07T17:18:00-05:00"
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https:\/\/www.bunnashop.com\/#website",
+          "url": "https:\/\/www.bunnashop.com\/",
+          "name": "Bunna Cafe de Especialidad",
+          "alternateName": "Bunna Shop",
+          "description": "Descubre nuestras exquisitas selecciones de cafe y accesorios.",
+          "inLanguage": "es-EC",
+          "publisher": {
+            "@id": "https:\/\/www.bunnashop.com\/#organization"
+          },
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https:\/\/www.bunnashop.com\/products?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+          }
+        }
+      ]
     }
   </script>
 
