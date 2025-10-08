@@ -1,4 +1,5 @@
 import {Atributos} from "@models/dto/atributos";
+import {Variante} from "@models/dto/variante";
 
 export interface Producto {
   id:           string;
@@ -12,4 +13,5 @@ export interface Producto {
 
   etiquetas:   string[];
   atributos:   Atributos[];
+  variantes:   Variante[]
 }

@@ -1,17 +1,23 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {NgClass} from "@angular/common";
+import {Component, EventEmitter, inject, Input, OnInit, Output} from '@angular/core';
+import {CurrencyPipe, NgClass} from "@angular/common";
+import {ItemCarrito} from "@models/dto/item-carrito";
+import {CarritoService} from "@services/carrito.service";
 
 @Component({
   selector: 'app-shopping-cart-sidebar',
   imports: [
-    NgClass
+    NgClass,
+    CurrencyPipe
   ],
   templateUrl: './shopping-cart-sidebar.component.html',
   styles: ``
 })
-export class ShoppingCartSidebarComponent {
+export class ShoppingCartSidebarComponent implements OnInit {
 
   private _visible = false;
+  private carritoService = inject(CarritoService);
+
+  cartItems: ItemCarrito[] = [];
 
   @Output() visibleChange = new EventEmitter<boolean>();
 
@@ -23,8 +29,27 @@ export class ShoppingCartSidebarComponent {
     return this._visible;
   }
 
+  ngOnInit(): void {
+    this.carritoService.carrito$.subscribe(carrito => {
+      this.cartItems = carrito.items;
+    })
+  }
+
   closeSidebar() {
     this._visible = false;
     this.visibleChange.emit(false);
   }
+
+  calcularTotal(): number {
+    return this.cartItems.reduce((total, item) => {
+      const precio = item.pvp;
+      const cantidad = parseInt(item.cantidad);
+      return total + precio * cantidad;
+    }, 0);
+  }
+
+  eliminarDelCarrito(id: string) {
+    this.carritoService.eliminarProducto(id)
+  }
+
 }

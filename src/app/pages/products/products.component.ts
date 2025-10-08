@@ -7,6 +7,7 @@ import {Meta, Title} from "@angular/platform-browser";
 import {environment} from "../../../environments/environment";
 import {MetaService} from "@services/meta.service";
 import {FormsModule} from "@angular/forms";
+import {CarritoService} from "@services/carrito.service";
 
 @Component({
   selector: 'app-products',
@@ -27,9 +28,11 @@ export default class ProductsComponent implements OnInit {
   private titleService = inject(Title);
   private metaService = inject(Meta);
   private canonicalService = inject(MetaService)
+  private carritoService = inject(CarritoService);
 
   private domain = environment.domain;
 
+  private showCart = false;
   isLoading = false;
   productos: Products[] = []
   productosFiltrados : Products[] = [];
@@ -61,6 +64,15 @@ export default class ProductsComponent implements OnInit {
     this.router.navigate(['/producto', productoId]).then(r => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     })
+  }
+
+  agregarAlCarrito(producto: Products){
+    this.carritoService.agregarProducto(producto);
+    this.abrirSidebarCarrito()
+  }
+
+  abrirSidebarCarrito(){
+    this.showCart = true
   }
 
   loadProducts() {

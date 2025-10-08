@@ -37,9 +37,9 @@
                 </div>
               }
 
-              <!-- Vista normal -->
-              <div class="md:flex md:items-center z-10 relative">
-                <div class="w-full md:w-1/2 lg:h-[500px] flex justify-center">
+              <!-- Vista -->
+              <div class="md:flex md:items-center z-0 relative">
+              <div class="w-full md:w-1/2 lg:h-[500px] flex justify-center">
                   <img (click)="zoomImage = true"
                        [src]="'images/products/' + producto.sku + '.webp'"
                        alt="producto"
@@ -54,7 +54,7 @@
                             style="background-color: #B3977E; color: white; font-weight: bold; padding: 0.5rem 1rem; border: 1px solid #B3977E; border-radius: 0.25rem;">
                       Solicitar
                     </button>
-                    <button (click)="openWhatsApp(producto)"
+                    <button (click)="agregarAlCarrito(producto)"
                             class="mx-2 text-gray-600 border rounded-md p-2 hover:bg-gray-200 focus:outline-none dark:text-gray-200">
                       <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                            viewBox="0 0 24 24" stroke="currentColor">
@@ -70,18 +70,29 @@
                   <h3 class="text-gray-600 text-2xl font-medium dark:text-gray-200">Mas Productos</h3>
                   <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-6">
                     @for (prod of productoFiltrado; track $index) {
-                      <div (click)="goToProducts(prod.sku)"
-                           class="w-full max-w-sm mx-auto rounded-md shadow-md overflow-hidden">
+                      <div class="w-full max-w-sm mx-auto rounded-md shadow-md overflow-hidden">
                         <div class="flex items-end justify-end h-56 w-full bg-cover"
                              [style.background-image]="'url(\'images/products/' + prod.sku + '.webp\')'">
-                          <button (click)="goToProducts(prod.sku)"
-                                  style="background-color: #B3977E; color: white; font-weight: bold; padding: 0.5rem 1rem; border: 1px solid #B3977E; border-radius: 0.25rem;">
-                            <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round"
-                                 stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
-                              <path
-                                d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                            </svg>
-                          </button>
+                          <div class="flex gap-2 p-2">
+                            <!-- Ver producto -->
+                            <button (click)="goToProducts(prod.sku)"
+                                    title="Ver Producto"
+                                    class="flex items-center justify-center w-10 h-10 rounded-full border border-[#B3977E] bg-[#B3977E] text-white hover:bg-[#a3866f]">
+                              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path fill-rule="evenodd" d="M14 7h-4v3a1 1 0 0 1-2 0V7H6a1 1 0 0 0-.997.923l-.917 11.924A2 2 0 0 0 6.08 22h11.84a2 2 0 0 0 1.994-2.153l-.917-11.924A1 1 0 0 0 18 7h-2v3a1 1 0 1 1-2 0V7Zm-2-3a2 2 0 0 0-2 2v1H8V6a4 4 0 0 1 8 0v1h-2V6a2 2 0 0 0-2-2Z" clip-rule="evenodd"/>
+                              </svg>
+                            </button>
+
+                            <!-- Agregar al carrito -->
+                            <button (click)="agregarAlCarrito(prod)"
+                                    title="Agregar al Carrito"
+                                    class="flex items-center justify-center w-10 h-10 rounded-full border border-[#B3977E] bg-[#B3977E] text-white hover:bg-[#a3866f]">
+                              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                      d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
+                              </svg>
+                            </button>
+                          </div>
                         </div>
                         <div class="px-5 py-3">
                           <h3 class="text-gray-700 dark:text-gray-200 uppercase">{{ prod.descripcion }}</h3>
@@ -97,5 +108,6 @@
         </div>
       }
     </div>
+    <app-shopping-cart-sidebar [(visible)]="showCart"></app-shopping-cart-sidebar>
   </main>
 </div>

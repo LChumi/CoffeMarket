@@ -45,10 +45,26 @@
                       <div class="flex justify-between items-center mt-2">
                         <p class="text-primary-600 font-bold dark:text-white">${{ producto.precio }}</p>
                       </div>
-                      <button (click)="goToProducts(producto.sku)"
-                              style="background-color: #B3977E; color: white; font-weight: bold; padding: 0.5rem 1rem; border: 1px solid #B3977E; border-radius: 0.25rem;">
-                        Ver
-                      </button>
+                      <div class="flex gap-2 p-2">
+                        <!-- Ver producto -->
+                        <button (click)="goToProducts(producto.sku)"
+                                title="Ver Producto"
+                                class="flex items-center justify-center w-10 h-10 rounded-full border border-[#B3977E] bg-[#B3977E] text-white hover:bg-[#a3866f]">
+                          <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                            <path fill-rule="evenodd" d="M4.998 7.78C6.729 6.345 9.198 5 12 5c2.802 0 5.27 1.345 7.002 2.78a12.713 12.713 0 0 1 2.096 2.183c.253.344.465.682.618.997.14.286.284.658.284 1.04s-.145.754-.284 1.04a6.6 6.6 0 0 1-.618.997 12.712 12.712 0 0 1-2.096 2.183C17.271 17.655 14.802 19 12 19c-2.802 0-5.27-1.345-7.002-2.78a12.712 12.712 0 0 1-2.096-2.183 6.6 6.6 0 0 1-.618-.997C2.144 12.754 2 12.382 2 12s.145-.754.284-1.04c.153-.315.365-.653.618-.997A12.714 12.714 0 0 1 4.998 7.78ZM12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" clip-rule="evenodd"/>
+                          </svg>
+                        </button>
+
+                        <!-- Agregar al carrito -->
+                        <button (click)="agregarAlCarrito(producto)"
+                                title="Agregar al Carrito"
+                                class="flex items-center justify-center w-10 h-10 rounded-full border border-[#B3977E] bg-[#B3977E] text-white hover:bg-[#a3866f]">
+                          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                  d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
+                          </svg>
+                        </button>
+                      </div>
                     </div>
                   </div>
                 }
