@@ -2,12 +2,14 @@ import {Component, EventEmitter, inject, Input, OnInit, Output} from '@angular/c
 import {CurrencyPipe, NgClass} from "@angular/common";
 import {ItemCarrito} from "@models/dto/item-carrito";
 import {CarritoService} from "@services/carrito.service";
+import {RouterLinkActive} from "@angular/router";
 
 @Component({
   selector: 'app-shopping-cart-sidebar',
   imports: [
     NgClass,
-    CurrencyPipe
+    CurrencyPipe,
+    RouterLinkActive
   ],
   templateUrl: './shopping-cart-sidebar.component.html',
   styles: ``

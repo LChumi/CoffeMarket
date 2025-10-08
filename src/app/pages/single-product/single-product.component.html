@@ -39,11 +39,11 @@
 
               <!-- Vista -->
               <div class="md:flex md:items-center z-0 relative">
-              <div class="w-full md:w-1/2 lg:h-[500px] flex justify-center">
+                <div class="w-full md:w-1/2 lg:h-[500px] flex justify-center">
                   <img (click)="zoomImage = true"
                        [src]="'images/products/' + producto.sku + '.webp'"
                        alt="producto"
-                       class="w-full h-full max-w-[300px] sm:max-w-[400px] md:max-w-md object-contain transition duration-300 ease-in-out hover:scale-105 cursor-zoom-in">
+                       class="w-full h-full max-w-[300px] sm:max-w-[400px] md:max-w-md object-contain transition duration-300 ease-in-out hover:scale-105 cursor-zoom-in ">
                 </div>
                 <div class="w-full max-w-lg mx-auto mt-5 md:ml-8 md:mt-0 md:w-1/2">
                   <h3 class="text-gray-700 uppercase text-lg dark:text-gray-200">{{ producto.descripcion }}</h3>
@@ -55,7 +55,7 @@
                       Solicitar
                     </button>
                     <button (click)="agregarAlCarrito(producto)"
-                            class="mx-2 text-gray-600 border rounded-md p-2 hover:bg-gray-200 focus:outline-none dark:text-gray-200">
+                            class="mx-2 flex items-center justify-center w-9 h-9 rounded-full border border-[#B3977E] bg-[#B3977E] text-white hover:bg-[#a3866f] transition">
                       <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                            viewBox="0 0 24 24" stroke="currentColor">
                         <path
@@ -70,32 +70,29 @@
                   <h3 class="text-gray-600 text-2xl font-medium dark:text-gray-200">Mas Productos</h3>
                   <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-6">
                     @for (prod of productoFiltrado; track $index) {
-                      <div class="w-full max-w-sm mx-auto rounded-md shadow-md overflow-hidden">
-                        <div class="flex items-end justify-end h-56 w-full bg-cover"
+                      <div class="bg-white dark:bg-gray-700 rounded-2xl shadow-lg overflow-hidden transform transition hover:-translate-y-2 hover:shadow-2xl max-w-sm mx-auto">
+                        <!-- Imagen clickeable -->
+                        <div (click)="goToProducts(prod.sku)" class="cursor-pointer group relative h-56 w-full bg-cover bg-center"
                              [style.background-image]="'url(\'images/products/' + prod.sku + '.webp\')'">
-                          <div class="flex gap-2 p-2">
-                            <!-- Ver producto -->
-                            <button (click)="goToProducts(prod.sku)"
-                                    title="Ver Producto"
-                                    class="flex items-center justify-center w-10 h-10 rounded-full border border-[#B3977E] bg-[#B3977E] text-white hover:bg-[#a3866f]">
-                              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                                <path fill-rule="evenodd" d="M14 7h-4v3a1 1 0 0 1-2 0V7H6a1 1 0 0 0-.997.923l-.917 11.924A2 2 0 0 0 6.08 22h11.84a2 2 0 0 0 1.994-2.153l-.917-11.924A1 1 0 0 0 18 7h-2v3a1 1 0 1 1-2 0V7Zm-2-3a2 2 0 0 0-2 2v1H8V6a4 4 0 0 1 8 0v1h-2V6a2 2 0 0 0-2-2Z" clip-rule="evenodd"/>
-                              </svg>
-                            </button>
+                          <div class="absolute inset-0 transition duration-300 ease-in-out group-hover:scale-105"></div>
+                        </div>
 
-                            <!-- Agregar al carrito -->
+                        <!-- Contenido -->
+                        <div class="px-5 py-4 space-y-2">
+                          <h3 class="text-lg font-semibold text-gray-800 dark:text-white uppercase">{{ prod.descripcion }}</h3>
+                          <div class="flex justify-end">
+                            <!-- Botón agregar al carrito -->
                             <button (click)="agregarAlCarrito(prod)"
                                     title="Agregar al Carrito"
-                                    class="flex items-center justify-center w-10 h-10 rounded-full border border-[#B3977E] bg-[#B3977E] text-white hover:bg-[#a3866f]">
-                              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    class="flex items-center justify-center w-9 h-9 rounded-full border border-[#B3977E] bg-[#B3977E] text-white hover:bg-[#a3866f] transition">
+                              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2"
+                                   viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round"
-                                      d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
+                                      d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17
+                                      m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
                               </svg>
                             </button>
                           </div>
-                        </div>
-                        <div class="px-5 py-3">
-                          <h3 class="text-gray-700 dark:text-gray-200 uppercase">{{ prod.descripcion }}</h3>
                         </div>
                       </div>
                     }

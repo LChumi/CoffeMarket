@@ -28,6 +28,10 @@ export const routes: Routes = [
     resolve: {producto: ProductoResolver},
     runGuardsAndResolvers: 'always'
   },
+  {
+    path: 'cart',
+    loadComponent: () => import('./pages/shoping-cart/shoping-cart.component')
+  },
   {path: 'producto', redirectTo: '/products', pathMatch: 'full'},
   {path: 'productos', redirectTo: '/products', pathMatch: 'full'},
   {path: '', redirectTo: '/home', pathMatch: 'full'},

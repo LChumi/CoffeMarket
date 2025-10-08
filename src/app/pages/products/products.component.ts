@@ -8,13 +8,15 @@ import {environment} from "../../../environments/environment";
 import {MetaService} from "@services/meta.service";
 import {FormsModule} from "@angular/forms";
 import {CarritoService} from "@services/carrito.service";
+import {ShoppingCartSidebarComponent} from "@components/shopping-cart-sidebar/shopping-cart-sidebar.component";
 
 @Component({
   selector: 'app-products',
   standalone: true,
   imports: [
     NavbarComponent,
-    FormsModule
+    FormsModule,
+    ShoppingCartSidebarComponent
   ],
   templateUrl: './products.component.html',
   styles: ``
@@ -32,7 +34,7 @@ export default class ProductsComponent implements OnInit {
 
   private domain = environment.domain;
 
-  private showCart = false;
+  showCart = false;
   isLoading = false;
   productos: Products[] = []
   productosFiltrados : Products[] = [];

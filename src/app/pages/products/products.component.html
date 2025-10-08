@@ -36,37 +36,33 @@
                 <!-- Grid de Porductos -->
                 @defer {
                 @for (producto of productos; track $index) {
-                  <div (click)="goToProducts(producto.sku)"
-                       class="bg-white dark:bg-gray-700 rounded-2xl shadow-lg overflow-hidden transform transition-all hover:-translate-y-2 hover:shadow-2xl">
-                    <img [src]="'images/products/'+producto.sku+'.webp'"
-                         alt="producto" class="w-full h-64 object-cover">
-                    <div class="p-6">
-                      <h3 class="text-xl font-semibold text-primary-800 dark:text-white">{{ producto.descripcion }}</h3>
-                      <div class="flex justify-between items-center mt-2">
-                        <p class="text-primary-600 font-bold dark:text-white">${{ producto.precio }}</p>
-                      </div>
-                      <div class="flex gap-2 p-2">
-                        <!-- Ver producto -->
-                        <button (click)="goToProducts(producto.sku)"
-                                title="Ver Producto"
-                                class="flex items-center justify-center w-10 h-10 rounded-full border border-[#B3977E] bg-[#B3977E] text-white hover:bg-[#a3866f]">
-                          <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                            <path fill-rule="evenodd" d="M4.998 7.78C6.729 6.345 9.198 5 12 5c2.802 0 5.27 1.345 7.002 2.78a12.713 12.713 0 0 1 2.096 2.183c.253.344.465.682.618.997.14.286.284.658.284 1.04s-.145.754-.284 1.04a6.6 6.6 0 0 1-.618.997 12.712 12.712 0 0 1-2.096 2.183C17.271 17.655 14.802 19 12 19c-2.802 0-5.27-1.345-7.002-2.78a12.712 12.712 0 0 1-2.096-2.183 6.6 6.6 0 0 1-.618-.997C2.144 12.754 2 12.382 2 12s.145-.754.284-1.04c.153-.315.365-.653.618-.997A12.714 12.714 0 0 1 4.998 7.78ZM12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" clip-rule="evenodd"/>
-                          </svg>
-                        </button>
+                  <div class="bg-white dark:bg-gray-700 rounded-2xl shadow-lg overflow-hidden transform transition hover:-translate-y-2 hover:shadow-2xl">
+                    <!-- Imagen clickeable -->
+                    <div (click)="goToProducts(producto.sku)" class="cursor-pointer group relative">
+                      <img [src]="'images/products/' + producto.sku + '.webp'"
+                           alt="{{ producto.descripcion }}"
+                           class="w-full h-64 object-cover transition duration-300 ease-in-out group-hover:scale-105" />
+                    </div>
 
-                        <!-- Agregar al carrito -->
+                    <!-- Contenido -->
+                    <div class="p-4 space-y-2">
+                      <h3 class="text-lg font-semibold text-gray-800 dark:text-white">{{ producto.descripcion }}</h3>
+                      <div class="flex justify-between items-center">
+                        <p class="text-primary-600 font-bold dark:text-white">${{ producto.precio }}</p>
+                        <!-- Botón agregar al carrito -->
                         <button (click)="agregarAlCarrito(producto)"
                                 title="Agregar al Carrito"
-                                class="flex items-center justify-center w-10 h-10 rounded-full border border-[#B3977E] bg-[#B3977E] text-white hover:bg-[#a3866f]">
-                          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                class="flex items-center justify-center w-9 h-9 rounded-full border border-[#B3977E] bg-[#B3977E] text-white hover:bg-[#a3866f] transition">
+                          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2"
+                               viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round"
-                                  d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
+                                  d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7h-1M8 7h-.688M13 5v4m-2-2h4"/>
                           </svg>
                         </button>
                       </div>
                     </div>
                   </div>
+
                 }
                 } @placeholder (minimum 200ms){
                   <div class="absolute inset-0  flex items-center justify-center z-10">
@@ -106,6 +102,7 @@
           </div>
         </div>
     </div>
+    <app-shopping-cart-sidebar [(visible)]="showCart"></app-shopping-cart-sidebar>
   </main>
 
 </div>
