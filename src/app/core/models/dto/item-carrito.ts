@@ -1,6 +1,6 @@
 export interface ItemCarrito {
   productoId: string;
   descripcion: string;
-  cantidad:   string;
+  cantidad:   number;
   pvp:      number;
 }

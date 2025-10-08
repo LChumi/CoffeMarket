@@ -49,10 +49,87 @@
                     </a>
                   </div>
                 </div>
+              } @else {
+                @for (item of cartItems; track $index){
+                  <div class="bg-white dark:bg-gray-700 rounded-2xl shadow-lg p-4 md:p-6 transition hover:shadow-xl">
+                    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+
+                      <!-- Botón eliminar -->
+                      <div>
+                        <button (click)="removeProduct(item.productoId)"
+                                class="flex items-center text-sm text-gray-500 hover:text-gray-200 transition">
+                          <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" stroke-width="2"
+                               viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+                          </svg>
+
+                        </button>
+                      </div>
+
+                      <!-- Imagen del producto -->
+                      <div class="shrink-0">
+                        <img [src]="'images/products/' + item.productoId + '.webp'"
+                             alt="{{ item.descripcion }}"
+                             class="h-20 w-20 object-cover rounded-2xl shadow-sm" />
+                      </div>
+
+                      <!-- Descripción y cantidad -->
+                      <div class="flex-1 space-y-2">
+                        <p class="text-base font-semibold text-gray-800 dark:text-white">{{ item.descripcion }}</p>
+                        <p class="text-sm text-gray-500 dark:text-gray-300">Cantidad: {{ item.cantidad }}</p>
+                      </div>
+
+                      <!-- Controles de cantidad -->
+                      <div class="flex items-center gap-2">
+                        <button (click)="removeQuantity(item.productoId)"
+                                class="w-8 h-8 rounded-full border border-gray-300 bg-gray-100 text-gray-700 hover:bg-gray-200 dark:border-gray-600 dark:bg-gray-800 dark:text-white transition">
+                          −
+                        </button>
+
+                        <span class="text-sm font-medium text-gray-700 dark:text-white">{{ item.cantidad }}</span>
+
+                        <button (click)="addQuantity(item.productoId)"
+                                class="w-8 h-8 rounded-full border border-[#B3977E] bg-[#B3977E] text-white hover:bg-[#a3866f] transition">
+                          +
+                        </button>
+                      </div>
+
+                      <!-- Precio total -->
+                      <div class="text-end min-w-[100px]">
+                        <p class="text-primary-600 font-bold dark:text-white">{{ item.pvp * item.cantidad | currency }}</p>
+                      </div>
+                    </div>
+                  </div>
+                }
               }
+            } @placeholder (minimum 200ms){
+              <app-product-loading/>
+              <app-product-loading/>
+              <app-product-loading/>
             }
           </div>
         </div>
+
+        <div class="mx-auto mt-6 max-w-4xl flex-1 space-y-6 lg:mt-0 lg:w-full">
+          <div class="space-y-4 rounded-lg border border-gray-500 p-4 shadow-sm sm:p-6">
+            <p class="text-xl font-semibold text-gray-500">Resumen del pedido</p>
+
+            <div class="space-y-4">
+              <div class="space-y-2">
+                <dl class="flex items-center justify-between gap-4 border-t border-gray-200 pt-2">
+                  <dt class="text-base font-bold text-gray-500">
+                    Subtotal
+                  </dt>
+                  <dd class="text-base font-bold text-gray-600">
+                    {{ calcularTotal() | currency}}
+                  </dd>
+                </dl>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
       </div>
     </div>
   </section>

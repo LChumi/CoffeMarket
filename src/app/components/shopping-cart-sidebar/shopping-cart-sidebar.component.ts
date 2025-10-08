@@ -2,14 +2,13 @@ import {Component, EventEmitter, inject, Input, OnInit, Output} from '@angular/c
 import {CurrencyPipe, NgClass} from "@angular/common";
 import {ItemCarrito} from "@models/dto/item-carrito";
 import {CarritoService} from "@services/carrito.service";
-import {RouterLinkActive} from "@angular/router";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-shopping-cart-sidebar',
   imports: [
     NgClass,
     CurrencyPipe,
-    RouterLinkActive
   ],
   templateUrl: './shopping-cart-sidebar.component.html',
   styles: ``
@@ -18,6 +17,7 @@ export class ShoppingCartSidebarComponent implements OnInit {
 
   private _visible = false;
   private carritoService = inject(CarritoService);
+  private router = inject(Router);
 
   cartItems: ItemCarrito[] = [];
 
@@ -45,13 +45,18 @@ export class ShoppingCartSidebarComponent implements OnInit {
   calcularTotal(): number {
     return this.cartItems.reduce((total, item) => {
       const precio = item.pvp;
-      const cantidad = parseInt(item.cantidad);
+      const cantidad = item.cantidad;
       return total + precio * cantidad;
     }, 0);
   }
 
   eliminarDelCarrito(id: string) {
     this.carritoService.eliminarProducto(id)
+  }
+
+  goToCart() {
+    this.router.navigate(['/cart']).then(r => {
+    })
   }
 
 }

@@ -82,7 +82,14 @@
                   <span>{{ calcularTotal() | currency:'USD' }}</span>
                 </div>
                 <button
-                  class="mt-4 w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded transition"
+                  (click)="goToCart()"
+                  class="mt-4 w-full text-white py-2 px-4 rounded transition"
+                  style="background-color: #B3977E; color: white; font-weight: bold; padding: 0.5rem 1rem; border: 1px solid #B3977E; border-radius: 0.25rem;"
+                >
+                  Ver carrito
+                </button>
+                <button
+                  class="mt-4 w-full text-white py-2 px-4 rounded transition"
                   style="background-color: #B3977E; color: white; font-weight: bold; padding: 0.5rem 1rem; border: 1px solid #B3977E; border-radius: 0.25rem;"
                 >
                   Proceder al pago

@@ -42,16 +42,34 @@ export class CarritoService {
   agregarProducto(producto: Products, cantidad: number = 1) {
     const existente = this.carrito.items.find(i => i.productoId === producto.sku);
     if (existente) {
-      existente.cantidad = (parseInt(existente.cantidad) + cantidad).toString();
+      existente.cantidad = (existente.cantidad + cantidad)
     } else {
       this.carrito.items.push({
         productoId: producto.sku,
         descripcion: producto.descripcion,
-        cantidad: cantidad.toString(),
+        cantidad: cantidad,
         pvp: producto.precio
       });
     }
     this.guardarCarrito();
+  }
+
+  agregarCantidad(id:string) {
+    const existente = this.carrito.items.find(i => i.productoId === id);
+    if (existente) {
+      existente.cantidad = (existente.cantidad+1);
+      this.guardarCarrito()
+    }
+  }
+
+  retirarCantidad(id: string) {
+    const item = this.carrito.items.find(i => i.productoId === id);
+    if (!item) return;
+
+    if (item.cantidad > 1) {
+      item.cantidad -= 1;
+      this.guardarCarrito();
+    }
   }
 
   obtenerCarrito(): Carrito {
