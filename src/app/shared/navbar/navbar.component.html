@@ -1,120 +1,121 @@
-<nav class="bg-white shadow-sm dark:bg-gray-700">
-  <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
-    <div class="relative flex justify-between h-16">
-      <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
-        <!-- Mobile menu button -->
+<nav class="bg-white dark:bg-gray-700 shadow-md">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-16">
+
+      <!-- Botón móvil -->
+      <div class="sm:hidden">
         <button type="button" (click)="mobileMenu = !mobileMenu"
-                class="inline-flex items-center justify-center p-2 rounded-md text-[#0f3321] hover:text-[#0f3321] hover:bg-[#c4b89b] focus:outline-none focus:ring-2 focus:ring-inset focus:ring-lime-950"
-                aria-controls="mobile-menu" aria-expanded="false">
-          <span class="sr-only">Open main menu</span>
-          <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-               stroke="currentColor" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
-          </svg>
-          <svg class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-               stroke="currentColor" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-          </svg>
+                class="p-2 rounded-md text-gray-700 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-[#B3977E] transition">
+          <span class="sr-only">Abrir menú</span>
+          @if (!mobileMenu) {
+            <!-- Icono hamburguesa -->
+            <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2"
+                 viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M4 6h16M4 12h16M4 18h16"/>
+            </svg>
+          }
+          @if (mobileMenu) {
+            <!-- Icono cerrar -->
+            <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2"
+                 viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M6 18L18 6M6 6l12 12"/>
+            </svg>
+          }
         </button>
       </div>
-      <div class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
-        <div class="flex-shrink-0 flex items-center">
-          <a [routerLink]="['home']" routerLinkActive="active-link" aria-label="Ir a Inicio">
-            <img
-              src="/images/logos/caffeCirc.webp"
-              alt=""
-              width="120"
-              height="90"
-              class="block lg:hidden h-12 w-auto transition-all duration-300 ease-in-out transform hover:scale-105"
-            />
-          </a>
-          <a [routerLink]="['home']" routerLinkActive="active-link" aria-label="Ir a Inicio">
-            <img
-              src="/images/logos/caffeCirc.webp"
-              alt=""
-              width="120"
-              height="90"
-              class="hidden lg:block h-12 w-auto transition-all duration-300 ease-in-out transform hover:scale-105"
-            />
-          </a>
 
-        </div>
-
-        <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
-          <a [routerLink]="['/home']" routerLinkActive="active-link"
-             class="text-gray-900 dark:text-white inline-flex items-center px-1 pt-1 text-sm font-medium">Inicio</a>
-          <a [routerLink]="['/about']" routerLinkActive="active-link"
-             class="border-transparent text-gray-500 dark:text-white hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Quienes
-            Somos</a>
-          <a [routerLink]="['/products']" routerLinkActive="active-link"
-             class="border-transparent text-gray-500 dark:text-white hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Productos
-            <svg class="w-5 h-5 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                 width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-              <path fill-rule="evenodd"
-                    d="M14 7h-4v3a1 1 0 0 1-2 0V7H6a1 1 0 0 0-.997.923l-.917 11.924A2 2 0 0 0 6.08 22h11.84a2 2 0 0 0 1.994-2.153l-.917-11.924A1 1 0 0 0 18 7h-2v3a1 1 0 1 1-2 0V7Zm-2-3a2 2 0 0 0-2 2v1H8V6a4 4 0 0 1 8 0v1h-2V6a2 2 0 0 0-2-2Z"
-                    clip-rule="evenodd"/>
-            </svg>
-          </a>
-        </div>
+      <!-- Logo -->
+      <div class="flex items-center">
+        <a [routerLink]="['home']" aria-label="Ir a Inicio">
+          <img src="/images/logos/caffeCirc.webp"
+               alt="Logo Bunna"
+               class="h-12 w-auto max-w-[120px] transition-transform duration-300 hover:scale-105" />
+        </a>
       </div>
-      <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-        <div class="ml-3 relative flex space-x-4">
-          <!-- Botón de Facebook -->
-          <a href="https://www.facebook.com/BunnaCafeEspecialidad"
-             type="button"
-             class=" p-2 rounded-full text-blue-900 dark:text-white hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white transition-all shadow-lg"
-             aria-label="Facebook">
-            <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-              <path fill-rule="evenodd"
-                    d="M13.135 6H15V3h-1.865a4.147 4.147 0 0 0-4.142 4.142V9H7v3h2v9.938h3V12h2.021l.592-3H12V6.591A.6.6 0 0 1 12.592 6h.543Z"
-                    clip-rule="evenodd"/>
-            </svg>
-          </a>
 
-          <!-- Botón de Instagram -->
-          <a type="button"
-             href="https://www.instagram.com/bunnacafeec/"
-             class="hover:bg-gradient-to-br from-pink-500 to-red-500 p-2 rounded-full text-red-600 dark:text-white hover:opacity-80 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white transition-all shadow-lg"
-             aria-label="Instagram">
-            <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-              <path fill-rule="evenodd"
-                    d="M3 8a5 5 0 0 1 5-5h8a5 5 0 0 1 5 5v8a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5V8Zm5-3a3 3 0 0 0-3 3v8a3 3 0 0 0 3 3h8a3 3 0 0 0 3-3V8a3 3 0 0 0-3-3H8Zm7.597 2.214a1 1 0 0 1 1-1h.01a1 1 0 1 1 0 2h-.01a1 1 0 0 1-1-1ZM12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm-5 3a5 5 0 1 1 10 0 5 5 0 0 1-10 0Z"
-                    clip-rule="evenodd"/>
-            </svg>
-          </a>
+      <!-- Links desktop -->
+      <div class="hidden sm:flex sm:space-x-6">
+        <a [routerLink]="['/home']" routerLinkActive="active-link"
+           class="px-3 py-2 text-sm font-medium text-gray-700 dark:text-white hover:text-[#B3977E] transition">
+          Inicio
+        </a>
+        <a [routerLink]="['/about']" routerLinkActive="active-link"
+           class="px-3 py-2 text-sm font-medium text-gray-500 dark:text-white hover:text-[#B3977E] transition">
+          Quienes Somos
+        </a>
+        <a [routerLink]="['/products']" routerLinkActive="active-link"
+           class="px-3 py-2 text-sm font-medium text-gray-500 dark:text-white hover:text-[#B3977E] flex items-center gap-1 transition">
+          Productos
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+            <path fill-rule="evenodd"
+                  d="M14 7h-4v3a1 1 0 0 1-2 0V7H6a1 1 0 0 0-.997.923l-.917 11.924A2 2 0 0 0 6.08 22h11.84a2 2 0 0 0 1.994-2.153l-.917-11.924A1 1 0 0 0 18 7h-2v3a1 1 0 1 1-2 0V7Zm-2-3a2 2 0 0 0-2 2v1H8V6a4 4 0 0 1 8 0v1h-2V6a2 2 0 0 0-2-2Z"
+                  clip-rule="evenodd"/>
+          </svg>
+        </a>
+      </div>
 
-          <button (click)="visibleSidebar= true" aria-label="carrito"
-            class="mx-2 text-gray-600 rounded-full p-2 hover:bg-lime-950 focus:outline-none dark:text-gray-200">
-            <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                 viewBox="0 0 24 24" stroke="currentColor">
-              <path
-                d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
-            </svg>
-          </button>
-          <app-shopping-cart-sidebar [(visible)]="visibleSidebar"></app-shopping-cart-sidebar>
-
-        </div>
+      <!-- Íconos sociales + carrito -->
+      <div class="flex items-center gap-3">
+        <!-- Facebook -->
+        <a href="https://www.facebook.com/BunnaCafeEspecialidad"
+           class="p-2 rounded-full  hover:bg-blue-500 text-blue-900  transition shadow-md hover:text-white"
+           aria-label="Facebook">
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+            <path fill-rule="evenodd"
+                  d="M13.135 6H15V3h-1.865a4.147 4.147 0 0 0-4.142 4.142V9H7v3h2v9.938h3V12h2.021l.592-3H12V6.591A.6.6 0 0 1 12.592 6h.543Z"
+                  clip-rule="evenodd"/>
+          </svg>
+        </a>
+        <!-- Instagram -->
+        <a href="https://www.instagram.com/bunnacafeec/"
+           class="p-2 rounded-full  hover:bg-pink-500 text-pink-600  transition shadow-md hover:text-white"
+           aria-label="Instagram">
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+            <path fill-rule="evenodd"
+                  d="M3 8a5 5 0 0 1 5-5h8a5 5 0 0 1 5 5v8a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5V8Zm5-3a3 3 0 0 0-3 3v8a3 3 0 0 0 3 3h8a3 3 0 0 0 3-3V8a3 3 0 0 0-3-3H8Zm7.597 2.214a1 1 0 0 1 1-1h.01a1 1 0 1 1 0 2h-.01a1 1 0 0 1-1-1ZM12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm-5 3a5 5 0 1 1 10 0 5 5 0 0 1-10 0Z"
+                  clip-rule="evenodd"/>
+          </svg>
+        </a>
+        <!-- Carrito -->
+        <button (click)="visibleSidebar = true"
+                class="p-2 rounded-full hover:bg-[#B3977E] text transition text-green-950"
+                aria-label="Carrito">
+          <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2"
+               viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
+          </svg>
+        </button>
+        <app-shopping-cart-sidebar [(visible)]="visibleSidebar"></app-shopping-cart-sidebar>
       </div>
     </div>
   </div>
+  <!-- Menú móvil -->
   @if (mobileMenu) {
-    <!-- Vista Móvil -->
-    <div class="sm:hidden" id="mobile-menu">
+    <div class="sm:hidden transition-all duration-300 ease-in-out" id="mobile-menu">
       <div class="pt-2 pb-4 space-y-1">
         <a [routerLink]="['/home']" routerLinkActive="active-link"
            [routerLinkActiveOptions]="{ exact: true }"
            [ngClass]="{ 'active-link': router.url === '/home' }"
-           class="block pl-3 pr-4 py-2 text-base font-medium text-gray-900 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-600 transition-all duration-300">Inicio</a>
+           class="block px-4 py-2 text-base font-medium text-gray-700 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-600 rounded-md transition">
+          Inicio
+        </a>
+
         <a [routerLink]="['/about']" routerLinkActive="active-link"
            [routerLinkActiveOptions]="{ exact: true }"
            [ngClass]="{ 'active-link': router.url === '/about' }"
-           class="block pl-3 pr-4 py-2 text-base font-medium text-gray-900 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-600 transition-all duration-300">Quienes Somos</a>
+           class="block px-4 py-2 text-base font-medium text-gray-700 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-600 rounded-md transition">
+          Quienes Somos
+        </a>
+
         <a [routerLink]="['/products']" routerLinkActive="active-link"
            [routerLinkActiveOptions]="{ exact: true }"
            [ngClass]="{ 'active-link': router.url === '/products' }"
-           class="block pl-3 pr-4 py-2 text-base font-medium text-gray-900 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-600 transition-all duration-300">Productos
-          <svg class="w-5 h-5 inline-block text-gray-900 dark:text-white ml-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-               width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+           class="block px-4 py-2 text-base font-medium text-gray-700 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-600 rounded-md flex items-center gap-2 transition">
+          Productos
+          <svg class="w-5 h-5 text-gray-700 dark:text-white" fill="currentColor" viewBox="0 0 24 24">
             <path fill-rule="evenodd"
                   d="M14 7h-4v3a1 1 0 0 1-2 0V7H6a1 1 0 0 0-.997.923l-.917 11.924A2 2 0 0 0 6.08 22h11.84a2 2 0 0 0 1.994-2.153l-.917-11.924A1 1 0 0 0 18 7h-2v3a1 1 0 1 1-2 0V7Zm-2-3a2 2 0 0 0-2 2v1H8V6a4 4 0 0 1 8 0v1h-2V6a2 2 0 0 0-2-2Z"
                   clip-rule="evenodd"/>
@@ -122,6 +123,5 @@
         </a>
       </div>
     </div>
-
   }
 </nav>
