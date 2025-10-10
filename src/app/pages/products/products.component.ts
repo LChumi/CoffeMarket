@@ -5,7 +5,7 @@ import {DataService} from "@services/data/data.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Meta, Title} from "@angular/platform-browser";
 import {environment} from "../../../environments/environment";
-import {MetaService} from "@services/meta.service";
+import {MetaService} from "@services/seo/meta.service";
 import {FormsModule} from "@angular/forms";
 import {CarritoService} from "@services/carrito.service";
 import {ShoppingCartSidebarComponent} from "@components/shopping-cart-sidebar/shopping-cart-sidebar.component";

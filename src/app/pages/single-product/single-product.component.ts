@@ -3,11 +3,11 @@ import {NavbarComponent} from "@shared/navbar/navbar.component";
 import {DataService} from "@services/data/data.service";
 import {Products} from "@models/data/products";
 import {ActivatedRoute, Router} from "@angular/router";
-import {ConsentService} from "@services/consent.service";
+import {ConsentService} from "@services/seo/consent.service";
 import { Meta, Title } from '@angular/platform-browser';
 import {environment} from "../../../environments/environment";
-import {MetaService} from "@services/meta.service";
-import {SchemaService} from "@services/schema.service";
+import {MetaService} from "@services/seo/meta.service";
+import {SchemaService} from "@services/seo/schema.service";
 import {CarritoService} from "@services/carrito.service";
 import {ShoppingCartSidebarComponent} from "@components/shopping-cart-sidebar/shopping-cart-sidebar.component";
 
@@ -60,9 +60,6 @@ export class SingleProductComponent implements OnInit {
           name: 'description',
           content: `Descubre el accesorio ${producto.descripcion} en Bunna Shop: calidad premium, ideal para baristas caseros y amantes del café.`
         });
-
-        const schema = this.schemaService.generateProductSchema(producto, this.domain, currentUrl);
-        this.schemaService.insertSchema(schema, 'Product');
 
         this.canonicalService.updateCanonical(currentUrl);
         this.loadProductsByCategory(producto.categoria_id);

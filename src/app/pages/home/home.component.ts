@@ -8,8 +8,8 @@ import {WhatsappButtonComponent} from "@components/whatsapp-button/whatsapp-butt
 import {Meta, Title} from "@angular/platform-browser";
 import {environment} from "../../../environments/environment";
 import {Router} from "@angular/router";
-import {MetaService} from "@services/meta.service";
-import {SchemaService} from "@services/schema.service";
+import {MetaService} from "@services/seo/meta.service";
+import {SchemaService} from "@services/seo/schema.service";
 
 @Component({
   selector: 'app-home',
