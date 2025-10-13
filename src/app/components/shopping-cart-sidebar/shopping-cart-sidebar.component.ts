@@ -11,6 +11,7 @@ import {Router} from "@angular/router";
     CurrencyPipe,
   ],
   templateUrl: './shopping-cart-sidebar.component.html',
+  standalone: true,
   styles: ``
 })
 export class ShoppingCartSidebarComponent implements OnInit {

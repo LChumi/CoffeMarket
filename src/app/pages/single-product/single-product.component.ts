@@ -4,7 +4,6 @@ import {DataService} from "@services/data/data.service";
 import {Products} from "@models/data/products";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ConsentService} from "@services/seo/consent.service";
-import { Meta, Title } from '@angular/platform-browser';
 import {environment} from "../../../environments/environment";
 import {MetaService} from "@services/seo/meta.service";
 import {SchemaService} from "@services/seo/schema.service";
@@ -20,6 +19,7 @@ declare var gtag: (...args: any[]) => void;
     ShoppingCartSidebarComponent
   ],
   templateUrl: './single-product.component.html',
+  standalone: true,
   styles: ``
 })
 export class SingleProductComponent implements OnInit {
@@ -28,11 +28,7 @@ export class SingleProductComponent implements OnInit {
   private route = inject(ActivatedRoute)
   private router = inject(Router);
   private consentService = inject(ConsentService);
-
-
-  private titleService = inject(Title);
-  private metaService = inject(Meta);
-  private canonicalService = inject(MetaService)
+  private seoService = inject(MetaService)
   private schemaService = inject(SchemaService);
   private carritoService = inject(CarritoService);
 
@@ -55,13 +51,26 @@ export class SingleProductComponent implements OnInit {
       if (producto) {
         this.producto = producto;
 
-        this.titleService.setTitle(`${producto.descripcion} | Accesorio para Café | Bunna`);
-        this.metaService.updateTag({
-          name: 'description',
-          content: `Descubre el accesorio ${producto.descripcion} en Bunna Shop: calidad premium, ideal para baristas caseros y amantes del café.`
+        const title = `${producto.descripcion} | Accesorio para Café | Bunna`;
+        const description = `${producto.descripcion} en Bunna Shop: calidad premium, ideal para baristas caseros y amantes del café.`
+
+        this.seoService.updateMetaTags({
+          title,
+          description,
+          canonicalUrl: currentUrl,
+          og: {
+            title,
+            description,
+            url: currentUrl,
+            image: `${this.domain}/images/logos/bunnaCirc.webp`
+          }
         });
 
-        this.canonicalService.updateCanonical(currentUrl);
+        const schema = this.schemaService.generateProductSchema(
+          producto,
+          currentUrl);
+        this.schemaService.injectSchema(schema, 'Product');
+
         this.loadProductsByCategory(producto.categoria_id);
       }
     });

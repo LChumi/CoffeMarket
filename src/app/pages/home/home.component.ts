@@ -1,11 +1,10 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {NavbarComponent} from '@shared/navbar/navbar.component';
 import {CarouselComponent} from '@components/carousel/carousel.component';
 import {FooterComponent} from '@shared/footer/footer.component';
 import {BoxesIconsComponent} from '@components/boxes-icons/boxes-icons.component';
 import {CategoriesGridComponent} from '@components/categories-grid/categories-grid.component';
 import {WhatsappButtonComponent} from "@components/whatsapp-button/whatsapp-button.component";
-import {Meta, Title} from "@angular/platform-browser";
 import {environment} from "../../../environments/environment";
 import {Router} from "@angular/router";
 import {MetaService} from "@services/seo/meta.service";
@@ -20,23 +19,37 @@ import {SchemaService} from "@services/seo/schema.service";
 })
 export default class HomeComponent implements OnInit {
 
-  private titleService = inject(Title);
-  private metaService = inject(Meta);
-  private router = inject(Router);
-  private canonicalService = inject(MetaService)
-  private schemaService = inject(SchemaService)
   private domain = environment.domain;
+
+  constructor(
+    private router: Router,
+    private schemaService: SchemaService,
+    private seoService : MetaService
+  ) {}
 
     ngOnInit(): void {
       const currentUrl = `${this.domain}${this.router.url}`;
 
-      this.canonicalService.updateCanonical(currentUrl);
+      const title = 'Bienvenido a Bunna Shop ☕| Accesorios para Cafe ';
+      const description = 'Bienvenido a Bunna Shop: cafeteras, molinos, filtros V60 y más para preparar café como un experto en casa.'
 
-      this.titleService.setTitle('Bienvenido a Bunna Shop ☕| Accesorios para Cafe ');
-      this.metaService.updateTag({
-        name: 'description',
-        content: 'Bienvenido a Bunna Shop: cafeteras, molinos, filtros V60 y más para preparar café como un experto en casa.'
+      this.seoService.updateMetaTags({
+        title,
+        description,
+        canonicalUrl: currentUrl,
+        og: {
+          title,
+          description,
+          url: currentUrl,
+          image: `${this.domain}/images/logos/bunnaCirc.webp`
+        }
       });
+
+      const schema = this.schemaService.generateContentPageSchema(
+        currentUrl,
+        'Bunna Shop inicio',
+        description);
+      this.schemaService.injectSchema(schema, 'ContentPage');
     }
 
 }

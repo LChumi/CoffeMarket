@@ -5,9 +5,8 @@ import {ProductoResolver} from "./core/resolvers/producto.resolver";
 import {ProductosResolver} from "./core/resolvers/productos.resolver";
 
 export const routes: Routes = [
-
   {
-    path: 'home',
+    path: '',
     loadComponent: () => import('./pages/home/home.component')
   },
   {
@@ -19,21 +18,22 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/products/products.component')
   },
   {
-    path: 'productos/:categoryId', component: ProductsComponent,
-    resolve: {productos: ProductosResolver},
+    path: 'productos/:categoryId',
+    component: ProductsComponent,
+    resolve: { productos: ProductosResolver },
     runGuardsAndResolvers: 'always'
   },
   {
-    path: 'producto/:productoId', component: SingleProductComponent,
-    resolve: {producto: ProductoResolver},
+    path: 'producto/:productoId',
+    component: SingleProductComponent,
+    resolve: { producto: ProductoResolver },
     runGuardsAndResolvers: 'always'
   },
   {
     path: 'cart',
     loadComponent: () => import('./pages/shoping-cart/shoping-cart.component')
   },
-  {path: 'producto', redirectTo: '/products', pathMatch: 'full'},
-  {path: 'productos', redirectTo: '/products', pathMatch: 'full'},
-  {path: '', redirectTo: '/home', pathMatch: 'full'},
-  {path: '**', redirectTo: '/home', pathMatch: 'full'}
+  { path: 'producto', redirectTo: 'products', pathMatch: 'full' },
+  { path: 'productos', redirectTo: 'products', pathMatch: 'full' },
+  { path: '**', redirectTo: '', pathMatch: 'full' }
 ];

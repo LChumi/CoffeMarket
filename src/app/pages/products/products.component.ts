@@ -3,12 +3,12 @@ import {NavbarComponent} from "@shared/navbar/navbar.component";
 import {Products} from "@models/data/products";
 import {DataService} from "@services/data/data.service";
 import {ActivatedRoute, Router} from "@angular/router";
-import {Meta, Title} from "@angular/platform-browser";
 import {environment} from "../../../environments/environment";
 import {MetaService} from "@services/seo/meta.service";
 import {FormsModule} from "@angular/forms";
 import {CarritoService} from "@services/carrito.service";
 import {ShoppingCartSidebarComponent} from "@components/shopping-cart-sidebar/shopping-cart-sidebar.component";
+import {SchemaService} from "@services/seo/schema.service";
 
 @Component({
   selector: 'app-products',
@@ -26,10 +26,8 @@ export default class ProductsComponent implements OnInit {
   private dataService = inject(DataService);
   private route = inject(ActivatedRoute)
   private router = inject(Router)
-
-  private titleService = inject(Title);
-  private metaService = inject(Meta);
-  private canonicalService = inject(MetaService)
+  private seoService = inject(MetaService)
+  private schemaService = inject(SchemaService)
   private carritoService = inject(CarritoService);
 
   private domain = environment.domain;
@@ -43,13 +41,26 @@ export default class ProductsComponent implements OnInit {
 
   ngOnInit(): void {
     const currentUrl = `${this.domain}${this.router.url}`;
-    this.canonicalService.updateCanonical(currentUrl);
+    const title = 'Catálogo de Accesorios para Café | Bunna Shop'
+    const description ='Explora nuestro catálogo: cafeteras V60, molinos manuales, filtros, balanzas y todo lo que necesitas para preparar café en casa.'
 
-    this.titleService.setTitle('Catálogo de Accesorios para Café | Bunna Shop');
-    this.metaService.updateTag({
-      name: 'description',
-      content: 'Explora nuestro catálogo: cafeteras V60, molinos manuales, filtros, balanzas y todo lo que necesitas para preparar café en casa.'
+    this.seoService.updateMetaTags({
+      title,
+      description,
+      canonicalUrl: currentUrl,
+      og: {
+        title,
+        description,
+        url: currentUrl,
+        image: `${this.domain}/images/logos/bunnaCirc.webp`
+      }
     });
+
+    const schema = this.schemaService.generateContentPageSchema(
+      currentUrl,
+      'Catalogo Bunna Shop',
+      description);
+    this.schemaService.injectSchema(schema, 'CollectionPage');
 
     const categoryId = this.route.snapshot.paramMap.get('categoryId');
 
