@@ -81,14 +81,14 @@
 
                       <!-- Controles de cantidad -->
                       <div class="flex items-center gap-2">
-                        <button (click)="removeQuantity(item.productoId)"
+                        <button (click)="removeQuantity(item.productoId)" aria-label="restar"
                                 class="w-8 h-8 rounded-full border border-gray-300 bg-gray-100 text-gray-700 hover:bg-gray-200 dark:border-gray-600 dark:bg-gray-800 dark:text-white transition">
                           −
                         </button>
 
                         <span class="text-sm font-medium text-gray-700 dark:text-white">{{ item.cantidad }}</span>
 
-                        <button (click)="addQuantity(item.productoId)"
+                        <button (click)="addQuantity(item.productoId)" aria-label="sumar"
                                 class="w-8 h-8 rounded-full border border-[#B3977E] bg-[#B3977E] text-white hover:bg-[#a3866f] transition">
                           +
                         </button>

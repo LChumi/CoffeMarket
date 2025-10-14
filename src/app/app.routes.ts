@@ -33,6 +33,10 @@ export const routes: Routes = [
     path: 'cart',
     loadComponent: () => import('./pages/shoping-cart/shoping-cart.component')
   },
+  {
+    path: 'checkout',
+    loadComponent: () => import('./pages/checkout/checkout.component')
+  },
   { path: 'producto', redirectTo: 'products', pathMatch: 'full' },
   { path: 'productos', redirectTo: 'products', pathMatch: 'full' },
   { path: '**', redirectTo: '', pathMatch: 'full' }
