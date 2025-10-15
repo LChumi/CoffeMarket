@@ -80,5 +80,8 @@ export default class ShopingCartComponent implements OnInit {
       return total + precio * cantidad;
     }, 0);
   }
+  goToCheckout(){
+    this.router.navigate(['/checkout']);
+  }
 
 }

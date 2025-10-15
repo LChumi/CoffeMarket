@@ -125,6 +125,26 @@
                   </dd>
                 </dl>
               </div>
+
+              <button (click)="goToCheckout()"
+                class="flex w-full items-center justify-center rounded-lg bg-primary-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-primary-800 focus:outline-none focus:ring-4 focus:ring-primary-300"
+              >
+                Finalizar Compra
+              </button>
+
+              <div class="flex items-center justify-center gap-2 text-gray-600 dark:text:white">
+                <a
+                  routerLink="/"
+                  class="inline-flex items-center gap-2 text-sm font-medium text-primary-700 underline hover:no-underline"
+                >
+                  Seguir comprando
+                  <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                    <path fill-rule="evenodd" d="M14 7h-4v3a1 1 0 0 1-2 0V7H6a1 1 0 0 0-.997.923l-.917 11.924A2 2 0 0 0 6.08 22h11.84a2 2 0 0 0 1.994-2.153l-.917-11.924A1 1 0 0 0 18 7h-2v3a1 1 0 1 1-2 0V7Zm-2-3a2 2 0 0 0-2 2v1H8V6a4 4 0 0 1 8 0v1h-2V6a2 2 0 0 0-2-2Z" clip-rule="evenodd"/>
+                  </svg>
+
+                </a>
+              </div>
+
             </div>
           </div>
 

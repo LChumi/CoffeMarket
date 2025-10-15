@@ -60,4 +60,8 @@ export class ShoppingCartSidebarComponent implements OnInit {
     })
   }
 
+  goToCheckOut() {
+    this.router.navigate(['/checkout']).then(r => {})
+  }
+
 }
