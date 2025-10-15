@@ -18,6 +18,10 @@ export class PedidoService {
     return this.http.post<Pedido>(`${this.baseUrl}/save`, pedido);
   }
 
+  sendMail(docNum: string):Observable<void>{
+    return this.http.get<void>(`${this.baseUrl}/send_mail/${docNum}`);
+  }
+
   getById(id: string):Observable<Pedido>{
     return this.http.get<Pedido>(`${this.baseUrl}/by/${id}`);
   }

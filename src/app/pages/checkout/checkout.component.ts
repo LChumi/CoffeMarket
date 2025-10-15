@@ -48,6 +48,7 @@ export default class CheckoutComponent implements OnInit {
   ubicaciones: Ubicacion[] = UBICACIONES_MOCK
   cartItems: ItemCarrito[] = [];
   selectedCiudades: string[] = []
+  loading: boolean = false;
   aceptaPoliticas: boolean = false;
   invoiceFrom !: FormGroup;
 
@@ -129,6 +130,7 @@ export default class CheckoutComponent implements OnInit {
       return;
     }
 
+    this.loading = true;
     this.message = '';
 
     const form = this.invoiceFrom.value;
@@ -237,7 +239,12 @@ export default class CheckoutComponent implements OnInit {
 
   goToOrder(numDoc: string) {
     this.router.navigate(['/checkout', 'order', numDoc]).then(r => {
-      removeLocalItem('carrito')
+      this.loading = false;
+      this.pedidoService.sendMail(numDoc).subscribe({
+        next: (result) => {
+          this.carritoService.limpiarCarrito()
+        }
+      })
       window.scrollTo({ top: 0, behavior: 'smooth' });
     })
   }

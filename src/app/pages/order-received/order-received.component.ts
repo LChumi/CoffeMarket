@@ -9,6 +9,7 @@ import {Pedido} from "@models/pedido";
 import {CurrencyPipe, DatePipe} from "@angular/common";
 import {ClienteService} from "@services/cliente.service";
 import {Cliente} from "@models/cliente";
+import {PedidoService} from "@services/pedido.service";
 
 @Component({
   selector: 'app-order-received',
