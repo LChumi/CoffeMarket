@@ -1,65 +1,108 @@
-<footer class="bg-white rounded-lg shadow dark:bg-gray-900 m-4">
-  <div class="w-full max-w-screen-xl mx-auto p-4 md:py-8">
+<footer class="bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700">
+  <div class="max-w-screen-xl mx-auto px-4 py-10 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 text-center sm:text-left">
 
-    <div class="grid grid-cols-1 sm:grid-cols-3 items-center text-center sm:text-left gap-y-6">
-
-      <div class="sm:mb-0 flex flex-col items-center sm:items-start">
+      <!-- Logo y descripción -->
+      <div class="flex flex-col items-center sm:items-start space-y-2">
         <img
           src="/images/logos/caffeCirc.webp"
           alt="Bunna Logo"
-          width="120"
-          height="90"
-          class="h-8 sm:h-10 md:h-12 w-auto rounded-full"
+          class="h-12 w-auto rounded-full"
         />
-        <p class="text-lg text-gray-700 dark:text-white">Bunna,</p>
+        <p class="text-lg font-semibold text-gray-700 dark:text-white">Bunna</p>
         <p class="text-sm text-gray-500 dark:text-gray-400">Café de Especialidad</p>
       </div>
 
-      <div class="flex flex-col items-center">
-        <h4 class="text-lg text-gray-700 dark:text-white">Compañía</h4>
-        <ul class="mt-2 space-y-1 text-sm text-gray-500 dark:text-gray-400">
+      <!-- Información institucional -->
+      <div class="flex flex-col items-center sm:items-start space-y-3">
+        <h4 class="text-lg font-semibold text-gray-700 dark:text-white tracking-wide">Sobre Bunna</h4>
+        <ul class="space-y-2 text-sm text-gray-500 dark:text-gray-400">
           <li>
-            <a [routerLink]="['/about']" (click)="scrollToTop()" class="hover:text-gray-900 dark:hover:text-white">
+            <a [routerLink]="['/about']" (click)="scrollToTop()" class="hover:text-[#103320] dark:hover:text-[#c6b89b] transition-colors">
               Acerca de Nosotros
             </a>
           </li>
-          <li class="flex items-center justify-center sm:justify-start space-x-2">
-            <svg class="w-4 h-4" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor">
+          <li>
+            <a [routerLink]="['/privacy-policy']" class="hover:text-[#103320] dark:hover:text-[#c6b89b] transition-colors">
+              Política de Privacidad
+            </a>
+          </li>
+          <li class="flex items-center gap-2">
+            <svg class="w-4 h-4 text-gray-400 dark:text-gray-300" fill="currentColor" viewBox="0 0 24 24">
               <path d="M2.038 5.61A2.01 2.01 0 0 0 2 6v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6c0-.12-.01-.238-.03-.352l-.866.65-7.89 6.032a2 2 0 0 1-2.429 0L2.884 6.288l-.846-.677Z"/>
               <path d="M20.677 4.117A1.996 1.996 0 0 0 20 4H4c-.225 0-.44.037-.642.105l.758.607L12 10.742 19.9 4.7l.777-.583Z"/>
             </svg>
-            <a href="mailto:bunnacoffeemp@gmail.com" class="hover:text-gray-900 dark:hover:text-white">
+            <a href="mailto:bunnacoffeemp@gmail.com" class="hover:text-[#103320] dark:hover:text-[#c6b89b] transition-colors">
               {{ mail }}
             </a>
           </li>
+
         </ul>
       </div>
 
-      <div class="flex flex-col items-center sm:items-end">
-        <h4 class="text-lg text-gray-700 dark:text-white">Síguenos</h4>
-        <div class="flex space-x-4 mt-2">
-          <a href="https://www.instagram.com/bunnacafeec/" aria-label="Instagram">
-            <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-              <path fill-rule="evenodd"
-                    d="M3 8a5 5 0 0 1 5-5h8a5 5 0 0 1 5 5v8a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5V8Zm5-3a3 3 0 0 0-3 3v8a3 3 0 0 0 3 3h8a3 3 0 0 0 3-3V8a3 3 0 0 0-3-3H8Zm7.597 2.214a1 1 0 0 1 1-1h.01a1 1 0 1 1 0 2h-.01a1 1 0 0 1-1-1ZM12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm-5 3a5 5 0 1 1 10 0 5 5 0 0 1-10 0Z"
-                    clip-rule="evenodd"/>
-            </svg>
+
+      <!-- Redes sociales -->
+      <div class="flex flex-col items-center sm:items-end space-y-2">
+        <h4 class="text-lg font-semibold text-gray-800 dark:text-gray-100 tracking-wide">Síguenos</h4>
+
+        <div class="flex space-x-3">
+
+          <!-- Instagram -->
+          <a href="https://www.instagram.com/bunnacafeec/" target="_blank" aria-label="Instagram" class="group">
+            <div
+              class="w-6 h-6 bg-gray-700 dark:bg-white transition-colors duration-300 icon-mask group-hover:bg-[#E4405F]"
+              style="-webkit-mask-image:url('/images/icons/instagram.svg'); mask-image:url('/images/icons/instagram.svg');">
+            </div>
           </a>
-          <a href="https://www.facebook.com/BunnaCafeEspecialidad" aria-label="Facebook" >
-            <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-              <path fill-rule="evenodd"
-                    d="M13.135 6H15V3h-1.865a4.147 4.147 0 0 0-4.142 4.142V9H7v3h2v9.938h3V12h2.021l.592-3H12V6.591A.6.6 0 0 1 12.592 6h.543Z"
-                    clip-rule="evenodd"/>
-            </svg>
+
+          <!-- Facebook -->
+          <a href="https://www.facebook.com/BunnaCafeEspecialidad" target="_blank" aria-label="Facebook" class="group">
+            <div
+              class="w-6 h-6 bg-gray-700 dark:bg-white transition-colors duration-300 icon-mask group-hover:bg-[#1877F2]"
+              style="-webkit-mask-image:url('/images/icons/facebook.svg'); mask-image:url('/images/icons/facebook.svg');">
+            </div>
           </a>
+
+          <!-- Pinterest -->
+          <a href="https://www.pinterest.com/bunnacoffeem/" target="_blank" aria-label="Pinterest" class="group">
+            <div
+              class="w-6 h-6 bg-gray-700 dark:bg-white transition-colors duration-300 icon-mask group-hover:bg-[#E60023]"
+              style="-webkit-mask-image:url('/images/icons/pinterest.svg'); mask-image:url('/images/icons/pinterest.svg');">
+            </div>
+          </a>
+
+          <!-- TikTok -->
+          <a href="https://www.tiktok.com/@bunnacoffeemp" target="_blank" aria-label="TikTok" class="group">
+            <div
+              class="w-6 h-6 bg-gray-700 dark:bg-white transition-colors duration-300 icon-mask group-hover:bg-[#69C9D0]"
+              style="-webkit-mask-image:url('/images/icons/tiktok.svg'); mask-image:url('/images/icons/tiktok.svg');">
+            </div>
+          </a>
+
+          <!-- YouTube -->
+          <a href="https://www.youtube.com/@bunnaCoffe" target="_blank" aria-label="YouTube" class="group">
+            <div
+              class="w-6 h-6 bg-gray-700 dark:bg-white transition-colors duration-300 icon-mask group-hover:bg-[#FF0000]"
+              style="-webkit-mask-image:url('/images/icons/youtube.svg'); mask-image:url('/images/icons/youtube.svg');">
+            </div>
+          </a>
+
+          <!-- WhatsApp -->
+          <a href="https://wa.link/tu_codigo" target="_blank" aria-label="WhatsApp" class="group">
+            <div
+              class="w-6 h-6 bg-gray-700 dark:bg-white transition-colors duration-300 icon-mask group-hover:bg-[#25D366]"
+              style="-webkit-mask-image:url('/images/icons/whatsapp.svg'); mask-image:url('/images/icons/whatsapp.svg');">
+            </div>
+          </a>
+
         </div>
       </div>
 
     </div>
 
-    <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
-    <span class="block text-sm text-gray-500 sm:text-center dark:text-gray-400">
-      Copyright © 2025 BunnaShop - Todos los derechos reservados.
-    </span>
+    <hr class="my-6 border-gray-300 dark:border-gray-700" />
+    <p class="text-center text-sm text-gray-500 dark:text-gray-400">
+      © 2025 BunnaShop — Todos los derechos reservados.
+    </p>
   </div>
 </footer>

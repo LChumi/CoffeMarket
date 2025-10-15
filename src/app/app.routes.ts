@@ -3,6 +3,7 @@ import ProductsComponent from "@pages/products/products.component";
 import {SingleProductComponent} from "@pages/single-product/single-product.component";
 import {ProductoResolver} from "./core/resolvers/producto.resolver";
 import {ProductosResolver} from "./core/resolvers/productos.resolver";
+import CheckoutComponent from "@pages/checkout/checkout.component";
 
 export const routes: Routes = [
   {
@@ -35,7 +36,10 @@ export const routes: Routes = [
   },
   {
     path: 'checkout',
-    loadComponent: () => import('./pages/checkout/checkout.component')
+    children:[
+      {path: '', loadComponent: () => import('./pages/checkout/checkout.component')},
+      {path: 'order-received', loadComponent: () => import('./pages/order-received/order-received.component')},
+    ]
   },
   { path: 'producto', redirectTo: 'products', pathMatch: 'full' },
   { path: 'productos', redirectTo: 'products', pathMatch: 'full' },

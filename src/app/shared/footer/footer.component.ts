@@ -8,7 +8,16 @@ import {RouterLink} from "@angular/router";
     RouterLink
   ],
   templateUrl: './footer.component.html',
-  styles: ``
+  styles: `
+    .icon-mask {
+      -webkit-mask-repeat: no-repeat;
+      -webkit-mask-position: center;
+      -webkit-mask-size: contain;
+      mask-repeat: no-repeat;
+      mask-position: center;
+      mask-size: contain;
+    }
+  `
 })
 export class FooterComponent {
 
