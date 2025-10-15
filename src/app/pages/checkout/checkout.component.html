@@ -26,8 +26,9 @@
               <select
                 name="tipo_persona"
                 id="tipo_persona"
+                aria-label="tipo_persona"
                 formControlName="tipo_persona"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white "
               >
                 <option value="Natural">Persona Natural</option>
                 <option value="Empresa">Empresa</option>
@@ -39,8 +40,9 @@
               <select
                 name="tipo_documento"
                 id="tipo_documento"
+                aria-label="tipo_documento"
                 formControlName="tipo_documento"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white "
               >
                 <option value="ruc">RUC</option>
                 <option value="cedula">Cedula</option>
@@ -53,13 +55,14 @@
               <input
                 type="text"
                 id="identificacion"
+                aria-label="identificacion"
                 formControlName="identificacion"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#103320] focus:border-[#103320] transition-colors duration-200 placeholder:text-gray-400 dark:placeholder:text-gray-500"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white transition-colors duration-200 placeholder:text-gray-400 dark:placeholder:text-gray-500"
                 placeholder="Ingrese su número de identificación"
                 autocomplete="off"
                 required/>
               @if (invoiceFrom.get('identificacion')?.invalid && invoiceFrom.get('identificacion')?.touched) {
-                <p class="text-sm text-red-500 mt-1">
+                <p role="alert" class="text-sm text-red-500 mt-1">
                   @switch (invoiceFrom.get('tipo_documento')?.value) {
                     @case ('ruc') { El RUC debe tener 13 dígitos numéricos. }
                     @case ('cedula') { La cédula debe tener 10 dígitos numéricos. }
@@ -77,11 +80,12 @@
                 type="text"
                 id="first_name"
                 formControlName="nombre"
+                aria-label="nombre"
                 autocomplete="off"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
                 required/>
               @if (invoiceFrom.get('nombre')?.invalid && invoiceFrom.get('nombre')?.touched) {
-                <p class="text-sm text-red-500 mt-1">Este campo es obligatorio.</p>
+                <p role="alert" class="text-sm text-red-500 mt-1">Este campo es obligatorio.</p>
               }
             </div>
             <div>
@@ -90,12 +94,13 @@
               <input
                 type="text"
                 id="last_name"
+                aria-label="appellido"
                 formControlName="apellido"
                 autocomplete="off"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white  "
                 required/>
               @if (invoiceFrom.get('apellido')?.invalid && invoiceFrom.get('apellido')?.touched) {
-                <p class="text-sm text-red-500 mt-1">Este campo es obligatorio.</p>
+                <p role="alert" class="text-sm text-red-500 mt-1">Este campo es obligatorio.</p>
               }
             </div>
             <div class="md:col-span-2">
@@ -104,13 +109,14 @@
               <input
                 type="text"
                 id="address"
+                aria-label="direccion"
                 formControlName="direccion"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white  "
                 placeholder="Ingrese su dirección"
                 autocomplete="off"
                 required/>
               @if (invoiceFrom.get('direccion')?.invalid && invoiceFrom.get('direccion')?.touched) {
-                <p class="text-sm text-red-500 mt-1">Este campo es obligatorio.</p>
+                <p role="alert" class="text-sm text-red-500 mt-1">Este campo es obligatorio.</p>
               }
             </div>
             <div>
@@ -119,9 +125,10 @@
               <select
                 name="provincia"
                 id="provincia"
+                aria-label="provincia"
                 formControlName="provincia"
                 (change)="onProvChange($event)"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white "
               >
                 @for (prov of ubicaciones; track $index) {
                   <option [value]="prov.nombre">{{ prov.nombre }}</option>
@@ -137,8 +144,9 @@
                 <select
                   name="ciudad"
                   id="ciudad"
+                  aria-label="ciudad"
                   formControlName="ciudad"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white "
                 >
                   @for (ciud of selectedCiudades; track $index) {
                     <option [value]="ciud">{{ ciud }}</option>
@@ -151,11 +159,12 @@
               <input
                 type="email"
                 id="email"
+                aria-label="email"
                 formControlName="email"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white  "
                 required/>
               @if (invoiceFrom.get('email')?.invalid && invoiceFrom.get('email')?.touched) {
-                <p class="text-sm text-red-500 mt-1">Este campo es obligatorio.</p>
+                <p role="alert" class="text-sm text-red-500 mt-1">Este campo es obligatorio.</p>
               }
             </div>
             <div class="md:col-span-2 mb-6">
@@ -163,8 +172,9 @@
                 <input
                   id="remember"
                   type="checkbox"
-                  [(ngModel)]="acepta"
-                  class="w-4 h-4 mt-1 border border-gray-300 rounded-sm bg-gray-50 focus:ring-2 focus:ring-[#103320] dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-[#c6b89b] dark:ring-offset-gray-800 transition-colors duration-200"
+                  aria-label="save_data"
+                  formControlName="acepta"
+                  class="w-4 h-4 mt-1 border border-gray-300 rounded-sm bg-gray-50  dark:bg-gray-700 dark:border-gray-600  dark:ring-offset-gray-800 transition-colors duration-200"
                 />
                 <span class="text-sm font-medium text-gray-900 dark:text-gray-300">Si marca esta casilla, nos autoriza a guardar algunos de sus datos en una lista de contactos.
                   Podría recibir correos electrónicos con información comercial o promocional sobre esta tienda.

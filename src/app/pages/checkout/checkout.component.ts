@@ -27,7 +27,6 @@ export default class CheckoutComponent implements OnInit {
   cartItems: ItemCarrito[] = [];
   selectedCiudades: string[] = []
   invoiceFrom !: FormGroup;
-  acepta: boolean= false;
 
   constructor() {
     this.invoiceFrom = this.fb.group({
@@ -41,6 +40,7 @@ export default class CheckoutComponent implements OnInit {
       provincia: ['', Validators.required],
       ciudad: ['', Validators.required],
       email: ['', Validators.required],
+      acepta: [false]
     })
   }
 
