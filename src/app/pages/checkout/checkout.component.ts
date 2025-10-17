@@ -78,6 +78,7 @@ export default class CheckoutComponent implements OnInit {
   finalizarCompra() {
     if (!this.invoiceFrom.valid) {
     this.invoiceFrom.markAllAsTouched();
+    return;
     }
   }
 
