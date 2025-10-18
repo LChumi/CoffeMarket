@@ -236,6 +236,22 @@
             Usa el número de pedido como referencia. El pedido se procesará una vez recibido el pago.
           </p>
         </div>
+        <div class="md:col-span-2 mb-6">
+          <label for="politicas" class="flex items-start gap-3 cursor-pointer">
+            <input
+              id="politicas"
+              type="checkbox"
+              aria-label="accept_policies"
+              [(ngModel)]="aceptaPoliticas"
+              class="w-4 h-4 mt-1 border border-gray-300 rounded-sm bg-gray-50  dark:bg-gray-700 dark:border-gray-600  dark:ring-offset-gray-800 transition-colors duration-200"
+            />
+            <span class="text-sm font-medium text-gray-900 dark:text-gray-300">He leído y estoy de acuerdo con los términos y condiciones de la web *
+                </span>
+          </label>
+          @if (message != '') {
+            <p role="alert" class="text-sm text-red-500 mt-1">{{ message}}</p>
+          }
+        </div>
 
         <button
           type="submit"

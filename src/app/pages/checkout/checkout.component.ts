@@ -5,6 +5,11 @@ import {Ubicacion, UBICACIONES_MOCK} from "../../mocks/ubicaciones";
 import {CarritoService} from "@services/carrito.service";
 import {ItemCarrito} from "@models/dto/item-carrito";
 import {CurrencyPipe} from "@angular/common";
+import {ClienteService} from "@services/cliente.service";
+import {PedidoService} from "@services/pedido.service";
+import {Cliente} from "@models/cliente";
+import {Pedido} from "@models/pedido";
+import {routes} from "../../app.routes";
 
 @Component({
   selector: 'app-checkout',
@@ -20,12 +25,17 @@ import {CurrencyPipe} from "@angular/common";
 export default class CheckoutComponent implements OnInit {
 
   private fb = inject(FormBuilder);
+  private clientService = inject(ClienteService);
+  private pedidoService = inject(PedidoService);
   private carritoService = inject(CarritoService);
+
   protected envio = 5.11
+  protected message = ''
 
   ubicaciones: Ubicacion[] = UBICACIONES_MOCK
   cartItems: ItemCarrito[] = [];
   selectedCiudades: string[] = []
+  aceptaPoliticas: boolean = false;
   invoiceFrom !: FormGroup;
 
   constructor() {
@@ -76,11 +86,76 @@ export default class CheckoutComponent implements OnInit {
   }
 
   finalizarCompra() {
-    if (!this.invoiceFrom.valid) {
-    this.invoiceFrom.markAllAsTouched();
-    return;
+    if (!this.invoiceFrom.valid || !this.aceptaPoliticas) {
+      this.invoiceFrom.markAllAsTouched();
+      this.message = 'Por favor, lee y acepta los términos y condiciones para proceder con tu pedido.';
+      return;
     }
+
+    this.message = '';
+
+    const form = this.invoiceFrom.value;
+
+    this.clientService.getByEmail(form.email).subscribe({
+      next: (result) => {
+        if (result) {
+          this.crearPedido(result.id, form);
+        } else {
+          const nuevoCliente: Cliente = {
+            id: null,
+            tipoPersona: form.tipo_persona,
+            identificacion: form.identificacion,
+            nombre: form.nombre,
+            apellido: form.apellido,
+            email: form.email,
+            aceptaPolitica: true,
+            aceptaPromocion: form.acepta
+          };
+
+          this.clientService.save(nuevoCliente).subscribe({
+            next: (clienteGuardado) => {
+              this.crearPedido(clienteGuardado.id, form);
+            }
+          });
+        }
+      }
+    });
   }
+
+  crearPedido(idCliente: string, form: any) {
+    const item: ItemCarrito = {
+      productoId: 'TRANSPORTE',
+      descripcion: `ENVIO TRANSPORTE ${form.ciudad.toLocaleUpperCase()}`,
+      cantidad: 1,
+      pvp: this.envio
+    };
+
+    this.cartItems.push(item);
+
+    const pedido: Pedido = {
+      id: null,
+      clienteId: idCliente,
+      items: this.cartItems,
+      estado: 'PENDIENTE',
+      creadoEn: new Date(),
+      direccion: form.direccion,
+      provincia: form.provincia,
+      ciudad: form.ciudad,
+      telefono: form.telefono,
+      total: this.calcularTotal(),
+      metodoPago: 'TRANSFERENCIA'
+    };
+
+    this.pedidoService.save(pedido).subscribe({
+      next: (result) => {
+        if (result) {
+          console.log('Pedido generado:', result);
+          // Aquí puedes redirigir o mostrar confirmación
+        }
+      }
+    });
+  }
+
 
   onProvChange(event: Event) {
     const select = event.target as HTMLSelectElement;

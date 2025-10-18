@@ -14,8 +14,8 @@ export class ClienteService {
 
   constructor() { }
 
-  save(pedido: Cliente):Observable<Cliente>{
-    return this.http.post<Cliente>(`${this.baseUrl}/save`, pedido);
+  save(cliente: Cliente):Observable<Cliente>{
+    return this.http.post<Cliente>(`${this.baseUrl}/save`, cliente);
   }
 
   getById(id: string):Observable<Cliente>{
@@ -31,7 +31,7 @@ export class ClienteService {
     return this.http.get<Cliente[]>(`${this.baseUrl}/get/all`);
   }
 
-  update(id: string, pedido: Cliente):Observable<Cliente>{
-    return this.http.put<Cliente>(`${this.baseUrl}/update/${id}`, pedido);
+  update(id: string, cliente: Cliente):Observable<Cliente>{
+    return this.http.put<Cliente>(`${this.baseUrl}/update/${id}`, cliente);
   }
 }
