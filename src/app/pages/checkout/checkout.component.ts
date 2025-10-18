@@ -31,12 +31,12 @@ export default class CheckoutComponent implements OnInit {
   constructor() {
     this.invoiceFrom = this.fb.group({
       tipo_persona: ['', Validators.required],
-      tipo_documento: ['', Validators.required],
+      tipo_documento: ['', [Validators.required]],
       identificacion: ['', [Validators.required, Validators.pattern(/^\d{13}$/)]],
       nombre: ['', Validators.required],
       apellido: ['', Validators.required],
       direccion: ['', Validators.required],
-      telefono: ['', Validators.required],
+      telefono: ['', [Validators.required, Validators.pattern(/^\d+$/)]],
       provincia: ['', Validators.required],
       ciudad: ['', Validators.required],
       email: ['', Validators.required],
@@ -108,4 +108,16 @@ export default class CheckoutComponent implements OnInit {
     return this.calcularSubtotal() + this.envio;
   }
 
+  soloNumeros(event: KeyboardEvent): void {
+    const charCode = event.key.charCodeAt(0);
+    if (charCode < 48 || charCode > 57) {
+      event.preventDefault();
+    }
+  }
+
+  filtrarSoloNumeros(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    input.value = input.value.replace(/\D/g, '');
+    this.invoiceFrom.get('telefono')?.setValue(input.value);
+  }
 }

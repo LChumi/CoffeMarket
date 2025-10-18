@@ -10,6 +10,7 @@ export interface Producto {
   categoriaId:  number;
   disponible:   boolean;
   imagenUrl:    string;
+  stock:        number;
 
   etiquetas:   string[];
   atributos:   Atributos[];

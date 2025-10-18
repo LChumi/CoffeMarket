@@ -167,6 +167,23 @@
                 <p role="alert" class="text-sm text-red-500 mt-1">Este campo es obligatorio.</p>
               }
             </div>
+            <div>
+              <label for="telefono"
+                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Telefono</label>
+              <input
+                type="tel"
+                id="telefono"
+                aria-label="telefono"
+                formControlName="telefono"
+                (keypress)="soloNumeros($event)"
+                (input)="filtrarSoloNumeros($event)"
+                autocomplete="off"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white  "
+                required/>
+              @if (invoiceFrom.get('telefono')?.invalid && invoiceFrom.get('telefono')?.touched) {
+                <p role="alert" class="text-sm text-red-500 mt-1">Este campo es obligatorio.</p>
+              }
+            </div>
             <div class="md:col-span-2 mb-6">
               <label for="remember" class="flex items-start gap-3 cursor-pointer">
                 <input
