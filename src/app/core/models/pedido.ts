@@ -3,6 +3,7 @@ import {ItemCarrito} from "@models/dto/item-carrito";
 export interface Pedido {
   id:                 any;
 
+  docNum:             any;
   clienteId:          string;
   items:              ItemCarrito[];
 

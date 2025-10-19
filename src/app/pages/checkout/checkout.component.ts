@@ -14,6 +14,7 @@ import {Router, RouterLink, RouterLinkActive} from "@angular/router";
 import {MetaService} from "@services/seo/meta.service";
 import {SchemaService} from "@services/seo/schema.service";
 import {environment} from "../../../environments/environment";
+import {removeLocalItem} from "../../core/utils/storage-utils";
 
 @Component({
   selector: 'app-checkout',
@@ -170,6 +171,7 @@ export default class CheckoutComponent implements OnInit {
 
     const pedido: Pedido = {
       id: null,
+      docNum: '',
       clienteId: idCliente,
       items: this.cartItems,
       estado: false,
@@ -186,8 +188,7 @@ export default class CheckoutComponent implements OnInit {
     this.pedidoService.save(pedido).subscribe({
       next: (result) => {
         if (result) {
-          console.log('Pedido generado:', result);
-          // Aquí puedes redirigir o mostrar confirmación
+          this.goToOrder(result.docNum)
         }
       }
     });
@@ -231,5 +232,12 @@ export default class CheckoutComponent implements OnInit {
     const input = event.target as HTMLInputElement;
     input.value = input.value.replace(/\D/g, '');
     this.invoiceFrom.get('telefono')?.setValue(input.value);
+  }
+
+  goToOrder(numDoc: string) {
+    this.router.navigate(['/checkout', 'order', numDoc]).then(r => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      removeLocalItem('carrito')
+    })
   }
 }
