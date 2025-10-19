@@ -10,257 +10,292 @@
   <section class="mx-auto max-w-screen-xl px-4 py-8 2xl:px-0">
     <h1 class="sr-only">Página de Checkout | Bunna Shop</h1>
 
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-      <!-- Datos de facturación -->
-      <div class="space-y-6">
-        <h3
-          class="text-lg font-bold text-center text-[#103320] dark:text-[#c6b89b] uppercase transition-colors duration-300">
-          Detalles de Facturación
-        </h3>
+    @if (cartItems.length !=0){
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <!-- Datos de facturación -->
+        <div class="space-y-6">
+          <h3
+            class="text-lg font-bold text-center text-[#103320] dark:text-[#c6b89b] uppercase transition-colors duration-300">
+            Detalles de Facturación
+          </h3>
 
-        <form [formGroup]="invoiceFrom" (ngSubmit)="finalizarCompra()" class="space-y-4">
-          <div class="grid gap-6 mb-6 md:grid-cols-2">
-            <div>
-              <label for="tipo_persona" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tipo
-                Persona</label>
-              <select
-                name="tipo_persona"
-                id="tipo_persona"
-                aria-label="tipo_persona"
-                formControlName="tipo_persona"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white "
-              >
-                <option value="Natural">Persona Natural</option>
-                <option value="Empresa">Empresa</option>
-              </select>
-            </div>
-            <div>
-              <label for="tipo_documento" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tipo
-                Documento</label>
-              <select
-                name="tipo_documento"
-                id="tipo_documento"
-                aria-label="tipo_documento"
-                formControlName="tipo_documento"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white "
-              >
-                <option value="ruc">RUC</option>
-                <option value="cedula">Cedula</option>
-                <option value="pasaporte">Pasaporte</option>
-              </select>
-            </div>
-            <div class="md:col-span-2">
-              <label for="identificacion"
-                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Identificación</label>
-              <input
-                type="text"
-                id="identificacion"
-                aria-label="identificacion"
-                formControlName="identificacion"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white transition-colors duration-200 placeholder:text-gray-400 dark:placeholder:text-gray-500"
-                placeholder="Ingrese su número de identificación"
-                autocomplete="off"
-                required/>
-              @if (invoiceFrom.get('identificacion')?.invalid && invoiceFrom.get('identificacion')?.touched) {
-                <p role="alert" class="text-sm text-red-500 mt-1">
-                  @switch (invoiceFrom.get('tipo_documento')?.value) {
-                    @case ('ruc') { El RUC debe tener 13 dígitos numéricos. }
-                    @case ('cedula') { La cédula debe tener 10 dígitos numéricos. }
-                    @case ('pasaporte') { El pasaporte debe contener letras o números. }
-                    @default { Este campo es obligatorio. }
-                  }
-                </p>
-              }
-
-            </div>
-            <div>
-              <label for="first_name"
-                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre</label>
-              <input
-                type="text"
-                id="first_name"
-                formControlName="nombre"
-                aria-label="nombre"
-                autocomplete="off"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
-                required/>
-              @if (invoiceFrom.get('nombre')?.invalid && invoiceFrom.get('nombre')?.touched) {
-                <p role="alert" class="text-sm text-red-500 mt-1">Este campo es obligatorio.</p>
-              }
-            </div>
-            <div>
-              <label for="last_name"
-                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Apellido</label>
-              <input
-                type="text"
-                id="last_name"
-                aria-label="appellido"
-                formControlName="apellido"
-                autocomplete="off"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white  "
-                required/>
-              @if (invoiceFrom.get('apellido')?.invalid && invoiceFrom.get('apellido')?.touched) {
-                <p role="alert" class="text-sm text-red-500 mt-1">Este campo es obligatorio.</p>
-              }
-            </div>
-            <div class="md:col-span-2">
-              <label for="address"
-                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Dirección</label>
-              <input
-                type="text"
-                id="address"
-                aria-label="direccion"
-                formControlName="direccion"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white  "
-                placeholder="Ingrese su dirección"
-                autocomplete="off"
-                required/>
-              @if (invoiceFrom.get('direccion')?.invalid && invoiceFrom.get('direccion')?.touched) {
-                <p role="alert" class="text-sm text-red-500 mt-1">Este campo es obligatorio.</p>
-              }
-            </div>
-            <div>
-              <label for="provincia"
-                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Provincia</label>
-              <select
-                name="provincia"
-                id="provincia"
-                aria-label="provincia"
-                formControlName="provincia"
-                (change)="onProvChange($event)"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white "
-              >
-                @for (prov of ubicaciones; track $index) {
-                  <option [value]="prov.nombre">{{ prov.nombre }}</option>
-                }
-              </select>
-            </div>
-            @if (selectedCiudades.length === 0) {
-              <p class="text-sm text-gray-500 dark:text-gray-400">Seleccione una provincia para ver ciudades
-                disponibles.</p>
-            } @else {
+          <form [formGroup]="invoiceFrom" (ngSubmit)="finalizarCompra()" class="space-y-4">
+            <div class="grid gap-6 mb-6 md:grid-cols-2">
               <div>
-                <label for="ciudad" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Ciudad</label>
+                <label for="tipo_persona" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tipo
+                  Persona</label>
                 <select
-                  name="ciudad"
-                  id="ciudad"
-                  aria-label="ciudad"
-                  formControlName="ciudad"
+                  name="tipo_persona"
+                  id="tipo_persona"
+                  aria-label="tipo_persona"
+                  formControlName="tipo_persona"
                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white "
                 >
-                  @for (ciud of selectedCiudades; track $index) {
-                    <option [value]="ciud">{{ ciud }}</option>
+                  <option value="Natural">Persona Natural</option>
+                  <option value="Empresa">Empresa</option>
+                </select>
+              </div>
+              <div>
+                <label for="tipo_documento" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tipo
+                  Documento</label>
+                <select
+                  name="tipo_documento"
+                  id="tipo_documento"
+                  aria-label="tipo_documento"
+                  formControlName="tipo_documento"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white "
+                >
+                  <option value="ruc">RUC</option>
+                  <option value="cedula">Cedula</option>
+                  <option value="pasaporte">Pasaporte</option>
+                </select>
+              </div>
+              <div class="md:col-span-2">
+                <label for="identificacion"
+                       class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Identificación</label>
+                <input
+                  type="text"
+                  id="identificacion"
+                  aria-label="identificacion"
+                  formControlName="identificacion"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white transition-colors duration-200 placeholder:text-gray-400 dark:placeholder:text-gray-500"
+                  placeholder="Ingrese su número de identificación"
+                  autocomplete="off"
+                  required/>
+                @if (invoiceFrom.get('identificacion')?.invalid && invoiceFrom.get('identificacion')?.touched) {
+                  <p role="alert" class="text-sm text-red-500 mt-1">
+                    @switch (invoiceFrom.get('tipo_documento')?.value) {
+                      @case ('ruc') { El RUC debe tener 13 dígitos numéricos. }
+                      @case ('cedula') { La cédula debe tener 10 dígitos numéricos. }
+                      @case ('pasaporte') { El pasaporte debe contener letras o números. }
+                      @default { Este campo es obligatorio. }
+                    }
+                  </p>
+                }
+
+              </div>
+              <div>
+                <label for="first_name"
+                       class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre</label>
+                <input
+                  type="text"
+                  id="first_name"
+                  formControlName="nombre"
+                  aria-label="nombre"
+                  autocomplete="off"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+                  required/>
+                @if (invoiceFrom.get('nombre')?.invalid && invoiceFrom.get('nombre')?.touched) {
+                  <p role="alert" class="text-sm text-red-500 mt-1">Este campo es obligatorio.</p>
+                }
+              </div>
+              <div>
+                <label for="last_name"
+                       class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Apellido</label>
+                <input
+                  type="text"
+                  id="last_name"
+                  aria-label="appellido"
+                  formControlName="apellido"
+                  autocomplete="off"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white  "
+                  required/>
+                @if (invoiceFrom.get('apellido')?.invalid && invoiceFrom.get('apellido')?.touched) {
+                  <p role="alert" class="text-sm text-red-500 mt-1">Este campo es obligatorio.</p>
+                }
+              </div>
+              <div class="md:col-span-2">
+                <label for="address"
+                       class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Dirección</label>
+                <input
+                  type="text"
+                  id="address"
+                  aria-label="direccion"
+                  formControlName="direccion"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white  "
+                  placeholder="Ingrese su dirección"
+                  autocomplete="off"
+                  required/>
+                @if (invoiceFrom.get('direccion')?.invalid && invoiceFrom.get('direccion')?.touched) {
+                  <p role="alert" class="text-sm text-red-500 mt-1">Este campo es obligatorio.</p>
+                }
+              </div>
+              <div>
+                <label for="provincia"
+                       class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Provincia</label>
+                <select
+                  name="provincia"
+                  id="provincia"
+                  aria-label="provincia"
+                  formControlName="provincia"
+                  (change)="onProvChange($event)"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white "
+                >
+                  @for (prov of ubicaciones; track $index) {
+                    <option [value]="prov.nombre">{{ prov.nombre }}</option>
                   }
                 </select>
               </div>
-            }
-            <div class="md:col-span-2">
-              <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Correo</label>
-              <input
-                type="email"
-                id="email"
-                aria-label="email"
-                formControlName="email"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white  "
-                required/>
-              @if (invoiceFrom.get('email')?.invalid && invoiceFrom.get('email')?.touched) {
-                <p role="alert" class="text-sm text-red-500 mt-1">Este campo es obligatorio.</p>
+              @if (selectedCiudades.length === 0) {
+                <p class="text-sm text-gray-500 dark:text-gray-400">Seleccione una provincia para ver ciudades
+                  disponibles.</p>
+              } @else {
+                <div>
+                  <label for="ciudad" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Ciudad</label>
+                  <select
+                    name="ciudad"
+                    id="ciudad"
+                    aria-label="ciudad"
+                    formControlName="ciudad"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white "
+                  >
+                    @for (ciud of selectedCiudades; track $index) {
+                      <option [value]="ciud">{{ ciud }}</option>
+                    }
+                  </select>
+                </div>
               }
-            </div>
-            <div>
-              <label for="telefono"
-                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Telefono</label>
-              <input
-                type="tel"
-                id="telefono"
-                aria-label="telefono"
-                formControlName="telefono"
-                (keypress)="soloNumeros($event)"
-                (input)="filtrarSoloNumeros($event)"
-                autocomplete="off"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white  "
-                required/>
-              @if (invoiceFrom.get('telefono')?.invalid && invoiceFrom.get('telefono')?.touched) {
-                <p role="alert" class="text-sm text-red-500 mt-1">Este campo es obligatorio.</p>
-              }
-            </div>
-            <div class="md:col-span-2 mb-6">
-              <label for="remember" class="flex items-start gap-3 cursor-pointer">
+              <div class="md:col-span-2">
+                <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Correo</label>
                 <input
-                  id="remember"
-                  type="checkbox"
-                  aria-label="save_data"
-                  formControlName="acepta"
-                  class="w-4 h-4 mt-1 border border-gray-300 rounded-sm bg-gray-50  dark:bg-gray-700 dark:border-gray-600  dark:ring-offset-gray-800 transition-colors duration-200"
-                />
-                <span class="text-sm font-medium text-gray-900 dark:text-gray-300">Si marca esta casilla, nos autoriza a guardar algunos de sus datos en una lista de contactos.
+                  type="email"
+                  id="email"
+                  aria-label="email"
+                  formControlName="email"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white  "
+                  required/>
+                @if (invoiceFrom.get('email')?.invalid && invoiceFrom.get('email')?.touched) {
+                  <p role="alert" class="text-sm text-red-500 mt-1">Este campo es obligatorio.</p>
+                }
+              </div>
+              <div>
+                <label for="telefono"
+                       class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Telefono</label>
+                <input
+                  type="tel"
+                  id="telefono"
+                  aria-label="telefono"
+                  formControlName="telefono"
+                  (keypress)="soloNumeros($event)"
+                  (input)="filtrarSoloNumeros($event)"
+                  autocomplete="off"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white  "
+                  required/>
+                @if (invoiceFrom.get('telefono')?.invalid && invoiceFrom.get('telefono')?.touched) {
+                  <p role="alert" class="text-sm text-red-500 mt-1">Este campo es obligatorio.</p>
+                }
+              </div>
+              <div class="md:col-span-2 mb-6">
+                <label for="remember" class="flex items-start gap-3 cursor-pointer">
+                  <input
+                    id="remember"
+                    type="checkbox"
+                    aria-label="save_data"
+                    formControlName="acepta"
+                    class="w-4 h-4 mt-1 border border-gray-300 rounded-sm bg-gray-50  dark:bg-gray-700 dark:border-gray-600  dark:ring-offset-gray-800 transition-colors duration-200"
+                  />
+                  <span class="text-sm font-medium text-gray-900 dark:text-gray-300">Si marca esta casilla, nos autoriza a guardar algunos de sus datos en una lista de contactos.
                   Podría recibir correos electrónicos con información comercial o promocional sobre esta tienda.
                   Datos personales recopilados: dirección de correo electrónico, nombre y apellidos.
                 </span>
-              </label>
+                </label>
+              </div>
+
             </div>
-
-          </div>
-        </form>
-      </div>
-
-      <!-- Resumen del pedido -->
-      <div class="space-y-6">
-        <h3 class="text-lg font-bold text-center text-[#103320] dark:text-[#c6b89b] uppercase transition-colors duration-300">
-          Tu pedido
-        </h3>
-
-        <div class="rounded-lg border border-gray-300 dark:border-gray-600 p-4 space-y-4 bg-white dark:bg-gray-800">
-          <div class="flex justify-between text-sm">
-            <span>Subtotal</span>
-            <span>{{ calcularSubtotal() | currency}}</span>
-          </div>
-          <div class="flex justify-between text-sm">
-            <span>Envío</span>
-            <span>{{ envio }}</span>
-          </div>
-          <div class="flex justify-between text-base font-bold">
-            <span>Total</span>
-            <span>{{ calcularTotal() | currency}}</span>
-          </div>
+          </form>
         </div>
 
-        <!-- Metodo de pago -->
-        <div class="space-y-4">
-          <h4 class="text-sm font-medium text-gray-600 dark:text-gray-300">Método de Pago</h4>
-          <label class="flex items-center gap-2">
-            <input type="radio" name="pago" checked/>
-            Transferencia bancaria directa
-          </label>
-          <p class="text-xs text-gray-500 dark:text-gray-400">
-            Usa el número de pedido como referencia. El pedido se procesará una vez recibido el pago.
-          </p>
-        </div>
-        <div class="md:col-span-2 mb-6">
-          <label for="politicas" class="flex items-start gap-3 cursor-pointer">
-            <input
-              id="politicas"
-              type="checkbox"
-              aria-label="accept_policies"
-              [(ngModel)]="aceptaPoliticas"
-              class="w-4 h-4 mt-1 border border-gray-300 rounded-sm bg-gray-50  dark:bg-gray-700 dark:border-gray-600  dark:ring-offset-gray-800 transition-colors duration-200"
-            />
-            <span class="text-sm font-medium text-gray-900 dark:text-gray-300">He leído y estoy de acuerdo con los términos y condiciones de la web *
+        <!-- Resumen del pedido -->
+        <div class="space-y-6">
+          <h3 class="text-lg font-bold text-center text-[#103320] dark:text-[#c6b89b] uppercase transition-colors duration-300">
+            Tu pedido
+          </h3>
+
+          <div class="rounded-lg border border-gray-300 dark:border-gray-600 p-4 space-y-4 bg-white dark:bg-gray-800">
+            <div class="flex justify-between text-sm">
+              <span>Subtotal</span>
+              <span>{{ calcularSubtotal() | currency}}</span>
+            </div>
+            <div class="flex justify-between text-sm">
+              <span>Envío</span>
+              <span>{{ envio }}</span>
+            </div>
+            <div class="flex justify-between text-base font-bold">
+              <span>Total</span>
+              <span>{{ calcularTotal() | currency}}</span>
+            </div>
+          </div>
+
+          <!-- Metodo de pago -->
+          <div class="space-y-4">
+            <h4 class="text-sm font-medium text-gray-600 dark:text-gray-300">Método de Pago</h4>
+            <label class="flex items-center gap-2">
+              <input type="radio" name="pago" checked/>
+              Transferencia bancaria directa
+            </label>
+            <p class="text-xs text-gray-500 dark:text-gray-400">
+              Usa el número de pedido como referencia. El pedido se procesará una vez recibido el pago.
+            </p>
+          </div>
+          <div class="md:col-span-2 mb-6">
+            <label for="politicas" class="flex items-start gap-3 cursor-pointer">
+              <input
+                id="politicas"
+                type="checkbox"
+                aria-label="accept_policies"
+                [(ngModel)]="aceptaPoliticas"
+                class="w-4 h-4 mt-1 border border-gray-300 rounded-sm bg-gray-50  dark:bg-gray-700 dark:border-gray-600  dark:ring-offset-gray-800 transition-colors duration-200"
+              />
+              <span class="text-sm font-medium text-gray-900 dark:text-gray-300">He leído y estoy de acuerdo con los términos y condiciones de la web *
                 </span>
-          </label>
-          @if (message != '') {
-            <p role="alert" class="text-sm text-red-500 mt-1">{{ message}}</p>
-          }
-        </div>
+            </label>
+            @if (message != '') {
+              <p role="alert" class="text-sm text-red-500 mt-1">{{ message}}</p>
+            }
+          </div>
 
-        <button
-          type="submit"
-          (click)="finalizarCompra()"
-          class="w-full bg-[#B3977E] hover:bg-[#a3866f] text-white font-semibold py-3 rounded-lg transition">
-          Realizar Pedido
-        </button>
+          <button
+            type="submit"
+            (click)="finalizarCompra()"
+            class="w-full bg-[#B3977E] hover:bg-[#a3866f] text-white font-semibold py-3 rounded-lg transition">
+            Realizar Pedido
+          </button>
+        </div>
       </div>
-    </div>
+    } @else {
+      <div class="flex flex-col mx-auto">
+        <div class="relative w-12 h-12 mx-auto">
+          <!-- Carrito -->
+          <svg class="absolute inset-0 w-full h-full text-gray-400" fill="none" stroke="currentColor"
+               stroke-width="2"
+               viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17 m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
+          </svg>
+          <!-- X encima -->
+          <svg class="absolute top-0 right-0 w-6 h-6 text-gray-500 hover:text-gray-700 dark:hover:text-white" fill="none" stroke="currentColor"
+               stroke-width="2"
+               viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </div>
+        <div class="flex flex-col items-center gap-1 max-w-96 mx-auto text-center">
+          <h2 class="text-gray-950 dark:text-white font-bold text-2xl sm:text-3xl">Tu carrito esta vacio</h2>
+          <p class="text-gray-500 text-base sm:text-lg">
+            Encontrarás muchos productos interesantes en nuestra "Tienda".
+          </p>
+          <a
+            [routerLink]="['/products']" routerLinkActive="routerLinkActive"
+            class="inline-flex items-center gap-2 text-base font-medium text-primary-700 text-gray-500 underline hover:no-underline">
+            Volver a la tienda
+            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+              <path fill-rule="evenodd" d="M5.535 7.677c.313-.98.687-2.023.926-2.677H17.46c.253.63.646 1.64.977 2.61.166.487.312.953.416 1.347.11.42.148.675.148.779 0 .18-.032.355-.09.515-.06.161-.144.3-.243.412-.1.111-.21.192-.324.245a.809.809 0 0 1-.686 0 1.004 1.004 0 0 1-.324-.245c-.1-.112-.183-.25-.242-.412a1.473 1.473 0 0 1-.091-.515 1 1 0 1 0-2 0 1.4 1.4 0 0 1-.333.927.896.896 0 0 1-.667.323.896.896 0 0 1-.667-.323A1.401 1.401 0 0 1 13 9.736a1 1 0 1 0-2 0 1.4 1.4 0 0 1-.333.927.896.896 0 0 1-.667.323.896.896 0 0 1-.667-.323A1.4 1.4 0 0 1 9 9.74v-.008a1 1 0 0 0-2 .003v.008a1.504 1.504 0 0 1-.18.712 1.22 1.22 0 0 1-.146.209l-.007.007a1.01 1.01 0 0 1-.325.248.82.82 0 0 1-.316.08.973.973 0 0 1-.563-.256 1.224 1.224 0 0 1-.102-.103A1.518 1.518 0 0 1 5 9.724v-.006a2.543 2.543 0 0 1 .029-.207c.024-.132.06-.296.11-.49.098-.385.237-.85.395-1.344ZM4 12.112a3.521 3.521 0 0 1-1-2.376c0-.349.098-.8.202-1.208.112-.441.264-.95.428-1.46.327-1.024.715-2.104.958-2.767A1.985 1.985 0 0 1 6.456 3h11.01c.803 0 1.539.481 1.844 1.243.258.641.67 1.697 1.019 2.72a22.3 22.3 0 0 1 .457 1.487c.114.433.214.903.214 1.286 0 .412-.072.821-.214 1.207A3.288 3.288 0 0 1 20 12.16V19a2 2 0 0 1-2 2h-6a1 1 0 0 1-1-1v-4H8v4a1 1 0 0 1-1 1H6a2 2 0 0 1-2-2v-6.888ZM13 15a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-2Z" clip-rule="evenodd"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    }
+
   </section>
 
   <footer class="mt-auto w-full bg-white dark:bg-gray-700">

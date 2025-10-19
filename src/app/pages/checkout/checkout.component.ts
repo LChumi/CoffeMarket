@@ -10,7 +10,7 @@ import {PedidoService} from "@services/pedido.service";
 import {Cliente} from "@models/cliente";
 import {Pedido} from "@models/pedido";
 import {FooterComponent} from "@shared/footer/footer.component";
-import {Router} from "@angular/router";
+import {Router, RouterLink, RouterLinkActive} from "@angular/router";
 import {MetaService} from "@services/seo/meta.service";
 import {SchemaService} from "@services/seo/schema.service";
 import {environment} from "../../../environments/environment";
@@ -22,7 +22,9 @@ import {environment} from "../../../environments/environment";
     ReactiveFormsModule,
     FormsModule,
     CurrencyPipe,
-    FooterComponent
+    FooterComponent,
+    RouterLinkActive,
+    RouterLink
   ],
   templateUrl: './checkout.component.html',
   styles: ``

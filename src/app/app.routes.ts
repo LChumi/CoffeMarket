@@ -4,29 +4,31 @@ import {SingleProductComponent} from "@pages/single-product/single-product.compo
 import {ProductoResolver} from "./core/resolvers/producto.resolver";
 import {ProductosResolver} from "./core/resolvers/productos.resolver";
 import CheckoutComponent from "@pages/checkout/checkout.component";
+import HomeComponent from "@pages/home/home.component";
+import AboutComponent from "@pages/about/about.component";
 
 export const routes: Routes = [
   {
     path: '',
-    loadComponent: () => import('./pages/home/home.component')
+    component: HomeComponent
   },
   {
     path: 'about',
-    loadComponent: () => import('./pages/about/about.component')
+    component: AboutComponent
   },
   {
     path: 'products',
-    loadComponent: () => import('./pages/products/products.component')
+    component: ProductsComponent
   },
   {
     path: 'productos/:categoryId',
-    component: ProductsComponent,
+    loadComponent: () => import('./pages/products/products.component'),
     resolve: { productos: ProductosResolver },
     runGuardsAndResolvers: 'always'
   },
   {
     path: 'producto/:productoId',
-    component: SingleProductComponent,
+    loadComponent: () => import('./pages/products/products.component'),
     resolve: { producto: ProductoResolver },
     runGuardsAndResolvers: 'always'
   },
@@ -37,8 +39,9 @@ export const routes: Routes = [
   {
     path: 'checkout',
     children:[
-      {path: '', loadComponent: () => import('./pages/checkout/checkout.component')},
-      {path: 'order-received', loadComponent: () => import('./pages/order-received/order-received.component')},
+      {path: '', component: CheckoutComponent},
+      {path: 'order/:orderId',
+        loadComponent: () => import('./pages/order-received/order-received.component')},
     ]
   },
   {path: 'privacy-policy', loadComponent: () => import('./pages/privacy-policy/privacy-policy.component')},
