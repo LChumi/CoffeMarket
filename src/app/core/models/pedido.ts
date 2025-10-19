@@ -6,7 +6,7 @@ export interface Pedido {
   clienteId:          string;
   items:              ItemCarrito[];
 
-  estado:             string;
+  estado:             boolean;
   metodoPago:         string;
   creadoEn:           any;
 
@@ -16,4 +16,5 @@ export interface Pedido {
   telefono:           string;
 
   total:              number;
+  docAutorizacion:    string;
 }

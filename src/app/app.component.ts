@@ -10,13 +10,13 @@ import {SchemaService} from "@services/seo/schema.service";
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent implements OnInit {
+export class AppComponent{
 
   private schemaService = inject(SchemaService)
 
   title = 'Bunna Shop';
 
-  ngOnInit(): void {
+  constructor() {
     const schema = this.schemaService.generateIndexSchema();
     this.schemaService.injectSchema(schema, 'WebSite');
   }

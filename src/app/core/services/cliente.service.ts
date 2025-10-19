@@ -24,7 +24,7 @@ export class ClienteService {
 
   getByEmail(email: string):Observable<Cliente>{
     const params = new HttpParams().set('email', email);
-    return this.http.get<Cliente>(`${this.baseUrl}/by/email`);
+    return this.http.get<Cliente>(`${this.baseUrl}/by/email`, {params: params});
   }
 
   getAll():Observable<Cliente[]>{

@@ -170,14 +170,15 @@ export default class CheckoutComponent implements OnInit {
       id: null,
       clienteId: idCliente,
       items: this.cartItems,
-      estado: 'PENDIENTE',
+      estado: false,
       creadoEn: new Date(),
       direccion: form.direccion,
       provincia: form.provincia,
       ciudad: form.ciudad,
       telefono: form.telefono,
       total: this.calcularTotal(),
-      metodoPago: 'TRANSFERENCIA'
+      metodoPago: 'TRANSFERENCIA',
+      docAutorizacion: ''
     };
 
     this.pedidoService.save(pedido).subscribe({
