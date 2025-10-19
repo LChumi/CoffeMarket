@@ -47,6 +47,5 @@ export default class AboutComponent implements OnInit {
       'Acerca de nosotros Bunna Shop',
       description);
     this.schemaService.injectSchema(schema, 'AboutPage');
-
   }
 }

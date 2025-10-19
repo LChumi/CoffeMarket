@@ -9,8 +9,11 @@ import {ClienteService} from "@services/cliente.service";
 import {PedidoService} from "@services/pedido.service";
 import {Cliente} from "@models/cliente";
 import {Pedido} from "@models/pedido";
-import {routes} from "../../app.routes";
 import {FooterComponent} from "@shared/footer/footer.component";
+import {Router} from "@angular/router";
+import {MetaService} from "@services/seo/meta.service";
+import {SchemaService} from "@services/seo/schema.service";
+import {environment} from "../../../environments/environment";
 
 @Component({
   selector: 'app-checkout',
@@ -25,6 +28,11 @@ import {FooterComponent} from "@shared/footer/footer.component";
   styles: ``
 })
 export default class CheckoutComponent implements OnInit {
+
+  private router = inject(Router);
+  private seoService = inject(MetaService)
+  private schemaService = inject(SchemaService);
+  private domain = environment.domain;
 
   private fb = inject(FormBuilder);
   private clientService = inject(ClienteService);
@@ -41,6 +49,30 @@ export default class CheckoutComponent implements OnInit {
   invoiceFrom !: FormGroup;
 
   constructor() {
+
+    const currentUrl = `${this.domain}${this.router.url}`;
+
+    const title ='Pagina de Pago| Bunna Accesorios para Café'
+    const description ='Completa tu compra con seguridad y rapidez. Envíos a todo Ecuador.'
+
+    this.seoService.updateMetaTags({
+      title,
+      description,
+      canonicalUrl: currentUrl,
+      og: {
+        title,
+        description,
+        url: currentUrl,
+        image: `${this.domain}/images/logos/bunnaCirc.webp`
+      }
+    });
+
+    const schema = this.schemaService.generateContentPageSchema(
+      currentUrl,
+      'Pagina de Pago',
+      description);
+    this.schemaService.injectSchema(schema, 'checkout');
+
     this.invoiceFrom = this.fb.group({
       tipo_persona: ['', Validators.required],
       tipo_documento: ['', [Validators.required]],

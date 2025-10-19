@@ -32,16 +32,8 @@ export default class ShopingCartComponent implements OnInit {
     private schemaService: SchemaService,
     private seoService: MetaService,
     private carritoService : CarritoService,
-  ) {}
-
-  cartItems: ItemCarrito[] = [];
-
-  ngOnInit(): void {
+  ) {
     const currentUrl = `${this.domain}${this.router.url}`;
-
-    this.carritoService.carrito$.subscribe(carrito => {
-      this.cartItems = carrito.items;
-    })
     const title ='Carrito Compras | Bunna Accesorios para Café'
     const description = 'Consulta tus productos en nuestro carrito de compras'
     this.seoService.updateMetaTags({
@@ -58,9 +50,17 @@ export default class ShopingCartComponent implements OnInit {
 
     const schema = this.schemaService.generateContentPageSchema(
       currentUrl,
-      'Bunna Shop inicio',
+      'shopping-cart',
       description);
     this.schemaService.injectSchema(schema, 'ContentPage');
+  }
+
+  cartItems: ItemCarrito[] = [];
+
+  ngOnInit(): void {
+    this.carritoService.carrito$.subscribe(carrito => {
+      this.cartItems = carrito.items;
+    })
   }
 
   addQuantity(id:string){

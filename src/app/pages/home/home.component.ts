@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {NavbarComponent} from '@shared/navbar/navbar.component';
 import {CarouselComponent} from '@components/carousel/carousel.component';
 import {FooterComponent} from '@shared/footer/footer.component';
@@ -17,7 +17,7 @@ import {SchemaService} from "@services/seo/schema.service";
   templateUrl: './home.component.html',
   styles: ``
 })
-export default class HomeComponent implements OnInit {
+export default class HomeComponent {
 
   private domain = environment.domain;
 
@@ -25,31 +25,28 @@ export default class HomeComponent implements OnInit {
     private router: Router,
     private schemaService: SchemaService,
     private seoService : MetaService
-  ) {}
+  ) {
+    const currentUrl = `${this.domain}${this.router.url}`;
 
-    ngOnInit(): void {
-      const currentUrl = `${this.domain}${this.router.url}`;
+    const title = 'Bienvenido a Bunna Shop ☕| Accesorios para Cafe ';
+    const description = 'Bienvenido a Bunna Shop: cafeteras, molinos, filtros V60 y más para preparar café como un experto en casa.'
 
-      const title = 'Bienvenido a Bunna Shop ☕| Accesorios para Cafe ';
-      const description = 'Bienvenido a Bunna Shop: cafeteras, molinos, filtros V60 y más para preparar café como un experto en casa.'
-
-      this.seoService.updateMetaTags({
+    this.seoService.updateMetaTags({
+      title,
+      description,
+      canonicalUrl: currentUrl,
+      og: {
         title,
         description,
-        canonicalUrl: currentUrl,
-        og: {
-          title,
-          description,
-          url: currentUrl,
-          image: `${this.domain}/images/logos/bunnaCirc.webp`
-        }
-      });
+        url: currentUrl,
+        image: `${this.domain}/images/logos/bunnaCirc.webp`
+      }
+    });
 
-      const schema = this.schemaService.generateContentPageSchema(
-        currentUrl,
-        'Bunna Shop inicio',
-        description);
-      this.schemaService.injectSchema(schema, 'ContentPage');
-    }
-
+    const schema = this.schemaService.generateContentPageSchema(
+      currentUrl,
+      'Bunna Shop inicio',
+      description);
+    this.schemaService.injectSchema(schema, 'ContentPage');
+  }
 }

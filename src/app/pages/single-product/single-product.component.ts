@@ -45,7 +45,7 @@ export class SingleProductComponent implements OnInit {
   producto: Products = {} as Products
   productoId: any
 
-  ngOnInit(): void {
+  constructor() {
     this.route.data.subscribe(data => {
       const producto = data['producto'];
       const currentUrl = `${this.domain}${this.router.url}`;
@@ -76,6 +76,9 @@ export class SingleProductComponent implements OnInit {
         this.loadProductsByCategory(producto.categoria_id);
       }
     });
+  }
+
+  ngOnInit(): void {
   }
 
   goToProducts(productoId: string) {
