@@ -10,6 +10,7 @@ import {PedidoService} from "@services/pedido.service";
 import {Cliente} from "@models/cliente";
 import {Pedido} from "@models/pedido";
 import {routes} from "../../app.routes";
+import {FooterComponent} from "@shared/footer/footer.component";
 
 @Component({
   selector: 'app-checkout',
@@ -17,7 +18,8 @@ import {routes} from "../../app.routes";
     NavbarComponent,
     ReactiveFormsModule,
     FormsModule,
-    CurrencyPipe
+    CurrencyPipe,
+    FooterComponent
   ],
   templateUrl: './checkout.component.html',
   styles: ``

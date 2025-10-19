@@ -41,6 +41,7 @@ export const routes: Routes = [
       {path: 'order-received', loadComponent: () => import('./pages/order-received/order-received.component')},
     ]
   },
+  {path: 'privacy-policy', loadComponent: () => import('./pages/privacy-policy/privacy-policy.component')},
   { path: 'producto', redirectTo: 'products', pathMatch: 'full' },
   { path: 'productos', redirectTo: 'products', pathMatch: 'full' },
   { path: '**', redirectTo: '', pathMatch: 'full' }

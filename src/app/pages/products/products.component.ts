@@ -9,6 +9,7 @@ import {FormsModule} from "@angular/forms";
 import {CarritoService} from "@services/carrito.service";
 import {ShoppingCartSidebarComponent} from "@components/shopping-cart-sidebar/shopping-cart-sidebar.component";
 import {SchemaService} from "@services/seo/schema.service";
+import {FooterComponent} from "@shared/footer/footer.component";
 
 @Component({
   selector: 'app-products',
@@ -16,7 +17,8 @@ import {SchemaService} from "@services/seo/schema.service";
   imports: [
     NavbarComponent,
     FormsModule,
-    ShoppingCartSidebarComponent
+    ShoppingCartSidebarComponent,
+    FooterComponent
   ],
   templateUrl: './products.component.html',
   styles: ``

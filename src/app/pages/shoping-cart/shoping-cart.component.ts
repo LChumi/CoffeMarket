@@ -8,6 +8,7 @@ import {ProductLoadingComponent} from "@components/product-loading/product-loadi
 import {SchemaService} from "@services/seo/schema.service";
 import {environment} from "../../../environments/environment";
 import {MetaService} from "@services/seo/meta.service";
+import {FooterComponent} from "@shared/footer/footer.component";
 
 @Component({
   selector: 'app-shoping-cart',
@@ -16,7 +17,8 @@ import {MetaService} from "@services/seo/meta.service";
     RouterLinkActive,
     RouterLink,
     CurrencyPipe,
-    ProductLoadingComponent
+    ProductLoadingComponent,
+    FooterComponent
   ],
   templateUrl: './shoping-cart.component.html',
   styles: ``

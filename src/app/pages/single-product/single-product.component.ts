@@ -9,6 +9,7 @@ import {MetaService} from "@services/seo/meta.service";
 import {SchemaService} from "@services/seo/schema.service";
 import {CarritoService} from "@services/carrito.service";
 import {ShoppingCartSidebarComponent} from "@components/shopping-cart-sidebar/shopping-cart-sidebar.component";
+import {FooterComponent} from "@shared/footer/footer.component";
 
 declare var gtag: (...args: any[]) => void;
 
@@ -16,7 +17,8 @@ declare var gtag: (...args: any[]) => void;
   selector: 'app-single-product',
   imports: [
     NavbarComponent,
-    ShoppingCartSidebarComponent
+    ShoppingCartSidebarComponent,
+    FooterComponent
   ],
   templateUrl: './single-product.component.html',
   standalone: true,
