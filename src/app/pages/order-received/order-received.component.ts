@@ -31,6 +31,7 @@ export default class OrderReceivedComponent implements OnInit {
   private clienteService = inject(ClienteService);
 
   private domain = environment.domain;
+  private urlImage = environment.imagesUrl;
 
   pedido: Pedido | null = null
   cliente: Cliente = {} as Cliente;
@@ -84,7 +85,7 @@ export default class OrderReceivedComponent implements OnInit {
   }
 
   urlItem(sku: string): string{
-    return `https://apis.cumpleanos.com.ec/assist/images/producto/${sku}`;
+    return `${this.urlImage}/${sku}`;
   }
 
 }

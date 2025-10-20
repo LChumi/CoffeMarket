@@ -80,6 +80,7 @@
                   <!-- Imagen del producto -->
                   <img
                     [src]="urlItem(item.productoId)"
+                    loading="lazy"
                     alt="{{ item.descripcion }}"
                     class="w-12 h-12 object-cover rounded-md border"
                   />
