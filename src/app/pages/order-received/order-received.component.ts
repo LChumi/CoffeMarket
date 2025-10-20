@@ -85,7 +85,7 @@ export default class OrderReceivedComponent implements OnInit {
   }
 
   urlItem(sku: string): string{
-    return `${this.urlImage}/${sku}`;
+    return `${this.urlImage}/${sku}/bunna`;
   }
 
 }
