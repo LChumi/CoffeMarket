@@ -160,8 +160,9 @@ export default class CheckoutComponent implements OnInit {
   }
 
   crearPedido(idCliente: string, form: any) {
+
     const item: ItemCarrito = {
-      productoId: 'TRANSPORTE',
+      productoId: 'ENVIO',
       descripcion: `ENVIO TRANSPORTE ${form.ciudad.toLocaleUpperCase()}`,
       cantidad: 1,
       pvp: this.envio
@@ -236,8 +237,8 @@ export default class CheckoutComponent implements OnInit {
 
   goToOrder(numDoc: string) {
     this.router.navigate(['/checkout', 'order', numDoc]).then(r => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
       removeLocalItem('carrito')
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     })
   }
 }

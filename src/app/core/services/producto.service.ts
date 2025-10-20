@@ -22,6 +22,10 @@ export class ProductoService {
     return this.http.get<Producto>(`${this.baseUrl}/by/${id}`);
   }
 
+  getBySku(sku: string):Observable<Producto>{
+    return this.http.get<Producto>(`${this.baseUrl}/sku/${sku}`);
+  }
+
   getAll():Observable<Producto[]>{
     return this.http.get<Producto[]>(`${this.baseUrl}/get/all`);
   }

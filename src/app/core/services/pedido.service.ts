@@ -22,6 +22,10 @@ export class PedidoService {
     return this.http.get<Pedido>(`${this.baseUrl}/by/${id}`);
   }
 
+  getByDocNum(doc: string):Observable<Pedido>{
+    return this.http.get<Pedido>(`${this.baseUrl}/by/${doc}/doc`);
+  }
+
   getAll():Observable<Pedido[]>{
     return this.http.get<Pedido[]>(`${this.baseUrl}/get/all`);
   }

@@ -6,6 +6,7 @@ import {ProductosResolver} from "./core/resolvers/productos.resolver";
 import CheckoutComponent from "@pages/checkout/checkout.component";
 import HomeComponent from "@pages/home/home.component";
 import AboutComponent from "@pages/about/about.component";
+import {pedidoResolver} from "./core/resolvers/pedido.resolver";
 
 export const routes: Routes = [
   {
@@ -41,10 +42,16 @@ export const routes: Routes = [
     children:[
       {path: '', component: CheckoutComponent},
       {path: 'order/:orderId',
-        loadComponent: () => import('./pages/order-received/order-received.component')},
+        loadComponent: () => import('./pages/order-received/order-received.component'),
+        resolve: { pedido: pedidoResolver},
+        runGuardsAndResolvers: 'always'
+      },
     ]
   },
-  {path: 'privacy-policy', loadComponent: () => import('./pages/privacy-policy/privacy-policy.component')},
+  {path: 'privacy-policy',
+    loadComponent: () => import('./pages/privacy-policy/privacy-policy.component')
+  },
+
   { path: 'producto', redirectTo: 'products', pathMatch: 'full' },
   { path: 'productos', redirectTo: 'products', pathMatch: 'full' },
   { path: '**', redirectTo: '', pathMatch: 'full' }
