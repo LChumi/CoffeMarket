@@ -30,6 +30,10 @@ export class ProductoService {
     return this.http.get<Producto[]>(`${this.baseUrl}/get/all`);
   }
 
+  getAllByCategory(category: string):Observable<Producto[]>{
+    return this.http.get<Producto[]>(`${this.baseUrl}/get/category/${category}`);
+  }
+
   update(id: string, pedido: Producto):Observable<Producto>{
     return this.http.put<Producto>(`${this.baseUrl}/update/${id}`, pedido);
   }

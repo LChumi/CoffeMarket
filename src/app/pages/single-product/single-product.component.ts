@@ -10,6 +10,8 @@ import {SchemaService} from "@services/seo/schema.service";
 import {CarritoService} from "@services/carrito.service";
 import {ShoppingCartSidebarComponent} from "@components/shopping-cart-sidebar/shopping-cart-sidebar.component";
 import {FooterComponent} from "@shared/footer/footer.component";
+import {Producto} from "@models/producto";
+import {ProductoService} from "@services/producto.service";
 
 declare var gtag: (...args: any[]) => void;
 
@@ -24,9 +26,9 @@ declare var gtag: (...args: any[]) => void;
   standalone: true,
   styles: ``
 })
-export class SingleProductComponent implements OnInit {
+export default class SingleProductComponent implements OnInit {
 
-  private dataService = inject(DataService);
+  private productoService = inject(ProductoService);
   private route = inject(ActivatedRoute)
   private router = inject(Router);
   private consentService = inject(ConsentService);
@@ -40,9 +42,9 @@ export class SingleProductComponent implements OnInit {
   zoomImage: boolean = false;
   showCart: boolean = false;
 
-  productos: Products[] = [];
+  productos: Producto[] = [];
   productoFiltrado: Products[] = [];
-  producto: Products = {} as Products
+  producto: Producto = {} as Producto
   productoId: any
 
   constructor() {
@@ -74,6 +76,26 @@ export class SingleProductComponent implements OnInit {
         this.schemaService.injectSchema(schema, 'Product');
 
         this.loadProductsByCategory(producto.categoria_id);
+      } else {
+        const title = `Producto no Ecnotrado | Accesorio para Café | Bunna`;
+        const description = `Puede que esta categoría esté vacía o que el producto ya no esté disponible.`
+
+        this.seoService.updateMetaTags({
+          title,
+          description,
+          canonicalUrl: currentUrl,
+          og: {
+            title,
+            description,
+            url: currentUrl,
+            image: `${this.domain}/images/logos/bunnaCirc.webp`
+          }
+        });
+
+        const schema = this.schemaService.generateProductSchema(
+          producto,
+          currentUrl);
+        this.schemaService.injectSchema(schema, 'Product');
       }
     });
   }
@@ -86,14 +108,15 @@ export class SingleProductComponent implements OnInit {
   }
 
 
-  loadProductsByCategory(categoryId: number) {
-    this.dataService.getProductos().subscribe(data => {
-      this.productoFiltrado = data.filter(producto => producto.categoria_id === categoryId);
-      this.isLoading = false;
+  loadProductsByCategory(categoryId: any) {
+    this.productoService.getAllByCategory(categoryId).subscribe({
+      next: data => {
+        this.productos = data
+      }
     })
   }
 
-  openWhatsApp(producto: Products) {
+  openWhatsApp(producto: Producto) {
     const telefono = '+593979126861';
     const mensaje = `Hola, estoy interesado(a) en adquirir el siguiente producto: *${producto.descripcion}* item: ${producto.item} Precio: $${producto.precio.toFixed(2)} ¿Podrías brindarme más información? ¡Gracias!`;
     const url = `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`;
@@ -111,7 +134,7 @@ export class SingleProductComponent implements OnInit {
     }
   }
 
-  agregarAlCarrito(producto: Products){
+  agregarAlCarrito(producto: Producto){
     this.carritoService.agregarProducto(producto);
     this.abrirSidebarCarrito()
   }

@@ -1,12 +1,11 @@
 import {Routes} from '@angular/router';
-import ProductsComponent from "@pages/products/products.component";
-import {SingleProductComponent} from "@pages/single-product/single-product.component";
-import {ProductoResolver} from "./core/resolvers/producto.resolver";
-import {ProductosResolver} from "./core/resolvers/productos.resolver";
 import CheckoutComponent from "@pages/checkout/checkout.component";
 import HomeComponent from "@pages/home/home.component";
 import AboutComponent from "@pages/about/about.component";
 import {pedidoResolver} from "./core/resolvers/pedido.resolver";
+import {productoResolver} from "./core/resolvers/producto.resolver";
+import {productosCategoryResolver} from "./core/resolvers/productos-category.resolver";
+import {productosResolver} from "./core/resolvers/productos.resolver";
 
 export const routes: Routes = [
   {
@@ -19,18 +18,19 @@ export const routes: Routes = [
   },
   {
     path: 'products',
-    component: ProductsComponent
+    loadComponent: () => import("./pages/products/products.component"),
+    resolve: { productos: productosResolver}
   },
   {
     path: 'productos/:categoryId',
     loadComponent: () => import('./pages/products/products.component'),
-    resolve: { productos: ProductosResolver },
+    resolve: { productos: productosCategoryResolver },
     runGuardsAndResolvers: 'always'
   },
   {
     path: 'producto/:productoId',
-    loadComponent: () => import('./pages/products/products.component'),
-    resolve: { producto: ProductoResolver },
+    loadComponent: () => import('./pages/single-product/single-product.component'),
+    resolve: { producto: productoResolver },
     runGuardsAndResolvers: 'always'
   },
   {

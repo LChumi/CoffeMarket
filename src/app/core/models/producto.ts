@@ -9,7 +9,6 @@ export interface Producto {
   precio:       number;
   categoriaId:  number;
   disponible:   boolean;
-  imagenUrl:    string;
   stock:        number;
 
   etiquetas:   string[];

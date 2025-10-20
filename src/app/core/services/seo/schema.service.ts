@@ -9,6 +9,7 @@ import {Producto} from "@models/producto";
 export class SchemaService {
 
   private domain = environment.domain;
+  private urlImage = environment.imagesUrl;
 
   constructor(
     @Inject(DOCUMENT) private document: Document,
@@ -108,7 +109,7 @@ export class SchemaService {
           "breadcrumb": { "@id": `${currentUrl}#breadcrumblist` },
           "image": {
             "@type": "ImageObject",
-            "url": product.imagenUrl,
+            "url": this.urlItem(product.sku),
             "@id": `${currentUrl}#mainImage`
           },
           "primaryImageOfPage": { "@id": `${currentUrl}#mainImage` },
@@ -123,7 +124,7 @@ export class SchemaService {
           "sku": product.sku,
           "name": product.descripcion,
           "description": product.descripcion,
-          "image": product.imagenUrl,
+          "image": this.urlItem(product.sku),
           "brand": { "@type": "Brand", "name": "Bunna" },
           "offers": {
             "@type": "Offer",
@@ -227,5 +228,9 @@ export class SchemaService {
         "query-input": "required name=search_term_string"
       }
     };
+  }
+
+  private urlItem(sku: string): string{
+    return `${this.urlImage}/${sku}/bunna`;
   }
 }

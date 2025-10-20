@@ -1,21 +1,9 @@
-import {inject, Injectable} from "@angular/core";
-import {ActivatedRouteSnapshot, Resolve} from "@angular/router";
-import {Products} from "@models/data/products";
-import {DataService} from "@services/data/data.service";
-import {map, Observable, of} from "rxjs";
+import {ResolveFn} from "@angular/router";
+import {Producto} from "@models/producto";
+import {inject} from "@angular/core";
+import {ProductoService} from "@services/producto.service";
 
-@Injectable({ providedIn: 'root' })
-export class ProductosResolver implements Resolve<Products[]> {
-  dataService = inject(DataService);
-
-  resolve(route: ActivatedRouteSnapshot): Observable<Products[]> {
-    const categoryId = route.paramMap.get('categoryId');
-    if (!categoryId) return of([]);
-
-    return this.dataService.getProductos().pipe(
-      map((productos: Products[]) =>
-        productos.filter(p => p.categoria_id?.toString() === categoryId.toString())
-      )
-    );
-  }
-}
+export const productosResolver: ResolveFn<Producto[]> = (route, state) => {
+  const productoService = inject(ProductoService);
+  return productoService.getAll();
+};

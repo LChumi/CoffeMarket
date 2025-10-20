@@ -2,7 +2,7 @@ import {Component, inject, OnInit} from '@angular/core';
 import {NavbarComponent} from "@shared/navbar/navbar.component";
 import {Products} from "@models/data/products";
 import {DataService} from "@services/data/data.service";
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {environment} from "../../../environments/environment";
 import {MetaService} from "@services/seo/meta.service";
 import {FormsModule} from "@angular/forms";
@@ -10,6 +10,7 @@ import {CarritoService} from "@services/carrito.service";
 import {ShoppingCartSidebarComponent} from "@components/shopping-cart-sidebar/shopping-cart-sidebar.component";
 import {SchemaService} from "@services/seo/schema.service";
 import {FooterComponent} from "@shared/footer/footer.component";
+import {Producto} from "@models/producto";
 
 @Component({
   selector: 'app-products',
@@ -18,28 +19,28 @@ import {FooterComponent} from "@shared/footer/footer.component";
     NavbarComponent,
     FormsModule,
     ShoppingCartSidebarComponent,
-    FooterComponent
+    FooterComponent,
+    RouterLink
   ],
   templateUrl: './products.component.html',
   styles: ``
 })
 export default class ProductsComponent implements OnInit {
 
-  private dataService = inject(DataService);
   private route = inject(ActivatedRoute)
   private router = inject(Router)
   private seoService = inject(MetaService)
   private schemaService = inject(SchemaService)
   private carritoService = inject(CarritoService);
-
   private domain = environment.domain;
+  private imageUrl = environment.imagesUrl;
 
   showCart = false;
-  isLoading = false;
-  productos: Products[] = []
-  productosFiltrados : Products[] = [];
+  productos: Producto[] = []
+  productosFiltrados : Producto[] = [];
   categoryId!: number;
   searchTerm: string = "";
+  titulo: string = "";
 
   constructor() {
     const currentUrl = `${this.domain}${this.router.url}`;
@@ -66,15 +67,14 @@ export default class ProductsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-   const categoryId = this.route.snapshot.paramMap.get('categoryId');
+    const categoryId = this.route.snapshot.paramMap.get('categoryId');
 
-    if (categoryId) {
-      this.route.data.subscribe(({ productos }) => {
-        this.productos = productos;
-      });
-    } else {
-      this.loadProducts(); // Navegación directa → catálogo completo
-    }
+    this.route.data.subscribe(({ productos }) => {
+      this.productos = productos;
+      this.titulo = categoryId
+        ? `Explora Nuestros Productos de Café ☕| Variedad, Estilo y Funcionalidad `
+        : 'Productos para Amantes del Café ☕ | Encuentra Todo lo que Necesitas';
+    });
   }
 
   goToProducts(productoId: any) {
@@ -83,28 +83,13 @@ export default class ProductsComponent implements OnInit {
     })
   }
 
-  agregarAlCarrito(producto: Products){
+  agregarAlCarrito(producto: Producto){
     this.carritoService.agregarProducto(producto);
     this.abrirSidebarCarrito()
   }
 
   abrirSidebarCarrito(){
     this.showCart = true
-  }
-
-  loadProducts() {
-    this.isLoading = true;
-    this.dataService.getProductos().subscribe(data => {
-      this.productos = data
-      this.productosFiltrados = data
-      this.isLoading = false;
-
-      const termFromQuery = this.route.snapshot.queryParamMap.get('q')
-      if (termFromQuery) {
-        this.searchTerm = termFromQuery;
-        this.filtrarProductos()
-      }
-    })
   }
 
   goToCafeteras() {
@@ -128,6 +113,10 @@ export default class ProductsComponent implements OnInit {
       p.item.toLowerCase().includes(filtro) ||
       p.descripcion.toLowerCase().includes(filtro)
     )
+  }
+
+  urlItem(sku: string): string{
+    return `${this.imageUrl}/${sku}/bunna`;
   }
 
 }
