@@ -105,7 +105,6 @@ export default class SingleProductComponent implements OnInit {
     this.router.navigate(['/producto', productoId]).then(r => {window.scrollTo({ top: 0, behavior: 'smooth' });});
   }
 
-
   loadProductsByCategory(categoryId: any) {
     console.log(categoryId)
     this.productoService.getAllByCategory(categoryId).subscribe({

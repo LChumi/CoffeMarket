@@ -69,10 +69,20 @@ export default class ProductsComponent implements OnInit {
 
   ngOnInit(): void {
     const categoryId = this.route.snapshot.paramMap.get('categoryId');
+    const searchQuery = this.route.snapshot.queryParamMap.get('q')?.trim().toLowerCase();
 
     this.route.data.subscribe(({ productos }) => {
       this.productos = productos;
-      this.productosFiltrados = productos
+      this.productosFiltrados = productos;
+
+      if (searchQuery) {
+        this.productosFiltrados = this.productos.filter(p =>
+          p.item?.toLowerCase().includes(searchQuery) ||
+          p.descripcion?.toLowerCase().includes(searchQuery)
+        );
+        this.searchTerm = searchQuery; // Para mostrar en el input
+      }
+
       this.titulo = categoryId
         ? `Explora Nuestros Productos de Café ☕| Variedad, Estilo y Funcionalidad `
         : 'Productos para Amantes del Café ☕ | Encuentra Todo lo que Necesitas';

@@ -14,7 +14,6 @@ import {Router, RouterLink, RouterLinkActive} from "@angular/router";
 import {MetaService} from "@services/seo/meta.service";
 import {SchemaService} from "@services/seo/schema.service";
 import {environment} from "../../../environments/environment";
-import {removeLocalItem} from "../../core/utils/storage-utils";
 
 @Component({
   selector: 'app-checkout',
@@ -118,7 +117,6 @@ export default class CheckoutComponent implements OnInit {
           Validators.pattern(/^[a-zA-Z0-9]{5,20}$/) // letras y números, longitud flexible
         ]);
       }
-
       control.updateValueAndValidity();
     });
   }
@@ -162,7 +160,6 @@ export default class CheckoutComponent implements OnInit {
   }
 
   crearPedido(idCliente: string, form: any) {
-
     const item: ItemCarrito = {
       productoId: 'ENVIO',
       descripcion: `ENVIO TRANSPORTE ${form.ciudad.toLocaleUpperCase()}`,

@@ -9,7 +9,6 @@ import {Pedido} from "@models/pedido";
 import {CurrencyPipe, DatePipe} from "@angular/common";
 import {ClienteService} from "@services/cliente.service";
 import {Cliente} from "@models/cliente";
-import {PedidoService} from "@services/pedido.service";
 import {getUrlImage} from "../../core/utils/imageUtil";
 
 @Component({
@@ -84,10 +83,6 @@ export default class OrderReceivedComponent implements OnInit {
     const mensaje = encodeURIComponent(`Hola, aquí está mi comprobante del pedido ${pedido}`);
     const url = `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`;
     window.open(url, '_blank');
-  }
-
-  urlItem(sku: string): string{
-    return `${this.urlImage}/${sku}/bunna`;
   }
 
   protected readonly getUrlImage = getUrlImage;

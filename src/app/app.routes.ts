@@ -19,7 +19,8 @@ export const routes: Routes = [
   {
     path: 'products',
     loadComponent: () => import("./pages/products/products.component"),
-    resolve: { productos: productosResolver}
+    resolve: { productos: productosResolver},
+    runGuardsAndResolvers: "always"
   },
   {
     path: 'productos/:categoryId',
