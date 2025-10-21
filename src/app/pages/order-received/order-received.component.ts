@@ -10,6 +10,7 @@ import {CurrencyPipe, DatePipe} from "@angular/common";
 import {ClienteService} from "@services/cliente.service";
 import {Cliente} from "@models/cliente";
 import {PedidoService} from "@services/pedido.service";
+import {getUrlImage} from "../../core/utils/imageUtil";
 
 @Component({
   selector: 'app-order-received',
@@ -89,4 +90,5 @@ export default class OrderReceivedComponent implements OnInit {
     return `${this.urlImage}/${sku}/bunna`;
   }
 
+  protected readonly getUrlImage = getUrlImage;
 }

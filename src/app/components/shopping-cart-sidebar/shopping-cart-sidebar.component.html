@@ -56,7 +56,8 @@
               @for (item of cartItems; track $index) {
                 <div class="flex justify-between items-center gap-4">
                   <img
-                    [src]="'images/products/' + item.productoId + '.webp'"
+                    [src]="getUrlImage(item.productoId)"
+                    loading="lazy"
                     alt="{{ item.descripcion }}"
                     class="w-12 h-12 object-cover rounded border border-gray-200 dark:border-gray-700"
                   />

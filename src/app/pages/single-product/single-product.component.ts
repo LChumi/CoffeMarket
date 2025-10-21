@@ -1,8 +1,6 @@
-import {Component, inject, OnInit, TransferState} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {NavbarComponent} from "@shared/navbar/navbar.component";
-import {DataService} from "@services/data/data.service";
-import {Products} from "@models/data/products";
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {ConsentService} from "@services/seo/consent.service";
 import {environment} from "../../../environments/environment";
 import {MetaService} from "@services/seo/meta.service";
@@ -12,6 +10,7 @@ import {ShoppingCartSidebarComponent} from "@components/shopping-cart-sidebar/sh
 import {FooterComponent} from "@shared/footer/footer.component";
 import {Producto} from "@models/producto";
 import {ProductoService} from "@services/producto.service";
+import {getUrlImage} from "../../core/utils/imageUtil";
 
 declare var gtag: (...args: any[]) => void;
 
@@ -20,7 +19,8 @@ declare var gtag: (...args: any[]) => void;
   imports: [
     NavbarComponent,
     ShoppingCartSidebarComponent,
-    FooterComponent
+    FooterComponent,
+    RouterLink
   ],
   templateUrl: './single-product.component.html',
   standalone: true,
@@ -38,13 +38,11 @@ export default class SingleProductComponent implements OnInit {
 
   private domain = environment.domain;
 
-  isLoading = false;
   zoomImage: boolean = false;
   showCart: boolean = false;
 
   productos: Producto[] = [];
-  productoFiltrado: Products[] = [];
-  producto: Producto = {} as Producto
+  producto: Producto | null = null
   productoId: any
 
   constructor() {
@@ -75,7 +73,7 @@ export default class SingleProductComponent implements OnInit {
           currentUrl);
         this.schemaService.injectSchema(schema, 'Product');
 
-        this.loadProductsByCategory(producto.categoria_id);
+        this.loadProductsByCategory(producto.categoriaId);
       } else {
         const title = `Producto no Ecnotrado | Accesorio para Café | Bunna`;
         const description = `Puede que esta categoría esté vacía o que el producto ya no esté disponible.`
@@ -109,6 +107,7 @@ export default class SingleProductComponent implements OnInit {
 
 
   loadProductsByCategory(categoryId: any) {
+    console.log(categoryId)
     this.productoService.getAllByCategory(categoryId).subscribe({
       next: data => {
         this.productos = data
@@ -143,4 +142,5 @@ export default class SingleProductComponent implements OnInit {
     this.showCart = true
   }
 
+  protected readonly getUrlImage = getUrlImage;
 }

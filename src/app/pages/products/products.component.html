@@ -36,35 +36,39 @@
               <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                 <!-- Grid de Porductos -->
                 @defer {
-                  @for (producto of productos; track $index) {
-                    <div class="bg-white dark:bg-gray-700 rounded-2xl shadow-lg overflow-hidden transform transition hover:-translate-y-2 hover:shadow-2xl">
-                      <!-- Imagen clickeable -->
-                      <div (click)="goToProducts(producto.sku)" class="cursor-pointer group relative">
-                        <img [src]="urlItem(producto.sku)"
+                  @for (producto of productosFiltrados; track $index) {
+                    <div class="bg-white dark:bg-gray-700 rounded-xl shadow-md overflow-hidden transition hover:-translate-y-1 hover:shadow-xl">
+                      <div (click)="goToProducts(producto.id)" class="cursor-pointer group relative">
+                        <img [src]="getUrlImage(producto.sku)"
                              loading="lazy"
                              alt="{{ producto.descripcion }}"
-                             class="w-full h-64 object-cover transition duration-300 ease-in-out group-hover:scale-105" />
+                             class="w-full h-56 object-cover transition duration-300 ease-in-out group-hover:scale-105" />
                       </div>
 
-                      <!-- Contenido -->
-                      <div class="p-4 space-y-2">
-                        <h3 class="text-lg font-semibold text-gray-800 dark:text-white">{{ producto.descripcion }}</h3>
+                      <div class="p-4 space-y-2 text-sm">
+                        <h3 class="text-base font-medium text-gray-800 dark:text-white leading-snug">
+                          {{ producto.descripcion }}
+                        </h3>
+
                         <div class="flex justify-between items-center">
-                          <p class="text-primary-600 font-bold dark:text-white">${{ producto.precio }}</p>
-                          <!-- Botón agregar al carrito -->
-                          <button (click)="agregarAlCarrito(producto)"
-                                  title="Agregar al Carrito"
-                                  class="flex items-center justify-center w-9 h-9 rounded-full border border-[#B3977E] bg-[#B3977E] text-white hover:bg-[#a3866f] transition">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2"
-                                 viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                              <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7h-1M8 7h-.688M13 5v4m-2-2h4"/>
-                            </svg>
-                          </button>
+                          <p class="text-primary-600 font-semibold dark:text-white">${{ producto.precio }}</p>
+
+                          @if (producto.disponible) {
+                            <button (click)="agregarAlCarrito(producto)"
+                                    title="Agregar al Carrito"
+                                    class="flex items-center justify-center w-8 h-8 rounded-full border border-[#B3977E] bg-[#B3977E] text-white hover:bg-[#a3866f] transition">
+                              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2"
+                                   viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                      d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7h-1M8 7h-.688M13 5v4m-2-2h4"/>
+                              </svg>
+                            </button>
+                          } @else {
+                            <span class="text-xs text-red-500 font-semibold">Agotado</span>
+                          }
                         </div>
                       </div>
                     </div>
-
                   }
                 } @placeholder (minimum 200ms){
                   <div class="absolute inset-0  flex items-center justify-center z-10">

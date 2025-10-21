@@ -11,6 +11,7 @@ import {ShoppingCartSidebarComponent} from "@components/shopping-cart-sidebar/sh
 import {SchemaService} from "@services/seo/schema.service";
 import {FooterComponent} from "@shared/footer/footer.component";
 import {Producto} from "@models/producto";
+import {getUrlImage} from "../../core/utils/imageUtil";
 
 @Component({
   selector: 'app-products',
@@ -71,6 +72,7 @@ export default class ProductsComponent implements OnInit {
 
     this.route.data.subscribe(({ productos }) => {
       this.productos = productos;
+      this.productosFiltrados = productos
       this.titulo = categoryId
         ? `Explora Nuestros Productos de Café ☕| Variedad, Estilo y Funcionalidad `
         : 'Productos para Amantes del Café ☕ | Encuentra Todo lo que Necesitas';
@@ -108,15 +110,11 @@ export default class ProductsComponent implements OnInit {
 
   filtrarProductos() {
     const filtro = this.searchTerm.trim().toLowerCase();
-
-    this.productos = this.productosFiltrados.filter(p =>
+    this.productosFiltrados = this.productos.filter(p =>
       p.item.toLowerCase().includes(filtro) ||
       p.descripcion.toLowerCase().includes(filtro)
-    )
+    );
   }
 
-  urlItem(sku: string): string{
-    return `${this.imageUrl}/${sku}/bunna`;
-  }
-
+  protected readonly getUrlImage = getUrlImage;
 }

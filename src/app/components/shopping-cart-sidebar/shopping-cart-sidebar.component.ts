@@ -3,6 +3,7 @@ import {CurrencyPipe, NgClass} from "@angular/common";
 import {ItemCarrito} from "@models/dto/item-carrito";
 import {CarritoService} from "@services/carrito.service";
 import {Router} from "@angular/router";
+import {getUrlImage} from "../../core/utils/imageUtil";
 
 @Component({
   selector: 'app-shopping-cart-sidebar',
@@ -64,4 +65,5 @@ export class ShoppingCartSidebarComponent implements OnInit {
     this.router.navigate(['/checkout']).then(r => {})
   }
 
+  protected readonly getUrlImage = getUrlImage;
 }

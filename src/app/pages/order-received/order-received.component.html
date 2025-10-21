@@ -79,7 +79,7 @@
                 <li class="flex items-center justify-between gap-4 py-3 border-b border-gray-200">
                   <!-- Imagen del producto -->
                   <img
-                    [src]="urlItem(item.productoId)"
+                    [src]="getUrlImage(item.productoId)"
                     loading="lazy"
                     alt="{{ item.descripcion }}"
                     class="w-12 h-12 object-cover rounded-md border"

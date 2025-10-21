@@ -9,6 +9,7 @@ import {SchemaService} from "@services/seo/schema.service";
 import {environment} from "../../../environments/environment";
 import {MetaService} from "@services/seo/meta.service";
 import {FooterComponent} from "@shared/footer/footer.component";
+import {getUrlImage} from "../../core/utils/imageUtil";
 
 @Component({
   selector: 'app-shoping-cart',
@@ -86,4 +87,5 @@ export default class ShopingCartComponent implements OnInit {
     this.router.navigate(['/checkout']);
   }
 
+  protected readonly getUrlImage = getUrlImage;
 }
