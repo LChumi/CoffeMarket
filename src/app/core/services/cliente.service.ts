@@ -27,6 +27,14 @@ export class ClienteService {
     return this.http.get<Cliente>(`${this.baseUrl}/by/email`, {params: params});
   }
 
+  getByEmailAndCed(email: string, identificacion: string): Observable<Cliente> {
+    const params = new HttpParams()
+      .set('email', email)
+      .set('identificacion', identificacion);
+
+    return this.http.get<Cliente>(`${this.baseUrl}/by/email/ced`, { params });
+  }
+
   getAll():Observable<Cliente[]>{
     return this.http.get<Cliente[]>(`${this.baseUrl}/get/all`);
   }

@@ -133,7 +133,7 @@ export default class CheckoutComponent implements OnInit {
 
     const form = this.invoiceFrom.value;
 
-    this.clientService.getByEmail(form.email).subscribe({
+    this.clientService.getByEmailAndCed(form.email, form.identificacion).subscribe({
       next: (result) => {
         if (result) {
           this.crearPedido(result.id, form);
@@ -194,14 +194,12 @@ export default class CheckoutComponent implements OnInit {
     });
   }
 
-
   onProvChange(event: Event) {
     const select = event.target as HTMLSelectElement;
     const provincia = select.value;
     // Aquí puedes usar provincia como string
     this.onProvinciaChange(provincia);
   }
-
 
   onProvinciaChange(provincia: string) {
     const ubicacion = this.ubicaciones.find(u => u.nombre === provincia);
