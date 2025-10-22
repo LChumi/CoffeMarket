@@ -40,6 +40,6 @@ export class ClienteService {
   }
 
   update(id: string, cliente: Cliente):Observable<Cliente>{
-    return this.http.put<Cliente>(`${this.baseUrl}/update/${id}`, cliente);
+    return this.http.put<Cliente>(`${this.baseUrl}/update/${id}`, cliente, {withCredentials: true});
   }
 }

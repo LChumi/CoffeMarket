@@ -9,7 +9,7 @@ import {ShoppingCartSidebarComponent} from "@components/shopping-cart-sidebar/sh
 import {SchemaService} from "@services/seo/schema.service";
 import {FooterComponent} from "@shared/footer/footer.component";
 import {Producto} from "@models/producto";
-import {getUrlImage} from "@utils/imageUtil";
+import {getUrlImage} from "@utils/image-util";
 
 @Component({
   selector: 'app-products',

@@ -14,8 +14,8 @@ export class ProductoService {
 
   constructor() { }
 
-  save(pedido: Producto):Observable<Producto>{
-    return this.http.post<Producto>(`${this.baseUrl}/save`, pedido);
+  save(producto: Producto):Observable<Producto>{
+    return this.http.post<Producto>(`${this.baseUrl}/save`, producto, {withCredentials: true});
   }
 
   getById(id: string):Observable<Producto>{
@@ -34,7 +34,7 @@ export class ProductoService {
     return this.http.get<Producto[]>(`${this.baseUrl}/get/category/${category}`);
   }
 
-  update(id: string, pedido: Producto):Observable<Producto>{
-    return this.http.put<Producto>(`${this.baseUrl}/update/${id}`, pedido);
+  update(id: string, producto: Producto):Observable<Producto>{
+    return this.http.put<Producto>(`${this.baseUrl}/update/${id}`, producto, {withCredentials: true});
   }
 }

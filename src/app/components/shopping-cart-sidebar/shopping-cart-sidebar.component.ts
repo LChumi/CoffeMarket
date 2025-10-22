@@ -3,7 +3,7 @@ import {CurrencyPipe, NgClass} from "@angular/common";
 import {ItemCarrito} from "@models/dto/item-carrito";
 import {CarritoService} from "@services/carrito.service";
 import {Router} from "@angular/router";
-import {getUrlImage} from "@utils/imageUtil";
+import {getUrlImage} from "@utils/image-util";
 
 @Component({
   selector: 'app-shopping-cart-sidebar',

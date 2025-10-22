@@ -10,7 +10,7 @@ import {ShoppingCartSidebarComponent} from "@components/shopping-cart-sidebar/sh
 import {FooterComponent} from "@shared/footer/footer.component";
 import {Producto} from "@models/producto";
 import {ProductoService} from "@services/producto.service";
-import {getUrlImage} from "@utils/imageUtil";
+import {getUrlImage} from "@utils/image-util";
 
 declare var gtag: (...args: any[]) => void;
 

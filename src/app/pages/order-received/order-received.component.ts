@@ -9,7 +9,7 @@ import {Pedido} from "@models/pedido";
 import {CurrencyPipe, DatePipe} from "@angular/common";
 import {ClienteService} from "@services/cliente.service";
 import {Cliente} from "@models/cliente";
-import {getUrlImage} from "@utils/imageUtil";
+import {getUrlImage} from "@utils/image-util";
 
 @Component({
   selector: 'app-order-received',

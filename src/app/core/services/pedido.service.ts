@@ -15,7 +15,7 @@ export class PedidoService {
   constructor() { }
 
   save(pedido: Pedido):Observable<Pedido>{
-    return this.http.post<Pedido>(`${this.baseUrl}/save`, pedido);
+    return this.http.post<Pedido>(`${this.baseUrl}/save`, pedido, {withCredentials: true});
   }
 
   sendMail(docNum: string):Observable<void>{
@@ -39,6 +39,6 @@ export class PedidoService {
   }
 
   update(id: string, pedido: Pedido):Observable<Pedido>{
-    return this.http.put<Pedido>(`${this.baseUrl}/update/${id}`, pedido);
+    return this.http.put<Pedido>(`${this.baseUrl}/update/${id}`, pedido, {withCredentials: true});
   }
 }

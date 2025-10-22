@@ -8,7 +8,6 @@ import {productosCategoryResolver} from "@resolvers/productos-category.resolver"
 import {productosResolver} from "@resolvers/productos.resolver";
 import {AdminRoutes} from "@admin/admin.routes";
 
-
 export const routes: Routes = [
   {
     path: '',

@@ -29,11 +29,17 @@
                 type="text"
                 id="usuario"
                 name="usuario"
-                formControlName="usuario"
+                formControlName="nombreUsuario"
                 placeholder="Ingrese su Usuario."
                 autocomplete="off"
                 class="block w-full rounded-lg border border-gray-200 px-5 py-3 leading-6 placeholder-gray-500 focus:border-[#B3977E] focus:ring focus:ring-[#B3977E] focus:ring-opacity-50 dark:border-gray-600 dark:bg-gray-800 dark:placeholder-gray-400 dark:focus:border-[#B3977E]"
               />
+              @if (loginForm.get('nombreUsuario')?.invalid && loginForm.get('nombreUsuario')?.touched) {
+                <p role="alert" class="text-sm text-red-500 mt-1">Este campo es obligatorio.</p>
+              }
+              @if (loginForm.get('nombreUsuario')?.hasError('invalidUsername') && loginForm.get('nombreUsuario')?.touched) {
+                <p role="alert" class="text-sm text-red-500 mt-1">Solo se permiten letras, números y guión bajo (_).</p>
+              }
             </div>
             <div class="space-y-1">
               <label for="password" class="text-sm font-medium"
@@ -43,11 +49,14 @@
                 type="password"
                 id="password"
                 name="password"
-                formControlName="password"
+                formControlName="clave"
                 placeholder="Ingrese su contraseña."
                 autocomplete="off"
                 class="block w-full rounded-lg border border-gray-200 px-5 py-3 leading-6 placeholder-gray-500 focus:border-[#B3977E] focus:ring focus:ring-[#B3977E] focus:ring-opacity-50 dark:border-gray-600 dark:bg-gray-800 dark:placeholder-gray-400 dark:focus:border-[#B3977E]"
               />
+              @if (loginForm.get('clave')?.invalid && loginForm.get('clave')?.touched) {
+                <p role="alert" class="text-sm text-red-500 mt-1">Este campo es obligatorio.</p>
+              }
             </div>
             <div>
               <button

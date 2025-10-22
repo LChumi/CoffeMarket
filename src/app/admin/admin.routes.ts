@@ -1,11 +1,12 @@
 import {Route} from "@angular/router";
 import {LayoutComponent} from "@admin/layout/layout.component";
+import {authGuardGuard} from "@guards/auth-guard.guard";
 
 export const AdminRoutes: Route[] = [
   {
     path:'',
     component: LayoutComponent,
-    //canActivate: [AuthGuard, RoleGuard],
+    canActivate: [authGuardGuard],
     children: [
       { path: 'dashboard', loadComponent: () => import('./pages/dashboard/dashboard.component').then(m => m.DashboardComponent) },
       { path: 'users', loadComponent: () => import('./pages/admin-usuarios/admin-usuarios.component').then(m => m.AdminUsuariosComponent) },
