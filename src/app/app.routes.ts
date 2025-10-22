@@ -6,6 +6,7 @@ import {pedidoResolver} from "./core/resolvers/pedido.resolver";
 import {productoResolver} from "./core/resolvers/producto.resolver";
 import {productosCategoryResolver} from "./core/resolvers/productos-category.resolver";
 import {productosResolver} from "./core/resolvers/productos.resolver";
+import {AdminRoutes} from "./admin/admin.routes";
 
 export const routes: Routes = [
   {
@@ -52,7 +53,7 @@ export const routes: Routes = [
   {path: 'privacy-policy',
     loadComponent: () => import('./pages/privacy-policy/privacy-policy.component')
   },
-
+  {path: 'admin', children: AdminRoutes},
   { path: 'producto', redirectTo: 'products', pathMatch: 'full' },
   { path: 'productos', redirectTo: 'products', pathMatch: 'full' },
   { path: '**', redirectTo: '', pathMatch: 'full' }

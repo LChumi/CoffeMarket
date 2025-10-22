@@ -1,0 +1,97 @@
+<main id="page-content" class="flex max-w-full flex-auto flex-col">
+  <div
+    class="relative mx-auto flex min-h-dvh w-full max-w-10xl items-center justify-center overflow-hidden p-4 lg:p-8"
+  >
+    <section class="w-full max-w-xl py-6">
+      <!-- Header -->
+      <header class="mb-10 text-center">
+        <h1
+          class="mb-2 inline-flex items-center space-x-2 text-2xl font-bold"
+        >
+          <img src="/favicon.ico" alt="log" class="mx-auto w-32 mb-1">
+          <span>Bunna Cafe Shop</span>
+        </h1>
+        <h2 class="text-sm font-medium text-gray-500 dark:text-gray-400">
+          Bienvenido Inicia Sesion
+        </h2>
+      </header>
+      <!-- END Header -->
+
+      <!-- Sign In Form -->
+      <div
+        class="flex flex-col overflow-hidden rounded-lg bg-white shadow-sm dark:bg-gray-800 dark:text-gray-100"
+      >
+        <div class="grow p-5 md:px-16 md:py-12">
+          <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="space-y-6" novalidate>
+            <div class="space-y-1">
+              <label for="usuario" class="text-sm font-medium">Usuario</label>
+              <input
+                type="text"
+                id="usuario"
+                name="usuario"
+                formControlName="usuario"
+                placeholder="Ingrese su Usuario."
+                autocomplete="off"
+                class="block w-full rounded-lg border border-gray-200 px-5 py-3 leading-6 placeholder-gray-500 focus:border-[#B3977E] focus:ring focus:ring-[#B3977E] focus:ring-opacity-50 dark:border-gray-600 dark:bg-gray-800 dark:placeholder-gray-400 dark:focus:border-[#B3977E]"
+              />
+            </div>
+            <div class="space-y-1">
+              <label for="password" class="text-sm font-medium"
+              >Contraseña</label
+              >
+              <input
+                type="password"
+                id="password"
+                name="password"
+                formControlName="password"
+                placeholder="Ingrese su contraseña."
+                autocomplete="off"
+                class="block w-full rounded-lg border border-gray-200 px-5 py-3 leading-6 placeholder-gray-500 focus:border-[#B3977E] focus:ring focus:ring-[#B3977E] focus:ring-opacity-50 dark:border-gray-600 dark:bg-gray-800 dark:placeholder-gray-400 dark:focus:border-[#B3977E]"
+              />
+            </div>
+            <div>
+              <button
+                type="submit"
+                class="inline-flex w-full items-center justify-center space-x-2 rounded-lg border border-[#a3866f] bg-[#a3866f] px-6 py-3 font-semibold leading-6 text-white hover:border-[#a3866f] hover:bg-[#a3866f] hover:text-white focus:ring focus:ring-[#B3977E] focus:ring-opacity-50 active:border-[#a3866f] active:bg-[#a3866f] dark:focus:ring-[#B3977E] dark:focus:ring-opacity-90"
+              >
+                <svg
+                  class="hi-mini hi-arrow-uturn-right inline-block size-5 opacity-50"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M12.207 2.232a.75.75 0 00.025 1.06l4.146 3.958H6.375a5.375 5.375 0 000 10.75H9.25a.75.75 0 000-1.5H6.375a3.875 3.875 0 010-7.75h10.003l-4.146 3.957a.75.75 0 001.036 1.085l5.5-5.25a.75.75 0 000-1.085l-5.5-5.25a.75.75 0 00-1.06.025z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+                <span>Iniciar sesión</span>
+              </button>
+
+              <!-- Divider: With Label -->
+              <div class="my-5 flex items-center">
+            <span
+              aria-hidden="true"
+              class="h-0.5 grow rounded bg-gray-100 dark:bg-gray-700/75"
+            ></span>
+                <span
+                  class="rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-800 dark:bg-gray-700 dark:text-gray-200"
+                >.</span
+                >
+                <span
+                  aria-hidden="true"
+                  class="h-0.5 grow rounded bg-gray-100 dark:bg-gray-700/75"
+                ></span>
+              </div>
+              <!-- END Divider: With Label -->
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <app-footer></app-footer>
+</main>
