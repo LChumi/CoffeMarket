@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {RouterLink} from "@angular/router";
+import {SidebarService} from "@services/data/sidebar.service";
 
 @Component({
   selector: 'app-admin-navbar',
@@ -11,4 +12,9 @@ import {RouterLink} from "@angular/router";
 })
 export class AdminNavbarComponent {
 
+  private sidebarService = inject(SidebarService);
+
+  sidebarOpen() {
+    this.sidebarService.toggle();
+  }
 }

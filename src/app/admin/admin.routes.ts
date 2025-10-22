@@ -4,10 +4,11 @@ import {authGuardGuard} from "@guards/auth-guard.guard";
 
 export const AdminRoutes: Route[] = [
   {
-    path:'',
+    path: '',
     component: LayoutComponent,
     canActivate: [authGuardGuard],
     children: [
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full' }, // 👈 esta línea es clave
       { path: 'dashboard', loadComponent: () => import('./pages/dashboard/dashboard.component').then(m => m.DashboardComponent) },
       { path: 'users', loadComponent: () => import('./pages/admin-usuarios/admin-usuarios.component').then(m => m.AdminUsuariosComponent) },
       { path: 'products', loadComponent: () => import('./pages/admin-products/admin-products.component').then(m => m.AdminProductsComponent) },
@@ -16,6 +17,6 @@ export const AdminRoutes: Route[] = [
     ]
   },
   { path: 'login', loadComponent: () => import('./pages/login/login.component').then(m => m.LoginComponent) },
-  {path: '**', redirectTo: 'login', pathMatch: 'full'},
-  {path: '', redirectTo: 'login', pathMatch: 'full'}
+  { path: '**', redirectTo: 'login', pathMatch: 'full' },
+  { path: '', redirectTo: 'login', pathMatch: 'full' }
 ];
