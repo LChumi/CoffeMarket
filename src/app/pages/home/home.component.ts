@@ -5,7 +5,7 @@ import {FooterComponent} from '@shared/footer/footer.component';
 import {BoxesIconsComponent} from '@components/boxes-icons/boxes-icons.component';
 import {CategoriesGridComponent} from '@components/categories-grid/categories-grid.component';
 import {WhatsappButtonComponent} from "@components/whatsapp-button/whatsapp-button.component";
-import {environment} from "../../../environments/environment";
+import {environment} from "@environments/environment";
 import {Router} from "@angular/router";
 import {MetaService} from "@services/seo/meta.service";
 import {SchemaService} from "@services/seo/schema.service";

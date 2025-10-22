@@ -1,4 +1,4 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {NavbarComponent} from "@shared/navbar/navbar.component";
 import {ItemCarrito} from "@models/dto/item-carrito";
 import {CarritoService} from "@services/carrito.service";
@@ -6,10 +6,10 @@ import {Router, RouterLink, RouterLinkActive} from "@angular/router";
 import {CurrencyPipe} from "@angular/common";
 import {ProductLoadingComponent} from "@components/product-loading/product-loading.component";
 import {SchemaService} from "@services/seo/schema.service";
-import {environment} from "../../../environments/environment";
+import {environment} from "@environments/environment";
 import {MetaService} from "@services/seo/meta.service";
 import {FooterComponent} from "@shared/footer/footer.component";
-import {getUrlImage} from "../../core/utils/imageUtil";
+import {getUrlImage} from "@utils/imageUtil";
 
 @Component({
   selector: 'app-shoping-cart',

@@ -9,6 +9,13 @@
       "@pages/*": ["./src/app/pages/*"],
       "@shared/*": ["./src/app/shared/*"],
       "@components/*": ["./src/app/components/*"],
+      "@resolvers/*": ["./src/app/core/resolvers/*"],
+      "@utils/*": ["./src/app/core/utils/*"],
+      "@handler/*": ["./src/app/core/handler/*"],
+      "@guards/*": ["./src/app/core/guards/*"],
+      "@mocks/*" : ["./src/app/mocks/*"],
+      "@admin/*" : ["./src/app/admin/*"],
+      "@environments/*" : ["./src/environments/*"]
     },
     "outDir": "./dist/out-tsc",
     "strict": true,

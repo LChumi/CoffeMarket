@@ -1,4 +1,4 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, inject} from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import {ConsentModalComponent} from "@components/consent-modal/consent-modal.component";
 import {SchemaService} from "@services/seo/schema.service";

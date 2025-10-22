@@ -1,5 +1,5 @@
 import {Route} from "@angular/router";
-import {LayoutComponent} from "./layout/layout.component";
+import {LayoutComponent} from "@admin/layout/layout.component";
 
 export const AdminRoutes: Route[] = [
   {

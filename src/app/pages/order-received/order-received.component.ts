@@ -4,12 +4,12 @@ import {FooterComponent} from "@shared/footer/footer.component";
 import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {MetaService} from "@services/seo/meta.service";
 import {SchemaService} from "@services/seo/schema.service";
-import {environment} from "../../../environments/environment";
+import {environment} from "@environments/environment";
 import {Pedido} from "@models/pedido";
 import {CurrencyPipe, DatePipe} from "@angular/common";
 import {ClienteService} from "@services/cliente.service";
 import {Cliente} from "@models/cliente";
-import {getUrlImage} from "../../core/utils/imageUtil";
+import {getUrlImage} from "@utils/imageUtil";
 
 @Component({
   selector: 'app-order-received',

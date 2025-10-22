@@ -2,11 +2,12 @@ import {Routes} from '@angular/router';
 import CheckoutComponent from "@pages/checkout/checkout.component";
 import HomeComponent from "@pages/home/home.component";
 import AboutComponent from "@pages/about/about.component";
-import {pedidoResolver} from "./core/resolvers/pedido.resolver";
-import {productoResolver} from "./core/resolvers/producto.resolver";
-import {productosCategoryResolver} from "./core/resolvers/productos-category.resolver";
-import {productosResolver} from "./core/resolvers/productos.resolver";
-import {AdminRoutes} from "./admin/admin.routes";
+import {pedidoResolver} from "@resolvers/pedido.resolver";
+import {productoResolver} from "@resolvers/producto.resolver";
+import {productosCategoryResolver} from "@resolvers/productos-category.resolver";
+import {productosResolver} from "@resolvers/productos.resolver";
+import {AdminRoutes} from "@admin/admin.routes";
+
 
 export const routes: Routes = [
   {

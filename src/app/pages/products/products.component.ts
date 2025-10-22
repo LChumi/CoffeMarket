@@ -1,9 +1,7 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {NavbarComponent} from "@shared/navbar/navbar.component";
-import {Products} from "@models/data/products";
-import {DataService} from "@services/data/data.service";
 import {ActivatedRoute, Router, RouterLink} from "@angular/router";
-import {environment} from "../../../environments/environment";
+import {environment} from "@environments/environment";
 import {MetaService} from "@services/seo/meta.service";
 import {FormsModule} from "@angular/forms";
 import {CarritoService} from "@services/carrito.service";
@@ -11,7 +9,7 @@ import {ShoppingCartSidebarComponent} from "@components/shopping-cart-sidebar/sh
 import {SchemaService} from "@services/seo/schema.service";
 import {FooterComponent} from "@shared/footer/footer.component";
 import {Producto} from "@models/producto";
-import {getUrlImage} from "../../core/utils/imageUtil";
+import {getUrlImage} from "@utils/imageUtil";
 
 @Component({
   selector: 'app-products',

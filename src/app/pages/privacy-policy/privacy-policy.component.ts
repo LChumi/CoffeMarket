@@ -4,7 +4,7 @@ import {NavbarComponent} from "@shared/navbar/navbar.component";
 import {Router} from "@angular/router";
 import {MetaService} from "@services/seo/meta.service";
 import {SchemaService} from "@services/seo/schema.service";
-import {environment} from "../../../environments/environment";
+import {environment} from "@environments/environment";
 
 @Component({
   selector: 'app-privacy-policy',

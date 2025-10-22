@@ -1,6 +1,6 @@
 import {Inject, Injectable, Renderer2, RendererFactory2} from '@angular/core';
 import {DOCUMENT} from "@angular/common";
-import {environment} from "../../../../environments/environment";
+import {environment} from "@environments/environment";
 import {Producto} from "@models/producto";
 
 @Injectable({

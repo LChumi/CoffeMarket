@@ -2,7 +2,7 @@ import {Component, inject, OnInit} from '@angular/core';
 import {NavbarComponent} from "@shared/navbar/navbar.component";
 import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {ConsentService} from "@services/seo/consent.service";
-import {environment} from "../../../environments/environment";
+import {environment} from "@environments/environment";
 import {MetaService} from "@services/seo/meta.service";
 import {SchemaService} from "@services/seo/schema.service";
 import {CarritoService} from "@services/carrito.service";
@@ -10,7 +10,7 @@ import {ShoppingCartSidebarComponent} from "@components/shopping-cart-sidebar/sh
 import {FooterComponent} from "@shared/footer/footer.component";
 import {Producto} from "@models/producto";
 import {ProductoService} from "@services/producto.service";
-import {getUrlImage} from "../../core/utils/imageUtil";
+import {getUrlImage} from "@utils/imageUtil";
 
 declare var gtag: (...args: any[]) => void;
 

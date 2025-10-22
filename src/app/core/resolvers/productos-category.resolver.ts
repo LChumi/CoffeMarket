@@ -1,5 +1,5 @@
 import {inject} from "@angular/core";
-import {catchError, of} from "rxjs";
+import {of} from "rxjs";
 import {ResolveFn} from "@angular/router";
 import {ProductoService} from "@services/producto.service";
 import {Producto} from "@models/producto";

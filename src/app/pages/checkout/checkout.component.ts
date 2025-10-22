@@ -1,7 +1,7 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {NavbarComponent} from "@shared/navbar/navbar.component";
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
-import {Ubicacion, UBICACIONES_MOCK} from "../../mocks/ubicaciones";
+import {Ubicacion, UBICACIONES_MOCK} from "@mocks/ubicaciones";
 import {CarritoService} from "@services/carrito.service";
 import {ItemCarrito} from "@models/dto/item-carrito";
 import {CurrencyPipe} from "@angular/common";
@@ -13,7 +13,7 @@ import {FooterComponent} from "@shared/footer/footer.component";
 import {Router, RouterLink, RouterLinkActive} from "@angular/router";
 import {MetaService} from "@services/seo/meta.service";
 import {SchemaService} from "@services/seo/schema.service";
-import {environment} from "../../../environments/environment";
+import {environment} from "@environments/environment";
 
 @Component({
   selector: 'app-checkout',

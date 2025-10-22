@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Carrito} from "@models/carrito";
-import {getLocalItem} from "../utils/storage-utils";
+import {getLocalItem} from "@utils/storage-utils";
 import {BehaviorSubject} from "rxjs";
 import {Producto} from "@models/producto";
 
