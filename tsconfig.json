@@ -11,7 +11,7 @@
       "@components/*": ["./src/app/components/*"],
       "@resolvers/*": ["./src/app/core/resolvers/*"],
       "@utils/*": ["./src/app/core/utils/*"],
-      "@handler/*": ["./src/app/core/handler/*"],
+      "@handler/*": ["./src/app/core/interceptors/*"],
       "@guards/*": ["./src/app/core/guards/*"],
       "@mocks/*" : ["./src/app/mocks/*"],
       "@admin/*" : ["./src/app/admin/*"],

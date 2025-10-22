@@ -14,6 +14,7 @@ import {usernameValidator} from "@utils/form-utils";
 import {AuthService} from "@services/auth/auth.service";
 import {setSessionItem} from "@utils/storage-utils";
 import {Router} from "@angular/router";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-login',
@@ -29,6 +30,7 @@ export class LoginComponent implements OnInit {
   private fb = inject(FormBuilder);
   private authService= inject(AuthService);
   private router = inject(Router);
+  private toastr = inject(ToastrService)
   loginForm!: FormGroup;
 
   constructor() {
@@ -40,7 +42,9 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     if (this.authService.isAuthenticated()) {
-      this.router.navigate(['/admin/dashboard']).then(() => {});
+      this.router.navigate(['/admin/dashboard']).then(() => {
+        this.toastr.info('Bienvenido')
+      });
     }
   }
 
@@ -59,7 +63,9 @@ export class LoginComponent implements OnInit {
             next: response => {
               if (response){
                 console.log(response);
-                this.router.navigate(['/admin/dashboard']).then(r => {});
+                this.router.navigate(['/admin/dashboard']).then(r => {
+                  this.toastr.info('Bienvenido')
+                });
               }
             }
           })
