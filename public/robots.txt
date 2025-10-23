@@ -8,6 +8,12 @@ Allow: /cart
 Allow: /checkout
 Disallow: /checkout/order/
 Allow: /privacy-policy
+Allow: /admin/login
+Disallow: /admin/dashboard
+Disallow: /admin/orders
+Disallow: /admin/clients
+Disallow: /admin/users
+Disallow: /admin/products
 
 Sitemap: https://www.bunnashop.com/sitemap.xml
 
