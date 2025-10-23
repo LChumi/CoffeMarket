@@ -24,7 +24,7 @@ export default class HomeComponent {
   constructor(
     private router: Router,
     private schemaService: SchemaService,
-    private seoService : MetaService
+    private seoService: MetaService
   ) {
     const currentUrl = `${this.domain}${this.router.url}`;
 

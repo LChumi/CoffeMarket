@@ -102,7 +102,9 @@ export default class SingleProductComponent implements OnInit {
   }
 
   goToProducts(productoId: string) {
-    this.router.navigate(['/producto', productoId]).then(r => {window.scrollTo({ top: 0, behavior: 'smooth' });});
+    this.router.navigate(['/producto', productoId]).then(r => {
+      window.scrollTo({top: 0, behavior: 'smooth'});
+    });
   }
 
   loadProductsByCategory(categoryId: any) {
@@ -132,12 +134,12 @@ export default class SingleProductComponent implements OnInit {
     }
   }
 
-  agregarAlCarrito(producto: Producto){
+  agregarAlCarrito(producto: Producto) {
     this.carritoService.agregarProducto(producto);
     this.abrirSidebarCarrito()
   }
 
-  abrirSidebarCarrito(){
+  abrirSidebarCarrito() {
     this.showCart = true
   }
 

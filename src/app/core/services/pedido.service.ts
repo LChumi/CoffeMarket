@@ -9,36 +9,37 @@ import {Observable} from "rxjs";
 })
 export class PedidoService {
 
-  private baseUrl= environment.apiUrl + 'pedido';
+  private baseUrl = environment.apiUrl + 'pedido';
   private http = inject(HttpClient)
 
-  constructor() { }
+  constructor() {
+  }
 
-  save(pedido: Pedido):Observable<Pedido>{
+  save(pedido: Pedido): Observable<Pedido> {
     return this.http.post<Pedido>(`${this.baseUrl}/save`, pedido, {withCredentials: true});
   }
 
-  sendMail(docNum: string):Observable<void>{
+  sendMail(docNum: string): Observable<void> {
     return this.http.get<void>(`${this.baseUrl}/send_mail/${docNum}`);
   }
 
-  getById(id: string):Observable<Pedido>{
+  getById(id: string): Observable<Pedido> {
     return this.http.get<Pedido>(`${this.baseUrl}/by/${id}`);
   }
 
-  getByDocNum(doc: string):Observable<Pedido>{
+  getByDocNum(doc: string): Observable<Pedido> {
     return this.http.get<Pedido>(`${this.baseUrl}/by/${doc}/doc`);
   }
 
-  getAll():Observable<Pedido[]>{
+  getAll(): Observable<Pedido[]> {
     return this.http.get<Pedido[]>(`${this.baseUrl}/get/all`);
   }
 
-  getNotFinished():Observable<Pedido[]>{
+  getNotFinished(): Observable<Pedido[]> {
     return this.http.get<Pedido[]>(`${this.baseUrl}/get/not-finished`)
   }
 
-  update(id: string, pedido: Pedido):Observable<Pedido>{
+  update(id: string, pedido: Pedido): Observable<Pedido> {
     return this.http.put<Pedido>(`${this.baseUrl}/update/${id}`, pedido, {withCredentials: true});
   }
 }

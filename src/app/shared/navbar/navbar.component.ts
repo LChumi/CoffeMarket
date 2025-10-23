@@ -34,7 +34,7 @@ export class NavbarComponent {
   router = inject(Router)
   mobileMenu = false;
   visibleSidebar = false;
-  cantidadItems =0;
+  cantidadItems = 0;
 
   constructor() {
     this.carritoService.carrito$.subscribe(carrito => {

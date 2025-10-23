@@ -19,6 +19,7 @@ export class SchemaService {
   }
 
   private renderer: Renderer2;
+
   /**
    * Inyecta el schema en el <head> del documento
    */
@@ -61,8 +62,8 @@ export class SchemaService {
           "name": "Bunna Cafe de Especialidad | Accesorios para Cafe",
           "description": "Explora nuestro universo cafetero: cafeteras, jarros, molinillos y más. Calidad y sabor desde Cuenca.",
           "inLanguage": "es-EC",
-          "isPartOf": { "@id": `${this.domain}/#website` },
-          "breadcrumb": { "@id": `${this.domain}/#breadcrumblist` },
+          "isPartOf": {"@id": `${this.domain}/#website`},
+          "breadcrumb": {"@id": `${this.domain}/#breadcrumblist`},
           "datePublished": "2021-08-26T12:13:00-05:00",
           "dateModified": new Date().toISOString()
         },
@@ -105,14 +106,14 @@ export class SchemaService {
           "url": currentUrl,
           "name": `${product.descripcion} | Bunna Cafe de Especialidad`,
           "inLanguage": "es-EC",
-          "isPartOf": { "@id": `${this.domain}/#website` },
-          "breadcrumb": { "@id": `${currentUrl}#breadcrumblist` },
+          "isPartOf": {"@id": `${this.domain}/#website`},
+          "breadcrumb": {"@id": `${currentUrl}#breadcrumblist`},
           "image": {
             "@type": "ImageObject",
             "url": this.urlItem(product.sku),
             "@id": `${currentUrl}#mainImage`
           },
-          "primaryImageOfPage": { "@id": `${currentUrl}#mainImage` },
+          "primaryImageOfPage": {"@id": `${currentUrl}#mainImage`},
           "datePublished": new Date().toISOString(),
           "dateModified": new Date().toISOString()
         },
@@ -125,7 +126,7 @@ export class SchemaService {
           "name": product.descripcion,
           "description": product.descripcion,
           "image": this.urlItem(product.sku),
-          "brand": { "@type": "Brand", "name": "Bunna" },
+          "brand": {"@type": "Brand", "name": "Bunna"},
           "offers": {
             "@type": "Offer",
             "priceCurrency": "USD",
@@ -178,8 +179,8 @@ export class SchemaService {
           "name": `${pageName} | Bunna Cafe de Especialidad`,
           "description": description,
           "inLanguage": "es-EC",
-          "isPartOf": { "@id": `${this.domain}/#website` },
-          "breadcrumb": { "@id": `${currentUrl}#breadcrumblist` },
+          "isPartOf": {"@id": `${this.domain}/#website`},
+          "breadcrumb": {"@id": `${currentUrl}#breadcrumblist`},
           "datePublished": new Date().toISOString(),
           "dateModified": new Date().toISOString()
         },
@@ -204,7 +205,7 @@ export class SchemaService {
         "width": 1200,
         "height": 900
       },
-      "image": { "@id": `${this.domain}/#organizationLogo` },
+      "image": {"@id": `${this.domain}/#organizationLogo`},
       "sameAs": [
         "https://www.facebook.com/BunnaCafeEspecialidad",
         "https://www.instagram.com/bunnacafeec/"
@@ -221,7 +222,7 @@ export class SchemaService {
       "alternateName": "Bunna Shop",
       "description": "Descubre nuestras exquisitas selecciones de cafe y accesorios.",
       "inLanguage": "es-EC",
-      "publisher": { "@id": `${this.domain}/#organization` },
+      "publisher": {"@id": `${this.domain}/#organization`},
       "potentialAction": {
         "@type": "SearchAction",
         "target": `${this.domain}/products?q={search_term_string}`,
@@ -230,7 +231,7 @@ export class SchemaService {
     };
   }
 
-  private urlItem(sku: string): string{
+  private urlItem(sku: string): string {
     return `${this.urlImage}/${sku}/bunna`;
   }
 }

@@ -1,4 +1,4 @@
-import { ResolveFn } from '@angular/router';
+import {ResolveFn} from '@angular/router';
 import {inject} from "@angular/core";
 import {PedidoService} from "@services/pedido.service";
 import {Pedido} from "@models/pedido";

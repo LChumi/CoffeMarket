@@ -9,32 +9,33 @@ import {Producto} from "@models/producto";
 })
 export class ProductoService {
 
-  private baseUrl= environment.apiUrl + 'producto';
+  private baseUrl = environment.apiUrl + 'producto';
   private http = inject(HttpClient)
 
-  constructor() { }
+  constructor() {
+  }
 
-  save(producto: Producto):Observable<Producto>{
+  save(producto: Producto): Observable<Producto> {
     return this.http.post<Producto>(`${this.baseUrl}/save`, producto, {withCredentials: true});
   }
 
-  getById(id: string):Observable<Producto>{
+  getById(id: string): Observable<Producto> {
     return this.http.get<Producto>(`${this.baseUrl}/by/${id}`);
   }
 
-  getBySku(sku: string):Observable<Producto>{
+  getBySku(sku: string): Observable<Producto> {
     return this.http.get<Producto>(`${this.baseUrl}/sku/${sku}`);
   }
 
-  getAll():Observable<Producto[]>{
+  getAll(): Observable<Producto[]> {
     return this.http.get<Producto[]>(`${this.baseUrl}/get/all`);
   }
 
-  getAllByCategory(category: string):Observable<Producto[]>{
+  getAllByCategory(category: string): Observable<Producto[]> {
     return this.http.get<Producto[]>(`${this.baseUrl}/get/category/${category}`);
   }
 
-  update(id: string, producto: Producto):Observable<Producto>{
+  update(id: string, producto: Producto): Observable<Producto> {
     return this.http.put<Producto>(`${this.baseUrl}/update/${id}`, producto, {withCredentials: true});
   }
 }

@@ -12,13 +12,13 @@ export class AdminUsuariosComponent implements OnInit {
 
   private usuarioService = inject(UsersService)
 
-  usuarios : Usuario[] = []
+  usuarios: Usuario[] = []
 
   ngOnInit() {
     this.getUsuarios()
   }
 
-  getUsuarios(){
+  getUsuarios() {
     this.usuarioService.getAll().subscribe({
       next: data => {
         console.log(data);

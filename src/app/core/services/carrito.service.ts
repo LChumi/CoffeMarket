@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Carrito} from "@models/carrito";
 import {getLocalItem} from "@utils/storage-utils";
 import {BehaviorSubject} from "rxjs";
@@ -54,10 +54,10 @@ export class CarritoService {
     this.guardarCarrito();
   }
 
-  agregarCantidad(id:string) {
+  agregarCantidad(id: string) {
     const existente = this.carrito.items.find(i => i.productoId === id);
     if (existente) {
-      existente.cantidad = (existente.cantidad+1);
+      existente.cantidad = (existente.cantidad + 1);
       this.guardarCarrito()
     }
   }

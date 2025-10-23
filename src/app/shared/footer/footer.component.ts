@@ -21,9 +21,9 @@ import {RouterLink} from "@angular/router";
 })
 export class FooterComponent {
 
-  mail: string= 'bunnacoffeemp@gmail.com'
+  mail: string = 'bunnacoffeemp@gmail.com'
 
   scrollToTop(): void {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({top: 0, behavior: 'smooth'});
   }
 }

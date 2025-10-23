@@ -1,4 +1,4 @@
-import { environment } from "@environments/environment";
+import {environment} from "@environments/environment";
 
 const imageUrl = environment.imagesUrl;
 

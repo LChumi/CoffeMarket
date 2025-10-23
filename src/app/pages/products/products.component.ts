@@ -32,11 +32,10 @@ export default class ProductsComponent implements OnInit {
   private schemaService = inject(SchemaService)
   private carritoService = inject(CarritoService);
   private domain = environment.domain;
-  private imageUrl = environment.imagesUrl;
 
   showCart = false;
   productos: Producto[] = []
-  productosFiltrados : Producto[] = [];
+  productosFiltrados: Producto[] = [];
   categoryId!: number;
   searchTerm: string = "";
   titulo: string = "";
@@ -44,7 +43,7 @@ export default class ProductsComponent implements OnInit {
   constructor() {
     const currentUrl = `${this.domain}${this.router.url}`;
     const title = 'Catálogo de Accesorios para Café | Bunna Shop'
-    const description ='Explora nuestro catálogo: cafeteras V60, molinos manuales, filtros, balanzas y todo lo que necesitas para preparar café en casa.'
+    const description = 'Explora nuestro catálogo: cafeteras V60, molinos manuales, filtros, balanzas y todo lo que necesitas para preparar café en casa.'
 
     this.seoService.updateMetaTags({
       title,
@@ -69,7 +68,7 @@ export default class ProductsComponent implements OnInit {
     const categoryId = this.route.snapshot.paramMap.get('categoryId');
     const searchQuery = this.route.snapshot.queryParamMap.get('q')?.trim().toLowerCase();
 
-    this.route.data.subscribe(({ productos }) => {
+    this.route.data.subscribe(({productos}) => {
       this.productos = productos;
       this.productosFiltrados = productos;
 
@@ -89,30 +88,30 @@ export default class ProductsComponent implements OnInit {
 
   goToProducts(productoId: any) {
     this.router.navigate(['/producto', productoId]).then(r => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      window.scrollTo({top: 0, behavior: 'smooth'});
     })
   }
 
-  agregarAlCarrito(producto: Producto){
+  agregarAlCarrito(producto: Producto) {
     this.carritoService.agregarProducto(producto);
     this.abrirSidebarCarrito()
   }
 
-  abrirSidebarCarrito(){
+  abrirSidebarCarrito() {
     this.showCart = true
   }
 
   goToCafeteras() {
     this.router.navigate(['/productos', 1]).then(() => {
       window.location.reload();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      window.scrollTo({top: 0, behavior: 'smooth'});
     });
   }
 
   goToAccesorios() {
     this.router.navigate(['/productos', 5]).then(() => {
       window.location.reload();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      window.scrollTo({top: 0, behavior: 'smooth'});
     });
   }
 

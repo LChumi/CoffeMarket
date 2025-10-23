@@ -32,10 +32,10 @@ export default class ShopingCartComponent implements OnInit {
     private router: Router,
     private schemaService: SchemaService,
     private seoService: MetaService,
-    private carritoService : CarritoService,
+    private carritoService: CarritoService,
   ) {
     const currentUrl = `${this.domain}${this.router.url}`;
-    const title ='Carrito Compras | Bunna Accesorios para Café'
+    const title = 'Carrito Compras | Bunna Accesorios para Café'
     const description = 'Consulta tus productos en nuestro carrito de compras'
     this.seoService.updateMetaTags({
       title,
@@ -64,15 +64,15 @@ export default class ShopingCartComponent implements OnInit {
     })
   }
 
-  addQuantity(id:string){
+  addQuantity(id: string) {
     this.carritoService.agregarCantidad(id)
   }
 
-  removeQuantity(id:string){
+  removeQuantity(id: string) {
     this.carritoService.retirarCantidad(id)
   }
 
-  removeProduct(id:string){
+  removeProduct(id: string) {
     this.carritoService.eliminarProducto(id)
   }
 
@@ -83,7 +83,8 @@ export default class ShopingCartComponent implements OnInit {
       return total + precio * cantidad;
     }, 0);
   }
-  goToCheckout(){
+
+  goToCheckout() {
     this.router.navigate(['/checkout']);
   }
 

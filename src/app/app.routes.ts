@@ -20,19 +20,19 @@ export const routes: Routes = [
   {
     path: 'products',
     loadComponent: () => import("./pages/products/products.component"),
-    resolve: { productos: productosResolver},
+    resolve: {productos: productosResolver},
     runGuardsAndResolvers: "always"
   },
   {
     path: 'productos/:categoryId',
     loadComponent: () => import('./pages/products/products.component'),
-    resolve: { productos: productosCategoryResolver },
+    resolve: {productos: productosCategoryResolver},
     runGuardsAndResolvers: 'always'
   },
   {
     path: 'producto/:productoId',
     loadComponent: () => import('./pages/single-product/single-product.component'),
-    resolve: { producto: productoResolver },
+    resolve: {producto: productoResolver},
     runGuardsAndResolvers: 'always'
   },
   {
@@ -41,20 +41,22 @@ export const routes: Routes = [
   },
   {
     path: 'checkout',
-    children:[
+    children: [
       {path: '', component: CheckoutComponent},
-      {path: 'order/:orderId',
+      {
+        path: 'order/:orderId',
         loadComponent: () => import('./pages/order-received/order-received.component'),
-        resolve: { pedido: pedidoResolver},
+        resolve: {pedido: pedidoResolver},
         runGuardsAndResolvers: 'always'
       },
     ]
   },
-  {path: 'privacy-policy',
+  {
+    path: 'privacy-policy',
     loadComponent: () => import('./pages/privacy-policy/privacy-policy.component')
   },
   {path: 'admin', children: AdminRoutes},
-  { path: 'producto', redirectTo: 'products', pathMatch: 'full' },
-  { path: 'productos', redirectTo: 'products', pathMatch: 'full' },
-  { path: '**', redirectTo: '', pathMatch: 'full' }
+  {path: 'producto', redirectTo: 'products', pathMatch: 'full'},
+  {path: 'productos', redirectTo: 'products', pathMatch: 'full'},
+  {path: '**', redirectTo: '', pathMatch: 'full'}
 ];

@@ -5,6 +5,6 @@ export function usernameValidator(): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
     const value = control.value;
     if (!value) return null;
-    return regex.test(value) ? null : { invalidUsername: true };
+    return regex.test(value) ? null : {invalidUsername: true};
   };
 }

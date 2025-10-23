@@ -17,22 +17,23 @@ export class AuthService {
 
   private user: UserInfo | null = null;
 
-  constructor() { }
+  constructor() {
+  }
 
-  login(request : AuthenticationRequest):Observable<ServiceResponse> {
+  login(request: AuthenticationRequest): Observable<ServiceResponse> {
     return this.http.post<ServiceResponse>(this.baseUrl + '/login', request, {withCredentials: true});
   }
 
   refresh(): Observable<ServiceResponse> {
-    return this.http.post<ServiceResponse>(this.baseUrl + '/refresh',{} , {withCredentials: true});
+    return this.http.post<ServiceResponse>(this.baseUrl + '/refresh', {}, {withCredentials: true});
   }
 
-  logout():Observable<ServiceResponse>{
+  logout(): Observable<ServiceResponse> {
     return this.http.post<ServiceResponse>(this.baseUrl + '/logout', {withCredentials: true})
   }
 
   fetchUser(): Observable<UserInfo> {
-    return this.http.get<UserInfo>(this.baseUrl + '/me', { withCredentials: true }).pipe(
+    return this.http.get<UserInfo>(this.baseUrl + '/me', {withCredentials: true}).pipe(
       tap(user => {
         this.user = user;
         setSessionItem('isLoggedIn', 'true');

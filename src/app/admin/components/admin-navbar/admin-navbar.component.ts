@@ -17,10 +17,10 @@ export class AdminNavbarComponent {
   private sidebarService = inject(SidebarService);
   private authService = inject(AuthService);
   private router = inject(Router);
-  protected username: string | null='';
+  protected username: string | null = '';
 
   constructor() {
-    this.username=getSessionItem('username')
+    this.username = getSessionItem('username')
   }
 
   sidebarOpen() {
@@ -37,7 +37,8 @@ export class AdminNavbarComponent {
     clearSessionItems()
     this.authService.logout().subscribe({
       next: () => {
-        this.router.navigate(['/admin/login']).then(() => {})
+        this.router.navigate(['/admin/login']).then(() => {
+        })
       }
     })
   }

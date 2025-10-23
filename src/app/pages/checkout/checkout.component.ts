@@ -55,8 +55,8 @@ export default class CheckoutComponent implements OnInit {
 
     const currentUrl = `${this.domain}${this.router.url}`;
 
-    const title ='Pagina de Pago| Bunna Accesorios para Café'
-    const description ='Completa tu compra con seguridad y rapidez. Envíos a todo Ecuador.'
+    const title = 'Pagina de Pago| Bunna Accesorios para Café'
+    const description = 'Completa tu compra con seguridad y rapidez. Envíos a todo Ecuador.'
 
     this.seoService.updateMetaTags({
       title,
@@ -215,7 +215,7 @@ export default class CheckoutComponent implements OnInit {
     }, 0);
   }
 
-  calcularTotal() : number {
+  calcularTotal(): number {
     return this.calcularSubtotal() + this.envio;
   }
 
@@ -240,7 +240,7 @@ export default class CheckoutComponent implements OnInit {
           this.carritoService.limpiarCarrito()
         }
       })
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      window.scrollTo({top: 0, behavior: 'smooth'});
     })
   }
 }

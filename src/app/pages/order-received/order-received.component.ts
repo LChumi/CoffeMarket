@@ -37,11 +37,11 @@ export default class OrderReceivedComponent implements OnInit {
   pedido: Pedido | null = null
   cliente: Cliente = {} as Cliente;
 
-  constructor(){
+  constructor() {
     const currentUrl = `${this.domain}${this.router.url}`;
 
-    const title ='Resumen de Pedido Generado | Bunna Accesorios para Café'
-    const description ='Observa el Resumen de tu Pedido Generado '
+    const title = 'Resumen de Pedido Generado | Bunna Accesorios para Café'
+    const description = 'Observa el Resumen de tu Pedido Generado '
 
     this.seoService.updateMetaTags({
       title,
@@ -67,10 +67,10 @@ export default class OrderReceivedComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.pedido){
+    if (this.pedido) {
       this.clienteService.getById(this.pedido.clienteId).subscribe({
         next: data => {
-          if (data){
+          if (data) {
             this.cliente = data
           }
         }
@@ -78,7 +78,7 @@ export default class OrderReceivedComponent implements OnInit {
     }
   }
 
-  enviarComprobantePorWhatsApp(pedido:string){
+  enviarComprobantePorWhatsApp(pedido: string) {
     const telefono = '+593979126861';
     const mensaje = encodeURIComponent(`Hola, aquí está mi comprobante del pedido ${pedido}`);
     const url = `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`;

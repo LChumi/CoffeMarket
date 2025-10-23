@@ -16,13 +16,13 @@ export class AdminProductsComponent implements OnInit {
 
   private productsService = inject(ProductoService)
 
-  productos : Producto[] = []
+  productos: Producto[] = []
 
   ngOnInit() {
     this.getProductos()
   }
 
-  getProductos(){
+  getProductos() {
     this.productsService.getAll().subscribe({
       next: data => {
         this.productos = data

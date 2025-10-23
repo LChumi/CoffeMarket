@@ -11,7 +11,8 @@ export class MetaService {
     private title: Title,
     private meta: Meta,
     @Inject(DOCUMENT) private document: Document
-  ) {}
+  ) {
+  }
 
   updateMetaTags(config: {
     title: string;
@@ -36,9 +37,9 @@ export class MetaService {
   private updateOrAddTag(attr: 'name' | 'property', key: string, value: string): void {
     const tag = this.meta.getTag(`${attr}="${key}"`);
     if (tag) {
-      this.meta.updateTag({ [attr]: key, content: value });
+      this.meta.updateTag({[attr]: key, content: value});
     } else {
-      this.meta.addTag({ [attr]: key, content: value });
+      this.meta.addTag({[attr]: key, content: value});
     }
   }
 

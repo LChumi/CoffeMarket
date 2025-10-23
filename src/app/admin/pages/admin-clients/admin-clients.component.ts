@@ -1,14 +1,10 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {ClienteService} from "@services/cliente.service";
 import {Cliente} from "@models/cliente";
-import {CurrencyPipe, DatePipe} from "@angular/common";
 
 @Component({
   selector: 'app-admin-clients',
-  imports: [
-    CurrencyPipe,
-    DatePipe
-  ],
+  imports: [],
   templateUrl: './admin-clients.component.html',
   styles: ``
 })

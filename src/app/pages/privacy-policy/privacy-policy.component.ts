@@ -22,7 +22,7 @@ export default class PrivacyPolicyComponent {
   private schemaService = inject(SchemaService);
   private domain = environment.domain;
 
-  protected emailInfo: string='bunnacoffeemp@gmail.com';
+  protected emailInfo: string = 'bunnacoffeemp@gmail.com';
 
   constructor() {
     const currentUrl = `${this.domain}${this.router.url}`;

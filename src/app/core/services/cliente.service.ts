@@ -9,20 +9,21 @@ import {Cliente} from "@models/cliente";
 })
 export class ClienteService {
 
-  private baseUrl= environment.apiUrl + 'cliente';
+  private baseUrl = environment.apiUrl + 'cliente';
   private http = inject(HttpClient)
 
-  constructor() { }
+  constructor() {
+  }
 
-  save(cliente: Cliente):Observable<Cliente>{
+  save(cliente: Cliente): Observable<Cliente> {
     return this.http.post<Cliente>(`${this.baseUrl}/save`, cliente);
   }
 
-  getById(id: string):Observable<Cliente>{
+  getById(id: string): Observable<Cliente> {
     return this.http.get<Cliente>(`${this.baseUrl}/by/${id}`);
   }
 
-  getByEmail(email: string):Observable<Cliente>{
+  getByEmail(email: string): Observable<Cliente> {
     const params = new HttpParams().set('email', email);
     return this.http.get<Cliente>(`${this.baseUrl}/by/email`, {params: params});
   }
@@ -32,14 +33,14 @@ export class ClienteService {
       .set('email', email)
       .set('identificacion', identificacion);
 
-    return this.http.get<Cliente>(`${this.baseUrl}/by/email/ced`, { params });
+    return this.http.get<Cliente>(`${this.baseUrl}/by/email/ced`, {params});
   }
 
-  getAll():Observable<Cliente[]>{
+  getAll(): Observable<Cliente[]> {
     return this.http.get<Cliente[]>(`${this.baseUrl}/get/all`);
   }
 
-  update(id: string, cliente: Cliente):Observable<Cliente>{
+  update(id: string, cliente: Cliente): Observable<Cliente> {
     return this.http.put<Cliente>(`${this.baseUrl}/update/${id}`, cliente, {withCredentials: true});
   }
 }

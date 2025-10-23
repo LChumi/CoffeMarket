@@ -21,10 +21,10 @@ export class AdminOrdersComponent implements OnInit {
   private toastr = inject(ToastrService)
 
   pedidos: Pedido[] = [];
-  pedidosFiltrados : Pedido[] = [];
+  pedidosFiltrados: Pedido[] = [];
   pedidoSelected: Pedido | null = null;
   modalPedido = false;
-  docAutorizaqcion : string = "";
+  docAutorizaqcion: string = "";
   searchOrder: string = "";
 
   ngOnInit() {
@@ -36,13 +36,13 @@ export class AdminOrdersComponent implements OnInit {
     this.modalPedido = true;
   }
 
-  cerrarModal(){
+  cerrarModal() {
     this.modalPedido = false;
     this.docAutorizaqcion = '';
   }
 
-  actualizar(){
-    if (this.docAutorizaqcion != "" && this.pedidoSelected){
+  actualizar() {
+    if (this.docAutorizaqcion != "" && this.pedidoSelected) {
       this.pedidoSelected.docAutorizacion = this.docAutorizaqcion.toUpperCase()
       this.pedidoService.update(this.pedidoSelected.id, this.pedidoSelected).subscribe({
         next: data => {
@@ -53,7 +53,7 @@ export class AdminOrdersComponent implements OnInit {
     }
   }
 
-  getPedidos(){
+  getPedidos() {
     this.pedidoService.getNotFinished().subscribe({
       next: data => {
         this.pedidos = data;
@@ -63,7 +63,7 @@ export class AdminOrdersComponent implements OnInit {
     })
   }
 
-  filtrarPedidos(){
+  filtrarPedidos() {
     const filtro = this.searchOrder.trim().toLowerCase();
     this.pedidos = this.pedidosFiltrados.filter(p =>
       p.docNum.toLowerCase().includes(filtro)

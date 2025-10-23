@@ -1,18 +1,14 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {
-  AbstractControl,
   FormBuilder,
   FormGroup,
   ReactiveFormsModule,
-  ValidationErrors,
-  ValidatorFn,
   Validators
 } from "@angular/forms";
 import {FooterComponent} from "@shared/footer/footer.component";
 import {AuthenticationRequest} from "@models/auth/authentication-request";
 import {usernameValidator} from "@utils/form-utils";
 import {AuthService} from "@services/auth/auth.service";
-import {setSessionItem} from "@utils/storage-utils";
 import {Router} from "@angular/router";
 import {ToastrService} from "ngx-toastr";
 
@@ -28,13 +24,13 @@ import {ToastrService} from "ngx-toastr";
 export class LoginComponent implements OnInit {
 
   private fb = inject(FormBuilder);
-  private authService= inject(AuthService);
+  private authService = inject(AuthService);
   private router = inject(Router);
   private toastr = inject(ToastrService)
   loginForm!: FormGroup;
 
   constructor() {
-    this.loginForm= this.fb.group({
+    this.loginForm = this.fb.group({
       nombreUsuario: ['', [Validators.required, usernameValidator()]],
       clave: ['', [Validators.required]],
     })
@@ -48,7 +44,7 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  onSubmit(){
+  onSubmit() {
     if (!this.loginForm.valid) {
       this.loginForm.markAllAsTouched();
       return;
@@ -57,10 +53,10 @@ export class LoginComponent implements OnInit {
     const form = this.loginForm.value as AuthenticationRequest;
     this.authService.login(form).subscribe({
       next: response => {
-        if (response.success){
+        if (response.success) {
           this.authService.fetchUser().subscribe({
             next: response => {
-              if (response){
+              if (response) {
                 this.router.navigate(['/admin/dashboard']).then(r => {
                   this.toastr.info('Bienvenido')
                 });
