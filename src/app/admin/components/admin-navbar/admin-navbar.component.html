@@ -14,38 +14,32 @@
         </a>
       </div>
       <div class="flex items-center">
-        <div class="flex items-center ms-3">
-          <div>
-            <button type="button" class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" aria-expanded="false" data-dropdown-toggle="dropdown-user">
-              <span class="sr-only">Open user menu</span>
-              <img class="w-8 h-8 rounded-full" src="/images/logos/caffeCirc.webp" alt="user photo">
-            </button>
-          </div>
-          <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-sm shadow-sm dark:bg-gray-700 dark:divide-gray-600" id="dropdown-user">
-            <div class="px-4 py-3" role="none">
-              <p class="text-sm text-gray-900 dark:text-white" role="none">
-                Neil Sims
-              </p>
-              <p class="text-sm font-medium text-gray-900 truncate dark:text-gray-300" role="none">
+        <div class="relative">
+          <button type="button"
+                  (click)="toggleDropdown()"
+                  class="flex items-center text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600">
+            <span class="sr-only">Open user menu</span>
+            <img class="w-8 h-8 rounded-full" src="/images/logos/caffeCirc.webp" alt="user photo">
+          </button>
 
-              </p>
+          @if (dropdownOpen) {
+            <div class="absolute right-0 mt-2 w-48 origin-top-right rounded-md shadow-lg bg-white dark:bg-gray-700 ring-1 ring-black ring-opacity-5 focus:outline-none z-50 transition ease-out duration-100"
+                 id="dropdown-user">
+              <div class="px-4 py-3">
+                <p class="text-sm text-gray-900 dark:text-white uppercase">{{username}}</p>
+              </div>
+              <ul class="py-1">
+                <li>
+                  <button (click)="logout()"
+                          class="block w-full text-left px-4 py-2 text-sm text-[#a3866f] hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-[#a3866f] dark:hover:text-white focus:outline-none">
+                    Sign out
+                  </button>
+                </li>
+              </ul>
             </div>
-            <ul class="py-1" role="none">
-              <li>
-                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Dashboard</a>
-              </li>
-              <li>
-                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Settings</a>
-              </li>
-              <li>
-                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Earnings</a>
-              </li>
-              <li>
-                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Sign out</a>
-              </li>
-            </ul>
-          </div>
+          }
         </div>
+
       </div>
     </div>
   </div>

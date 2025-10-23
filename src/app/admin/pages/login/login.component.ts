@@ -58,18 +58,23 @@ export class LoginComponent implements OnInit {
     this.authService.login(form).subscribe({
       next: response => {
         if (response.success){
-          console.log(response);
           this.authService.fetchUser().subscribe({
             next: response => {
               if (response){
-                console.log(response);
                 this.router.navigate(['/admin/dashboard']).then(r => {
                   this.toastr.info('Bienvenido')
                 });
               }
             }
           })
+        } else {
+          this.toastr.warning('Usuario no identificado por favor vuelva a iniciar sesion')
+          this.loginForm.reset()
         }
+      },
+      error: error => {
+        this.toastr.error('Ocurrio un problema, Servicio no disponible');
+        this.loginForm.reset()
       }
     })
   }

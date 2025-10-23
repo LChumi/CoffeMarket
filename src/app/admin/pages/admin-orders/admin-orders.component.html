@@ -1,1 +1,66 @@
-<p>admin-orders works!</p>
+@defer {
+  <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+    <!-- Search bar -->
+    <div class="px-4 mb-6">
+      <label for="table-search" class="sr-only">Search</label>
+      <div class="relative mt-1">
+        <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+          <svg class="w-4 h-4 text-gray-500" fill="none" viewBox="0 0 20 20">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+          </svg>
+        </div>
+        <input type="text" id="table-search"
+               class="block pt-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 focus:ring-[#a3866f] focus:border-[#a3866f] transition duration-150 ease-in-out"
+               placeholder="Buscar pedidos...">
+      </div>
+    </div>
+
+    <!-- Table -->
+    <table class="w-full text-sm text-left text-gray-700">
+      <thead>
+      <tr>
+        <th scope="col" class="p-4 bg-[#c6b89b] text-black">
+          <input id="checkbox-all-search" type="checkbox"
+                 class="w-4 h-4 text-[#a3866f] border-gray-300 rounded-sm focus:ring-[#a3866f] focus:ring-2">
+        </th>
+        <th scope="col" class="px-6 py-3 bg-[#c6b89b] text-black">Documento</th>
+        <th scope="col" class="px-6 py-3 bg-[#c6b89b] text-black">Items</th>
+        <th scope="col" class="px-6 py-3 bg-[#c6b89b] text-black">Fecha</th>
+        <th scope="col" class="px-6 py-3 bg-[#c6b89b] text-black">Ciudad</th>
+        <th scope="col" class="px-6 py-3 bg-[#c6b89b] text-black">Total</th>
+        <th scope="col" class="px-6 py-3 bg-[#c6b89b] text-black">Validar</th>
+      </tr>
+      </thead>
+      <tbody>
+        @for (pedido of pedidos; track $index) {
+          <tr class="border-b hover:bg-gray-50 transition">
+            <td class="w-4 p-4">
+              <input type="checkbox"
+                     class="w-4 h-4 text-[#a3866f] border-gray-300 rounded-sm focus:ring-[#a3866f] focus:ring-2">
+            </td>
+            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+              {{ pedido.docNum }}
+            </th>
+            <td class="px-6 py-4">{{ pedido.items.length }} Items</td>
+            <td class="px-6 py-4">{{ pedido.creadoEn | date }}</td>
+            <td class="px-6 py-4">{{ pedido.ciudad }}</td>
+            <td class="px-6 py-4">{{ pedido.total | currency }}</td>
+            <td class="px-6 py-4">
+              <button (click)="editarPedido(pedido)"
+                      class="text-[#a3866f] hover:underline transition">
+                Agregar Comprobante
+              </button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+}
+@placeholder (minimum 1000ms) {
+  <div class="absolute inset-0 flex items-center justify-center z-10">
+    <img [src]="'images/loading/loading.gif'" alt="Cargando..."
+         class="w-60 h-60 mt-52 rounded-full object-cover object-center"/>
+  </div>
+}

@@ -17,7 +17,7 @@ import {MetaService} from "@services/seo/meta.service";
     <app-admin-navbar></app-admin-navbar>
     <app-admin-sidebar></app-admin-sidebar>
     <div class="p-4 sm:ml-64">
-      <div class="p-4 rounded-lg dark:border-gray-700 mt-14">
+      <div class="p-4 rounded-lg dark:border-gray-700 mt-14 ">
         <router-outlet/>
       </div>
     </div>
