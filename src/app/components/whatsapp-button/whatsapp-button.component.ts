@@ -4,6 +4,7 @@ import {Component, inject, Renderer2} from '@angular/core';
   selector: 'app-whatsapp-button',
   imports: [],
   templateUrl: './whatsapp-button.component.html',
+  standalone: true,
   styleUrl: './whatsapp-button.component.css'
 })
 export class WhatsappButtonComponent {

@@ -8,12 +8,13 @@
     </div>
   </header>
   <main>
-    <div class="relative pt-16 pb-32 flex content-center  items-center justify-center min-h-screen-75">
+    @if (productos.length > 0) {
+      <div class="relative pt-16 pb-32 flex content-center  items-center justify-center min-h-screen-75">
         <div class="mx-auto px-4 sm:container">
           <div class="relative bg-gradient-to-br from-primary-50 to-white dark:from-gray-800 dark:to-gray-900">
             <div class="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
               <h1 class="text-4xl font-bold text-primary-800 dark:text-white mb-8 animate-bounce-slow">
-                Nuestros Productos Accesorios para Café ☕
+                {{titulo}}
               </h1>
 
               <div class="max-w-md w-full mx-auto mt-4 md:mt-0 mb-8">
@@ -35,23 +36,40 @@
               <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                 <!-- Grid de Porductos -->
                 @defer {
-                @for (producto of productos; track $index) {
-                  <div (click)="goToProducts(producto.sku)"
-                       class="bg-white dark:bg-gray-700 rounded-2xl shadow-lg overflow-hidden transform transition-all hover:-translate-y-2 hover:shadow-2xl">
-                    <img [src]="'images/products/'+producto.sku+'.webp'"
-                         alt="producto" class="w-full h-64 object-cover">
-                    <div class="p-6">
-                      <h3 class="text-xl font-semibold text-primary-800 dark:text-white">{{ producto.descripcion }}</h3>
-                      <div class="flex justify-between items-center mt-2">
-                        <p class="text-primary-600 font-bold dark:text-white">${{ producto.precio }}</p>
+                  @for (producto of productosFiltrados; track $index) {
+                    <div class="bg-white dark:bg-gray-700 rounded-xl shadow-md overflow-hidden transition hover:-translate-y-1 hover:shadow-xl">
+                      <div (click)="goToProducts(producto.id)" class="cursor-pointer group relative">
+                        <img [src]="getUrlImage(producto.sku)"
+                             loading="lazy"
+                             alt="{{ producto.descripcion }}"
+                             class="w-full h-56 object-cover transition duration-300 ease-in-out group-hover:scale-105" />
                       </div>
-                      <button (click)="goToProducts(producto.sku)"
-                              style="background-color: #B3977E; color: white; font-weight: bold; padding: 0.5rem 1rem; border: 1px solid #B3977E; border-radius: 0.25rem;">
-                        Ver
-                      </button>
+
+                      <div class="p-4 space-y-2 text-sm">
+                        <h3 class="text-base font-medium text-gray-800 dark:text-white leading-snug">
+                          {{ producto.descripcion }}
+                        </h3>
+
+                        <div class="flex justify-between items-center">
+                          <p class="text-primary-600 font-semibold dark:text-white">${{ producto.precio }}</p>
+
+                          @if (producto.disponible) {
+                            <button (click)="agregarAlCarrito(producto)"
+                                    title="Agregar al Carrito"
+                                    class="flex items-center justify-center w-8 h-8 rounded-full border border-[#B3977E] bg-[#B3977E] text-white hover:bg-[#a3866f] transition">
+                              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2"
+                                   viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                      d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7h-1M8 7h-.688M13 5v4m-2-2h4"/>
+                              </svg>
+                            </button>
+                          } @else {
+                            <span class="text-xs text-red-500 font-semibold">Agotado</span>
+                          }
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                }
+                  }
                 } @placeholder (minimum 200ms){
                   <div class="absolute inset-0  flex items-center justify-center z-10">
                     <img
@@ -89,7 +107,34 @@
             </div>
           </div>
         </div>
-    </div>
+      </div>
+    } @else {
+      <div class="relative pt-20 pb-32 flex items-center justify-center min-h-screen bg-gradient-to-br from-primary-50 to-white dark:from-gray-800 dark:to-gray-900">
+        <div class="max-w-2xl mx-auto px-4 text-center">
+          <h1 class="text-4xl font-extrabold text-primary-800 dark:text-white mb-6">
+            Ups... no encontramos lo que buscabas
+          </h1>
+          <p class="text-lg text-gray-600 dark:text-gray-300 mb-4">
+            Puede que esta categoría esté vacía o que el producto ya no esté disponible.
+          </p>
+          <p class="text-base text-gray-500 dark:text-gray-400 mb-8">
+            Pero no te preocupes, tenemos muchas opciones deliciosas esperándote en nuestra tienda.
+          </p>
+          <a
+            [routerLink]="['/products']"
+            class="inline-flex items-center gap-2 px-6 py-3 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition">
+            Explorar la tienda
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    }
+    <app-shopping-cart-sidebar [(visible)]="showCart"></app-shopping-cart-sidebar>
   </main>
 
+  <footer class="mt-auto w-full bg-white dark:bg-gray-700">
+    <app-footer></app-footer>
+  </footer>
 </div>

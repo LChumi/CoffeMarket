@@ -9,93 +9,166 @@
   </header>
 
   <main>
-    <h1 class="sr-only">Nuestros Productos – Accesorios para Café</h1>
 
-    <div class="relative pt-16 pb-32 flex content-center  items-center justify-center min-h-screen-75">
-      @if (isLoading){
-        <div class="absolute inset-0  flex items-center justify-center z-10">
-          <img
-            [src]="'images/loading/loading.gif'"
-            alt="Cargando..." class="w-60 h-60 mt-52 rounded-full object-cover object-center" />
-        </div>
-      } @else {
-        <div
-          class="mx-auto px-4 sm:container">
-          @if (producto) {
-            <div class="container mx-auto px-6 relative">
-              <!-- Imagen Ampliada (Zoom Modal) -->
-              @if (zoomImage){
-                <div
-                  (click)="zoomImage = false"
-                  class="fixed inset-0 bg-black/70 flex items-center justify-center z-50 cursor-zoom-out p-4 sm:p-8"
-                >
-                  <img
-                    [src]="'images/products/' + producto.sku + '.webp'"
-                    class="object-contain w-full max-w-[90vw] max-h-[60vh] sm:max-w-3xl sm:max-h-[80vh] md:max-w-2xl md:max-h-[70vh] rounded-xl shadow-2xl transition-transform duration-300 scale-100 hover:scale-105 animate-zoomIn"
-                    alt="Producto ampliado"
-                  />
-                </div>
-              }
-
-              <!-- Vista normal -->
-              <div class="md:flex md:items-center z-10 relative">
-                <div class="w-full md:w-1/2 lg:h-[500px] flex justify-center">
-                  <img (click)="zoomImage = true"
-                       [src]="'images/products/' + producto.sku + '.webp'"
-                       alt="producto"
-                       class="w-full h-full max-w-[300px] sm:max-w-[400px] md:max-w-md object-contain transition duration-300 ease-in-out hover:scale-105 cursor-zoom-in">
-                </div>
-                <div class="w-full max-w-lg mx-auto mt-5 md:ml-8 md:mt-0 md:w-1/2">
-                  <h3 class="text-gray-700 uppercase text-lg dark:text-gray-200">{{ producto.descripcion }}</h3>
-                  <span class="text-gray-500 mt-3 dark:text-gray-200">{{ producto.precio }}</span>
-                  <hr class="my-3">
-                  <div class="flex items-center mt-6">
-                    <button (click)="openWhatsApp(producto)"
-                            style="background-color: #B3977E; color: white; font-weight: bold; padding: 0.5rem 1rem; border: 1px solid #B3977E; border-radius: 0.25rem;">
-                      Solicitar
-                    </button>
-                    <button (click)="openWhatsApp(producto)"
-                            class="mx-2 text-gray-600 border rounded-md p-2 hover:bg-gray-200 focus:outline-none dark:text-gray-200">
-                      <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                           viewBox="0 0 24 24" stroke="currentColor">
-                        <path
-                          d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                      </svg>
-                    </button>
+    @if (producto) {
+      @defer {
+        <h1 class="sr-only">Calidad en cada Producto Bunna – Accesorios para Café</h1>
+        <div class="relative pt-16 pb-32 flex content-center  items-center justify-center min-h-screen-75">
+          <div
+            class="mx-auto px-4 sm:container">
+            @if (producto) {
+              <div class="container mx-auto px-6 relative">
+                <!-- Imagen Ampliada (Zoom Modal) -->
+                @if (zoomImage){
+                  <div
+                    (click)="zoomImage = false"
+                    class="fixed inset-0 bg-black/70 flex items-center justify-center z-50 cursor-zoom-out p-4 sm:p-8"
+                  >
+                    <img
+                      [src]="'images/products/' + producto.sku + '.webp'"
+                      class="object-contain w-full max-w-[90vw] max-h-[60vh] sm:max-w-3xl sm:max-h-[80vh] md:max-w-2xl md:max-h-[70vh] rounded-xl shadow-2xl transition-transform duration-300 scale-100 hover:scale-105 animate-zoomIn"
+                      alt="Producto ampliado"
+                    />
                   </div>
-                </div>
-              </div>
-              @if (productoFiltrado) {
-                <div class="mt-16">
-                  <h3 class="text-gray-600 text-2xl font-medium dark:text-gray-200">Mas Productos</h3>
-                  <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-6">
-                    @for (prod of productoFiltrado; track $index) {
-                      <div (click)="goToProducts(prod.sku)"
-                           class="w-full max-w-sm mx-auto rounded-md shadow-md overflow-hidden">
-                        <div class="flex items-end justify-end h-56 w-full bg-cover"
-                             [style.background-image]="'url(\'images/products/' + prod.sku + '.webp\')'">
-                          <button (click)="goToProducts(prod.sku)"
-                                  style="background-color: #B3977E; color: white; font-weight: bold; padding: 0.5rem 1rem; border: 1px solid #B3977E; border-radius: 0.25rem;">
-                            <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round"
-                                 stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
-                              <path
-                                d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                }
+
+                <!-- Vista -->
+                <div class="container mx-auto px-4 py-8">
+                  <div class="flex flex-col md:flex-row items-start gap-8">
+
+                    <!-- Imagen -->
+                    <div class="w-full md:w-1/2 flex justify-center">
+                      <img (click)="zoomImage = true"
+                           [src]="getUrlImage(producto.sku)"
+                           alt="{{ producto.descripcion }}"
+                           class="w-full max-w-xs sm:max-w-sm md:max-w-md object-contain rounded-lg shadow-md transition hover:scale-105 cursor-zoom-in" />
+                    </div>
+
+                    <!-- Descripción -->
+                    <div class="w-full md:w-1/2 space-y-4">
+                      <h1 class="text-2xl font-bold text-gray-800 dark:text-white">{{ producto.descripcion }}</h1>
+                      <p class="text-sm text-gray-600 dark:text-gray-300">SKU: {{ producto.sku }} </p>
+
+                      @if (producto.etiquetas.length > 0) {
+                        <div class="flex flex-wrap gap-2">
+                          @for (etiqueta of producto.etiquetas; track $index) {
+                            <span class="px-2 py-1 text-xs bg-primary-100 text-primary-700 rounded-full dark:bg-primary-800 dark:text-white">
+                              {{ etiqueta }}
+                            </span>
+                          }
+                        </div>
+                      }
+
+                      @if (producto.atributos.length > 0) {
+                        <ul class="text-sm text-gray-600 dark:text-gray-300 list-disc list-inside">
+                          @for (atributo of producto.atributos; track $index) {
+                            <li>{{ atributo.nombre }}: {{ atributo.detalle }}</li>
+                          }
+                        </ul>
+                      }
+
+                      @if (producto.disponible) {
+                        <p class="text-green-600 font-semibold text-sm">Disponible ({{ producto.stock }} unidades)</p>
+                      } @else {
+                        <p class="text-red-500 font-semibold text-sm">Agotado</p>
+                      }
+
+                      <p class="text-xl font-bold text-primary-700 dark:text-white">${{ producto.precio }}</p>
+
+                      <div class="flex gap-4 mt-4">
+                        @if (producto.disponible) {
+                          <button (click)="agregarAlCarrito(producto)"
+                                  class="w-10 h-10 flex items-center justify-center rounded-full border border-[#B3977E] bg-[#B3977E] text-white hover:bg-[#a3866f] transition">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2"
+                                 viewBox="0 0 24 24">
+                              <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
                             </svg>
                           </button>
-                        </div>
-                        <div class="px-5 py-3">
-                          <h3 class="text-gray-700 dark:text-gray-200 uppercase">{{ prod.descripcion }}</h3>
-                        </div>
+                        }
                       </div>
-                    }
+                    </div>
                   </div>
                 </div>
-              }
-            </div>
-          }
 
+                @if (productos) {
+                  <div class="mt-16">
+                    <h3 class="text-gray-600 text-2xl font-medium dark:text-gray-200">Mas Productos</h3>
+                    <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-6">
+                      @for (producto of productos; track $index) {
+                        <div class="bg-white dark:bg-gray-700 rounded-xl shadow-md overflow-hidden transition hover:-translate-y-1 hover:shadow-xl">
+                          <div (click)="goToProducts(producto.id)" class="cursor-pointer group relative">
+                            <img [src]="getUrlImage(producto.sku)"
+                                 loading="lazy"
+                                 alt="{{ producto.descripcion }}"
+                                 class="w-full h-56 object-cover transition duration-300 ease-in-out group-hover:scale-105" />
+                          </div>
+
+                          <div class="p-4 space-y-2 text-sm">
+                            <h3 class="text-base font-medium text-gray-800 dark:text-white leading-snug">
+                              {{ producto.descripcion }}
+                            </h3>
+
+                            <div class="flex justify-between items-center">
+                              <p class="text-primary-600 font-semibold dark:text-white">${{ producto.precio }}</p>
+
+                              @if (producto.disponible) {
+                                <button (click)="agregarAlCarrito(producto)"
+                                        title="Agregar al Carrito"
+                                        class="flex items-center justify-center w-8 h-8 rounded-full border border-[#B3977E] bg-[#B3977E] text-white hover:bg-[#a3866f] transition">
+                                  <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2"
+                                       viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                          d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7h-1M8 7h-.688M13 5v4m-2-2h4"/>
+                                  </svg>
+                                </button>
+                              } @else {
+                                <span class="text-xs text-red-500 font-semibold">Agotado</span>
+                              }
+                            </div>
+                          </div>
+                        </div>                    }
+                    </div>
+                  </div>
+                }
+              </div>
+            }
+          </div>
+        </div>
+      } @placeholder (minimum 1000ms){
+        <div class="inset-0  flex items-center justify-center">
+          <img
+            [src]="'images/loading/loading.gif'"
+            alt="Cargando..." class="w-60 h-60 rounded-full object-cover object-center" />
         </div>
       }
-    </div>
+    } @else {
+      <div class="relative pt-20 pb-32 flex items-center justify-center min-h-screen bg-gradient-to-br from-primary-50 to-white dark:from-gray-800 dark:to-gray-900">
+        <div class="max-w-2xl mx-auto px-4 text-center">
+          <h1 class="text-4xl font-extrabold text-primary-800 dark:text-white mb-6">
+            Ups... no encontramos lo que buscabas
+          </h1>
+          <p class="text-lg text-gray-600 dark:text-gray-300 mb-4">
+            Puede que esta categoría esté vacía o que el producto ya no esté disponible.
+          </p>
+          <p class="text-base text-gray-500 dark:text-gray-400 mb-8">
+            Pero no te preocupes, tenemos muchas opciones deliciosas esperándote en nuestra tienda.
+          </p>
+          <a
+            [routerLink]="['/products']"
+            class="inline-flex items-center gap-2 px-6 py-3 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition">
+            Explorar la tienda
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    }
+    <app-shopping-cart-sidebar [(visible)]="showCart"></app-shopping-cart-sidebar>
   </main>
+
+  <footer class="mt-auto w-full bg-white dark:bg-gray-700">
+    <app-footer></app-footer>
+  </footer>
 </div>

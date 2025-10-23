@@ -1,0 +1,41 @@
+@defer {
+  <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+    <h1 class="text-2xl">usuarios</h1>
+
+    <table class="w-full text-sm text-left text-gray-700">
+      <thead>
+      <tr>
+        <th scope="col" class="px-6 py-3 bg-[#c6b89b] text-black">Nombre Usuario</th>
+        <th scope="col" class="px-6 py-3 bg-[#c6b89b] text-black">Nombre</th>
+        <th scope="col" class="px-6 py-3 bg-[#c6b89b] text-black">Activo</th>
+        <th scope="col" class="px-6 py-3 bg-[#c6b89b] text-black">roles</th>
+        <th scope="col" class="px-6 py-3 bg-[#c6b89b] text-black"></th>
+      </tr>
+      </thead>
+      <tbody>
+        @for (usuario of usuarios; track usuario.id) {
+          <tr class="border-b hover:bg-gray-50 transition">
+            <td class="px-6 py-4">{{ usuario.username }}</td>
+            <td class="px-6 py-4">{{ usuario.nombre }}</td>
+            <td class="px-6 py-4">
+              @if (!usuario.inactive) {
+                <span class="text-[#103320] font-semibold">Activo</span>
+              } @else {
+                <span class="text-[#a3866f] font-medium">Inactivo</span>
+              }
+            </td>
+            <td class="px-6 py-4">{{ usuario.roles }}</td>
+            <td class="px-6 py-4"></td>
+          </tr>
+        }
+      </tbody>
+
+    </table>
+
+  </div>
+} @loading (minimum 1000ms){
+  <div class="absolute inset-0 flex items-center justify-center">
+    <img [src]="'images/loading/loading.gif'" alt="Cargando..."
+         class="w-60 h-60 rounded-full object-cover object-center"/>
+  </div>
+}

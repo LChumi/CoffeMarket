@@ -1,9 +1,13 @@
 User-agent: *
-Allow: /home
+Allow: /
 Allow: /about
 Allow: /products
 Disallow: /productos/
 Allow: /producto/
+Allow: /cart
+Allow: /checkout
+Disallow: /checkout/order/
+Allow: /privacy-policy
 
 Sitemap: https://www.bunnashop.com/sitemap.xml
 

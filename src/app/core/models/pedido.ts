@@ -1,2 +1,21 @@
+import {ItemCarrito} from "@models/dto/item-carrito";
+
 export interface Pedido {
+  id:                 any;
+
+  docNum:             any;
+  clienteId:          string;
+  items:              ItemCarrito[];
+
+  estado:             boolean;
+  metodoPago:         string;
+  creadoEn:           any;
+
+  direccion:          string;
+  provincia:          string;
+  ciudad:             string;
+  telefono:           string;
+
+  total:              number;
+  docAutorizacion:    string;
 }

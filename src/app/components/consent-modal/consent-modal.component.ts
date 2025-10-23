@@ -1,5 +1,5 @@
 import {Component, inject} from '@angular/core';
-import {ConsentService} from "@services/consent.service";
+import {ConsentService} from "@services/seo/consent.service";
 
 @Component({
   selector: 'app-consent-modal',

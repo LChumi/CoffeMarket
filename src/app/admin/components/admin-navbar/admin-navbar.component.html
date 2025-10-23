@@ -1,0 +1,46 @@
+<nav class="fixed top-0 z-50 w-full bg-[#a3866f] border-b border-gray-200 dark:border-gray-700">
+  <div class="px-3 py-3 lg:px-5 lg:pl-3">
+    <div class="flex items-center justify-between">
+      <div class="flex items-center justify-start rtl:justify-end">
+        <button (click)="sidebarOpen()" class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
+          <span class="sr-only">Abrir menú</span>
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+            <path clip-rule="evenodd" fill-rule="evenodd" d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"/>
+          </svg>
+        </button>
+        <a [routerLink]="['/admin', 'dashboard']" class="flex ms-2 md:me-24">
+          <img src="/favicon.ico" class="h-8 me-3" alt="Bunna Logo" />
+          <span class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">BunnaShop</span>
+        </a>
+      </div>
+      <div class="flex items-center">
+        <div class="relative">
+          <button type="button"
+                  (click)="toggleDropdown()"
+                  class="flex items-center text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600">
+            <span class="sr-only">Open user menu</span>
+            <img class="w-8 h-8 rounded-full" src="/images/logos/caffeCirc.webp" alt="user photo">
+          </button>
+
+          @if (dropdownOpen) {
+            <div class="absolute right-0 mt-2 w-48 origin-top-right rounded-md shadow-lg bg-[#a3866f] focus:outline-none z-50 transition ease-out duration-100"
+                 id="dropdown-user">
+              <div class="px-4 py-3">
+                <p class="text-sm text-lime-950 uppercase">{{username}}</p>
+              </div>
+              <ul class="py-1">
+                <li>
+                  <button (click)="logout()"
+                          class="block w-full text-left px-4 py-2 text-sm text-lime-950 hover:bg-gray-100 focus:outline-none">
+                    Sign out
+                  </button>
+                </li>
+              </ul>
+            </div>
+          }
+        </div>
+
+      </div>
+    </div>
+  </div>
+</nav>

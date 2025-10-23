@@ -1,104 +1,127 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {NavbarComponent} from "@shared/navbar/navbar.component";
-import {Products} from "@models/data/products";
-import {DataService} from "@services/data/data.service";
-import {ActivatedRoute, Router} from "@angular/router";
-import {Meta, Title} from "@angular/platform-browser";
-import {environment} from "../../../environments/environment";
-import {MetaService} from "@services/meta.service";
+import {ActivatedRoute, Router, RouterLink} from "@angular/router";
+import {environment} from "@environments/environment";
+import {MetaService} from "@services/seo/meta.service";
 import {FormsModule} from "@angular/forms";
+import {CarritoService} from "@services/carrito.service";
+import {ShoppingCartSidebarComponent} from "@components/shopping-cart-sidebar/shopping-cart-sidebar.component";
+import {SchemaService} from "@services/seo/schema.service";
+import {FooterComponent} from "@shared/footer/footer.component";
+import {Producto} from "@models/producto";
+import {getUrlImage} from "@utils/image-util";
 
 @Component({
   selector: 'app-products',
   standalone: true,
   imports: [
     NavbarComponent,
-    FormsModule
+    FormsModule,
+    ShoppingCartSidebarComponent,
+    FooterComponent,
+    RouterLink
   ],
   templateUrl: './products.component.html',
   styles: ``
 })
 export default class ProductsComponent implements OnInit {
 
-  private dataService = inject(DataService);
   private route = inject(ActivatedRoute)
   private router = inject(Router)
-
-  private titleService = inject(Title);
-  private metaService = inject(Meta);
-  private canonicalService = inject(MetaService)
-
+  private seoService = inject(MetaService)
+  private schemaService = inject(SchemaService)
+  private carritoService = inject(CarritoService);
   private domain = environment.domain;
 
-  isLoading = false;
-  productos: Products[] = []
-  productosFiltrados : Products[] = [];
+  showCart = false;
+  productos: Producto[] = []
+  productosFiltrados: Producto[] = [];
   categoryId!: number;
   searchTerm: string = "";
+  titulo: string = "";
 
-  ngOnInit(): void {
+  constructor() {
     const currentUrl = `${this.domain}${this.router.url}`;
-    this.canonicalService.updateCanonical(currentUrl);
+    const title = 'Catálogo de Accesorios para Café | Bunna Shop'
+    const description = 'Explora nuestro catálogo: cafeteras V60, molinos manuales, filtros, balanzas y todo lo que necesitas para preparar café en casa.'
 
-    this.titleService.setTitle('Catálogo de Accesorios para Café | Bunna Shop');
-    this.metaService.updateTag({
-      name: 'description',
-      content: 'Explora nuestro catálogo: cafeteras V60, molinos manuales, filtros, balanzas y todo lo que necesitas para preparar café en casa.'
+    this.seoService.updateMetaTags({
+      title,
+      description,
+      canonicalUrl: currentUrl,
+      og: {
+        title,
+        description,
+        url: currentUrl,
+        image: `${this.domain}/images/logos/bunnaCirc.webp`
+      }
     });
 
-    const categoryId = this.route.snapshot.paramMap.get('categoryId');
+    const schema = this.schemaService.generateContentPageSchema(
+      currentUrl,
+      'Catalogo Bunna Shop',
+      description);
+    this.schemaService.injectSchema(schema, 'CollectionPage');
+  }
 
-    if (categoryId) {
-      this.route.data.subscribe(({ productos }) => {
-        this.productos = productos;
-      });
-    } else {
-      this.loadProducts(); // Navegación directa → catálogo completo
-    }
+  ngOnInit(): void {
+    const categoryId = this.route.snapshot.paramMap.get('categoryId');
+    const searchQuery = this.route.snapshot.queryParamMap.get('q')?.trim().toLowerCase();
+
+    this.route.data.subscribe(({productos}) => {
+      this.productos = productos;
+      this.productosFiltrados = productos;
+
+      if (searchQuery) {
+        this.productosFiltrados = this.productos.filter(p =>
+          p.item?.toLowerCase().includes(searchQuery) ||
+          p.descripcion?.toLowerCase().includes(searchQuery)
+        );
+        this.searchTerm = searchQuery; // Para mostrar en el input
+      }
+
+      this.titulo = categoryId
+        ? `Explora Nuestros Productos de Café ☕| Variedad, Estilo y Funcionalidad `
+        : 'Productos para Amantes del Café ☕ | Encuentra Todo lo que Necesitas';
+    });
   }
 
   goToProducts(productoId: any) {
     this.router.navigate(['/producto', productoId]).then(r => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      window.scrollTo({top: 0, behavior: 'smooth'});
     })
   }
 
-  loadProducts() {
-    this.isLoading = true;
-    this.dataService.getProductos().subscribe(data => {
-      this.productos = data
-      this.productosFiltrados = data
-      this.isLoading = false;
+  agregarAlCarrito(producto: Producto) {
+    this.carritoService.agregarProducto(producto);
+    this.abrirSidebarCarrito()
+  }
 
-      const termFromQuery = this.route.snapshot.queryParamMap.get('q')
-      if (termFromQuery) {
-        this.searchTerm = termFromQuery;
-        this.filtrarProductos()
-      }
-    })
+  abrirSidebarCarrito() {
+    this.showCart = true
   }
 
   goToCafeteras() {
     this.router.navigate(['/productos', 1]).then(() => {
       window.location.reload();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      window.scrollTo({top: 0, behavior: 'smooth'});
     });
   }
 
   goToAccesorios() {
     this.router.navigate(['/productos', 5]).then(() => {
       window.location.reload();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      window.scrollTo({top: 0, behavior: 'smooth'});
     });
   }
 
   filtrarProductos() {
     const filtro = this.searchTerm.trim().toLowerCase();
-
-    this.productos = this.productosFiltrados.filter(p =>
+    this.productosFiltrados = this.productos.filter(p =>
       p.item.toLowerCase().includes(filtro) ||
       p.descripcion.toLowerCase().includes(filtro)
-    )
+    );
   }
 
+  protected readonly getUrlImage = getUrlImage;
 }

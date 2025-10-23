@@ -1,35 +1,62 @@
 import {Routes} from '@angular/router';
-import ProductsComponent from "@pages/products/products.component";
-import {SingleProductComponent} from "@pages/single-product/single-product.component";
-import {ProductoResolver} from "./core/resolvers/producto.resolver";
-import {ProductosResolver} from "./core/resolvers/productos.resolver";
+import CheckoutComponent from "@pages/checkout/checkout.component";
+import HomeComponent from "@pages/home/home.component";
+import AboutComponent from "@pages/about/about.component";
+import {pedidoResolver} from "@resolvers/pedido.resolver";
+import {productoResolver} from "@resolvers/producto.resolver";
+import {productosCategoryResolver} from "@resolvers/productos-category.resolver";
+import {productosResolver} from "@resolvers/productos.resolver";
+import {AdminRoutes} from "@admin/admin.routes";
 
 export const routes: Routes = [
-
   {
-    path: 'home',
-    loadComponent: () => import('./pages/home/home.component')
+    path: '',
+    component: HomeComponent
   },
   {
     path: 'about',
-    loadComponent: () => import('./pages/about/about.component')
+    component: AboutComponent
   },
   {
     path: 'products',
-    loadComponent: () => import('./pages/products/products.component')
+    loadComponent: () => import("./pages/products/products.component"),
+    resolve: {productos: productosResolver},
+    runGuardsAndResolvers: "always"
   },
   {
-    path: 'productos/:categoryId', component: ProductsComponent,
-    resolve: {productos: ProductosResolver},
+    path: 'productos/:categoryId',
+    loadComponent: () => import('./pages/products/products.component'),
+    resolve: {productos: productosCategoryResolver},
     runGuardsAndResolvers: 'always'
   },
   {
-    path: 'producto/:productoId', component: SingleProductComponent,
-    resolve: {producto: ProductoResolver},
+    path: 'producto/:productoId',
+    loadComponent: () => import('./pages/single-product/single-product.component'),
+    resolve: {producto: productoResolver},
     runGuardsAndResolvers: 'always'
   },
-  {path: 'producto', redirectTo: '/products', pathMatch: 'full'},
-  {path: 'productos', redirectTo: '/products', pathMatch: 'full'},
-  {path: '', redirectTo: '/home', pathMatch: 'full'},
-  {path: '**', redirectTo: '/home', pathMatch: 'full'}
+  {
+    path: 'cart',
+    loadComponent: () => import('./pages/shoping-cart/shoping-cart.component')
+  },
+  {
+    path: 'checkout',
+    children: [
+      {path: '', component: CheckoutComponent},
+      {
+        path: 'order/:orderId',
+        loadComponent: () => import('./pages/order-received/order-received.component'),
+        resolve: {pedido: pedidoResolver},
+        runGuardsAndResolvers: 'always'
+      },
+    ]
+  },
+  {
+    path: 'privacy-policy',
+    loadComponent: () => import('./pages/privacy-policy/privacy-policy.component')
+  },
+  {path: 'admin', children: AdminRoutes},
+  {path: 'producto', redirectTo: 'products', pathMatch: 'full'},
+  {path: 'productos', redirectTo: 'products', pathMatch: 'full'},
+  {path: '**', redirectTo: '', pathMatch: 'full'}
 ];
