@@ -1,5 +1,6 @@
 @defer {
   <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+    <h1 class="text-2xl">Pedidos Pendientes de verificar</h1>
     <!-- Search bar -->
     <div class="px-4 mb-6">
       <label for="table-search" class="sr-only">Search</label>
@@ -57,10 +58,63 @@
       </tbody>
     </table>
   </div>
-}
-@placeholder (minimum 1000ms) {
-  <div class="absolute inset-0 flex items-center justify-center z-10">
+} @placeholder (minimum 1000ms) {
+  <div class="absolute inset-0 flex items-center justify-center">
     <img [src]="'images/loading/loading.gif'" alt="Cargando..."
-         class="w-60 h-60 mt-52 rounded-full object-cover object-center"/>
+         class="w-60 h-60 rounded-full object-cover object-center"/>
+  </div>
+}
+
+@if (modalPedido && pedidoSelected) {
+  <div id="modal-pedidos" tabindex="-1"
+       class="fixed inset-0 z-50 flex items-center justify-center bg-black/30 backdrop-blur-sm">
+    <div class="bg-white rounded-xl shadow-xl w-full max-w-lg p-6">
+      <!-- Header -->
+      <div class="flex items-center justify-between border-b pb-4 mb-4">
+        <h3 class="text-xl font-semibold text-gray-900">
+          Agregar Documento de Transferencia
+        </h3>
+        <button type="button"
+                (click)="cerrarModal()"
+                class="text-gray-400 hover:text-gray-600 transition">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 14 14">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+          </svg>
+          <span class="sr-only">Cerrar</span>
+        </button>
+      </div>
+
+      <!-- Body -->
+      <div class="space-y-4">
+        <div class="text-sm text-gray-700">
+          <p><strong>Documento:</strong> {{ pedidoSelected.docNum }}</p>
+          <p><strong>Total:</strong> {{ pedidoSelected.total | currency }}</p>
+        </div>
+
+        <div>
+          <label for="doc-aut" class="block text-sm font-medium text-gray-700 mb-1">
+            Número de Autorización
+          </label>
+          <input
+            type="text"
+            id="doc-aut"
+            [(ngModel)]="docAutorizaqcion"
+            autocomplete="off"
+            class="uppercase bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#a3866f] focus:border-[#a3866f] block w-full p-2.5"
+            placeholder="Ingrese el número de autorización"
+          >
+        </div>
+
+        @if (docAutorizaqcion != '') {
+          <button
+            type="submit"
+            (click)="actualizar()"
+            class="w-full bg-[#B3977E] hover:bg-[#a3866f] text-white font-semibold py-3 rounded-lg transition">
+            Guardar Autorización
+          </button>
+        }
+      </div>
+    </div>
   </div>
 }

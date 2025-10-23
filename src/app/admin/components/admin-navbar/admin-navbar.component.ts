@@ -34,11 +34,10 @@ export class AdminNavbarComponent {
   }
 
   logout() {
+    clearSessionItems()
     this.authService.logout().subscribe({
       next: () => {
-        this.router.navigate(['/admin/login']).then(() => {
-          clearSessionItems()
-        })
+        this.router.navigate(['/admin/login']).then(() => {})
       }
     })
   }
