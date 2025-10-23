@@ -23,7 +23,7 @@ export class UsersService {
   }
 
   getAll():Observable<Usuario[]>{
-    return this.http.get<Usuario[]>(`${this.baseUrl}/get/all`, {withCredentials: true});
+    return this.http.get<Usuario[]>(`${this.baseUrl}/all`, {withCredentials: true});
   }
 
   update(id: string, pedido: Usuario):Observable<Usuario>{

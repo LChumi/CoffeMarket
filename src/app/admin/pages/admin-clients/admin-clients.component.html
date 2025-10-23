@@ -1,1 +1,35 @@
-<p>admin-clients works!</p>
+@defer {
+  <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+    <h1 class="text-2xl">Clientes</h1>
+
+    <table class="w-full text-sm text-left text-gray-700">
+      <thead>
+      <tr>
+        <th scope="col" class="px-6 py-3 bg-[#c6b89b] text-black">Identificacion</th>
+        <th scope="col" class="px-6 py-3 bg-[#c6b89b] text-black">Nombre</th>
+        <th scope="col" class="px-6 py-3 bg-[#c6b89b] text-black">Apellido</th>
+        <th scope="col" class="px-6 py-3 bg-[#c6b89b] text-black">email</th>
+        <th scope="col" class="px-6 py-3 bg-[#c6b89b] text-black"></th>
+      </tr>
+      </thead>
+      <tbody>
+        @for (cliente of clientes; track cliente.id) {
+          <tr class="border-b hover:bg-gray-50 transition">
+            <td class="px-6 py-4">{{ cliente.identificacion }}</td>
+            <td class="px-6 py-4">{{ cliente.nombre }}</td>
+            <td class="px-6 py-4">{{ cliente.apellido}}</td>
+            <td class="px-6 py-4">{{ cliente.email }}</td>
+            <td class="px-6 py-4"></td>
+          </tr>
+        }
+      </tbody>
+
+    </table>
+
+  </div>
+} @loading (minimum 1000ms){
+  <div class="absolute inset-0 flex items-center justify-center">
+    <img [src]="'images/loading/loading.gif'" alt="Cargando..."
+         class="w-60 h-60 rounded-full object-cover object-center"/>
+  </div>
+}

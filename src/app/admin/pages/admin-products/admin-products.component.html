@@ -1,1 +1,49 @@
-<p>admin-products works!</p>
+@defer {
+  <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+    <h1 class="text-2xl">Clientes</h1>
+
+    <table class="w-full text-sm text-left text-gray-700">
+      <thead>
+      <tr>
+        <th scope="col" class="px-6 py-3 bg-[#c6b89b] text-black">Barra</th>
+        <th scope="col" class="px-6 py-3 bg-[#c6b89b] text-black">Item</th>
+        <th scope="col" class="px-6 py-3 bg-[#c6b89b] text-black">Descripcion</th>
+        <th scope="col" class="px-6 py-3 bg-[#c6b89b] text-black">Precio</th>
+        <th scope="col" class="px-6 py-3 bg-[#c6b89b] text-black">Stock</th>
+        <th scope="col" class="px-6 py-3 bg-[#c6b89b] text-black">Disponible</th>
+        <th scope="col" class="px-6 py-3 bg-[#c6b89b] text-black"></th>
+      </tr>
+      </thead>
+      <tbody>
+        @for (producto of productos; track producto.id) {
+          <tr class="border-b hover:bg-gray-50 transition">
+            <th scope="row" class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
+              <img class="w-10 h-10 rounded-full" [src]="getUrlImage(producto.sku)" [alt]="producto.sku">
+              <div class="ps-3">
+                <div class="text-gray-800 font-semibold">{{ producto.sku }}</div>
+              </div>
+            </th>
+            <td class="px-6 py-4">{{ producto.item }}</td>
+            <td class="px-6 py-4">{{ producto.descripcion }}</td>
+            <td class="px-6 py-4">{{ producto.precio | currency }}</td>
+            <td class="px-6 py-4">{{ producto.stock }}</td>
+            <td class="px-6 py-4">
+              @if (producto.disponible) {
+                <span class="text-[#103320] font-semibold">Disponible</span>
+              } @else {
+                <span class="text-[#a3866f] font-medium">No disponible</span>
+              }
+            </td>
+            <td class="px-6 py-4"></td>
+          </tr>
+        }
+      </tbody>
+    </table>
+
+  </div>
+} @loading (minimum 1000ms){
+  <div class="absolute inset-0 flex items-center justify-center">
+    <img [src]="'images/loading/loading.gif'" alt="Cargando..."
+         class="w-60 h-60 rounded-full object-cover object-center"/>
+  </div>
+}
