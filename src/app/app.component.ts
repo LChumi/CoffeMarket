@@ -35,7 +35,7 @@ export class AppComponent {
         title,
         description,
         url: currentUrl,
-        image: `${this.domain}/images/logos/bunnaCirc.webp`
+        image: `${this.domain}/favicon.ico`
       }
     });
 

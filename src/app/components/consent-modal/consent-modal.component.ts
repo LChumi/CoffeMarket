@@ -1,4 +1,4 @@
-import {Component, inject} from '@angular/core';
+import {AfterViewInit, Component, inject} from '@angular/core';
 import {ConsentService} from "@services/seo/consent.service";
 
 @Component({
@@ -8,14 +8,19 @@ import {ConsentService} from "@services/seo/consent.service";
   templateUrl: './consent-modal.component.html',
   styles: ``
 })
-export class ConsentModalComponent {
+export class ConsentModalComponent implements AfterViewInit{
 
   showModal = false;
 
   consentService = inject(ConsentService);
 
   constructor() {
-    this.showModal = ! this.consentService.hasConsented();
+  }
+
+  ngAfterViewInit() {
+    setTimeout(() => {
+      this.showModal = ! this.consentService.hasConsented();
+    }, 1000)
   }
 
   accept() {
