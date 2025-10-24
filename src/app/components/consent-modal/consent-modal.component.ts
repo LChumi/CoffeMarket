@@ -11,17 +11,20 @@ import {ConsentService} from "@services/seo/consent.service";
 export class ConsentModalComponent implements AfterViewInit{
 
   showModal = false;
-
   consentService = inject(ConsentService);
-
-  constructor() {
-  }
 
   ngAfterViewInit() {
     if (typeof window !== 'undefined') {
-      setTimeout(() => {
-        this.showModal = !this.consentService.hasConsented();
-      }, 2000);
+      const triggerModal = () => {
+        if (!this.consentService.hasConsented()) {
+          this.showModal = true;
+        }
+        window.removeEventListener('scroll', triggerModal);
+        window.removeEventListener('click', triggerModal);
+      };
+
+      window.addEventListener('scroll', triggerModal);
+      window.addEventListener('click', triggerModal);
     }
   }
 
