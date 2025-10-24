@@ -21,7 +21,6 @@ export class AdminUsuariosComponent implements OnInit {
   getUsuarios() {
     this.usuarioService.getAll().subscribe({
       next: data => {
-        console.log(data);
         this.usuarios = data
       }
     })

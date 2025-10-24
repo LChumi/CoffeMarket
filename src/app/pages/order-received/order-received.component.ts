@@ -32,7 +32,6 @@ export default class OrderReceivedComponent implements OnInit {
   private clienteService = inject(ClienteService);
 
   private domain = environment.domain;
-  private urlImage = environment.imagesUrl;
 
   pedido: Pedido | null = null
   cliente: Cliente = {} as Cliente;
