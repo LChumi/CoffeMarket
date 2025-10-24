@@ -51,7 +51,7 @@ export default class ShopingCartComponent implements OnInit {
 
     const schema = this.schemaService.generateContentPageSchema(
       currentUrl,
-      'shopping-cart',
+      'Carrito de compras',
       description);
     this.schemaService.injectSchema(schema, 'ContentPage');
   }

@@ -44,7 +44,7 @@ export default class PrivacyPolicyComponent {
 
     const schema = this.schemaService.generateContentPageSchema(
       currentUrl,
-      'Privacy-Policy',
+      'Pagina de Politica de privacidad',
       description);
     this.schemaService.injectSchema(schema, 'ContentPage');
   }
