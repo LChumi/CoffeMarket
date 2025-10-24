@@ -20,7 +20,7 @@ export class ConsentModalComponent implements AfterViewInit{
   ngAfterViewInit() {
     setTimeout(() => {
       this.showModal = ! this.consentService.hasConsented();
-    }, 1000)
+    }, 2000)
   }
 
   accept() {
