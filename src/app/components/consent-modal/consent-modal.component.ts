@@ -18,18 +18,15 @@ export class ConsentModalComponent implements AfterViewInit{
   }
 
   ngAfterViewInit() {
-    setTimeout(() => {
-      this.showModal = ! this.consentService.hasConsented();
-    }, 2000)
+    if (typeof window !== 'undefined') {
+      setTimeout(() => {
+        this.showModal = !this.consentService.hasConsented();
+      }, 2000);
+    }
   }
 
   accept() {
     this.consentService.setConsent(true);
-    this.showModal = false;
-  }
-
-  reject() {
-    this.consentService.setConsent(false);
     this.showModal = false;
   }
 
