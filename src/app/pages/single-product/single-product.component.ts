@@ -75,8 +75,8 @@ export default class SingleProductComponent implements OnInit {
 
         this.loadProductsByCategory(producto.categoriaId);
       } else {
-        const title = `Producto no Ecnotrado | Accesorio para Café | Bunna`;
-        const description = `Puede que esta categoría esté vacía o que el producto ya no esté disponible.`
+        const title = `Accesorio para Café | Bunna`;
+        const description = `Nuestros productos cuentan con la mejor calidad y buen precio`
 
         this.seoService.updateMetaTags({
           title,
