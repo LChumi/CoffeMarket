@@ -1,8 +1,20 @@
 {
   "rewrites": [
     {
+      "source": "/images/:sku/bunna",
+      "destination": "https://apis.cumpleanos.com.ec/assist/images/product/:sku/bunna"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/images/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=86400" }
+      ]
     }
   ]
 }
