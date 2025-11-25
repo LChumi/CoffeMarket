@@ -108,7 +108,6 @@ export default class SingleProductComponent implements OnInit {
   }
 
   loadProductsByCategory(categoryId: any) {
-    console.log(categoryId)
     this.productoService.getAllByCategory(categoryId).subscribe({
       next: data => {
         this.productos = data

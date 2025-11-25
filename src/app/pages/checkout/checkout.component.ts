@@ -14,6 +14,7 @@ import {Router, RouterLink, RouterLinkActive} from "@angular/router";
 import {MetaService} from "@services/seo/meta.service";
 import {SchemaService} from "@services/seo/schema.service";
 import {environment} from "@environments/environment";
+import {ClarityService} from "@services/data/clarity.service";
 
 @Component({
   selector: 'app-checkout',
@@ -40,6 +41,7 @@ export default class CheckoutComponent implements OnInit {
   private clientService = inject(ClienteService);
   private pedidoService = inject(PedidoService);
   private carritoService = inject(CarritoService);
+  private clarity = inject(ClarityService)
 
   protected envio = 5.11
   protected message = ''
@@ -125,6 +127,8 @@ export default class CheckoutComponent implements OnInit {
     if (!this.invoiceFrom.valid || !this.aceptaPoliticas) {
       this.invoiceFrom.markAllAsTouched();
       this.message = 'Por favor, lee y acepta los términos y condiciones para proceder con tu pedido.';
+      this.clarity.event('Checkout fallido: términos no aceptados');
+      this.clarity.setTag('checkoutStatus', 'fallido');
       return;
     }
 
@@ -136,6 +140,8 @@ export default class CheckoutComponent implements OnInit {
     this.clientService.getByEmailAndCed(form.email, form.identificacion).subscribe({
       next: (result) => {
         if (result) {
+          this.clarity.event('Checkout con cliente existente');
+          this.clarity.setTag('checkoutStatus', 'cliente_existente');
           this.crearPedido(result.id, form);
         } else {
           const nuevoCliente: Cliente = {
@@ -151,6 +157,8 @@ export default class CheckoutComponent implements OnInit {
 
           this.clientService.save(nuevoCliente).subscribe({
             next: (clienteGuardado) => {
+              this.clarity.event('Checkout con nuevo cliente');
+              this.clarity.setTag('checkoutStatus', 'nuevo_cliente');
               this.crearPedido(clienteGuardado.id, form);
             }
           });
@@ -188,6 +196,11 @@ export default class CheckoutComponent implements OnInit {
     this.pedidoService.save(pedido).subscribe({
       next: (result) => {
         if (result) {
+          this.clarity.event('Compra finalizada');
+          this.clarity.setTag('montoTotal', pedido.total.toString());
+          if (pedido.total > 100) {
+            this.clarity.prioritize('Compra de alto valor');
+          }
           this.goToOrder(result.docNum)
         }
       }

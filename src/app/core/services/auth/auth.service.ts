@@ -6,6 +6,7 @@ import {Observable, tap} from "rxjs";
 import {ServiceResponse} from "@models/auth/service-response";
 import {UserInfo} from "@models/auth/user-info";
 import {getSessionItem, setSessionItem} from "@utils/storage-utils";
+import {ClarityService} from "@services/data/clarity.service";
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,7 @@ export class AuthService {
 
   private baseUrl = environment.apiUrl + 'auth';
   private http = inject(HttpClient);
+  private clarity = inject(ClarityService)
 
   private user: UserInfo | null = null;
 
@@ -38,6 +40,7 @@ export class AuthService {
         this.user = user;
         setSessionItem('isLoggedIn', 'true');
         setSessionItem('username', user.username);
+        this.clarity.identify(user.username,'')
       })
     );
   }

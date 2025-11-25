@@ -10,6 +10,7 @@ import {CurrencyPipe, DatePipe} from "@angular/common";
 import {ClienteService} from "@services/cliente.service";
 import {Cliente} from "@models/cliente";
 import {getUrlImage} from "@utils/image-util";
+import {ClarityService} from "@services/data/clarity.service";
 
 @Component({
   selector: 'app-order-received',
@@ -30,6 +31,7 @@ export default class OrderReceivedComponent implements OnInit {
   private schemaService = inject(SchemaService);
   private route = inject(ActivatedRoute)
   private clienteService = inject(ClienteService);
+  private clarity = inject(ClarityService)
 
   private domain = environment.domain;
 
@@ -70,6 +72,17 @@ export default class OrderReceivedComponent implements OnInit {
       this.clienteService.getById(this.pedido.clienteId).subscribe({
         next: data => {
           if (data) {
+            this.clarity.setTag('orderStatus', 'Pedido confirmado');
+            this.clarity.setTag('orderId', this.pedido?.docNum?.toString());
+
+            const total = Number(this.pedido?.total ?? 0);
+
+            this.clarity.setTag('orderValue', total.toString());
+
+            if (total > 100) {
+              this.clarity.prioritize('Pedido de alto valor');
+            }
+
             this.cliente = data
           }
         }

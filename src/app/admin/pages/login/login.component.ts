@@ -11,6 +11,7 @@ import {usernameValidator} from "@utils/form-utils";
 import {AuthService} from "@services/auth/auth.service";
 import {Router} from "@angular/router";
 import {ToastrService} from "ngx-toastr";
+import {ClarityService} from "@services/data/clarity.service";
 
 @Component({
   selector: 'app-login',
@@ -26,7 +27,8 @@ export class LoginComponent implements OnInit {
   private fb = inject(FormBuilder);
   private authService = inject(AuthService);
   private router = inject(Router);
-  private toastr = inject(ToastrService)
+  private toastr = inject(ToastrService);
+  private clarity = inject(ClarityService);
   loginForm!: FormGroup;
 
   constructor() {
@@ -58,7 +60,8 @@ export class LoginComponent implements OnInit {
             next: response => {
               if (response) {
                 this.router.navigate(['/admin/dashboard']).then(r => {
-                  this.toastr.info('Bienvenido')
+                  this.toastr.info('Bienvenido');
+                  this.clarity.event('Ingreso panel Administracion')
                 });
               }
             }
