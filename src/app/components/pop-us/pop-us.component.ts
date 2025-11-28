@@ -8,12 +8,24 @@ import {AfterViewInit, Component, OnInit} from '@angular/core';
 })
 export class PopUsComponent implements AfterViewInit {
 
+  titulo: string='';
+  mensage:string='';
+  showModal:boolean=true;
+
   ngAfterViewInit(): void {
     if (typeof window !== 'undefined') {
       const triggerModal = () => {
+        // Mostrar el modal 1 segundo después del evento
         setTimeout(() => {
-          this.showModal = false;
-        }, 5000); // se cierra en 5 segundos
+          this.showModal = true;
+
+          // Cierre automático después de 3 segundos
+          setTimeout(() => {
+            this.showModal = false;
+          }, 3000);
+        }, 1000);
+
+        // Elimina los listeners después del primer disparo
         window.removeEventListener('scroll', triggerModal);
         window.removeEventListener('click', triggerModal);
       };
@@ -23,7 +35,4 @@ export class PopUsComponent implements AfterViewInit {
     }
   }
 
-  titulo: string='';
-  mensage:string='';
-  showModal:boolean=true;
 }
