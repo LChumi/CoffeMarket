@@ -10,7 +10,7 @@ export class PopUsComponent implements AfterViewInit {
 
   titulo: string='';
   mensage:string='';
-  showModal:boolean=true;
+  showModal:boolean=false;
 
   ngAfterViewInit(): void {
     if (typeof window !== 'undefined') {
