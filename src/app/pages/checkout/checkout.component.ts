@@ -15,6 +15,7 @@ import {MetaService} from "@services/seo/meta.service";
 import {SchemaService} from "@services/seo/schema.service";
 import {environment} from "@environments/environment";
 import {ClarityService} from "@services/data/clarity.service";
+import {PopUsComponent} from "@components/pop-us/pop-us.component";
 
 @Component({
   selector: 'app-checkout',
@@ -25,7 +26,8 @@ import {ClarityService} from "@services/data/clarity.service";
     CurrencyPipe,
     FooterComponent,
     RouterLinkActive,
-    RouterLink
+    RouterLink,
+    PopUsComponent
   ],
   templateUrl: './checkout.component.html',
   styles: ``
@@ -43,7 +45,7 @@ export default class CheckoutComponent implements OnInit {
   private carritoService = inject(CarritoService);
   private clarity = inject(ClarityService)
 
-  protected envio = 5.11
+  protected envio = 0.00
   protected message = ''
 
   ubicaciones: Ubicacion[] = UBICACIONES_MOCK

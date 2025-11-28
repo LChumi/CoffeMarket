@@ -1,0 +1,22 @@
+@if (showModal) {
+  <div class="fixed top-0 inset-x-0 z-50 bg-black text-[#c6b89b] p-4 flex items-center justify-between shadow-md animate-slide-down">
+    <div class="flex items-center space-x-2">
+      <!-- Ícono primero -->
+      <svg class="w-6 h-6 text-[#c6b89b]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M13 7h6l2 4m-8-4v8m0-8V6a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v9h2m8 0H9m4 0h2m4 0h2v-4m0 0h-5m3.5 5.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0Zm-10 0a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0Z"/>
+      </svg>
+      <!-- Texto después -->
+      <p class="text-sm md:text-base font-medium">
+        🎉 Black Friday: Envíos gratis todo el día
+      </p>
+    </div>
+    <!-- Botón cerrar -->
+    <button
+      class="ml-4 text-[#c6b89b] hover:text-yellow-400 font-bold"
+      (click)="showModal = false"
+    >
+      ✕
+    </button>
+  </div>
+}

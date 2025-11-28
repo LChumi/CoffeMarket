@@ -10,6 +10,7 @@ import {SchemaService} from "@services/seo/schema.service";
 import {FooterComponent} from "@shared/footer/footer.component";
 import {Producto} from "@models/producto";
 import {getUrlImage} from "@utils/image-util";
+import {PopUsComponent} from "@components/pop-us/pop-us.component";
 
 @Component({
   selector: 'app-products',
@@ -19,7 +20,8 @@ import {getUrlImage} from "@utils/image-util";
     FormsModule,
     ShoppingCartSidebarComponent,
     FooterComponent,
-    RouterLink
+    RouterLink,
+    PopUsComponent
   ],
   templateUrl: './products.component.html',
   styles: ``
