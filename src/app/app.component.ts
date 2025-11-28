@@ -45,7 +45,7 @@ export class AppComponent {
     const schema = this.schemaService.generateIndexSchema();
     this.schemaService.injectSchema(schema, 'WebSite');
 
-    //clarity.init(this.projectId)
+    clarity.init(this.projectId)
   }
 
 }
