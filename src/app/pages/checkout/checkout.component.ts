@@ -43,7 +43,7 @@ export default class CheckoutComponent implements OnInit {
   private carritoService = inject(CarritoService);
   private clarity = inject(ClarityService)
 
-  protected envio = 0.00
+  protected envio = 5.11
   protected message = ''
 
   ubicaciones: Ubicacion[] = UBICACIONES_MOCK
