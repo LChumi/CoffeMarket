@@ -15,7 +15,6 @@ import {MetaService} from "@services/seo/meta.service";
 import {SchemaService} from "@services/seo/schema.service";
 import {environment} from "@environments/environment";
 import {ClarityService} from "@services/data/clarity.service";
-import {PopUsComponent} from "@components/pop-us/pop-us.component";
 
 @Component({
   selector: 'app-checkout',
@@ -27,7 +26,6 @@ import {PopUsComponent} from "@components/pop-us/pop-us.component";
     FooterComponent,
     RouterLinkActive,
     RouterLink,
-    PopUsComponent
   ],
   templateUrl: './checkout.component.html',
   styles: ``
