@@ -45,9 +45,7 @@ export class ClarityService  {
       filter(event => event instanceof NavigationEnd)
     ).subscribe((event: NavigationEnd) => {
       const currentUrl = event.urlAfterRedirects.toLowerCase().split('?')[0];
-
       clarity.setTag('page', currentUrl);
-      clarity.event(`Ruta visitada: ${currentUrl}`);
     });
   }
 }
