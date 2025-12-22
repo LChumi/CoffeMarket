@@ -8,7 +8,7 @@ export const AdminRoutes: Route[] = [
     component: LayoutComponent,
     canActivate: [authGuardGuard],
     children: [
-      { path: '', redirectTo: 'dashboard', pathMatch: 'full' }, // 👈 esta línea es clave
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       { path: 'dashboard', loadComponent: () => import('./pages/dashboard/dashboard.component').then(m => m.DashboardComponent) },
       { path: 'users', loadComponent: () => import('./pages/admin-usuarios/admin-usuarios.component').then(m => m.AdminUsuariosComponent) },
       { path: 'products', loadComponent: () => import('./pages/admin-products/admin-products.component').then(m => m.AdminProductsComponent) },

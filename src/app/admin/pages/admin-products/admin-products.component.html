@@ -1,8 +1,23 @@
 @defer {
-  <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-    <h1 class="text-2xl">Clientes</h1>
+  <div class="relative overflow-x-auto shadow-md sm:rounded-lg p-6">
+    <h1 class="text-2xl font-bold text-center mb-6">Productos</h1>
 
-    <table class="w-full text-sm text-left text-gray-700">
+    <div class="flex justify-center mb-6">
+      <button
+        type="button"
+        class="bg-[#c6b89b] hover:bg-lime-900 text-white font-medium py-2 px-4 rounded flex items-center space-x-2 shadow-md transition"
+      >
+        <span class="text-lime-950 hover:text-[#c6b89b]">Agregar Producto</span>
+        <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+             width="24" height="24" fill="none" viewBox="0 0 24 24">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M5 12h14m-7 7V5"/>
+        </svg>
+      </button>
+    </div>
+
+    <small>Total de items {{productos.length}}</small>
+    <table class="w-full text-sm text-left text-gray-700 border-t">
       <thead>
       <tr>
         <th scope="col" class="px-6 py-3 bg-[#c6b89b] text-black">Barra</th>
