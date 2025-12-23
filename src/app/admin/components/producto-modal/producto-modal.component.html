@@ -1,0 +1,152 @@
+@if (visible) {
+  <div class="fixed inset-0 z-50 flex items-center justify-center">
+    <!-- Overlay -->
+    <div class="absolute inset-0 bg-black/50 backdrop-blur-sm"></div>
+
+    <!-- Modal -->
+    <div class="relative bg-white rounded-2xl shadow-2xl w-full max-w-2xl mx-4 transform transition-all duration-300 scale-95 hover:scale-100">
+      <!-- Header -->
+      <div class="flex items-center justify-between px-6 py-4 border-b">
+        <h3 class="text-xl font-semibold text-gray-800">
+          Gestión de Productos
+        </h3>
+        <button
+          type="button"
+          (click)="cerrarModal()"
+          class="w-9 h-9 flex items-center justify-center rounded-full hover:bg-gray-100 transition">
+          ✕
+        </button>
+      </div>
+
+      <!-- Body -->
+      <form
+        [formGroup]="productoForm"
+        (ngSubmit)="agregarEditarProducto()"
+        class="px-6 py-5">
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+          <!-- Descripción -->
+          <div class="md:col-span-2">
+            <label class="block mb-1 text-sm font-medium text-gray-700">
+              Descripción
+            </label>
+            <input
+              formControlName="descripcion"
+              class="w-full rounded-lg border border-gray-300 p-2.5
+                   focus:ring-2 focus:ring-[#B3977E]
+                   focus:border-transparent transition">
+          </div>
+
+          <!-- Item -->
+          <div>
+            <label class="block mb-1 text-sm font-medium text-gray-700">
+              Item
+            </label>
+            <input
+              formControlName="item"
+              [readOnly]="modo !== 'agregar'"
+              class="w-full rounded-lg border border-gray-300 p-2.5 bg-gray-50">
+          </div>
+
+          <!-- SKU -->
+          <div>
+            <label class="block mb-1 text-sm font-medium text-gray-700">
+              SKU
+            </label>
+            <input
+              formControlName="sku"
+              class="w-full rounded-lg border border-gray-300 p-2.5">
+          </div>
+
+          <!-- Precio -->
+          <div>
+            <label class="block mb-1 text-sm font-medium text-gray-700">
+              Precio
+            </label>
+            <input
+              type="number"
+              formControlName="precio"
+              class="w-full rounded-lg border border-gray-300 p-2.5">
+          </div>
+
+          <!-- Categoría -->
+          <div>
+            <label class="block mb-1 text-sm font-medium text-gray-700">
+              Categoría
+            </label>
+            <select
+              formControlName="categoria"
+              class="w-full rounded-lg border border-gray-300 p-2.5">
+              @for (cat of categorias; track $index) {
+                <option [value]="cat.id">{{ cat.nombre }}</option>
+              }
+            </select>
+          </div>
+
+          <!-- Etiquetas -->
+          <div>
+            <label class="block mb-1 text-sm font-medium text-gray-700">
+              Etiquetas
+            </label>
+            <input
+              [(ngModel)]="etiqueta"
+              [ngModelOptions]="{standalone:true}"
+              (keydown.enter)="addLabel(); $event.preventDefault()"
+              class="w-full rounded-lg border border-gray-300 p-2.5">
+
+            <div class="flex flex-wrap gap-2 mt-2">
+              @for (et of etiquetasNuevas; track $index) {
+                <span
+                  class="flex items-center gap-1 bg-amber-100 text-amber-800 px-3 py-1 rounded-full text-sm">
+                {{ et }}
+                  <button (click)="removeLabel($index)">✕</button>
+              </span>
+              }
+            </div>
+          </div>
+
+          <!-- Atributos -->
+          <div>
+            <label class="block mb-1 text-sm font-medium text-gray-700">
+              Atributos
+            </label>
+
+            <input
+              [(ngModel)]="atributo.nombre"
+              [ngModelOptions]="{standalone:true}"
+              placeholder="Nombre"
+              class="w-full rounded-lg border border-gray-300 p-2.5 mb-2">
+
+            <input
+              [(ngModel)]="atributo.detalle"
+              [ngModelOptions]="{standalone:true}"
+              (keydown.enter)="addAtributo(); $event.preventDefault()"
+              placeholder="Detalle"
+              class="w-full rounded-lg border border-gray-300 p-2.5">
+
+            <div class="flex flex-wrap gap-2 mt-2">
+              @for (at of atributosNuevo; track $index) {
+                <span
+                  class="bg-lime-100 text-lime-800 px-3 py-1 rounded-full text-sm">
+                {{ at.nombre }}: {{ at.detalle }}
+                  <button (click)="removeAtributo($index)">✕</button>
+              </span>
+              }
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Footer -->
+        <button
+          type="submit"
+          class="mt-6 w-full bg-[#B3977E] hover:bg-[#a3866f]
+               text-white font-semibold py-3 rounded-xl
+               transition transform hover:scale-[1.02]">
+          {{ modo === 'agregar' ? 'Agregar Producto' : 'Actualizar Producto' }}
+        </button>
+      </form>
+    </div>
+  </div>
+}

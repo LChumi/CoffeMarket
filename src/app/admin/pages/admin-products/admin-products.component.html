@@ -4,7 +4,7 @@
 
     <div class="flex justify-center mb-6">
       <button
-        type="button"
+        type="button" (click)="abrirModal()"
         class="bg-[#c6b89b] hover:bg-lime-900 text-white font-medium py-2 px-4 rounded flex items-center space-x-2 shadow-md transition"
       >
         <span class="text-lime-950 hover:text-[#c6b89b]">Agregar Producto</span>
@@ -56,6 +56,12 @@
     </table>
 
   </div>
+
+  <app-producto-modal
+    [(visible)] = modalProducto
+    [modo]="modo">
+  </app-producto-modal>
+
 } @loading (minimum 1000ms){
   <div class="absolute inset-0 flex items-center justify-center">
     <img [src]="'images/loading/loading.gif'" alt="Cargando..."
