@@ -1,10 +1,18 @@
-import {AfterViewInit, Component, EventEmitter, inject, Input, input, OnChanges, Output} from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  inject,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {ProductoService} from "@services/producto.service";
 import {ToastrService} from "ngx-toastr";
 import {Categorias} from "@models/data/categorias";
 import {DataService} from "@services/data/data.service";
 import {Atributos} from "@models/dto/atributos";
+import {Producto} from "@models/producto";
 
 @Component({
   selector: 'app-producto-modal',
@@ -15,12 +23,26 @@ import {Atributos} from "@models/dto/atributos";
   templateUrl: './producto-modal.component.html',
   styles: ``
 })
-export class ProductoModalComponent implements OnChanges {
+export class ProductoModalComponent implements OnInit {
 
   private _visible: boolean = false;
+  private _idProducto: string = '';
 
   @Input() modo!: string;
-  @Input() idProduct!: string;
+
+  @Input() set idProduct(value: string | null) {
+    if (value) {
+      // Modo edición → cargar datos del producto
+      this.loadProduct(value);
+      this._idProducto = value;
+    } else {
+      // Modo creación → resetear formulario
+      this.productoForm.reset();
+      this.etiquetasNuevas = []
+      this.atributosNuevo = []
+    }
+  }
+
   @Input() set visible(visible: boolean) {
     this._visible = visible;
     if (visible) {
@@ -32,7 +54,7 @@ export class ProductoModalComponent implements OnChanges {
     return this._visible;
   }
 
-  @Output() saveRequest = new EventEmitter<{visible: boolean}>
+  @Output() saveRequest = new EventEmitter<{editUpdate: boolean}>
   @Output() visibleChange = new EventEmitter<boolean>();
 
   private productoService = inject(ProductoService);
@@ -49,18 +71,18 @@ export class ProductoModalComponent implements OnChanges {
 
   constructor() {
     this.productoForm = this.fb.group({
-      sku: ['', Validators.required, Validators.pattern('^[0-9]+$')], //solo se aceptan numeros sin letras
-      item: ['', Validators.required],
-      descripcion: ['', Validators.required],
-      precio: ['', Validators.required, Validators.pattern('^[0-9]+(\\.[0-9]{1,2})?$')],//numero entero o decimal con dos decimales
-      categoria: ['', Validators.required],
-    })
+      sku: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
+      item: ['', [Validators.required]],
+      descripcion: ['', [Validators.required]],
+      precio: ['', [Validators.required, Validators.pattern('^[0-9]+(\\.[0-9]{1,2})?$')]],
+      categoria: ['', [Validators.required]],
+    });
     this.loadCategories()
   }
 
-  ngOnChanges(): void {
-    this.initializeModal()
-  }
+  ngOnInit(): void {
+        this.loadCategories()
+    }
 
   loadCategories() {
     this.dataService.getCategorias().subscribe(
@@ -71,11 +93,16 @@ export class ProductoModalComponent implements OnChanges {
   }
 
   initializeModal(){
-
+    if (this.idProduct){
+      console.log(this.idProduct)
+    }
   }
 
   cerrarModal() {
     this.visibleChange.emit(false);
+    this.etiquetasNuevas = []
+    this.atributosNuevo = []
+    this._idProducto = ''
   }
 
   addLabel(){
@@ -116,6 +143,65 @@ export class ProductoModalComponent implements OnChanges {
   }
 
   agregarEditarProducto(){
+    if (this.productoForm.invalid) {
+      this.toastr.warning('Pro favor llene los campos del formulario');
+      return;
+    }
+    const sku = this.productoForm.get('sku')?.value;
+    const item = this.productoForm.get('item')?.value;
+    const descripcion = this.productoForm.get('descripcion')?.value;
+    const precio = this.productoForm.get('precio')?.value;
+    const categoria = this.productoForm.get('categoria')?.value;
+    const etiquetas = this.etiquetasNuevas
+    const atributos = this.atributosNuevo
 
+    const producto: Producto ={
+      id: null,
+      sku: sku,
+      item: item,
+      descripcion: descripcion,
+      precio: precio,
+      disponible: true,
+      stock: 0,
+      categoriaId: categoria,
+      etiquetas: etiquetas,
+      atributos: atributos,
+      variantes: []
+    }
+
+    if (this._idProducto) {
+      this.productoService.update(this._idProducto, producto).subscribe({
+        next: data => {
+          this.toastr.success('Producto actualizado con exito!');
+          this.visibleChange.emit(false);
+          this.saveRequest.emit({editUpdate: true});
+        }
+      })
+    } else {
+      this.productoService.save(producto).subscribe({
+        next: data => {
+          this.toastr.success('Producto guardado con exito');
+          this.visibleChange.emit(false);
+          this.saveRequest.emit({editUpdate: true});
+        }
+      })
+    }
+  }
+
+  private loadProduct(id: string){
+    this.productoService.getById(id).subscribe({
+      next: (data) => {
+        console.log(data);
+        this.productoForm.patchValue({
+          sku: data.sku,
+          item: data.item,
+          descripcion: data.descripcion,
+          precio: data.precio,
+          categoria: data.categoriaId,
+        });
+        this.etiquetasNuevas = data.etiquetas;
+        this.atributosNuevo = data.atributos;
+      }
+    });
   }
 }

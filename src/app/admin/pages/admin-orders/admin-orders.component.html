@@ -1,24 +1,40 @@
 @defer {
-  <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-    <h1 class="text-2xl">Pedidos Pendientes de verificar</h1>
-    <!-- Search bar -->
-    <div class="px-4 mb-6">
-      <label for="table-search" class="sr-only">Search</label>
-      <div class="relative mt-1">
-        <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-          <svg class="w-4 h-4 text-gray-500" fill="none" viewBox="0 0 20 20">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
-          </svg>
-        </div>
-        <input type="text" id="table-search" [(ngModel)]="searchOrder" (input)="filtrarPedidos()"
-               class="block pt-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 focus:ring-[#a3866f] focus:border-[#a3866f] transition duration-150 ease-in-out"
-               placeholder="Buscar pedidos...">
+  <div class="relative overflow-x-auto sm:rounded-xl bg-white shadow-md p-6">
+
+    <!-- Header -->
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
+      <!-- Título -->
+      <div>
+        <h1 class="text-2xl font-bold text-gray-800">Pedidos pendientes</h1>
+        <p class="text-sm text-gray-500">Pendientes de verificación</p>
+        <span class="ml-2 inline-flex items-center px-2 py-0.5 text-xs font-semibold
+             bg-amber-100 text-amber-800 rounded-full">{{ pedidos.length }}</span>
       </div>
+
+      <!-- Search -->
+      <div class="relative w-full sm:w-80">
+        <svg
+          class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400"
+          fill="none"
+          viewBox="0 0 20 20">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+        </svg>
+
+        <input
+          type="text"
+          [(ngModel)]="searchOrder"
+          (input)="filtrarPedidos()"
+          placeholder="Buscar pedido..."
+          class="w-full rounded-lg border border-gray-300 pl-10 pr-4 py-2.5 text-sm
+               focus:ring-2 focus:ring-[#a3866f] focus:border-[#a3866f] transition"
+        />
+      </div>
+
     </div>
 
     <!-- Table -->
-    <table class="w-full text-sm text-left text-gray-700">
+    <table class="w-full text-sm text-left text-gray-700 border-t">
       <thead>
       <tr>
         <th scope="col" class="px-6 py-3 bg-[#c6b89b] text-black">Documento</th>

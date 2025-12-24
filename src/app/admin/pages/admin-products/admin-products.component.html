@@ -1,22 +1,34 @@
 @defer {
-  <div class="relative overflow-x-auto shadow-md sm:rounded-lg p-6">
-    <h1 class="text-2xl font-bold text-center mb-6">Productos</h1>
+  <div class="relative overflow-x-auto sm:rounded-xl bg-white shadow-md p-6">
 
-    <div class="flex justify-center mb-6">
+    <!-- Header -->
+    <div class="flex items-center justify-between mb-6 bg-gray-50 p-4 rounded-lg">
+
+    <div>
+        <h1 class="text-2xl font-bold text-gray-800">Productos</h1>
+        <p class="text-sm text-gray-500">Total: {{ productos.length }} items</p>
+      </div>
+
       <button
-        type="button" (click)="abrirModal()"
-        class="bg-[#c6b89b] hover:bg-lime-900 text-white font-medium py-2 px-4 rounded flex items-center space-x-2 shadow-md transition"
-      >
-        <span class="text-lime-950 hover:text-[#c6b89b]">Agregar Producto</span>
-        <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-             width="24" height="24" fill="none" viewBox="0 0 24 24">
-          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M5 12h14m-7 7V5"/>
+        type="button"
+        (click)="abrirModal()"
+        class="flex items-center gap-2 bg-[#c6b89b] hover:bg-[#b1a487]
+             text-lime-950 font-semibold px-5 py-2.5 rounded-lg
+             shadow-md transition transform hover:scale-105">
+
+        <svg class="w-5 h-5" fill="none" stroke="currentColor"
+             stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round"
+                d="M12 5v14m7-7H5"/>
         </svg>
+
+        <span>Agregar producto</span>
       </button>
     </div>
 
-    <small>Total de items {{productos.length}}</small>
+    <div class="border-b border-gray-200 mb-4"></div>
+
+    <!-- Tabla -->
     <table class="w-full text-sm text-left text-gray-700 border-t">
       <thead>
       <tr>
@@ -26,11 +38,11 @@
         <th scope="col" class="px-6 py-3 bg-[#c6b89b] text-black">Precio</th>
         <th scope="col" class="px-6 py-3 bg-[#c6b89b] text-black">Stock</th>
         <th scope="col" class="px-6 py-3 bg-[#c6b89b] text-black">Disponible</th>
-        <th scope="col" class="px-6 py-3 bg-[#c6b89b] text-black"></th>
+        <th scope="col" class="px-6 py-3 bg-[#c6b89b] text-black">Accion</th>
       </tr>
       </thead>
       <tbody>
-        @for (producto of productos; track producto.id) {
+        @for (producto of productos; track $index) {
           <tr class="border-b hover:bg-gray-50 transition">
             <th scope="row" class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
               <img class="w-10 h-10 rounded-full" [src]="getUrlImage(producto.sku)" [alt]="producto.sku">
@@ -49,6 +61,63 @@
                 <span class="text-[#a3866f] font-medium">No disponible</span>
               }
             </td>
+            <td class="px-6 py-4">
+              <div class="flex items-center gap-2 justify-center">
+
+                @if (removeIndex !== $index) {
+
+                  <!-- Editar -->
+                  <button
+                    type="button"
+                    (click)="abrirModalProducto(producto)"
+                    class="flex items-center justify-center w-9 h-9
+               rounded-lg bg-[#B3977E] hover:bg-[#a3866f]
+               text-white shadow transition">
+                  <svg class="w-4 h-4 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                    <path fill-rule="evenodd" d="M14 4.182A4.136 4.136 0 0 1 16.9 3c1.087 0 2.13.425 2.899 1.182A4.01 4.01 0 0 1 21 7.037c0 1.068-.43 2.092-1.194 2.849L18.5 11.214l-5.8-5.71 1.287-1.31.012-.012Zm-2.717 2.763L6.186 12.13l2.175 2.141 5.063-5.218-2.141-2.108Zm-6.25 6.886-1.98 5.849a.992.992 0 0 0 .245 1.026 1.03 1.03 0 0 0 1.043.242L10.282 19l-5.25-5.168Zm6.954 4.01 5.096-5.186-2.218-2.183-5.063 5.218 2.185 2.15Z" clip-rule="evenodd"/>
+                  </svg>
+                </button>
+
+                  <!-- Eliminar -->
+                  <button
+                    type="button"
+                    (click)="removeIndex = $index"
+                    class="flex items-center justify-center w-9 h-9
+               rounded-lg bg-orange-400 hover:bg-red-500
+               text-white shadow transition">
+                  <svg class="w-4 h-4 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z"/>
+                  </svg>
+                </button>
+
+                } @else {
+
+                  <!-- Texto -->
+                  <span class="text-xs text-gray-600 mr-1">¿Eliminar?</span>
+
+                  <!-- Sí -->
+                  <button
+                    type="button"
+                    (click)="deleteProduct(producto)"
+                    class="flex items-center justify-center w-9 h-9
+               rounded-lg bg-red-600 hover:bg-red-700
+               text-white shadow transition">
+                    ✔
+                  </button>
+
+                  <!-- No -->
+                  <button
+                    type="button"
+                    (click)="removeIndex = null"
+                    class="flex items-center justify-center w-9 h-9
+               rounded-lg bg-gray-300 hover:bg-gray-400
+               text-gray-800 shadow transition">
+                    ✖
+                  </button>
+                }
+              </div>
+            </td>
+
             <td class="px-6 py-4"></td>
           </tr>
         }
@@ -59,7 +128,10 @@
 
   <app-producto-modal
     [(visible)] = modalProducto
-    [modo]="modo">
+    [modo]="modo"
+    (saveRequest)="handleSaveRequest($event)"
+    [idProduct]="idProducto"
+  >
   </app-producto-modal>
 
 } @loading (minimum 1000ms){

@@ -2,7 +2,7 @@ import {Atributos} from "@models/dto/atributos";
 import {Variante} from "@models/dto/variante";
 
 export interface Producto {
-  id:           string;
+  id:           any;
   sku:          string;
   item:         string;
   descripcion:  string;
