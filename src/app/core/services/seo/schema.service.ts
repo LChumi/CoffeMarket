@@ -132,6 +132,7 @@ export class SchemaService {
             "priceCurrency": "USD",
             "price": product.precio,
             "availability": `https://schema.org/${product.disponible ?? 'InStock'}`,
+            "itemCondition": "https://schema.org/NewCondition",
             "url": currentUrl,
             "seller": {
               "@type": "Organization",
@@ -206,6 +207,34 @@ export class SchemaService {
         "height": 900
       },
       "image": {"@id": `${this.domain}/#organizationLogo`},
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Cuenca, Ecuador",
+        "addressLocality": "Cuenca",
+        "addressRegion": "Azuay",
+        "postalCode": "010106",
+        "addressCountry": "EC"
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+          ],
+          "opens": "08:00",
+          "closes": "18:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Saturday",
+          "opens": "8:00",
+          "closes": "13:00"
+        }
+      ],
       "sameAs": [
         "https://www.facebook.com/BunnaCafeEspecialidad",
         "https://www.instagram.com/bunnacafeec/"
