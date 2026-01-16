@@ -60,9 +60,14 @@
       <div class="flex items-center gap-3">
         <!-- Facebook -->
         <a href="https://www.facebook.com/BunnaCafeEspecialidad"
-           class="p-2 rounded-full  hover:bg-blue-500 text-blue-900  transition shadow-md hover:text-white"
+           class="p-2 rounded-full
+          bg-gray-100 dark:bg-[#B3977E]
+          text-blue-700 dark:text-blue-700
+          shadow-md
+          hover:bg-blue-600 hover:text-white
+          transition"
            aria-label="Facebook">
-          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
             <path fill-rule="evenodd"
                   d="M13.135 6H15V3h-1.865a4.147 4.147 0 0 0-4.142 4.142V9H7v3h2v9.938h3V12h2.021l.592-3H12V6.591A.6.6 0 0 1 12.592 6h.543Z"
                   clip-rule="evenodd"/>
@@ -70,9 +75,14 @@
         </a>
         <!-- Instagram -->
         <a href="https://www.instagram.com/bunnacafeec/"
-           class="p-2 rounded-full  hover:bg-pink-500 text-pink-600  transition shadow-md hover:text-white"
+           class="p-2 rounded-full
+          bg-gray-100 dark:bg-[#B3977E]
+          text-pink-600 dark:text-pink-600
+          shadow-md
+          hover:bg-pink-500 hover:text-white
+          transition"
            aria-label="Instagram">
-          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
             <path fill-rule="evenodd"
                   d="M3 8a5 5 0 0 1 5-5h8a5 5 0 0 1 5 5v8a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5V8Zm5-3a3 3 0 0 0-3 3v8a3 3 0 0 0 3 3h8a3 3 0 0 0 3-3V8a3 3 0 0 0-3-3H8Zm7.597 2.214a1 1 0 0 1 1-1h.01a1 1 0 1 1 0 2h-.01a1 1 0 0 1-1-1ZM12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm-5 3a5 5 0 1 1 10 0 5 5 0 0 1-10 0Z"
                   clip-rule="evenodd"/>
@@ -82,17 +92,27 @@
         <div class="relative">
           <button
             (click)="visibleSidebar = true"
-            class="p-2 rounded-full hover:bg-[#B3977E] text transition text-green-950"
-            aria-label="Carrito"
-          >
-            <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            class="p-2 rounded-full
+         bg-gray-100 dark:dark:bg-[#B3977E]
+         text-green-900
+         shadow-md
+         hover:bg-[#B3977E] hover:text-white
+         transition"
+            aria-label="Carrito">
+          <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round"
                     d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
             </svg>
           </button>
 
           @if (cantidadItems >0){
-            <span class="absolute -top-1 -right-1 bg-[#B3977E] text-white text-xs font-semibold px-1.5 py-0.5 rounded-full">
+            <span class="absolute -top-1 -right-1
+             bg-[#B3977E]
+             text-white
+             text-xs font-semibold
+             px-1.5 py-0.5
+             rounded-full
+             ring-2 ring-white dark:ring-gray-800">
               {{ cantidadItems }}
             </span>
           }
