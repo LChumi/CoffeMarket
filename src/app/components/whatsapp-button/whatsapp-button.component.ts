@@ -1,4 +1,4 @@
-import {Component, inject, Renderer2} from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {ClarityService} from "@services/data/clarity.service";
 
 @Component({
@@ -10,7 +10,6 @@ import {ClarityService} from "@services/data/clarity.service";
 })
 export class WhatsappButtonComponent {
 
-  private renderer = inject(Renderer2)
   private clarity=  inject(ClarityService)
 
   openWhatsApp() {
