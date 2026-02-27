@@ -1,4 +1,5 @@
 import {Component, inject, Renderer2} from '@angular/core';
+import {ClarityService} from "@services/data/clarity.service";
 
 @Component({
   selector: 'app-whatsapp-button',
@@ -10,6 +11,7 @@ import {Component, inject, Renderer2} from '@angular/core';
 export class WhatsappButtonComponent {
 
   private renderer = inject(Renderer2)
+  private clarity=  inject(ClarityService)
 
   openWhatsApp() {
     const telefono = '593979126861';
@@ -21,7 +23,8 @@ export class WhatsappButtonComponent {
       ? `https://wa.me/${telefono}?text=${encoded}`
       : `https://web.whatsapp.com/send?phone=${telefono}&text=${encoded}`;
 
-    window.open(url, '_blank');
+    this.clarity.event("Redirect to WhatsApp")
+    window.open(url, '_blank', 'noopener,noreferrer');
   }
 
 }
