@@ -163,6 +163,9 @@ export default class CheckoutComponent implements OnInit {
             }
           });
         }
+      }, error : err => {
+        this.loading = false;
+        console.error(err.message);
       }
     });
   }
