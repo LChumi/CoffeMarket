@@ -24,7 +24,6 @@ export class AdminProductsComponent implements OnInit {
   modalProducto = false;
   modo: 'agregar' | 'editar' = 'agregar'
   idProducto = ''
-  removeAction = false;
   removeIndex: number | null = null;
 
   ngOnInit() {
@@ -34,7 +33,6 @@ export class AdminProductsComponent implements OnInit {
   getProductos() {
     this.productsService.getAll().subscribe({
       next: data => {
-        console.log(data);
         this.productos = data
       }
     })

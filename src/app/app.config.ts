@@ -18,12 +18,7 @@ export const appConfig: ApplicationConfig = {
     }),
     provideZoneChangeDetection({eventCoalescing: true}),
     provideRouter(routes, withViewTransitions()),
-    provideHttpClient(
-      withXsrfConfiguration({
-        cookieName : 'XSRF-TOKEN',
-        headerName : 'X-XSRF-TOKEN',
-      }),
-      withInterceptors([errorHandlerInterceptor])),
+    provideHttpClient(withInterceptors([errorHandlerInterceptor, csrfInterceptorInterceptor])),
     provideClientHydration(withEventReplay()),
   ]
 };
