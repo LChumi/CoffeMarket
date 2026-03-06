@@ -23,19 +23,19 @@ export class AuthService {
   }
 
   login(request: AuthenticationRequest): Observable<ServiceResponse> {
-    return this.http.post<ServiceResponse>(this.baseUrl + '/login', request, {withCredentials: true});
+    return this.http.post<ServiceResponse>(this.baseUrl + '/login', request);
   }
 
   refresh(): Observable<ServiceResponse> {
-    return this.http.post<ServiceResponse>(this.baseUrl + '/refresh', {}, {withCredentials: true});
+    return this.http.post<ServiceResponse>(this.baseUrl + '/refresh', {});
   }
 
-  logout(): Observable<ServiceResponse> {
-    return this.http.post<ServiceResponse>(this.baseUrl + '/logout', {withCredentials: true})
+  logout(): Observable<any> {
+    return this.http.post(this.baseUrl + '/logout', {});
   }
 
   fetchUser(): Observable<UserInfo> {
-    return this.http.get<UserInfo>(this.baseUrl + '/me', {withCredentials: true}).pipe(
+    return this.http.get<UserInfo>(this.baseUrl + '/me').pipe(
       tap(user => {
         this.user = user;
         setSessionItem('isLoggedIn', 'true');

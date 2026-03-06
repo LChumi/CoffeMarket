@@ -16,23 +16,23 @@ export class UsersService {
   }
 
   save(usuario: Usuario): Observable<Usuario> {
-    return this.http.post<Usuario>(`${this.baseUrl}/save`, usuario, {withCredentials: true});
+    return this.http.post<Usuario>(`${this.baseUrl}/save`, usuario);
   }
 
   getById(id: string): Observable<Usuario> {
-    return this.http.get<Usuario>(`${this.baseUrl}/by/${id}`, {withCredentials: true});
+    return this.http.get<Usuario>(`${this.baseUrl}/by/${id}`);
   }
 
   getAll(): Observable<Usuario[]> {
-    return this.http.get<Usuario[]>(`${this.baseUrl}/all`, {withCredentials: true});
+    return this.http.get<Usuario[]>(`${this.baseUrl}/all`);
   }
 
   update(id: string, pedido: Usuario): Observable<Usuario> {
-    return this.http.put<Usuario>(`${this.baseUrl}/update/${id}`, pedido, {withCredentials: true});
+    return this.http.put<Usuario>(`${this.baseUrl}/update/${id}`, pedido);
   }
 
   delete(id: string): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/delete/${id}`, {withCredentials: true});
+    return this.http.delete<void>(`${this.baseUrl}/delete/${id}`);
   }
 
 }

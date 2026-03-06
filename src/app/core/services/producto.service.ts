@@ -16,7 +16,7 @@ export class ProductoService {
   }
 
   save(producto: Producto): Observable<Producto> {
-    return this.http.post<Producto>(`${this.baseUrl}/save`, producto, {withCredentials: true});
+    return this.http.post<Producto>(`${this.baseUrl}/save`, producto);
   }
 
   getById(id: string): Observable<Producto> {
@@ -36,10 +36,10 @@ export class ProductoService {
   }
 
   update(id: string, producto: Producto): Observable<Producto> {
-    return this.http.put<Producto>(`${this.baseUrl}/update/${id}`, producto, {withCredentials: true});
+    return this.http.put<Producto>(`${this.baseUrl}/update/${id}`, producto);
   }
 
   delete(id: string): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/delete/${id}`, {withCredentials: true});
+    return this.http.delete<void>(`${this.baseUrl}/delete/${id}`);
   }
 }
