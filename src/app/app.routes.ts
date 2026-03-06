@@ -55,6 +55,10 @@ export const routes: Routes = [
     path: 'privacy-policy',
     loadComponent: () => import('./pages/privacy-policy/privacy-policy.component')
   },
+  {
+    path: 'returns-and-refunds-policy',
+    loadComponent: () => import('./pages/returns-and-refunds-policy/returns-and-refunds-policy.component')
+  },
   {path: 'admin', children: AdminRoutes},
   {path: 'producto', redirectTo: 'products', pathMatch: 'full'},
   {path: 'productos', redirectTo: 'products', pathMatch: 'full'},

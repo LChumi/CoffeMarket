@@ -1,0 +1,79 @@
+<div id="page-container"
+     class="mx-auto flex min-h-screen w-full flex-col bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-100">
+  <header id="page-header" class="flex-none z-10 bg-white shadow-sm dark:bg-gray-700 w-full">
+    <app-navbar></app-navbar>
+  </header>
+
+  <section class="bg-white dark:bg-gray-800">
+    <div class="max-w-4xl mx-auto px-6 py-12">
+      <img
+        src="/images/logos/caffeCirc.webp"
+        alt="Logo"
+        width="120"
+        height="90"
+        loading="lazy"
+        class="mx-auto mb-3 dark:opacity-90"
+      />
+      <h1 class="text-gray-900 dark:text-white text-3xl font-bold text-center mb-8">Política de Devoluciones y Reembolsos</h1>
+
+      <p class="mb-6 text-gray-900 dark:text-white ">
+        En <span class="font-semibold">Bunna Coffe Shop</span>, queremos que nuestros clientes se sientan seguros al realizar sus compras.
+        Por ello, establecemos la siguiente política de devoluciones y reembolsos, conforme a la legislación ecuatoriana de protección al consumidor.
+      </p>
+
+      <!-- Sección 1 -->
+      <h2 class="text-xl font-semibold mb-3">1. Condiciones para devoluciones</h2>
+      <ul class="list-disc list-inside mb-6 text-gray-900 dark:text-white  space-y-2">
+        <li>El cliente podrá solicitar la devolución de un producto dentro de los 7 días hábiles posteriores a la entrega.</li>
+        <li>El producto debe estar en su empaque original, sin uso y en las mismas condiciones en que fue recibido.</li>
+        <li>No se aceptan devoluciones de productos personalizados, perecibles o en promoción, salvo que presenten defectos de fabricación.</li>
+      </ul>
+
+      <!-- Sección 2 -->
+      <h2 class="text-xl font-semibold mb-3">2. Procedimiento para solicitar una devolución</h2>
+      <ol class="list-decimal list-inside mb-6 text-gray-900 dark:text-white  space-y-2">
+        <li>Contactar a nuestro equipo de atención al cliente a través de <a href="mailto:bunnacoffeemp@gmail.com" class="text-blue-600 underline">{{emailInfo}}</a> o al número publicado en nuestra web.</li>
+        <li>Indicar el número de pedido y motivo de la devolución.</li>
+        <li>Una vez aprobado, el cliente deberá enviar el producto a la dirección indicada por nuestro equipo.</li>
+        <li>Los costos de envío por devolución corren a cargo del cliente, salvo en casos de productos defectuosos o errores en el pedido.</li>
+      </ol>
+
+      <!-- Sección 3 -->
+      <h2 class="text-xl font-semibold mb-3">3. Reembolsos</h2>
+      <p class="mb-6 text-gray-900 dark:text-white ">
+        Una vez recibido y verificado el producto, se procederá al reembolso en un plazo máximo de 10 días hábiles.
+        El reembolso se realizará mediante el mismo método de pago utilizado en la compra.
+        En caso de compras con promociones o descuentos, el reembolso se aplicará sobre el monto efectivamente pagado.
+      </p>
+
+      <!-- Sección 4 -->
+      <h2 class="text-xl font-semibold mb-3">4. Productos defectuosos o pedidos incorrectos</h2>
+      <p class="mb-6 text-gray-900 dark:text-white ">
+        Si el producto presenta defectos de fabricación o el pedido entregado no corresponde al solicitado,
+        Bunna Coffe Shop asumirá los costos de devolución y reemplazo.
+        El cliente podrá optar por recibir un producto de reemplazo o el reembolso total.
+      </p>
+
+      <!-- Sección 5 -->
+      <h2 class="text-xl font-semibold mb-3">5. Excepciones</h2>
+      <ul class="list-disc list-inside mb-6 text-gray-900 dark:text-white  space-y-2">
+        <li>Productos personalizados o confeccionados bajo pedido especial.</li>
+        <li>Artículos perecibles o de consumo inmediato.</li>
+        <li>Productos en liquidación o promociones especiales, salvo defectos de fábrica.</li>
+      </ul>
+
+      <!-- Sección 6 -->
+      <h2 class="text-xl font-semibold mb-3">6. Contacto</h2>
+      <p class="text-gray-900 dark:text-white ">
+        Para cualquier consulta sobre esta política, comuníquese con nosotros:
+        📧 <a href="mailto:bunnacoffeemp@gmail.com" class="text-blue-600 underline">{{emailInfo}}</a>
+        📞 <a href="tel:+593979126861">Contact center</a>
+      </p>
+    </div>
+  </section>
+
+  <footer class="mt-auto w-full bg-white dark:bg-gray-700">
+    <app-footer></app-footer>
+  </footer>
+
+</div>
