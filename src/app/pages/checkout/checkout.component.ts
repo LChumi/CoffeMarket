@@ -51,7 +51,8 @@ export default class CheckoutComponent implements OnInit {
   selectedCiudades: string[] = []
   loading: boolean = false;
   aceptaPoliticas: boolean = false;
-  invoiceFrom !: FormGroup;
+  invoiceForm !: FormGroup;
+  lastIdConsulted: string | null = null;
 
   constructor() {
 
@@ -78,7 +79,7 @@ export default class CheckoutComponent implements OnInit {
       description);
     this.schemaService.injectSchema(schema, 'checkout');
 
-    this.invoiceFrom = this.fb.group({
+    this.invoiceForm = this.fb.group({
       tipo_persona: ['', Validators.required],
       tipo_documento: ['', [Validators.required]],
       identificacion: ['', [Validators.required, Validators.pattern(/^\d{13}$/)]],
@@ -97,8 +98,8 @@ export default class CheckoutComponent implements OnInit {
     this.carritoService.carrito$.subscribe(carrito => {
       this.cartItems = carrito.items;
     })
-    this.invoiceFrom.get('tipo_documento')?.valueChanges.subscribe(tipo => {
-      const control = this.invoiceFrom.get('identificacion');
+    this.invoiceForm.get('tipo_documento')?.valueChanges.subscribe(tipo => {
+      const control = this.invoiceForm.get('identificacion');
       if (!control) return;
 
       control.clearValidators();
@@ -124,8 +125,8 @@ export default class CheckoutComponent implements OnInit {
   }
 
   finalizarCompra() {
-    if (!this.invoiceFrom.valid || !this.aceptaPoliticas) {
-      this.invoiceFrom.markAllAsTouched();
+    if (!this.invoiceForm.valid || !this.aceptaPoliticas) {
+      this.invoiceForm.markAllAsTouched();
       this.message = 'Por favor, lee y acepta los términos y condiciones para proceder con tu pedido.';
       this.clarity.event('Checkout fallido: términos no aceptados');
       this.clarity.setTag('checkoutStatus', 'fallido');
@@ -135,7 +136,7 @@ export default class CheckoutComponent implements OnInit {
     this.loading = true;
     this.message = '';
 
-    const form = this.invoiceFrom.value;
+    const form = this.invoiceForm.value;
 
     this.clientService.getByEmailAndCed(form.email, form.identificacion).subscribe({
       next: (result) => {
@@ -220,7 +221,7 @@ export default class CheckoutComponent implements OnInit {
   onProvinciaChange(provincia: string) {
     const ubicacion = this.ubicaciones.find(u => u.nombre === provincia);
     this.selectedCiudades = ubicacion?.ciudades || [];
-    this, this.invoiceFrom.get('ciudad')?.setValue(null)
+    this, this.invoiceForm.get('ciudad')?.setValue(null)
   }
 
   calcularSubtotal(): number {
@@ -245,7 +246,7 @@ export default class CheckoutComponent implements OnInit {
   filtrarSoloNumeros(event: Event): void {
     const input = event.target as HTMLInputElement;
     input.value = input.value.replace(/\D/g, '');
-    this.invoiceFrom.get('telefono')?.setValue(input.value);
+    this.invoiceForm.get('telefono')?.setValue(input.value);
   }
 
   goToOrder(numDoc: string) {
@@ -260,26 +261,36 @@ export default class CheckoutComponent implements OnInit {
     })
   }
 
-  getNames(){
-    const id = this.invoiceFrom.get("identificacion")?.value;
+  getNames() {
 
-    if (!this.invoiceFrom.get("identificacion")?.value) {
-      return;
-    }
+    const id = this.invoiceForm.get("identificacion")?.value;
+    if (!id) return;
 
-    this.clientService.getNames(id).subscribe({
-      next: (result) => {
-        if (!result) return;
+    if (!(id.length === 10 || id.length === 13)) return;
 
-        const partes = result.trim().split(/\s+/);
-        const apellidos = partes.slice(0,2).join(' ');
-        const nombres = partes.slice(2).join(' ');
+    if (this.lastIdConsulted === id) return;
 
-        this.invoiceFrom.patchValue({
-          nombre: nombres,
-          apellido: apellidos
-        });
-      }
+    if (this.invoiceForm.get('nombre')?.value || this.invoiceForm.get('apellido')?.value) return;
+
+    this.lastIdConsulted = id;
+
+    this.clientService.getNames(id).subscribe(nombreCompleto => {
+
+      if (!nombreCompleto) return;
+
+      const partes = nombreCompleto.trim().split(/\s+/);
+      if (partes.length < 2) return;
+
+      const nombre = partes.slice(-2).join(' ');
+      const apellido = partes.slice(0, -2).join(' ');
+
+      this.invoiceForm.patchValue({
+        nombre,
+        apellido
+      });
+
     });
+
   }
+
 }

@@ -67,8 +67,7 @@
                     formControlName="identificacion"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white transition-colors duration-200 placeholder:text-gray-400 dark:placeholder:text-gray-500"
                     placeholder="Ingrese su número de identificación"
-                    (keyup.enter)="getNames()"
-                    (blur)="getNames()"
+                    (keyup)="getNames()"
                     required/>
                   @if (invoiceFrom.get('identificacion')?.invalid && invoiceFrom.get('identificacion')?.touched) {
                     <p role="alert" class="text-sm text-red-500 mt-1">
