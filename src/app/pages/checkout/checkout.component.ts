@@ -268,10 +268,9 @@ export default class CheckoutComponent implements OnInit {
 
     if (!(id.length === 10 || id.length === 13)) return;
 
-    if (this.lastIdConsulted === id) return;
-
-    if (this.invoiceForm.get('nombre')?.value || this.invoiceForm.get('apellido')?.value) return;
-
+    if (this.lastIdConsulted === id){
+      return;
+    }
     this.lastIdConsulted = id;
 
     this.clientService.getNames(id).subscribe(nombreCompleto => {
