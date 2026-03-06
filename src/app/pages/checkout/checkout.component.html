@@ -26,7 +26,7 @@
               Detalles de Facturación
             </h3>
 
-            <form [formGroup]="invoiceFrom" (ngSubmit)="finalizarCompra()" class="space-y-4">
+            <form [formGroup]="invoiceForm" (ngSubmit)="finalizarCompra()" class="space-y-4">
               <div class="grid gap-6 mb-6 md:grid-cols-2">
                 <div>
                   <label for="tipo_persona" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tipo
@@ -69,9 +69,9 @@
                     placeholder="Ingrese su número de identificación"
                     (keyup)="getNames()"
                     required/>
-                  @if (invoiceFrom.get('identificacion')?.invalid && invoiceFrom.get('identificacion')?.touched) {
+                  @if (invoiceForm.get('identificacion')?.invalid && invoiceForm.get('identificacion')?.touched) {
                     <p role="alert" class="text-sm text-red-500 mt-1">
-                      @switch (invoiceFrom.get('tipo_documento')?.value) {
+                      @switch (invoiceForm.get('tipo_documento')?.value) {
                         @case ('ruc') {
                           El RUC debe tener 13 dígitos numéricos.
                         }
@@ -99,7 +99,7 @@
                     aria-label="nombre"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
                     required/>
-                  @if (invoiceFrom.get('nombre')?.invalid && invoiceFrom.get('nombre')?.touched) {
+                  @if (invoiceForm.get('nombre')?.invalid && invoiceForm.get('nombre')?.touched) {
                     <p role="alert" class="text-sm text-red-500 mt-1">Este campo es obligatorio.</p>
                   }
                 </div>
@@ -113,7 +113,7 @@
                     formControlName="apellido"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white  "
                     required/>
-                  @if (invoiceFrom.get('apellido')?.invalid && invoiceFrom.get('apellido')?.touched) {
+                  @if (invoiceForm.get('apellido')?.invalid && invoiceForm.get('apellido')?.touched) {
                     <p role="alert" class="text-sm text-red-500 mt-1">Este campo es obligatorio.</p>
                   }
                 </div>
@@ -128,7 +128,7 @@
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white  "
                     placeholder="Ingrese su dirección"
                     required/>
-                  @if (invoiceFrom.get('direccion')?.invalid && invoiceFrom.get('direccion')?.touched) {
+                  @if (invoiceForm.get('direccion')?.invalid && invoiceForm.get('direccion')?.touched) {
                     <p role="alert" class="text-sm text-red-500 mt-1">Este campo es obligatorio.</p>
                   }
                 </div>
@@ -177,7 +177,7 @@
                     formControlName="email"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white  "
                     required/>
-                  @if (invoiceFrom.get('email')?.invalid && invoiceFrom.get('email')?.touched) {
+                  @if (invoiceForm.get('email')?.invalid && invoiceForm.get('email')?.touched) {
                     <p role="alert" class="text-sm text-red-500 mt-1">Este campo es obligatorio.</p>
                   }
                 </div>
@@ -193,7 +193,7 @@
                     (input)="filtrarSoloNumeros($event)"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white  "
                     required/>
-                  @if (invoiceFrom.get('telefono')?.invalid && invoiceFrom.get('telefono')?.touched) {
+                  @if (invoiceForm.get('telefono')?.invalid && invoiceForm.get('telefono')?.touched) {
                     <p role="alert" class="text-sm text-red-500 mt-1">Este campo es obligatorio.</p>
                   }
                 </div>
