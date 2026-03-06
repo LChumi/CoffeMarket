@@ -259,4 +259,27 @@ export default class CheckoutComponent implements OnInit {
       window.scrollTo({top: 0, behavior: 'smooth'});
     })
   }
+
+  getNames(){
+    const id = this.invoiceFrom.get("identificacion")?.value;
+
+    if (!this.invoiceFrom.get("identificacion")?.value) {
+      return;
+    }
+
+    this.clientService.getNames(id).subscribe({
+      next: (result) => {
+        if (!result) return;
+
+        const partes = result.trim().split(/\s+/);
+        const apellidos = partes.slice(0,2).join(' ');
+        const nombres = partes.slice(2).join(' ');
+
+        this.invoiceFrom.patchValue({
+          nombre: nombres,
+          apellido: apellidos
+        });
+      }
+    });
+  }
 }

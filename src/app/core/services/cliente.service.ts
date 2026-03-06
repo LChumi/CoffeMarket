@@ -43,4 +43,8 @@ export class ClienteService {
   update(id: string, cliente: Cliente): Observable<Cliente> {
     return this.http.put<Cliente>(`${this.baseUrl}/update/${id}`, cliente);
   }
+
+  getNames(identificacion: string): Observable<string> {
+    return this.http.get(`${this.baseUrl}/get/names/${identificacion}`, {responseType: "text"});
+  }
 }
