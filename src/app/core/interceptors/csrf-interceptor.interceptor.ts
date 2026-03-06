@@ -9,12 +9,17 @@ export const csrfInterceptorInterceptor: HttpInterceptorFn = (req, next) => {
     .find(c => c.startsWith('XSRF-TOKEN='))
     ?.split('=')[1];
 
-  req = req.clone({ withCredentials: true });
-
   if (methods.includes(req.method) && token) {
+
     req = req.clone({
-      headers: req.headers.set('X-XSRF-TOKEN', token)
+      withCredentials: true,
+      setHeaders: {
+        'X-XSRF-TOKEN': token
+      }
     });
+
+  } else {
+    req = req.clone({ withCredentials: true });
   }
 
   return next(req);
