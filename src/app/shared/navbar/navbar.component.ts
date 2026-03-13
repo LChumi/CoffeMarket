@@ -1,6 +1,6 @@
 import {Component, inject} from '@angular/core';
 import {Router, RouterLink, RouterLinkActive} from "@angular/router";
-import {NgClass} from "@angular/common";
+import {NgClass, NgOptimizedImage} from "@angular/common";
 import {ShoppingCartSidebarComponent} from "@components/shopping-cart-sidebar/shopping-cart-sidebar.component";
 import {CarritoService} from "@services/carrito.service";
 
@@ -11,7 +11,8 @@ import {CarritoService} from "@services/carrito.service";
     RouterLink,
     RouterLinkActive,
     NgClass,
-    ShoppingCartSidebarComponent
+    ShoppingCartSidebarComponent,
+    NgOptimizedImage
   ],
   templateUrl: './navbar.component.html',
   styles: [`
