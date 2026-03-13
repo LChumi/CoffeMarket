@@ -4,13 +4,16 @@ import {ToastrService} from "ngx-toastr";
 import {Pedido} from "@models/pedido";
 import {CurrencyPipe, DatePipe} from "@angular/common";
 import {FormsModule} from "@angular/forms";
+import {ProductsOrderModalComponent} from "@admin/components/products-order-modal/products-order-modal.component";
+import {ItemCarrito} from "@models/dto/item-carrito";
 
 @Component({
   selector: 'app-admin-orders',
   imports: [
     DatePipe,
     CurrencyPipe,
-    FormsModule
+    FormsModule,
+    ProductsOrderModalComponent
   ],
   templateUrl: './admin-orders.component.html',
   styles: ``
@@ -26,6 +29,8 @@ export class AdminOrdersComponent implements OnInit {
   modalPedido = false;
   docAutorizaqcion: string = "";
   searchOrder: string = "";
+  selectedItems: ItemCarrito[] = [];
+  showItemsModal: boolean = false;
 
   ngOnInit() {
     this.getPedidos()
@@ -68,7 +73,16 @@ export class AdminOrdersComponent implements OnInit {
     this.pedidos = this.pedidosFiltrados.filter(p =>
       p.docNum.toLowerCase().includes(filtro)
     )
+  }
 
+  openItems(items: ItemCarrito[]){
+    this.selectedItems = items;
+    this.showItemsModal = true;
+  }
+
+  closeModal(){
+    this.showItemsModal = false;
+    this.selectedItems = []
   }
 
 }

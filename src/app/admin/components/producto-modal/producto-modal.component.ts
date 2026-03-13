@@ -45,9 +45,6 @@ export class ProductoModalComponent implements OnInit {
 
   @Input() set visible(visible: boolean) {
     this._visible = visible;
-    if (visible) {
-      this.initializeModal()
-    }
   }
 
   get visible() {
@@ -90,12 +87,6 @@ export class ProductoModalComponent implements OnInit {
         this.categorias = data;
       }
     )
-  }
-
-  initializeModal(){
-    if (this.idProduct){
-      console.log(this.idProduct)
-    }
   }
 
   cerrarModal() {

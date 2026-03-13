@@ -1,0 +1,70 @@
+@if (visible) {
+  <div class="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
+
+    <div class="bg-white rounded-xl shadow-xl w-[720px] max-h-[80vh] overflow-hidden flex flex-col">
+
+      <!-- HEADER -->
+      <div class="flex justify-between items-center px-6 py-4 border-b">
+        <h2 class="text-lg font-semibold text-gray-800">
+          Detalle del pedido
+        </h2>
+
+        <button
+          (click)="cerrar()"
+          class="p-1 rounded-md hover:bg-gray-100">
+          ✕
+        </button>
+      </div>
+
+      <!-- ITEMS -->
+      <div class="overflow-y-auto px-6 py-4 space-y-4">
+
+        @for (item of items; track $index) {
+
+          <div class="flex items-center gap-4 border rounded-lg p-3 hover:bg-gray-50 transition">
+
+            <!-- IMAGEN -->
+            <img
+              [src]="getUrlImage(item.productoId)"
+              alt="producto"
+              loading="lazy"
+              decoding="async"
+              class="w-16 h-16 rounded object-cover border"
+            />
+
+            <!-- INFO -->
+            <div class="flex-1">
+
+              <h3 class="font-medium text-gray-800">
+                {{ item.descripcion }}
+              </h3>
+
+              <div class="text-sm text-gray-500">
+                Cantidad: {{ item.cantidad }}
+              </div>
+
+            </div>
+
+            <!-- PRECIO -->
+            <div class="text-right">
+
+              <div class="text-sm text-gray-500">
+                {{ item.pvp | currency }}
+              </div>
+
+              <div class="font-semibold text-gray-800">
+                {{ item.cantidad * item.pvp | currency }}
+              </div>
+
+            </div>
+
+          </div>
+
+        }
+
+      </div>
+
+    </div>
+
+  </div>
+}
