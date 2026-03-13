@@ -45,7 +45,7 @@
         @for (producto of productos; track $index) {
           <tr class="border-b hover:bg-gray-50 transition">
             <th scope="row" class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
-              <img class="w-10 h-10 rounded-full" [src]="getUrlImage(producto.sku)" [alt]="producto.sku">
+              <img class="w-10 h-10 rounded-full" [src]="getUrlImage(producto.sku)" [alt]="producto.sku" loading="lazy" decoding="async">
               <div class="ps-3">
                 <div class="text-gray-800 font-semibold">{{ producto.sku }}</div>
               </div>

@@ -25,7 +25,8 @@
                     class="fixed inset-0 bg-black/70 flex items-center justify-center z-50 cursor-zoom-out p-4 sm:p-8"
                   >
                     <img
-                      [src]="'images/products/' + producto.sku + '.webp'"
+                      [src]="getUrlImage(producto.sku)"
+                      loading="lazy" decoding="async"
                       class="object-contain w-full max-w-[90vw] max-h-[60vh] sm:max-w-3xl sm:max-h-[80vh] md:max-w-2xl md:max-h-[70vh] rounded-xl shadow-2xl transition-transform duration-300 scale-100 hover:scale-105 animate-zoomIn"
                       alt="Producto ampliado"
                     />
@@ -40,6 +41,8 @@
                     <div class="w-full md:w-1/2 flex justify-center">
                       <img (click)="zoomImage = true"
                            [src]="getUrlImage(producto.sku)"
+                           loading="lazy"
+                           decoding="async"
                            alt="{{ producto.descripcion }}"
                            class="w-full max-w-xs sm:max-w-sm md:max-w-md object-contain rounded-lg shadow-md transition hover:scale-105 cursor-zoom-in" />
                     </div>
@@ -100,6 +103,7 @@
                           <div (click)="goToProducts(producto.id)" class="cursor-pointer group relative">
                             <img [src]="getUrlImage(producto.sku)"
                                  loading="lazy"
+                                 decoding="async"
                                  alt="{{ producto.descripcion }}"
                                  class="w-full h-56 object-cover transition duration-300 ease-in-out group-hover:scale-105" />
                           </div>
@@ -139,6 +143,7 @@
         <div class="inset-0  flex items-center justify-center">
           <img
             [src]="'images/loading/loading.gif'"
+            decoding="async"
             alt="Cargando..." class="w-60 h-60 rounded-full object-cover object-center" />
         </div>
       }

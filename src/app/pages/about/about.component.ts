@@ -5,13 +5,15 @@ import {environment} from "@environments/environment";
 import {Router} from "@angular/router";
 import {MetaService} from "@services/seo/meta.service";
 import {SchemaService} from "@services/seo/schema.service";
+import {NgOptimizedImage} from "@angular/common";
 
 @Component({
   selector: 'app-about',
   standalone: true,
   imports: [
     FooterComponent,
-    NavbarComponent
+    NavbarComponent,
+    NgOptimizedImage
   ],
   templateUrl: './about.component.html',
   styles: ``

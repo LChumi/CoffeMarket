@@ -5,12 +5,14 @@ import {Router} from "@angular/router";
 import {MetaService} from "@services/seo/meta.service";
 import {SchemaService} from "@services/seo/schema.service";
 import {environment} from "@environments/environment";
+import {NgOptimizedImage} from "@angular/common";
 
 @Component({
   selector: 'app-privacy-policy',
   imports: [
     FooterComponent,
-    NavbarComponent
+    NavbarComponent,
+    NgOptimizedImage
   ],
   templateUrl: './privacy-policy.component.html',
   styles: ``

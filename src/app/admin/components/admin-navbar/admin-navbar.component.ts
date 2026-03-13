@@ -3,11 +3,13 @@ import {Router, RouterLink} from "@angular/router";
 import {SidebarService} from "@services/data/sidebar.service";
 import {clearSessionItems, getSessionItem} from "@utils/storage-utils";
 import {AuthService} from "@services/auth/auth.service";
+import {NgOptimizedImage} from "@angular/common";
 
 @Component({
   selector: 'app-admin-navbar',
   imports: [
-    RouterLink
+    RouterLink,
+    NgOptimizedImage
   ],
   templateUrl: './admin-navbar.component.html',
   styles: ``

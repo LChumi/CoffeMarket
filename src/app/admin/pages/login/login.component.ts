@@ -12,12 +12,14 @@ import {AuthService} from "@services/auth/auth.service";
 import {Router} from "@angular/router";
 import {ToastrService} from "ngx-toastr";
 import {ClarityService} from "@services/data/clarity.service";
+import {NgOptimizedImage} from "@angular/common";
 
 @Component({
   selector: 'app-login',
   imports: [
     ReactiveFormsModule,
-    FooterComponent
+    FooterComponent,
+    NgOptimizedImage
   ],
   templateUrl: './login.component.html',
   styles: ``
