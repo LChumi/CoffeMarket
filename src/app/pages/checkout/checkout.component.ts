@@ -192,7 +192,7 @@ export default class CheckoutComponent implements OnInit {
       provincia: form.provincia,
       ciudad: form.ciudad,
       telefono: form.telefono,
-      total: this.calcularTotal(),
+      total: this.calcularSubtotal(),
       metodoPago: 'TRANSFERENCIA',
       docAutorizacion: ''
     };
