@@ -8,8 +8,7 @@ import {NgOptimizedImage} from "@angular/common";
 @Component({
   selector: 'app-admin-navbar',
   imports: [
-    RouterLink,
-    NgOptimizedImage
+    RouterLink
   ],
   templateUrl: './admin-navbar.component.html',
   styles: ``

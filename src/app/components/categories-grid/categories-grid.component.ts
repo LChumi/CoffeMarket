@@ -2,6 +2,7 @@ import {Component, inject, OnInit} from '@angular/core';
 import {DataService} from "@services/data/data.service";
 import {Categorias} from "@models/data/categorias";
 import {Router} from "@angular/router";
+import {CATEGORIAS_MOCK} from "@mocks/categorias";
 
 @Component({
   selector: 'app-categories-grid',
@@ -12,21 +13,12 @@ import {Router} from "@angular/router";
 })
 export class CategoriesGridComponent implements OnInit {
 
-  private dataService = inject(DataService);
   private router = inject(Router)
 
-  protected categorias: Categorias[] = []
+  protected categorias: Categorias[] = CATEGORIAS_MOCK
 
   ngOnInit(): void {
-    this.loadCategories()
-  }
 
-  loadCategories() {
-    this.dataService.getCategorias().subscribe(
-      data => {
-        this.categorias = data;
-      }
-    )
   }
 
   goToProducts(categoryId: number) {
