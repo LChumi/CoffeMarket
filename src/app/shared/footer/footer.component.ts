@@ -22,6 +22,7 @@ import {RouterLink} from "@angular/router";
 export class FooterComponent {
 
   mail: string = 'bunnacoffeemp@gmail.com'
+  date = new Date().getFullYear();
 
   scrollToTop(): void {
     window.scrollTo({top: 0, behavior: 'smooth'});
