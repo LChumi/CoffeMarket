@@ -11,17 +11,11 @@ import {CarritoService} from "@services/carrito.service";
     RouterLink,
     RouterLinkActive,
     NgClass,
-    ShoppingCartSidebarComponent,
-    NgOptimizedImage
+    NgOptimizedImage,
+    ShoppingCartSidebarComponent
   ],
   templateUrl: './navbar.component.html',
   styles: [`
-    .active-link {
-      text-decoration: underline;
-      color: #c4b89b;
-      transition: color 0.3s ease, text-decoration 0.3s ease;
-    }
-
     svg-shop {
       color: #c4b89b;
       transition: color 0.3s ease;

@@ -47,6 +47,14 @@ module.exports = {
         'slide-in-right': 'slideInRight 0.4s ease-out forwards',
         'slide-in-left': 'slideInLeft 0.4s ease-out forwards',
       },
+      zIndex: {
+        base: '0',
+        header: '50',
+        dropdown: '100',
+        overlay: '1000',
+        modal: '1100',
+        critical: '9999',
+      }
     },
   },
   plugins: [],

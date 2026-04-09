@@ -9,20 +9,9 @@ import {REDES_MOCK} from "@mocks/redes";
     RouterLink
   ],
   templateUrl: './footer.component.html',
-  styles: `
-    .icon-mask {
-      -webkit-mask-repeat: no-repeat;
-      -webkit-mask-position: center;
-      -webkit-mask-size: contain;
-      mask-repeat: no-repeat;
-      mask-position: center;
-      mask-size: contain;
-    }
-  `
 })
 export class FooterComponent {
 
-  mail: string = 'bunnacoffeemp@gmail.com'
   date = new Date().getFullYear();
 
   scrollToTop(): void {
