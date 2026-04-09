@@ -1,56 +1,69 @@
-<nav class="bg-white dark:bg-gray-700 shadow-md">
+<nav class="sticky top-0 z-50 bg-white/90 dark:bg-[#1F1B19]/95 backdrop-blur-md border-b border-[#B3977E]/20 shadow-sm">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex justify-between items-center h-16">
 
       <!-- Botón móvil -->
       <div class="sm:hidden">
         <button type="button" (click)="mobileMenu = !mobileMenu"
-                class="p-2 rounded-md text-gray-700 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-[#B3977E] transition">
+                class="p-2 rounded-lg text-[#5C4A3A] dark:text-[#D4C0AF]
+                       hover:bg-[#B3977E]/10 dark:hover:bg-[#B3977E]/15
+                       focus:outline-none focus:ring-2 focus:ring-[#B3977E]/40 transition">
           <span class="sr-only">Abrir menú</span>
           @if (!mobileMenu) {
-            <!-- Icono hamburguesa -->
-            <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2"
-                 viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round"
-                    d="M4 6h16M4 12h16M4 18h16"/>
+            <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
             </svg>
           }
           @if (mobileMenu) {
-            <!-- Icono cerrar -->
-            <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2"
-                 viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round"
-                    d="M6 18L18 6M6 6l12 12"/>
+            <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
             </svg>
           }
         </button>
       </div>
 
       <!-- Logo -->
-      <div class="flex items-center">
-        <a [routerLink]="['home']" aria-label="Ir a Inicio">
-          <img ngSrc="/favicon48x48.png"
-               alt="Logo Bunna"
-               loading="eager"
-               decoding="async"
-               class="w-auto max-w-[120px] transition-transform duration-300 hover:scale-105" height="48" width="48"/>
-        </a>
-      </div>
+      <a [routerLink]="['home']" aria-label="Ir a Inicio"
+         class="flex items-center gap-2.5 group">
+        <div class="w-9 h-9 rounded-[10px] bg-gradient-to-br from-[#B3977E] to-[#8B6E56]
+                    flex items-center justify-center
+                    transition-transform duration-200 group-hover:scale-105">
+          <img ngSrc="/favicon48x48.png" alt="Logo Bunna"
+               loading="eager" decoding="async"
+               height="28" width="28" class="rounded-md"/>
+        </div>
+        <div class="hidden sm:block leading-tight">
+          <p class="text-[17px] font-bold text-[#2D1F14] dark:text-[#F5EDE6] tracking-tight">Bunna</p>
+          <p class="text-[10px] tracking-widest text-[#B3977E] uppercase -mt-0.5">Café Especialidad</p>
+        </div>
+      </a>
 
       <!-- Links desktop -->
-      <div class="hidden sm:flex sm:space-x-6">
-        <a [routerLink]="['/home']" routerLinkActive="active-link"
-           class="px-3 py-2 text-sm font-medium text-gray-700 dark:text-white hover:text-[#B3977E] transition">
+      <div class="hidden sm:flex sm:items-center sm:gap-1">
+        <a [routerLink]="['/home']" routerLinkActive="!text-[#8B6E56] !bg-[#B3977E]/10 font-semibold"
+           class="flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-sm font-medium
+                  text-[#5C4A3A] dark:text-[#D4C0AF]
+                  hover:bg-[#B3977E]/10 hover:text-[#B3977E]
+                  dark:hover:bg-[#B3977E]/15 dark:hover:text-[#D4A98A]
+                  transition-all duration-150">
           Inicio
         </a>
-        <a [routerLink]="['/about']" routerLinkActive="active-link"
-           class="px-3 py-2 text-sm font-medium text-gray-500 dark:text-white hover:text-[#B3977E] transition">
-          Quienes Somos
+        <a [routerLink]="['/about']" routerLinkActive="!text-[#8B6E56] !bg-[#B3977E]/10 font-semibold"
+           class="flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-sm font-medium
+                  text-[#5C4A3A] dark:text-[#D4C0AF]
+                  hover:bg-[#B3977E]/10 hover:text-[#B3977E]
+                  dark:hover:bg-[#B3977E]/15 dark:hover:text-[#D4A98A]
+                  transition-all duration-150">
+          Quiénes Somos
         </a>
-        <a [routerLink]="['/products']" routerLinkActive="active-link"
-           class="px-3 py-2 text-sm font-medium text-gray-500 dark:text-white hover:text-[#B3977E] flex items-center gap-1 transition">
+        <a [routerLink]="['/products']" routerLinkActive="!text-[#8B6E56] !bg-[#B3977E]/10 font-semibold"
+           class="flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-sm font-medium
+                  text-[#5C4A3A] dark:text-[#D4C0AF]
+                  hover:bg-[#B3977E]/10 hover:text-[#B3977E]
+                  dark:hover:bg-[#B3977E]/15 dark:hover:text-[#D4A98A]
+                  transition-all duration-150">
           Productos
-          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+          <svg class="w-4 h-4 opacity-70" fill="currentColor" viewBox="0 0 24 24">
             <path fill-rule="evenodd"
                   d="M14 7h-4v3a1 1 0 0 1-2 0V7H6a1 1 0 0 0-.997.923l-.917 11.924A2 2 0 0 0 6.08 22h11.84a2 2 0 0 0 1.994-2.153l-.917-11.924A1 1 0 0 0 18 7h-2v3a1 1 0 1 1-2 0V7Zm-2-3a2 2 0 0 0-2 2v1H8V6a4 4 0 0 1 8 0v1h-2V6a2 2 0 0 0-2-2Z"
                   clip-rule="evenodd"/>
@@ -58,63 +71,64 @@
         </a>
       </div>
 
-      <!-- Íconos sociales + carrito -->
-      <div class="flex items-center gap-3">
+      <!-- Acciones -->
+      <div class="flex items-center gap-1.5">
+
         <!-- Facebook -->
         <a href="https://www.facebook.com/BunnaCafeEspecialidad"
-           class="p-2 rounded-full
-          bg-gray-100 dark:bg-[#B3977E]
-          text-blue-700 dark:text-blue-700
-          shadow-md
-          hover:bg-blue-600 hover:text-white
-          transition"
+           class="w-9 h-9 rounded-[10px] flex items-center justify-center
+                  text-[#7A5F4A] dark:text-[#B3977E]
+                  border border-[#B3977E]/25 dark:border-[#B3977E]/25
+                  hover:bg-[#B3977E]/10 hover:text-[#B3977E]
+                  dark:hover:bg-[#B3977E]/15 dark:hover:border-[#B3977E]/45
+                  transition-all duration-150"
            aria-label="Facebook">
-        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-            <path fill-rule="evenodd"
-                  d="M13.135 6H15V3h-1.865a4.147 4.147 0 0 0-4.142 4.142V9H7v3h2v9.938h3V12h2.021l.592-3H12V6.591A.6.6 0 0 1 12.592 6h.543Z"
-                  clip-rule="evenodd"/>
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+            <path fill-rule="evenodd" d="M13.135 6H15V3h-1.865a4.147 4.147 0 0 0-4.142 4.142V9H7v3h2v9.938h3V12h2.021l.592-3H12V6.591A.6.6 0 0 1 12.592 6h.543Z" clip-rule="evenodd"/>
           </svg>
         </a>
+
         <!-- Instagram -->
         <a href="https://www.instagram.com/bunnacafeec/"
-           class="p-2 rounded-full
-          bg-gray-100 dark:bg-[#B3977E]
-          text-pink-600 dark:text-pink-600
-          shadow-md
-          hover:bg-pink-500 hover:text-white
-          transition"
+           class="w-9 h-9 rounded-[10px] flex items-center justify-center
+                  text-[#7A5F4A] dark:text-[#B3977E]
+                  border border-[#B3977E]/25 dark:border-[#B3977E]/25
+                  hover:bg-[#B3977E]/10 hover:text-[#B3977E]
+                  dark:hover:bg-[#B3977E]/15 dark:hover:border-[#B3977E]/45
+                  transition-all duration-150"
            aria-label="Instagram">
-        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-            <path fill-rule="evenodd"
-                  d="M3 8a5 5 0 0 1 5-5h8a5 5 0 0 1 5 5v8a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5V8Zm5-3a3 3 0 0 0-3 3v8a3 3 0 0 0 3 3h8a3 3 0 0 0 3-3V8a3 3 0 0 0-3-3H8Zm7.597 2.214a1 1 0 0 1 1-1h.01a1 1 0 1 1 0 2h-.01a1 1 0 0 1-1-1ZM12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm-5 3a5 5 0 1 1 10 0 5 5 0 0 1-10 0Z"
-                  clip-rule="evenodd"/>
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+            <path fill-rule="evenodd" d="M3 8a5 5 0 0 1 5-5h8a5 5 0 0 1 5 5v8a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5V8Zm5-3a3 3 0 0 0-3 3v8a3 3 0 0 0 3 3h8a3 3 0 0 0 3-3V8a3 3 0 0 0-3-3H8Zm7.597 2.214a1 1 0 0 1 1-1h.01a1 1 0 1 1 0 2h-.01a1 1 0 0 1-1-1ZM12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm-5 3a5 5 0 1 1 10 0 5 5 0 0 1-10 0Z" clip-rule="evenodd"/>
           </svg>
         </a>
+
+        <!-- Separador -->
+        <div class="w-px h-5 bg-[#B3977E]/25 mx-1"></div>
+
         <!-- Carrito -->
         <div class="relative">
-          <button
-            (click)="visibleSidebar = true"
-            class="p-2 rounded-full
-         bg-gray-100 dark:dark:bg-[#B3977E]
-         text-green-900
-         shadow-md
-         hover:bg-[#B3977E] hover:text-white
-         transition"
-            aria-label="Carrito">
-          <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <button (click)="visibleSidebar = true"
+                  class="flex items-center gap-2 px-3.5 py-2 rounded-[10px] text-sm font-semibold
+                         bg-[#B3977E] text-white
+                         dark:bg-[#B3977E]/20 dark:text-[#D4A98A] dark:border dark:border-[#B3977E]/35
+                         hover:bg-[#8B6E56] dark:hover:bg-[#B3977E]/30
+                         transition-all duration-150 hover:-translate-y-px"
+                  aria-label="Carrito">
+            <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round"
                     d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
             </svg>
+            <span class="hidden sm:inline">Carrito</span>
           </button>
 
-          @if (cantidadItems >0){
-            <span class="absolute -top-1 -right-1
-             bg-[#B3977E]
-             text-white
-             text-xs font-semibold
-             px-1.5 py-0.5
-             rounded-full
-             ring-2 ring-white dark:ring-gray-800">
+          @if (cantidadItems > 0) {
+            <span class="absolute -top-1.5 -right-1.5
+                         bg-red-500 text-white
+                         text-[10px] font-bold
+                         w-[18px] h-[18px]
+                         flex items-center justify-center
+                         rounded-full
+                         ring-2 ring-white dark:ring-[#1F1B19]">
               {{ cantidadItems }}
             </span>
           }
@@ -124,33 +138,36 @@
       </div>
     </div>
   </div>
+
   <!-- Menú móvil -->
   @if (mobileMenu) {
-    <div class="sm:hidden transition-all duration-300 ease-in-out" id="mobile-menu">
-      <div class="pt-2 pb-4 space-y-1">
-        <a [routerLink]="['/home']" routerLinkActive="active-link"
-           [routerLinkActiveOptions]="{ exact: true }"
-           [ngClass]="{ 'active-link': router.url === '/home' }"
-           class="block px-4 py-2 text-base font-medium text-gray-700 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-600 rounded-md transition">
+    <div class="sm:hidden border-t border-[#B3977E]/15 dark:border-[#B3977E]/10" id="mobile-menu">
+      <div class="px-3 py-3 space-y-1">
+        <a [routerLink]="['/home']" routerLinkActive="bg-[#B3977E]/10 !text-[#8B6E56] font-semibold"
+           [ngClass]="{ 'bg-[#B3977E]/10 !text-[#8B6E56]': router.url === '/home' }"
+           class="flex items-center px-3 py-2.5 rounded-lg text-sm font-medium
+                  text-[#5C4A3A] dark:text-[#D4C0AF]
+                  hover:bg-[#B3977E]/10 hover:text-[#B3977E]
+                  dark:hover:bg-[#B3977E]/15 transition-all">
           Inicio
         </a>
-
-        <a [routerLink]="['/about']" routerLinkActive="active-link"
-           [routerLinkActiveOptions]="{ exact: true }"
-           [ngClass]="{ 'active-link': router.url === '/about' }"
-           class="block px-4 py-2 text-base font-medium text-gray-700 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-600 rounded-md transition">
-          Quienes Somos
+        <a [routerLink]="['/about']" routerLinkActive="bg-[#B3977E]/10 !text-[#8B6E56] font-semibold"
+           [ngClass]="{ 'bg-[#B3977E]/10 !text-[#8B6E56]': router.url === '/about' }"
+           class="flex items-center px-3 py-2.5 rounded-lg text-sm font-medium
+                  text-[#5C4A3A] dark:text-[#D4C0AF]
+                  hover:bg-[#B3977E]/10 hover:text-[#B3977E]
+                  dark:hover:bg-[#B3977E]/15 transition-all">
+          Quiénes Somos
         </a>
-
-        <a [routerLink]="['/products']" routerLinkActive="active-link"
-           [routerLinkActiveOptions]="{ exact: true }"
-           [ngClass]="{ 'active-link': router.url === '/products' }"
-           class="block px-4 py-2 text-base font-medium text-gray-700 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-600 rounded-md flex items-center gap-2 transition">
+        <a [routerLink]="['/products']" routerLinkActive="bg-[#B3977E]/10 !text-[#8B6E56] font-semibold"
+           [ngClass]="{ 'bg-[#B3977E]/10 !text-[#8B6E56]': router.url === '/products' }"
+           class="flex items-center gap-2 px-3 py-2.5 rounded-lg text-sm font-medium
+                  text-[#5C4A3A] dark:text-[#D4C0AF]
+                  hover:bg-[#B3977E]/10 hover:text-[#B3977E]
+                  dark:hover:bg-[#B3977E]/15 transition-all">
           Productos
-          <svg class="w-5 h-5 text-gray-700 dark:text-white" fill="currentColor" viewBox="0 0 24 24">
-            <path fill-rule="evenodd"
-                  d="M14 7h-4v3a1 1 0 0 1-2 0V7H6a1 1 0 0 0-.997.923l-.917 11.924A2 2 0 0 0 6.08 22h11.84a2 2 0 0 0 1.994-2.153l-.917-11.924A1 1 0 0 0 18 7h-2v3a1 1 0 1 1-2 0V7Zm-2-3a2 2 0 0 0-2 2v1H8V6a4 4 0 0 1 8 0v1h-2V6a2 2 0 0 0-2-2Z"
-                  clip-rule="evenodd"/>
+          <svg class="w-4 h-4 opacity-60" fill="currentColor" viewBox="0 0 24 24">
+            <path fill-rule="evenodd" d="M14 7h-4v3a1 1 0 0 1-2 0V7H6a1 1 0 0 0-.997.923l-.917 11.924A2 2 0 0 0 6.08 22h11.84a2 2 0 0 0 1.994-2.153l-.917-11.924A1 1 0 0 0 18 7h-2v3a1 1 0 1 1-2 0V7Zm-2-3a2 2 0 0 0-2 2v1H8V6a4 4 0 0 1 8 0v1h-2V6a2 2 0 0 0-2-2Z" clip-rule="evenodd"/>
           </svg>
         </a>
       </div>
