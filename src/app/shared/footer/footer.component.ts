@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {RouterLink} from "@angular/router";
+import {REDES_MOCK} from "@mocks/redes";
 
 @Component({
   selector: 'app-footer',
@@ -27,4 +28,6 @@ export class FooterComponent {
   scrollToTop(): void {
     window.scrollTo({top: 0, behavior: 'smooth'});
   }
+
+  redes = REDES_MOCK;
 }
