@@ -1,18 +1,15 @@
 <div id="page-container"
-     class="mx-auto flex min-h-screen w-full flex-col bg-gray-100 dark:bg-gray-900 dark:text-gray-100">
-  <header
-    id="page-header"
-    class="flex-none z-10 bg-white shadow-sm dark:bg-gray-700 w-full">
-      <app-navbar></app-navbar>
+     class="mx-auto flex min-h-screen w-full flex-col bg-[#FAF8F5] dark:bg-[#0F0D0C] dark:text-gray-100">
+
+  <header id="page-header" class="flex-none w-full">
+    <app-navbar></app-navbar>
   </header>
 
-  <main>
+  <main class="flex-1">
     <h1 class="sr-only">Bienvenido a Bunna Shop</h1>
-
-    <!-- Page Content -->
     <div>
       <app-carousel></app-carousel>
-      <section class="mt-8">
+      <section class="mt-8 space-y-0">
         <app-boxes-icons></app-boxes-icons>
         <app-categories-grid></app-categories-grid>
       </section>
@@ -20,7 +17,7 @@
     <app-whatsapp-button></app-whatsapp-button>
   </main>
 
-  <footer class="mt-auto w-full bg-white dark:bg-gray-700">
+  <footer class="mt-auto w-full bg-white dark:bg-[#1A1512] border-t border-[#B3977E]/15">
     <app-footer></app-footer>
   </footer>
 </div>
