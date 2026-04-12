@@ -2,16 +2,28 @@
 <div class="container mx-auto px-4 py-10 lg:px-6 lg:py-16 xl:max-w-7xl">
 
   <!-- Header sección -->
-  <div class="mb-8 flex items-end justify-between">
+  <div class="mb-10 flex items-end justify-between gap-6">
+    <!-- Título -->
     <div>
-      <p class="mb-1 text-xs font-semibold uppercase tracking-[0.15em] text-[#B3977E]">
+      <p class="mb-2 text-xs font-semibold uppercase tracking-widest text-[#B3977E]">
         Nuestra selección
       </p>
       <h2 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-3xl">
         Categorías
       </h2>
     </div>
-    <div class="h-px flex-1 mx-6 bg-gradient-to-r from-[#B3977E]/30 to-transparent"></div>
+
+    <!-- Línea decorativa -->
+    <div class="hidden sm:block h-px flex-1 bg-gradient-to-r from-[#B3977E]/40 via-[#B3977E]/20 to-transparent"></div>
+
+    <!-- Botón -->
+    <a
+      href="/products"
+      class="inline-flex items-center gap-2 rounded-full border border-[#B3977E] px-5 py-2 text-sm font-medium text-[#B3977E] transition-all duration-300 hover:bg-[#B3977E] hover:text-white hover:shadow-md focus:outline-none focus:ring-2 focus:ring-[#B3977E]/50"
+    >
+      Ver todo
+      <span class="text-lg leading-none">→</span>
+    </a>
   </div>
 
   <!-- Grid -->
