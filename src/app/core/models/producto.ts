@@ -2,7 +2,7 @@ import {Atributos} from "@models/dto/atributos";
 import {Variante} from "@models/dto/variante";
 
 export interface Producto {
-  id:                 any;
+  id?:                 any;
   sku:                string;
   item:               string;
   descripcion:        string;
@@ -10,8 +10,8 @@ export interface Producto {
   categoriaId:        number;
   disponible:         boolean;
   stock:              number;
-  stockComprometido:  number;
-  stockDisponible: number;
+  stockComprometido?:  number;
+  stockDisponible?: number;
 
   etiquetas:   string[];
   atributos:   Atributos[];
