@@ -35,13 +35,13 @@ export class AdminOrdersComponent implements OnInit {
   showItemsModal: boolean = false;
   isSaving = false;
   // Filtros y tabs
-  activeTab: 'todos' | 'pendientes' | 'finalizados'  | 'expirados' = 'todos';
+  activeTab: 'todos' | 'pendientes' | 'finalizados' | 'expirados' = 'todos';
 
   tabs = [
-    { label: 'Todos', value: 'todos' },
-    { label: 'Pendientes', value: 'pendientes' },
-    { label: 'Finalizados', value: 'finalizados' },
-    { label: 'Expirados', value: 'expirados' },
+    {label: 'Todos', value: 'todos'},
+    {label: 'Pendientes', value: 'pendientes'},
+    {label: 'Finalizados', value: 'finalizados'},
+    {label: 'Expirados', value: 'expirados'},
   ] as const;
 
   ngOnInit() {
@@ -55,7 +55,11 @@ export class AdminOrdersComponent implements OnInit {
           ? true
           : this.activeTab === 'finalizados'
             ? p.estado === true
-            : p.estado === false;
+            : this.activeTab === 'pendientes'
+              ? p.estado === false
+              : this.activeTab === 'expirados'
+                ? p.estado === null
+                : false;
 
       const q = this.searchOrder.toLowerCase();
       const matchSearch =
@@ -74,7 +78,7 @@ export class AdminOrdersComponent implements OnInit {
   }
 
   editarPedido(pedido: Pedido) {
-    this.pedidoSelected = { ...pedido };
+    this.pedidoSelected = {...pedido};
     this.docAutorizaqcion = pedido.docAutorizacion;
     if (!this.pedidoSelected.metodoPago) {
       this.pedidoSelected.metodoPago = 'Efectivo'; // valor por defecto
