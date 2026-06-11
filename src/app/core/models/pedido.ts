@@ -7,7 +7,7 @@ export interface Pedido {
   clienteId:          string;
   items:              ItemCarrito[];
 
-  estado:             boolean;
+  estado:             boolean | null;
   metodoPago:         string;
   creadoEn:           any;
 

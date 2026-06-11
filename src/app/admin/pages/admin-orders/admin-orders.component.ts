@@ -35,12 +35,13 @@ export class AdminOrdersComponent implements OnInit {
   showItemsModal: boolean = false;
   isSaving = false;
   // Filtros y tabs
-  activeTab: 'todos' | 'pendientes' | 'finalizados' = 'todos';
+  activeTab: 'todos' | 'pendientes' | 'finalizados'  | 'expirados' = 'todos';
 
   tabs = [
     { label: 'Todos', value: 'todos' },
     { label: 'Pendientes', value: 'pendientes' },
     { label: 'Finalizados', value: 'finalizados' },
+    { label: 'Expirados', value: 'expirados' },
   ] as const;
 
   ngOnInit() {

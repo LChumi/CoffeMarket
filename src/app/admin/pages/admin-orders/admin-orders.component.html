@@ -16,6 +16,12 @@
           <p class="text-xs text-[#a3866f]">Pendientes</p>
           <p class="text-xl font-bold text-[#5c3a1e]">{{ pedidos | estadoCount:false }}</p>
         </div>
+        <div class="rounded-2xl border border-[#ff6347] bg-white px-4 py-3">
+          <p class="text-xs text-[#ff6347]">Expirados</p>
+          <p class="text-xl font-bold text-[#ff6347]">
+            {{ pedidos | estadoCount:null }}
+          </p>
+        </div>
       </div>
     </div>
 
@@ -71,21 +77,18 @@
                 <td class="px-6 py-4 font-medium text-[#2c1f14]">${{ pedido.total | number:'1.2-2' }}</td>
                 <td class="px-6 py-4 text-[#5c4a38]">{{ pedido.metodoPago }}</td>
                 <td class="px-6 py-4">
-                  @if (pedido.estado) {
+                <td class="px-6 py-4">
+                  @if (pedido.estado === true) {
                     <span class="inline-flex items-center gap-2 rounded-full bg-green-100 px-3 py-1 text-xs font-semibold text-green-700">
-                      <svg class="h-3 w-3" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/>
-                      </svg>
                       Finalizado
                     </span>
-                  } @else {
-                    <span class="inline-flex items-center gap-2 rounded-full bg-[#fff8e1] px-3 py-1 text-xs font-semibold text-[#a3866f]">
-                      <svg class="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <circle cx="12" cy="12" r="9" stroke-width="2"/>
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3"/>
-                      </svg>
+                  } @else if (pedido.estado === false) {
+                    <span class="inline-flex items-center gap-2 rounded-full bg-yellow-100 px-3 py-1 text-xs font-semibold text-yellow-700">
                       Pendiente
                     </span>
+                  } @else {
+                    <span class="inline-flex items-center gap-2 rounded-full bg-red-100 px-3 py-1 text-xs font-semibold text-red-700">
+                      Expirado</span>
                   }
                 </td>
                 <td class="px-6 py-4 text-[#a3866f]">{{ pedido.creadoEn | date:'dd MMM yyyy' }}</td>
