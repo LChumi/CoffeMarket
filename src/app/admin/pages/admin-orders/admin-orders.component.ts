@@ -2,18 +2,21 @@ import {Component, inject, OnInit} from '@angular/core';
 import {PedidoService} from "@services/pedido.service";
 import {ToastrService} from "ngx-toastr";
 import {Pedido} from "@models/pedido";
-import {CurrencyPipe, DatePipe} from "@angular/common";
+import {DatePipe, DecimalPipe} from "@angular/common";
 import {FormsModule} from "@angular/forms";
 import {ProductsOrderModalComponent} from "@admin/components/products-order-modal/products-order-modal.component";
 import {ItemCarrito} from "@models/dto/item-carrito";
+import {finalize} from "rxjs";
+import {EstadoCountPipe} from "@shared/pipes/estado-count.pipe";
 
 @Component({
   selector: 'app-admin-orders',
   imports: [
     DatePipe,
-    CurrencyPipe,
     FormsModule,
-    ProductsOrderModalComponent
+    ProductsOrderModalComponent,
+    EstadoCountPipe,
+    DecimalPipe
   ],
   templateUrl: './admin-orders.component.html',
   styles: ``
@@ -24,65 +27,90 @@ export class AdminOrdersComponent implements OnInit {
   private toastr = inject(ToastrService)
 
   pedidos: Pedido[] = [];
-  pedidosFiltrados: Pedido[] = [];
   pedidoSelected: Pedido | null = null;
   modalPedido = false;
   docAutorizaqcion: string = "";
   searchOrder: string = "";
   selectedItems: ItemCarrito[] = [];
   showItemsModal: boolean = false;
+  isSaving = false;
+  // Filtros y tabs
+  activeTab: 'todos' | 'pendientes' | 'finalizados' = 'todos';
+
+  tabs = [
+    { label: 'Todos', value: 'todos' },
+    { label: 'Pendientes', value: 'pendientes' },
+    { label: 'Finalizados', value: 'finalizados' },
+  ] as const;
 
   ngOnInit() {
-    this.getPedidos()
+    this.getPedidos();
   }
 
-  editarPedido(pedido: Pedido) {
-    this.pedidoSelected = pedido;
-    this.modalPedido = true;
-  }
+  get pedidosFiltrados(): Pedido[] {
+    return this.pedidos.filter((p) => {
+      const matchTab =
+        this.activeTab === 'todos'
+          ? true
+          : this.activeTab === 'finalizados'
+            ? p.estado === true
+            : p.estado === false;
 
-  cerrarModal() {
-    this.modalPedido = false;
-    this.docAutorizaqcion = '';
-  }
+      const q = this.searchOrder.toLowerCase();
+      const matchSearch =
+        !q || p.docNum?.toString().includes(q) || p.clienteId?.toLowerCase().includes(q);
 
-  actualizar() {
-    if (this.docAutorizaqcion != "" && this.pedidoSelected) {
-      this.pedidoSelected.docAutorizacion = this.docAutorizaqcion.toUpperCase()
-      this.pedidoService.update(this.pedidoSelected.id, this.pedidoSelected).subscribe({
-        next: data => {
-          this.toastr.success(`Se registro la autorizacion al pedido ${data.docNum}`, 'Pedido actualizado');
-          this.getPedidos()
-        }
-      })
-    }
+      return matchTab && matchSearch;
+    });
   }
 
   getPedidos() {
-    this.pedidoService.getNotFinished().subscribe({
-      next: data => {
+    this.pedidoService.getAll().subscribe({
+      next: (data) => {
         this.pedidos = data;
-        this.pedidosFiltrados = data
-        this.modalPedido = false
-      }
-    })
+      },
+    });
   }
 
-  filtrarPedidos() {
-    const filtro = this.searchOrder.trim().toLowerCase();
-    this.pedidos = this.pedidosFiltrados.filter(p =>
-      p.docNum.toLowerCase().includes(filtro)
-    )
+  editarPedido(pedido: Pedido) {
+    this.pedidoSelected = { ...pedido };
+    this.docAutorizaqcion = pedido.docAutorizacion;
+    if (!this.pedidoSelected.metodoPago) {
+      this.pedidoSelected.metodoPago = 'Efectivo'; // valor por defecto
+    }
+    this.modalPedido = true;
   }
 
-  openItems(items: ItemCarrito[]){
-    this.selectedItems = items;
+  verItems(pedido: Pedido) {
+    this.selectedItems = pedido.items;
     this.showItemsModal = true;
   }
 
-  closeModal(){
-    this.showItemsModal = false;
-    this.selectedItems = []
+  guardarPedido() {
+    if (!this.pedidoSelected) return;
+    this.isSaving = true;
+
+    const payload = {
+      ...this.pedidoSelected,
+      docAutorizacion: this.docAutorizaqcion,
+    };
+
+    this.pedidoService
+      .update(this.pedidoSelected.id, payload)
+      .pipe(finalize(() => (this.isSaving = false)))
+      .subscribe({
+        next: (value) => {
+          const idx = this.pedidos.findIndex((p) => p.id === value.id);
+          if (idx !== -1) this.pedidos[idx] = value; // usar el objeto real del backend
+          this.modalPedido = false;
+          this.toastr.success('Pedido actualizado');
+        },
+        error: () => this.toastr.error('No se pudo guardar'),
+      });
   }
 
+  closeModal() {
+    this.showItemsModal = false;
+    this.selectedItems = [];
+  }
 }

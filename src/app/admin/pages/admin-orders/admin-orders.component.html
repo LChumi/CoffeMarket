@@ -1,92 +1,130 @@
 @defer {
-  <div class="relative overflow-x-auto sm:rounded-xl bg-white shadow-md p-6">
+  <div class="min-h-screen bg-[#faf6f1] p-6">
 
     <!-- Header -->
-    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
-      <!-- Título -->
+    <div class="mb-8 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
       <div>
-        <h1 class="text-2xl font-bold text-gray-800">Pedidos pendientes</h1>
-        <p class="text-sm text-gray-500">Pendientes de verificación</p>
-        <span class="ml-2 inline-flex items-center px-2 py-0.5 text-xs font-semibold
-             bg-amber-100 text-amber-800 rounded-full">{{ pedidos.length }}</span>
+        <h1 class="text-3xl font-bold text-[#2c1f14]">Pedidos</h1>
+        <p class="mt-1 text-[#a3866f]">Gestión y seguimiento de órdenes</p>
       </div>
-
-      <!-- Search -->
-      <div class="relative w-full sm:w-80">
-        <svg
-          class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400"
-          fill="none"
-          viewBox="0 0 20 20">
-          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
-        </svg>
-
-        <input
-          type="text"
-          [(ngModel)]="searchOrder"
-          (input)="filtrarPedidos()"
-          placeholder="Buscar pedido..."
-          class="w-full rounded-lg border border-gray-300 pl-10 pr-4 py-2.5 text-sm
-               focus:ring-2 focus:ring-[#a3866f] focus:border-[#a3866f] transition"
-        />
+      <div class="flex flex-wrap gap-3">
+        <div class="rounded-2xl border border-green-200 bg-green-50 px-4 py-3">
+          <p class="text-xs text-green-600">Finalizados</p>
+          <p class="text-xl font-bold text-green-800">{{ pedidos | estadoCount:true }}</p>
+        </div>
+        <div class="rounded-2xl border border-[#ffe082] bg-[#fff8e1] px-4 py-3">
+          <p class="text-xs text-[#a3866f]">Pendientes</p>
+          <p class="text-xl font-bold text-[#5c3a1e]">{{ pedidos | estadoCount:false }}</p>
+        </div>
       </div>
-
     </div>
 
-    <!-- Table -->
-    <table class="w-full text-sm text-left text-gray-700 border-t">
-      <thead>
-      <tr>
-        <th scope="col" class="px-6 py-3 bg-[#c6b89b] text-black">Documento</th>
-        <th scope="col" class="px-6 py-3 bg-[#c6b89b] text-black">Items</th>
-        <th scope="col" class="px-6 py-3 bg-[#c6b89b] text-black">Fecha</th>
-        <th scope="col" class="px-6 py-3 bg-[#c6b89b] text-black">Ciudad</th>
-        <th scope="col" class="px-6 py-3 bg-[#c6b89b] text-black">Total</th>
-        <th scope="col" class="px-6 py-3 bg-[#c6b89b] text-black">Validar</th>
-      </tr>
-      </thead>
-      <tbody>
-        @for (pedido of pedidos; track $index) {
-          <tr class="border-b hover:bg-gray-50 transition">
-            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-              {{ pedido.docNum }}
-            </th>
-            <td class="px-6 py-4">
-              <div class="flex items-center gap-2">
-
-                <span class="text-gray-700">
-                  {{ pedido.items.length }} Items
-                </span>
-
-                <button
-                  (click)="openItems(pedido.items)"
-                  class="p-1 rounded-md text-gray-600 hover:bg-gray-100 hover:text-gray-900 transition"
-                  title="Ver items">
-
-                  <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                          d="M11 9h6m-6 3h6m-6 3h6M6.996 9h.01m-.01 3h.01m-.01 3h.01M4 5h16a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Z"/>
-                  </svg>
-
-                </button>
-
-              </div>
-            </td>
-            <td class="px-6 py-4">{{ pedido.creadoEn | date }}</td>
-            <td class="px-6 py-4">{{ pedido.ciudad }}</td>
-            <td class="px-6 py-4">{{ pedido.total | currency }}</td>
-            <td class="px-6 py-4">
-              <button (click)="editarPedido(pedido)"
-                      class="text-[#a3866f] hover:underline transition">
-                Agregar Comprobante
-              </button>
-            </td>
-          </tr>
+    <!-- Tabs + Search -->
+    <div class="mb-6 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+      <div class="flex flex-wrap gap-2">
+        @for (tab of tabs; track tab.value) {
+          <button
+            (click)="activeTab = tab.value"
+            [class]="activeTab === tab.value
+              ? 'rounded-xl bg-[#2c1f14] px-5 py-2 text-white shadow-lg'
+              : 'rounded-xl border border-[#d4c4b0] bg-white px-5 py-2 text-[#5c4a38] hover:bg-[#faf6f1]'">
+            {{ tab.label }}
+          </button>
         }
-      </tbody>
-    </table>
+      </div>
+
+      <div class="relative w-full lg:w-80">
+        <svg class="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-[#a3866f]"
+             fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M21 21l-4.35-4.35m1.85-5.15a7 7 0 11-14 0a7 7 0 0114 0z"/>
+        </svg>
+        <input
+          [(ngModel)]="searchOrder"
+          type="text"
+          placeholder="Buscar pedido..."
+          class="w-full rounded-2xl border border-[#d4c4b0] bg-white py-3 pl-11 pr-4 shadow-sm
+                 focus:outline-none focus:ring-4 focus:ring-[#d4c4b0] focus:border-[#a3866f]">
+      </div>
+    </div>
+
+    <!-- Tabla -->
+    <div class="overflow-hidden rounded-3xl border border-[#e0d4c4] bg-white shadow-sm">
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+          <tr class="border-b">
+            <th class="bg-[#c6b89b] px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-[#2c1f14]">N° Doc</th>
+            <th class="bg-[#c6b89b] px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-[#2c1f14]">Cliente</th>
+            <th class="bg-[#c6b89b] px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-[#2c1f14]">Total</th>
+            <th class="bg-[#c6b89b] px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-[#2c1f14]">Método Pago</th>
+            <th class="bg-[#c6b89b] px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-[#2c1f14]">Estado</th>
+            <th class="bg-[#c6b89b] px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-[#2c1f14]">Fecha</th>
+            <th class="bg-[#c6b89b] px-6 py-4"></th>
+          </tr>
+          </thead>
+          <tbody>
+            @for (pedido of pedidosFiltrados; track pedido.id) {
+              <tr class="border-b border-[#e8dfd4] transition hover:bg-[#faf6f1]">
+                <td class="px-6 py-4 font-semibold text-[#2c1f14]">#{{ pedido.docNum }}</td>
+                <td class="px-6 py-4 text-[#5c4a38]">{{ pedido.clienteId }}</td>
+                <td class="px-6 py-4 font-medium text-[#2c1f14]">${{ pedido.total | number:'1.2-2' }}</td>
+                <td class="px-6 py-4 text-[#5c4a38]">{{ pedido.metodoPago }}</td>
+                <td class="px-6 py-4">
+                  @if (pedido.estado) {
+                    <span class="inline-flex items-center gap-2 rounded-full bg-green-100 px-3 py-1 text-xs font-semibold text-green-700">
+                      <svg class="h-3 w-3" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/>
+                      </svg>
+                      Finalizado
+                    </span>
+                  } @else {
+                    <span class="inline-flex items-center gap-2 rounded-full bg-[#fff8e1] px-3 py-1 text-xs font-semibold text-[#a3866f]">
+                      <svg class="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="9" stroke-width="2"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3"/>
+                      </svg>
+                      Pendiente
+                    </span>
+                  }
+                </td>
+                <td class="px-6 py-4 text-[#a3866f]">{{ pedido.creadoEn | date:'dd MMM yyyy' }}</td>
+                <td class="px-6 py-4">
+                  <div class="flex items-center gap-2">
+                    <button (click)="verItems(pedido)" title="Ver pedido"
+                            class="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-50 text-blue-600 transition hover:bg-blue-100">
+                      <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M15 12a3 3 0 11-6 0a3 3 0 016 0z"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M2.458 12C3.732 7.943 7.523 5 12 5s8.268 2.943 9.542 7c-1.274 4.057-5.065 7-9.542 7s-8.268-2.943-9.542-7z"/>
+                      </svg>
+                    </button>
+                    <button (click)="editarPedido(pedido)" title="Editar pedido"
+                            class="flex h-10 w-10 items-center justify-center rounded-xl bg-[#fff8e1] text-[#a3866f] transition hover:bg-[#ffe0b2]">
+                      <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1l1-4 9.5-9.5z"/>
+                      </svg>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            } @empty {
+              <tr>
+                <td colspan="7" class="px-6 py-16 text-center text-[#a3866f]">
+                  No hay pedidos que coincidan con el filtro.
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
-} @placeholder (minimum 1000ms) {
+}@placeholder (minimum 1000ms) {
   <div class="absolute inset-0 flex items-center justify-center">
     <img [src]="'images/loading/loading.gif'" alt="Cargando..."
          decoding="async"
@@ -94,59 +132,111 @@
   </div>
 }
 
+<!-- Modal de edición -->
 @if (modalPedido && pedidoSelected) {
-  <div id="modal-pedidos" tabindex="-1"
-       class="fixed inset-0 z-50 flex items-center justify-center bg-black/30 backdrop-blur-sm">
-    <div class="bg-white rounded-xl shadow-xl w-full max-w-lg p-6">
+  <div class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
+    <div class="w-full max-w-2xl overflow-hidden rounded-3xl bg-white shadow-2xl">
+
       <!-- Header -->
-      <div class="flex items-center justify-between border-b pb-4 mb-4">
-        <h3 class="text-xl font-semibold text-gray-900">
-          Agregar Documento de Transferencia
-        </h3>
-        <button type="button"
-                (click)="cerrarModal()"
-                class="text-gray-400 hover:text-gray-600 transition">
-          <svg class="w-4 h-4" fill="none" viewBox="0 0 14 14">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-          </svg>
-          <span class="sr-only">Cerrar</span>
-        </button>
+      <div class="border-b border-[#e0d4c4] px-8 py-6">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#fff8e1]">
+              <svg class="h-6 w-6 text-[#a3866f]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5"/>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1l1-4 9.5-9.5z"/>
+              </svg>
+            </div>
+            <div>
+              <h2 class="text-xl font-bold text-[#2c1f14]">Editar Pedido</h2>
+              <p class="text-sm text-[#a3866f]">Pedido #{{ pedidoSelected.docNum }}</p>
+            </div>
+          </div>
+          <button (click)="modalPedido = false"
+                  class="flex h-10 w-10 items-center justify-center rounded-xl border border-[#e0d4c4] text-[#a3866f] transition hover:bg-[#faf6f1]">
+            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+            </svg>
+          </button>
+        </div>
       </div>
 
       <!-- Body -->
-      <div class="space-y-4">
-        <div class="text-sm text-gray-700">
-          <p><strong>Documento:</strong> {{ pedidoSelected.docNum }}</p>
-          <p><strong>Total:</strong> {{ pedidoSelected.total | currency }}</p>
+      <div class="p-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div class="md:col-span-2">
+            <label class="mb-2 block text-sm font-medium text-[#5c4a38]">Documento de autorización</label>
+            <input [(ngModel)]="docAutorizaqcion" type="text" placeholder="001-001-000000001"
+                   class="w-full rounded-2xl border border-[#d4c4b0] bg-white px-4 py-3 text-sm shadow-sm
+                          focus:border-[#a3866f] focus:outline-none focus:ring-4 focus:ring-[#d4c4b0]">
+          </div>
+          <div>
+            <label class="mb-2 block text-sm font-medium text-[#5c4a38]">Método de pago</label>
+            <select [(ngModel)]="pedidoSelected.metodoPago"
+                    class="w-full rounded-2xl border border-[#d4c4b0] bg-white px-4 py-3 text-sm shadow-sm
+                           focus:border-[#a3866f] focus:outline-none focus:ring-4 focus:ring-[#d4c4b0]">
+              <option>Efectivo</option>
+              <option>Transferencia</option>
+              <option>Tarjeta</option>
+            </select>
+          </div>
+          <div>
+            <label class="mb-2 block text-sm font-medium text-[#5c4a38]">Estado</label>
+            <select [(ngModel)]="pedidoSelected.estado"
+                    class="w-full rounded-2xl border border-[#d4c4b0] bg-white px-4 py-3 text-sm shadow-sm
+                           focus:border-[#a3866f] focus:outline-none focus:ring-4 focus:ring-[#d4c4b0]">
+              <option [ngValue]="false">Pendiente</option>
+              <option [ngValue]="true">Finalizado</option>
+            </select>
+          </div>
+          <div>
+            <label class="mb-2 block text-sm font-medium text-[#5c4a38]">Teléfono</label>
+            <input [(ngModel)]="pedidoSelected.telefono" type="text"
+                   class="w-full rounded-2xl border border-[#d4c4b0] bg-white px-4 py-3 text-sm shadow-sm
+                          focus:border-[#a3866f] focus:outline-none focus:ring-4 focus:ring-[#d4c4b0]">
+          </div>
+          <div>
+            <label class="mb-2 block text-sm font-medium text-[#5c4a38]">Ciudad</label>
+            <input [(ngModel)]="pedidoSelected.ciudad" type="text"
+                   class="w-full rounded-2xl border border-[#d4c4b0] bg-white px-4 py-3 text-sm shadow-sm
+                          focus:border-[#a3866f] focus:outline-none focus:ring-4 focus:ring-[#d4c4b0]">
+          </div>
+          <div class="md:col-span-2">
+            <label class="mb-2 block text-sm font-medium text-[#5c4a38]">Dirección</label>
+            <input [(ngModel)]="pedidoSelected.direccion" type="text"
+                   class="w-full rounded-2xl border border-[#d4c4b0] bg-white px-4 py-3 text-sm shadow-sm
+                          focus:border-[#a3866f] focus:outline-none focus:ring-4 focus:ring-[#d4c4b0]">
+          </div>
         </div>
+      </div>
 
-        <div>
-          <label for="doc-aut" class="block text-sm font-medium text-gray-700 mb-1">
-            Número de Autorización
-          </label>
-          <input
-            type="text"
-            id="doc-aut"
-            [(ngModel)]="docAutorizaqcion"
-            autocomplete="off"
-            class="uppercase bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#a3866f] focus:border-[#a3866f] block w-full p-2.5"
-            placeholder="Ingrese el número de autorización"
-          >
-        </div>
-
-        @if (docAutorizaqcion != '') {
-          <button
-            type="submit"
-            (click)="actualizar()"
-            class="w-full bg-[#B3977E] hover:bg-[#a3866f] text-white font-semibold py-3 rounded-lg transition">
-            Guardar Autorización
-          </button>
-        }
+      <!-- Footer -->
+      <div class="flex flex-col-reverse gap-3 border-t border-[#e0d4c4] bg-[#faf6f1] px-8 py-6 sm:flex-row sm:justify-end">
+        <button (click)="modalPedido = false"
+                class="rounded-2xl border border-[#d4c4b0] bg-white px-6 py-3 text-sm font-medium text-[#5c4a38] transition hover:bg-[#faf6f1]">
+          Cancelar
+        </button>
+        <button (click)="guardarPedido()" [disabled]="isSaving"
+                class="rounded-2xl bg-[#2c1f14] px-6 py-3 text-sm font-medium text-white shadow-lg transition hover:bg-[#3d2c1e] disabled:cursor-not-allowed disabled:opacity-50">
+          @if (isSaving) {
+            <span class="flex items-center gap-2">
+              <svg class="h-4 w-4 animate-spin" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path>
+              </svg>
+              Guardando...
+            </span>
+          } @else {
+            Guardar cambios
+          }
+        </button>
       </div>
     </div>
   </div>
 }
+
 <app-products-order-modal
   [items]="selectedItems"
   [visible] = showItemsModal
