@@ -143,7 +143,7 @@ export default class CheckoutComponent implements OnInit {
         if (result) {
           this.clarity.event('Checkout con cliente existente');
           this.clarity.setTag('checkoutStatus', 'cliente_existente');
-          this.crearPedido(result.id, form);
+          this.crearPedido(result.nombre, form);
         } else {
           const nuevoCliente: Cliente = {
             id: null,
@@ -160,7 +160,7 @@ export default class CheckoutComponent implements OnInit {
             next: (clienteGuardado) => {
               this.clarity.event('Checkout con nuevo cliente');
               this.clarity.setTag('checkoutStatus', 'nuevo_cliente');
-              this.crearPedido(clienteGuardado.id, form);
+              this.crearPedido(clienteGuardado.nombre, form);
             }
           });
         }
