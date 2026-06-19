@@ -92,7 +92,7 @@ export default class OrderReceivedComponent implements OnInit {
 
   enviarComprobantePorWhatsApp(pedido: string) {
     const telefono = '593979126861';
-    const mensaje = encodeURIComponent(`Hola, aquí está mi comprobante del pedido ${pedido}`);
+    const mensaje = encodeURIComponent(`Hola, realicé el pedido ${pedido}. Quisiera coordinar el pago.`);
     const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
     const url = isMobile
       ? `https://wa.me/${telefono}?text=${mensaje}`
