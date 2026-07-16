@@ -1,33 +1,53 @@
 @if (showModal) {
-  <div class="fixed inset-0 flex items-center justify-center z-50 bg-black/60 shadow-md animate-fade-in">
-    <div class="bg-black rounded-lg p-6 shadow-xl text-center max-w-md animate-fade-in">
-      <div class="flex flex-col items-center space-y-4">
-        <!-- Ícono + texto -->
-        <div class="flex items-center space-x-2">
-          <svg class="w-6 h-6 text-yellow-200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M13 7h6l2 4m-8-4v8m0-8V6a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v9h2m8 0H9m4 0h2m4 0h2v-4m0 0h-5m3.5 5.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0Zm-10 0a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0Z"/>
-          </svg>
-          <p class="text-sm md:text-base font-medium text-yellow-200">
-            🎉 Black Friday: Envíos gratis todo el día
-          </p>
-        </div>
+  <div
+    class="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-3 sm:p-4 animate-fade-in"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="promo-title"
+    (click)="close()"
+  >
+    <div
+      class="relative w-full max-w-xs sm:max-w-sm overflow-hidden rounded-2xl bg-[#1A1512] border border-yellow-200/20 shadow-2xl shadow-yellow-200/10 animate-fade-in"
+      (click)="$event.stopPropagation()"
+    >
+      <!-- Botón cerrar flotando sobre la imagen -->
+      <button
+        (click)="close()"
+        autofocus
+        aria-label="Cerrar"
+        class="absolute top-3 right-3 z-10 flex h-9 w-9 items-center justify-center rounded-full bg-black/50 text-white backdrop-blur-sm transition-transform hover:scale-110 hover:bg-black/70 focus:outline-none focus:ring-2 focus:ring-yellow-200"
+      >
+        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+          <path d="M18 6 6 18M6 6l12 12"/>
+        </svg>
+      </button>
 
-        <!-- Imagen del logo -->
+      <!-- Imagen a todo el ancho, proporción real 1080x1350 (4:5) -->
+      <div class="relative w-full aspect-[4/5] bg-black">
         <img
-          src="/images/background/black_friday.png"
+          ngSrc="/images/background/proximamente.png"
           alt="Bunna Black Friday Logo"
-          loading="lazy"
+          fill
           decoding="async"
-          class="w-full max-w-xs rounded-lg shadow-md"
-        />
+          class="object-cover"
+          priority/>
 
-        <!-- Botón cerrar -->
+      </div>
+
+      <!-- Contenido debajo -->
+      <div class="p-5 text-center">
+        <h2 id="promo-title" class="text-lg font-bold text-yellow-200">
+          Algo especial está en camino
+        </h2>
+        <p class="mt-1.5 text-sm text-gray-300">
+          Estamos preparando promociones exclusivas para ti. ¡Vuelve pronto!
+        </p>
+
         <button
-          class="mt-4 text-yellow-200 hover:text-yellow-400 font-bold"
-          (click)="showModal = false"
+          (click)="close()"
+          class="mt-4 w-full rounded-lg bg-yellow-200 px-4 py-3 text-sm font-semibold text-black transition-colors hover:bg-yellow-300"
         >
-          ✕ Cerrar
+          Entendido
         </button>
       </div>
     </div>

@@ -1,38 +1,37 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {NgOptimizedImage} from "@angular/common";
+
+const STORAGE_KEY = 'bunna_promo_seen';
 
 @Component({
   selector: 'app-pop-us',
-  imports: [],
+  imports: [
+    NgOptimizedImage
+  ],
   templateUrl: './pop-us.component.html',
   styles: ``
 })
 export class PopUsComponent implements AfterViewInit {
-
-  titulo: string='';
-  mensage:string='';
-  showModal:boolean=false;
+  showModal = false;
 
   ngAfterViewInit(): void {
-    if (typeof window !== 'undefined') {
-      const triggerModal = () => {
-        // Mostrar el modal 1 segundo después del evento
-        setTimeout(() => {
-          this.showModal = true;
+    if (typeof window === 'undefined') return;
 
-          // Cierre automático después de 3 segundos
-          setTimeout(() => {
-            this.showModal = false;
-          }, 3000);
-        }, 1000);
+    // Ya lo vio en esta sesión -> no molestar de nuevo
+    if (sessionStorage.getItem(STORAGE_KEY)) return;
 
-        // Elimina los listeners después del primer disparo
-        window.removeEventListener('scroll', triggerModal);
-        window.removeEventListener('click', triggerModal);
-      };
+    const trigger = () => {
+      setTimeout(() => {
+        this.showModal = true;
+        sessionStorage.setItem(STORAGE_KEY, '1');
+      }, 1500);
+    };
 
-      window.addEventListener('scroll', triggerModal);
-      window.addEventListener('click', triggerModal);
-    }
+    // Solo scroll, con { once: true } para que se auto-remueva
+    window.addEventListener('scroll', trigger, { once: true, passive: true });
   }
 
+  close(): void {
+    this.showModal = false;
+  }
 }
