@@ -1,27 +1,109 @@
-# CoffeMarket
+# Bunna Shop Frontend
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.4.
+Frontend oficial de **Bunna Shop**, desarrollado con **Angular** y desplegado en **Vercel**.
 
-## Development server
+La aplicación consume la API de Bunna para ofrecer una experiencia de compra rápida y responsive.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## 🌐 Sitio web
 
-## Code scaffolding
+**Producción**
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+https://www.bunnashop.com/
 
-## Build
+**Despliegue**
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+https://coffe-market-seven.vercel.app
 
-## Running unit tests
+---
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## 🚀 Características
 
-## Running end-to-end tests
+* Desarrollado con Angular 18
+* Diseño responsive
+* Consumo de API REST
+* Gestión de autenticación
+* Catálogo de productos
+* Carrito de compras
+* Despliegue automático con Vercel
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+---
 
-## Further help
+## 🛠️ Tecnologías
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+* Angular 18
+* TypeScript
+* RxJS
+* Angular Router
+* Angular HttpClient
+* CSS
+
+---
+
+## 📦 Requisitos
+
+* Node.js 20+
+* Angular CLI
+
+```bash
+npm install -g @angular/cli
+```
+
+---
+
+## ⚙️ Instalación
+
+Clona el repositorio:
+
+```bash
+git clone https://github.com/LChumi/CoffeMarket.git
+cd CoffeMarket
+```
+
+Instala las dependencias:
+
+```bash
+npm install
+```
+
+Ejecuta el proyecto:
+
+```bash
+ng serve
+```
+
+Abre:
+
+```text
+http://localhost:4200
+```
+
+---
+
+## 📁 Compilación
+
+```bash
+ng build
+```
+
+Los archivos generados estarán en:
+
+```text
+dist/
+```
+
+---
+
+## 🔗 Backend
+
+La aplicación consume la API de Bunna desarrollada con Spring Boot.
+
+---
+
+## 🚀 Despliegue
+
+El proyecto se encuentra desplegado en **Vercel** y se publica automáticamente cuando se realizan cambios en la rama principal.
+
+---
+
+## 📄 Licencia
+Este proyecto está bajo la licencia MIT License
