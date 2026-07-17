@@ -44,6 +44,13 @@ export class CarouselComponent implements OnInit, OnDestroy {
       title: 'Café, la mejor parte de cada día',
       cta: 'Conocer más'
     },
+    {
+      id: 4,
+      image: 'images/slidebar/cafeteria.webp',
+      eyebrow: 'Tu nueva experiencia de café en Cuenca',
+      title: 'El rincón perfecto para tu café favorito',
+      cta: 'Conocer más'
+    },
   ];
 
   currentSlide = 0;
