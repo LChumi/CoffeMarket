@@ -7,6 +7,7 @@ import {productoResolver} from "@resolvers/producto.resolver";
 import {productosCategoryResolver} from "@resolvers/productos-category.resolver";
 import {productosResolver} from "@resolvers/productos.resolver";
 import {AdminRoutes} from "@admin/admin.routes";
+import {CafeteriaRoutes} from "@pages/cafeteria/cafeteria.routes";
 
 export const routes: Routes = [
   {
@@ -59,6 +60,7 @@ export const routes: Routes = [
     path: 'returns-and-refunds-policy',
     loadComponent: () => import('./pages/returns-and-refunds-policy/returns-and-refunds-policy.component')
   },
+  {path: 'cafeteria', children: CafeteriaRoutes},
   {path: 'admin', children: AdminRoutes},
   {path: 'producto', redirectTo: 'products', pathMatch: 'full'},
   {path: 'productos', redirectTo: 'products', pathMatch: 'full'},
