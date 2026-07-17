@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component} from '@angular/core';
 import {NgOptimizedImage} from "@angular/common";
 
 const STORAGE_KEY = 'bunna_promo_seen';
@@ -9,6 +9,7 @@ const STORAGE_KEY = 'bunna_promo_seen';
     NgOptimizedImage
   ],
   templateUrl: './pop-us.component.html',
+  standalone: true,
   styles: ``
 })
 export class PopUsComponent implements AfterViewInit {
