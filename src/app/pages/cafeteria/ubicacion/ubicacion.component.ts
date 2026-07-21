@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {DomSanitizer, SafeResourceUrl} from "@angular/platform-browser";
 import {HORARIO_DIA} from "@pages/cafeteria/mocks/horario-dia.mock";
 import {NgOptimizedImage} from "@angular/common";
