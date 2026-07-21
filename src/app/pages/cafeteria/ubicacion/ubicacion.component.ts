@@ -1,32 +1,30 @@
 import { Component } from '@angular/core';
 import {DomSanitizer, SafeResourceUrl} from "@angular/platform-browser";
 import {HORARIO_DIA} from "@pages/cafeteria/mocks/horario-dia.mock";
+import {NgOptimizedImage} from "@angular/common";
 
 @Component({
   selector: 'app-ubicacion',
-  imports: [],
+  imports: [
+    NgOptimizedImage
+  ],
   templateUrl: './ubicacion.component.html',
   standalone: true,
   styles: ``
 })
 export class UbicacionComponent {
-  /**
-   * Mapa sin API key: basta con una búsqueda + &output=embed.
-   * Reemplaza la query por tu dirección exacta o, mejor aún,
-   * por el nombre del local tal como aparece en Google Maps
-   * (ej. "Bunna Café de Especialidad, Chaullabamba, Cuenca").
-   */
-  private readonly mapQuery = 'Bunna Café de Especialidad, Chaullabamba, Cuenca, Ecuador';
-  private readonly mapSrc = `https://www.google.com/maps?q=${encodeURIComponent(this.mapQuery)}&output=embed`;
 
-  /** Para el botón "Cómo llegar" (abre Google Maps con direcciones, no embebido) */
-  readonly directionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(this.mapQuery)}`;
+  private readonly mapEmbedUrl =
+    'https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d861.6803945916535!2d-78.91815510476818!3d-2.8551567420372943!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1ses!2sec!4v1784643592904!5m2!1ses!2sec';
 
-  mapUrlSegura: SafeResourceUrl;
+  readonly directionsUrl =
+    'https://www.google.com/maps/dir/?api=1&destination=-2.8551567420372943,-78.91815510476818';
 
-  horario= HORARIO_DIA
+  readonly horario = HORARIO_DIA;
+
+  readonly mapUrlSegura: SafeResourceUrl;
 
   constructor(private sanitizer: DomSanitizer) {
-    this.mapUrlSegura = this.sanitizer.bypassSecurityTrustResourceUrl(this.mapSrc);
+    this.mapUrlSegura = this.sanitizer.bypassSecurityTrustResourceUrl(this.mapEmbedUrl);
   }
 }
