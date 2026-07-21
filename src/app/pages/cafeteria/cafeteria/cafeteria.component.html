@@ -1,27 +1,30 @@
 <div class="w-full">
 
   <!-- ================= HERO ================= -->
-  <section class="relative flex min-h-[92vh] w-full flex-col justify-end overflow-hidden px-6 pb-14 pt-28 text-[#FAF8F5] sm:px-10 lg:px-16">
+  <section
+    class="relative flex min-h-[92vh] w-full flex-col justify-end overflow-hidden px-6 pb-14 pt-28 text-[#FAF8F5] sm:px-10 lg:px-16">
 
     <!-- imagen de fondo -->
     <img
-      src="/images/background/hero-bunna.webp"
-      alt="Barra de café Bunna en Chaullabamba, Cuenca"
+      ngSrc="/images/background/hero-bunna.webp"
+      alt="Barra de café Bunna en Challuabamba, Cuenca"
       class="absolute inset-0 h-full w-full object-cover"
-    />
+      height="670" width="1200"/>
 
     <!-- overlay oscuro para legibilidad del texto -->
     <div class="pointer-events-none absolute inset-0 "></div>
 
     <!-- tu viñeta cálida, ahora encima de la foto -->
-    <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,#43331b_0%,transparent_45%),radial-gradient(circle_at_85%_75%,#3a4b33_0%,transparent_40%)] opacity-60"></div>
+    <div
+      class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,#43331b_0%,transparent_45%),radial-gradient(circle_at_85%_75%,#3a4b33_0%,transparent_40%)] opacity-60"></div>
 
     <!-- degradado inferior para que el texto no choque con la foto -->
     <div class="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,transparent_0%,#1C1310_92%)]"></div>
 
     <div class="relative z-10 max-w-3xl">
-      <span class="mb-5 inline-block border border-[#84745c]/50 px-3 py-1 font-['Inter'] text-[11px] uppercase tracking-[0.25em] text-[#c1b999]">
-        Chaullabamba · Cuenca
+      <span
+        class="mb-5 inline-block border border-[#84745c]/50 px-3 py-1 font-['Inter'] text-[11px] uppercase tracking-[0.25em] text-[#c1b999]">
+        Challuabamba · Cuenca
       </span>
 
       <h1 class="font-['Fraunces'] text-5xl font-semibold leading-[1.05] text-[#FAF8F5] sm:text-6xl lg:text-7xl">
@@ -68,8 +71,9 @@
              [class]="rotacion(i)">
 
             <!-- sello circular con cantidad -->
-            <div class="absolute -right-3 -top-3 flex h-14 w-14 items-center justify-center rounded-full border font-['Fraunces'] text-sm font-semibold"
-                 [class]="cat.acento === 'verde'
+            <div
+              class="absolute -right-3 -top-3 flex h-14 w-14 items-center justify-center rounded-full border font-['Fraunces'] text-sm font-semibold"
+              [class]="cat.acento === 'verde'
                    ? 'border-[#3a4b33]/40 bg-[#5d6c53] text-[#FAF8F5]'
                    : 'border-[#84745c]/40 bg-[#43331b] text-[#c1b999]'">
               {{ cat.items.length }}
@@ -88,7 +92,8 @@
               {{ cat.descripcion }}
             </p>
 
-            <span class="mt-4 inline-flex items-center gap-1 font-['Inter'] text-xs font-medium uppercase tracking-wide text-[#43331b] dark:text-[#c1b999]">
+            <span
+              class="mt-4 inline-flex items-center gap-1 font-['Inter'] text-xs font-medium uppercase tracking-wide text-[#43331b] dark:text-[#c1b999]">
               Ver bebidas
               <span class="transition-transform group-hover:translate-x-1">→</span>
             </span>
@@ -117,7 +122,7 @@
       </div>
 
       <div class="grid grid-cols-2 gap-3 font-['Inter'] text-sm">
-        @for (metodo of ['V60','Chemex','Aeropress','Sifón Japonés','Kalita Wave','Prensa Francesa']; track metodo) {
+        @for (metodo of ['V60', 'Chemex', 'Aeropress', 'Sifón Japonés', 'Kalita Wave', 'Prensa Francesa']; track metodo) {
           <div class="border border-[#c2ba9b]/25 px-4 py-3 text-[#c2ba9b]">{{ metodo }}</div>
         }
       </div>
@@ -126,10 +131,11 @@
 
   <!-- ================= UBICACIÓN TEASER ================= -->
   <section class="bg-[#FAF8F5] px-6 py-16 dark:bg-[#0F0D0C] sm:px-10 lg:px-16">
-    <div class="mx-auto flex max-w-6xl flex-col items-start justify-between gap-6 border-t border-[#84745c]/25 pt-10 sm:flex-row sm:items-center">
+    <div
+      class="mx-auto flex max-w-6xl flex-col items-start justify-between gap-6 border-t border-[#84745c]/25 pt-10 sm:flex-row sm:items-center">
       <div>
         <h3 class="font-['Fraunces'] text-2xl font-semibold text-[#43331b] dark:text-[#c1b999]">
-          Te esperamos en Chaullabamba, Cuenca
+          Te esperamos en Challuabamba, Cuenca
         </h3>
         <p class="mt-2 font-['Inter'] text-sm text-[#716149] dark:text-[#c1b999]/70">
           Horarios, mapa y cómo llegar.

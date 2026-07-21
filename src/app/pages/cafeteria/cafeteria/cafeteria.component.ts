@@ -1,11 +1,13 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {RouterLink} from "@angular/router";
 import {CAFETERIA_MENU, MenuCategoria} from "@pages/cafeteria/mocks/menu-categoria.mock";
+import {NgOptimizedImage} from "@angular/common";
 
 @Component({
   selector: 'app-cafeteria',
   imports: [
-    RouterLink
+    RouterLink,
+    NgOptimizedImage
   ],
   templateUrl: './cafeteria.component.html',
   standalone: true,

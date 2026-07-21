@@ -3,6 +3,6 @@ import {Route} from "@angular/router";
 export const CafeteriaRoutes: Route[] = [
   {
     path: '', loadComponent: () => import('./cafeteria/cafeteria.component').then(m => m.CafeteriaComponent),
-    title: 'Cafetería Bunna | Chaullabamba, Cuenca'
+    title: 'Cafetería Bunna | Challuabamba, Cuenca'
   }
 ];
