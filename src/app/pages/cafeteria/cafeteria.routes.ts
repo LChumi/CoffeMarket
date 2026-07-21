@@ -6,7 +6,7 @@ export const CafeteriaRoutes: Route[] = [
     title: 'Cafetería Bunna | Challuabamba, Cuenca'
   },
   {
-    path: 'ubicacion', loadComponent: () => import('./ubicacion/ubicacion.component').then(m => m.UbicacionComponent),
+    path: 'horarios-ubicacion', loadComponent: () => import('./ubicacion/ubicacion.component').then(m => m.UbicacionComponent),
     title: 'Ubicanos | Bunna Cuenca',
   }
 ];
