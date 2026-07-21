@@ -1,6 +1,7 @@
 export interface MenuItem {
   nombre: string;
   destacado?: boolean;
+  precio?: number;
 }
 
 export interface MenuCategoria {

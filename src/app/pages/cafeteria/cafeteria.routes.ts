@@ -8,5 +8,9 @@ export const CafeteriaRoutes: Route[] = [
   {
     path: 'horarios-ubicacion', loadComponent: () => import('./ubicacion/ubicacion.component').then(m => m.UbicacionComponent),
     title: 'Ubicanos | Bunna Cuenca',
+  },
+  {
+    path: 'menu', loadComponent: () => import('./menus/menus.component').then(m => m.MenusComponent),
+    title: 'Menú | Bunna Coffee Shop'
   }
 ];

@@ -1,0 +1,82 @@
+<div class="w-full">
+
+  <!-- ================= HERO CORTO ================= -->
+  <section class="relative flex min-h-[32vh] w-full flex-col justify-end overflow-hidden bg-[#1C1310] px-6 pb-10 pt-28 text-[#FAF8F5] sm:px-10 lg:px-16">
+    <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,#43331b_0%,transparent_45%)] opacity-60"></div>
+    <div class="relative z-10">
+      <span class="mb-4 inline-block border border-[#84745c]/50 px-3 py-1 font-['Inter'] text-[11px] uppercase tracking-[0.25em] text-[#c1b999]">
+        Bunna Coffee Shop
+      </span>
+      <h1 class="font-['Fraunces'] text-4xl font-semibold text-[#FAF8F5] sm:text-5xl">
+        Menú
+      </h1>
+    </div>
+  </section>
+
+  <!-- ================= TABS + CONTENIDO ================= -->
+  <section class="bg-[#FAF8F5] dark:bg-[#0F0D0C]">
+
+    <!-- barra de tabs, sticky para que no se pierda al hacer scroll -->
+    <div class="sticky top-0 z-20 border-b border-[#84745c]/20 bg-[#FAF8F5]/95 px-6 py-4 backdrop-blur dark:bg-[#0F0D0C]/95 sm:px-10 lg:px-16">
+      <div class="scrollbar-hide flex gap-2 overflow-x-auto">
+        @for (cat of categorias; track cat.slug) {
+          <button
+            (click)="seleccionar(cat.slug)"
+            class="flex-none whitespace-nowrap rounded-full border px-4 py-2 font-['Inter'] text-sm font-medium transition-colors"
+            [class]="categoriaActiva() === cat.slug
+              ? 'border-[#43331b] bg-[#43331b] text-[#FAF8F5]'
+              : 'border-[#84745c]/30 bg-transparent text-[#716149] hover:border-[#84745c] dark:text-[#c1b999]/70'">
+            {{ cat.nombre }}
+          </button>
+        }
+      </div>
+    </div>
+
+    <!-- contenido de la categoría activa -->
+    <div class="mx-auto max-w-5xl px-6 py-12 sm:px-10 lg:px-16">
+      @if (categoriaSeleccionada(); as cat) {
+        <div class="mb-8 flex items-start justify-between gap-4 border-b border-[#84745c]/20 pb-6">
+          <div>
+            <h2 class="font-['Fraunces'] text-2xl font-semibold text-[#43331b] dark:text-[#c1b999] sm:text-3xl">
+              {{ cat.nombre }}
+            </h2>
+            <p class="mt-2 max-w-lg font-['Inter'] text-sm text-[#716149] dark:text-[#c1b999]/70">
+              {{ cat.descripcion }}
+            </p>
+          </div>
+          <span class="flex-none rounded-full px-3 py-1 font-['Inter'] text-xs font-medium"
+                [class]="cat.acento === 'verde'
+                  ? 'bg-[#5d6c53]/15 text-[#3a4b33] dark:text-[#c2ba9b]'
+                  : 'bg-[#84745c]/15 text-[#43331b] dark:text-[#c1b999]'">
+            {{ cat.items.length }} opciones
+          </span>
+        </div>
+
+        <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
+          @for (item of cat.items; track item.nombre) {
+            <div class="flex items-center justify-between border border-[#84745c]/20 bg-white px-5 py-4 dark:bg-[#1A1512]">
+              <div class="flex items-center gap-2">
+                <span class="font-['Inter'] text-[15px] text-[#43331b] dark:text-[#FAF8F5]">
+                  {{ item.nombre }}
+                </span>
+                @if (item.destacado) {
+                  <span class="rounded-full bg-[#3a4b33] px-2 py-0.5 font-['Inter'] text-[10px] font-medium uppercase tracking-wide text-[#c2ba9b]">
+                    Bunna
+                  </span>
+                }
+              </div>
+              @if (item.precio) {
+                <span class="flex-none font-['Inter'] text-sm font-medium text-[#43331b] dark:text-[#c1b999]">
+                  {{ item.precio | currency:'USD' }}
+                </span>
+              } @else {
+                <span class="flex-none font-['Inter'] text-xs italic text-[#84745c]">Próximamente</span>
+              }
+            </div>
+          }
+        </div>
+      }
+    </div>
+  </section>
+
+</div>
