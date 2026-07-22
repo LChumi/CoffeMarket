@@ -58,9 +58,9 @@
             </a>
           </li>
           <li>
-            <a [routerLink]="['/blog']"
+            <a [routerLink]="['/cafeteria']"
                class="text-sm text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white">
-              Blog
+              Cafeteria
             </a>
           </li>
         </ul>
@@ -132,8 +132,8 @@
               class="w-4 h-4 bg-gray-400 dark:bg-gray-500
                      group-hover:bg-[var(--hover-color)] transition-colors"
               [style.--hover-color]="red.color"
-              [style.webkitMaskImage]="'url(' + red.icon + ')'"
-              [style.maskImage]="'url(' + red.icon + ')'"
+              [style.-webkit-mask-image]="'url(' + red.icon + ')'"
+              [style.mask-image]="'url(' + red.icon + ')'"
               style="-webkit-mask-size: cover; mask-size: cover;">
             </div>
 
