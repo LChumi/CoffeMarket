@@ -3,12 +3,13 @@ import {CAFETERIA_MENU, MenuCategoria} from "@pages/cafeteria/mocks/menu-categor
 import {toSignal} from "@angular/core/rxjs-interop";
 import {map} from "rxjs";
 import {ActivatedRoute} from "@angular/router";
-import {CurrencyPipe} from "@angular/common";
+import {CurrencyPipe, NgOptimizedImage} from "@angular/common";
 
 @Component({
   selector: 'app-menus',
   imports: [
-    CurrencyPipe
+    CurrencyPipe,
+    NgOptimizedImage
   ],
   templateUrl: './menus.component.html',
   styles: ``
@@ -38,5 +39,14 @@ export class MenusComponent {
 
   seleccionar(slug: string): void {
     this.categoriaActiva.set(slug);
+  }
+
+  getImageName(nombre: string): string {
+    return nombre
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-|-$/g, '');
   }
 }
