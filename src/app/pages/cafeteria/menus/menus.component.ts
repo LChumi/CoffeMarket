@@ -2,14 +2,15 @@ import {afterNextRender, Component, computed, ElementRef, inject, signal} from '
 import {CAFETERIA_MENU, MenuCategoria} from "@pages/cafeteria/mocks/menu-categoria.mock";
 import {toSignal} from "@angular/core/rxjs-interop";
 import {map} from "rxjs";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, RouterLink} from "@angular/router";
 import {CurrencyPipe, NgOptimizedImage} from "@angular/common";
 
 @Component({
   selector: 'app-menus',
   imports: [
     CurrencyPipe,
-    NgOptimizedImage
+    NgOptimizedImage,
+    RouterLink
   ],
   templateUrl: './menus.component.html',
   styles: ``

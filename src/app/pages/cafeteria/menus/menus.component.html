@@ -17,9 +17,11 @@
     <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_30%,#3a4b33_0%,transparent_50%)] opacity-50"></div>
 
     <div class="relative z-10 max-w-4xl">
-      <span class="mb-4 inline-block border border-[#84745c]/50 px-4 py-1.5 font-['Inter'] text-[11px] uppercase tracking-[0.3em] text-[#c1b999]">
+      <a [routerLink]="['/cafeteria']"
+         aria-label="Ir a Cafetería"
+         class="mb-4 inline-block border border-[#84745c]/50 px-4 py-1.5 font-['Inter'] text-[11px] uppercase tracking-[0.3em] text-[#c1b999] hover:bg-[#84745c]/20 transition-colors">
         Bunna Coffee Shop
-      </span>
+      </a>
       <h1 class="font-['Fraunces'] text-5xl font-semibold text-[#FAF8F5] sm:text-6xl lg:text-7xl">
         Menú
       </h1>
