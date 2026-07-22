@@ -13,53 +13,62 @@ import {CafeteriaLayoutComponent} from "@pages/cafeteria/cafeteria-layout/cafete
 export const routes: Routes = [
   {
     path: '',
-    component: HomeComponent
+    component: HomeComponent,
+    title: 'Bienvenido a Bunna Shop ☕| Accesorios para Cafe',
   },
   {
     path: 'about',
-    component: AboutComponent
+    component: AboutComponent,
+    title: 'Quiénes Somos | Bunna Accesorios para Café'
   },
   {
     path: 'products',
     loadComponent: () => import("./pages/products/products.component"),
     resolve: {productos: productosResolver},
+    title: 'Catálogo de Accesorios para Café | Bunna Shop',
     runGuardsAndResolvers: "always"
   },
   {
     path: 'productos/:categoryId',
     loadComponent: () => import('./pages/products/products.component'),
     resolve: {productos: productosCategoryResolver},
+    title: 'Catálogo de Accesorios para Café por categoria | Bunna Shop',
     runGuardsAndResolvers: 'always'
   },
   {
     path: 'producto/:productoId',
     loadComponent: () => import('./pages/single-product/single-product.component'),
     resolve: {producto: productoResolver},
+    title: 'Producto unico | Accesorio para Café | Bunna',
     runGuardsAndResolvers: 'always'
   },
   {
     path: 'cart',
-    loadComponent: () => import('./pages/shoping-cart/shoping-cart.component')
+    loadComponent: () => import('./pages/shoping-cart/shoping-cart.component'),
+    title: 'Carrito Compras | Bunna Accesorios para Café',
   },
   {
     path: 'checkout',
     children: [
-      {path: '', component: CheckoutComponent},
+      {path: '', component: CheckoutComponent, title: 'Pagina de Pago| Bunna Accesorios para Café'},
       {
         path: 'order/:orderId',
         loadComponent: () => import('./pages/order-received/order-received.component'),
         resolve: {pedido: pedidoResolver},
+        title: 'Resumen de Pedido Generado | Bunna Accesorios para Café',
         runGuardsAndResolvers: 'always'
       },
     ]
   },
   {
     path: 'privacy-policy',
-    loadComponent: () => import('./pages/privacy-policy/privacy-policy.component')
+    loadComponent: () => import('./pages/privacy-policy/privacy-policy.component'),
+    title: 'Pagina de Politica de privacidad | Bunna Shop'
   },
   {
     path: 'returns-and-refunds-policy',
-    loadComponent: () => import('./pages/returns-and-refunds-policy/returns-and-refunds-policy.component')
+    loadComponent: () => import('./pages/returns-and-refunds-policy/returns-and-refunds-policy.component'),
+    title: 'Pagina de Politica de Devoluciones | Bunna Shop'
   },
   {path: 'cafeteria', component: CafeteriaLayoutComponent, children: CafeteriaRoutes},
   {path: 'admin', children: AdminRoutes},

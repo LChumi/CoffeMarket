@@ -12,5 +12,6 @@ export const CafeteriaRoutes: Route[] = [
   {
     path: 'menu', loadComponent: () => import('./menus/menus.component').then(m => m.MenusComponent),
     title: 'Menú | Bunna Coffee Shop'
-  }
+  },
+  {path: '**', redirectTo: '', pathMatch: 'full'}
 ];
