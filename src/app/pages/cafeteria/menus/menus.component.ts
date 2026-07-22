@@ -41,7 +41,13 @@ export class MenusComponent implements OnInit {
     () => this.categorias.find((c) => c.slug === this.categoriaActiva()) ?? this.categorias[0],
   );
 
-  constructor() {}
+  constructor() {
+    // una vez el DOM ya pintó los tabs, centra el tab activo (sin animación,
+    // para que no se sienta como un "salto" al cargar la página)
+    afterNextRender(() => {
+      this.centrarTab(this.categoriaActiva(), 'instant');
+    });
+  }
 
   ngOnInit(): void {
     const currentUrl = `${this.domain}${this.router.url}`;
@@ -71,12 +77,6 @@ export class MenusComponent implements OnInit {
     if (inicial && this.categorias.some((c) => c.slug === inicial)) {
       this.categoriaActiva.set(inicial);
     }
-
-    // una vez el DOM ya pintó los tabs, centra el tab activo (sin animación,
-    // para que no se sienta como un "salto" al cargar la página)
-    afterNextRender(() => {
-      this.centrarTab(this.categoriaActiva(), 'instant');
-    });
   }
 
   seleccionar(slug: string): void {
