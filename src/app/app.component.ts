@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {Router, RouterOutlet} from '@angular/router';
 import {ConsentModalComponent} from "@components/consent-modal/consent-modal.component";
 import {SchemaService} from "@services/seo/schema.service";
@@ -13,18 +13,21 @@ import {ClarityService} from "@services/data/clarity.service";
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
 
   private domain = environment.domain;
   private projectId = environment.clarityId;
+
+  private router = inject(Router)
+  private schemaService = inject(SchemaService)
+  private seoService = inject(MetaService)
+  private clarity = inject(ClarityService)
+
   title = 'coffe-market';
 
-  constructor(
-    private router: Router,
-    private schemaService: SchemaService,
-    private seoService: MetaService,
-    private clarity: ClarityService
-  ) {
+  constructor() {}
+
+  ngOnInit(): void {
     const currentUrl = `${this.domain}${this.router.url}`;
 
     const title = 'Bienvenido a Bunna Shop ☕| Accesorios para Cafe ';
@@ -46,6 +49,6 @@ export class AppComponent {
     this.schemaService.injectSchema(schema, 'WebSite');
 
     this.clarity.init(this.projectId)
-  }
+    }
 
 }

@@ -63,36 +63,52 @@
 
   <!-- Content Security Policy -->
   <meta http-equiv="Content-Security-Policy" content="
-    default-src 'self';
-    script-src 'self'
-      https://www.googletagmanager.com
-      https://pagead2.googlesyndication.com
-      https://analytics.ahrefs.com
-      https://tracker.metricool.com
-      https://vercel.live
-      https://*.clarity.ms
-      'unsafe-inline';
-    style-src 'self' 'unsafe-inline' https://maxcdn.bootstrapcdn.com;
-    img-src 'self' data: https:;
-    font-src 'self' data: https:;
-    connect-src 'self'
-      https://apis.cumpleanos.com.ec
-      https://www.google-analytics.com
-      https://analytics.google.com
-      https://pagead2.googlesyndication.com
-      https://*.clarity.ms
-      https://analytics.ahrefs.com
-      https://bat.bing.com
-      https://c.bing.com;
-    frame-src 'self'
-      https://www.youtube.com
-      https://player.vimeo.com
-      https://www.googletagmanager.com
-      https://vercel.live;
-    object-src 'none';
-    base-uri 'self';
-    form-action 'self';">
-
+  default-src 'self';
+  script-src
+    'self'
+    'unsafe-inline'
+    https://www.googletagmanager.com
+    https://pagead2.googlesyndication.com
+    https://analytics.ahrefs.com
+    https://tracker.metricool.com
+    https://vercel.live
+    https://va.vercel-scripts.com
+    https://*.clarity.ms;
+  style-src
+    'self'
+    'unsafe-inline'
+    https://maxcdn.bootstrapcdn.com;
+  img-src
+    'self'
+    data:
+    https:;
+  font-src
+    'self'
+    data:
+    https:;
+  connect-src
+    'self'
+    https://apis.cumpleanos.com.ec
+    https://www.google-analytics.com
+    https://analytics.google.com
+    https://pagead2.googlesyndication.com
+    https://*.clarity.ms
+    https://analytics.ahrefs.com
+    https://bat.bing.com
+    https://c.bing.com
+    https://vitals.vercel-insights.com
+    https://va.vercel-scripts.com;
+  frame-src
+    'self'
+    https://www.google.com
+    https://www.youtube.com
+    https://player.vimeo.com
+    https://www.googletagmanager.com
+    https://vercel.live;
+  object-src 'none';
+  base-uri 'self';
+  form-action 'self';
+">
   <!-- Google Tag Manager -->
   <script>
     (function (w, d, s, l, i) {
@@ -103,7 +119,7 @@
       });
       var f = d.getElementsByTagName(s)[0],
         j = d.createElement(s),
-        dl = l != 'dataLayer' ? '&l=' + l : '';
+        dl = l !== 'dataLayer' ? '&l=' + l : '';
 
       j.async = true;
       j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;

@@ -11,7 +11,7 @@
         <!-- Imagen de fondo -->
         <div class="absolute inset-0 bg-cover bg-center transition-transform duration-[6000ms] ease-out"
              [class.scale-105]="currentSlide === $index"
-             [style.backgroundImage]="'url(' + slide.image + ')'">
+             [ngStyle]="{'background-image': 'url(' + slide.image + ')'}">
         </div>
 
         <!-- Overlay gradiente -->
@@ -42,7 +42,7 @@
             </h2>
 
             <!-- CTA -->
-            <a [routerLink]="['/products']"
+            <a [routerLink]="[slide.route]"
                class="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-xl
                       bg-[#B3977E] hover:bg-[#8B6E56]
                       text-white text-sm font-semibold

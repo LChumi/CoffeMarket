@@ -148,45 +148,61 @@ export class SchemaService {
   /**
    * Schema para páginas de contenido genéricas
    */
-  generateContentPageSchema(currentUrl: string, pageName: string, description: string): object {
+  generateContentPageSchema(
+    currentUrl: string,
+    pageName: string,
+    description: string,
+    includeCafe = false
+  ): object {
+
+    const graph: any[] = [
+      {
+        "@type": "BreadcrumbList",
+        "@id": `${currentUrl}#breadcrumblist`,
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "@id": `${this.domain}/#listItem`,
+            "position": 1,
+            "name": "Inicio",
+            "item": this.domain
+          },
+          {
+            "@type": "ListItem",
+            "@id": `${currentUrl}#listItem`,
+            "position": 2,
+            "name": pageName,
+            "item": currentUrl
+          }
+        ]
+      },
+      this.generateOrganizationSchema(),
+      {
+        "@type": "WebPage",
+        "@id": `${currentUrl}#webpage`,
+        "url": currentUrl,
+        "name": `${pageName} | Bunna Café de Especialidad`,
+        "description": description,
+        "inLanguage": "es-EC",
+        "isPartOf": {
+          "@id": `${this.domain}/#website`
+        },
+        "breadcrumb": {
+          "@id": `${currentUrl}#breadcrumblist`
+        },
+        "datePublished": new Date().toISOString(),
+        "dateModified": new Date().toISOString()
+      },
+      this.generateWebsiteSchema()
+    ];
+
+    if (includeCafe) {
+      graph.push(this.generateCafeSchema());
+    }
+
     return {
       "@context": "https://schema.org",
-      "@graph": [
-        {
-          "@type": "BreadcrumbList",
-          "@id": `${currentUrl}#breadcrumblist`,
-          "itemListElement": [
-            {
-              "@type": "ListItem",
-              "@id": `${this.domain}/#listItem`,
-              "position": 1,
-              "name": "Inicio",
-              "item": this.domain
-            },
-            {
-              "@type": "ListItem",
-              "@id": `${currentUrl}#listItem`,
-              "position": 2,
-              "name": pageName,
-              "item": currentUrl
-            }
-          ]
-        },
-        this.generateOrganizationSchema(),
-        {
-          "@type": "WebPage",
-          "@id": `${currentUrl}#webpage`,
-          "url": currentUrl,
-          "name": `${pageName} | Bunna Cafe de Especialidad`,
-          "description": description,
-          "inLanguage": "es-EC",
-          "isPartOf": {"@id": `${this.domain}/#website`},
-          "breadcrumb": {"@id": `${currentUrl}#breadcrumblist`},
-          "datePublished": new Date().toISOString(),
-          "dateModified": new Date().toISOString()
-        },
-        this.generateWebsiteSchema()
-      ]
+      "@graph": graph
     };
   }
 
@@ -262,5 +278,73 @@ export class SchemaService {
 
   private urlItem(sku: string): string {
     return `${this.urlImage}/${sku}/bunna`;
+  }
+
+  private generateCafeSchema(): object {
+    return {
+      "@type": "CafeOrCoffeeShop",
+      "@id": `${this.domain}/#cafe`,
+      "name": "Bunna Coffee Shop",
+      "url": this.domain,
+      "image": `${this.domain}/images/logo.webp`,
+      "telephone": "+593979126861",
+      "priceRange": "$$",
+      "servesCuisine": [
+        "Coffee",
+        "Tea",
+        "Desserts",
+        "Pastries"
+      ],
+      "paymentAccepted": [
+        "Cash",
+        "Credit Card",
+        "Debit Card"
+      ],
+      "currenciesAccepted": "USD",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Av. Panamericana y Cultura El Inga, Challuabamba",
+        "addressLocality": "Cuenca",
+        "addressRegion": "Azuay",
+        "addressCountry": "EC"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": -2.8551567420372943,
+        "longitude": -78.91815510476818
+      },
+      "hasMap": "https://www.google.com/maps/dir/?api=1&destination=-2.8551567420372943,-78.91815510476818",
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Tuesday",
+            "Wednesday"
+          ],
+          "opens": "09:00",
+          "closes": "19:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Thursday",
+            "Friday",
+            "Saturday"
+          ],
+          "opens": "09:00",
+          "closes": "21:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Sunday",
+          "opens": "09:00",
+          "closes": "18:00"
+        }
+      ],
+      "sameAs": [
+        "https://www.facebook.com/BunnaCafeEspecialidad",
+        "https://www.instagram.com/bunnacafeec/"
+      ]
+    };
   }
 }

@@ -1,6 +1,6 @@
 import {Component, NgZone, OnDestroy, OnInit} from '@angular/core';
 import {RouterLink} from "@angular/router";
-import {NgClass} from "@angular/common";
+import {NgClass, NgStyle} from "@angular/common";
 
 interface Slide {
   id: number;
@@ -8,6 +8,7 @@ interface Slide {
   eyebrow: string;
   title: string;
   cta: string;
+  route: string;
 }
 
 @Component({
@@ -15,7 +16,8 @@ interface Slide {
   standalone: true,
   imports: [
     RouterLink,
-    NgClass
+    NgClass,
+    NgStyle
   ],
   templateUrl: './carousel.component.html',
   styleUrl: './carousel.component.css'
@@ -28,21 +30,32 @@ export class CarouselComponent implements OnInit, OnDestroy {
       image: 'images/slidebar/coffe_slide1.webp',
       eyebrow: 'Bunna Café',
       title: 'Bienvenidos a nuestro rincón del café',
-      cta: 'Explorar productos'
+      cta: 'Explorar productos',
+      route: '/products'
     },
     {
       id: 2,
       image: 'images/slidebar/coffe_slide2.webp',
       eyebrow: 'Especialidad',
       title: 'Explora, saborea y disfruta',
-      cta: 'Ver selección'
+      cta: 'Ver selección',
+      route: '/products'
     },
     {
       id: 3,
       image: 'images/slidebar/coffe_slide4.webp',
       eyebrow: 'Cada día',
       title: 'Café, la mejor parte de cada día',
-      cta: 'Conocer más'
+      cta: 'Conocer más',
+      route: '/products'
+    },
+    {
+      id: 4,
+      image: 'images/slidebar/cafeteria.webp',
+      eyebrow: 'Tu nueva experiencia de café en Cuenca',
+      title: 'El rincón perfecto para tu café favorito',
+      cta: 'Conocer más',
+      route: '/cafeteria'
     },
   ];
 

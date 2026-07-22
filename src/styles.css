@@ -5,30 +5,43 @@
 
 @font-face {
   font-family: 'BricolageGrotesque';
-  src: url('../public/fonts/BricolageGrotesque-VariableFont_opsz,wdth,wght.ttf') format('truetype');
+  src: url('../public/fonts/BricolageGrotesque-VariableFont_opsz,wdth,wght.woff2') format('woff2');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'GillSans';
-  src: url('../public/fonts/GillSans.ttc') format('truetype');
+  src: url('../public/fonts/GillSans.woff2') format('woff2');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'TAN-PEARL';
-  src: url('../public/fonts/TAN-PEARL.otf') format('opentype');
+  src: url('../public/fonts/TAN-PEARL.woff2') format('woff2');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'TimesNewRomma';
-  src: url('../public/fonts/TimesNewRoman.ttf') format('truetype');
+  src: url('../public/fonts/TimesNewRoman.woff2') format('woff2');
   font-weight: normal;
   font-style: normal;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('../public/fonts/Inter.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Fraunces';
+  src: url('../public/fonts/Fraunces.woff2') format('woff2');
+  font-weight: 100 900;
 }
 
 body {
@@ -42,3 +55,6 @@ h1 {
 footer {
   font-family: 'TimesNewRomma', serif;
 }
+
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
