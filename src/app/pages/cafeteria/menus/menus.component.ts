@@ -1,4 +1,4 @@
-import {Component, computed, signal} from '@angular/core';
+import {afterNextRender, Component, computed, ElementRef, inject, signal} from '@angular/core';
 import {CAFETERIA_MENU, MenuCategoria} from "@pages/cafeteria/mocks/menu-categoria.mock";
 import {toSignal} from "@angular/core/rxjs-interop";
 import {map} from "rxjs";
@@ -15,6 +15,9 @@ import {CurrencyPipe, NgOptimizedImage} from "@angular/common";
   styles: ``
 })
 export class MenusComponent {
+  private route = inject(ActivatedRoute);
+  private elRef = inject(ElementRef<HTMLElement>);
+
   categorias: MenuCategoria[] = CAFETERIA_MENU;
 
   /** slug inicial que viene por queryParam, ej: /cafeteria/menu?categoria=cafes-filtrados */
@@ -25,28 +28,51 @@ export class MenusComponent {
 
   categoriaActiva = signal<string>(this.categorias[0].slug);
 
-  constructor(private route: ActivatedRoute) {
-    // si llega un queryParam válido, lo respeta; si no, se queda en la primera categoría
-    const inicial = this.slugInicial();
-    if (inicial && this.categorias.some((c) => c.slug === inicial)) {
-      this.categoriaActiva.set(inicial);
-    }
-  }
-
   categoriaSeleccionada = computed<MenuCategoria>(
     () => this.categorias.find((c) => c.slug === this.categoriaActiva()) ?? this.categorias[0],
   );
 
-  seleccionar(slug: string): void {
-    this.categoriaActiva.set(slug);
+  constructor() {
+    const inicial = this.slugInicial();
+    if (inicial && this.categorias.some((c) => c.slug === inicial)) {
+      this.categoriaActiva.set(inicial);
+    }
+
+    // una vez el DOM ya pintó los tabs, centra el tab activo (sin animación,
+    // para que no se sienta como un "salto" al cargar la página)
+    afterNextRender(() => {
+      this.centrarTab(this.categoriaActiva(), 'instant');
+    });
   }
 
+  seleccionar(slug: string): void {
+    this.categoriaActiva.set(slug);
+    this.centrarTab(slug, 'smooth');
+  }
+
+  private centrarTab(slug: string, behavior: ScrollBehavior): void {
+    const boton = this.elRef.nativeElement.querySelector(`[data-slug="${slug}"]`) as HTMLElement | null;
+    boton?.scrollIntoView({ behavior, inline: 'center', block: 'nearest' });
+  }
+
+  /**
+   * Convierte "Café de la Casa Bunna" -> "cafe-de-la-casa-bunna"
+   * para armar la ruta del asset: /images/menu/cafe-de-la-casa-bunna.webp
+   */
   getImageName(nombre: string): string {
     return nombre
-      .toLowerCase()
       .normalize('NFD')
-      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/[\u0300-\u036f]/g, '') // quita tildes
+      .toLowerCase()
       .replace(/[^a-z0-9]+/g, '-')
-      .replace(/^-|-$/g, '');
+      .replace(/(^-|-$)/g, '');
+  }
+
+  /**
+   * Si la foto del item aún no existe en /images/menu, oculta el <img> roto
+   * y deja visible la inicial de fondo (ya está en el DOM, detrás de la imagen).
+   */
+  ocultarImagenRota(event: Event): void {
+    (event.target as HTMLImageElement).style.display = 'none';
   }
 }
