@@ -29,13 +29,16 @@ export default class ShopingCartComponent implements OnInit {
 
   private domain = environment.domain;
   private clarity = inject(ClarityService);
+  private router = inject(Router);
+  private seoService = inject(MetaService)
+  private schemaService = inject(SchemaService)
+  private carritoService = inject(CarritoService);
 
-  constructor(
-    private router: Router,
-    private schemaService: SchemaService,
-    private seoService: MetaService,
-    private carritoService: CarritoService,
-  ) {
+  constructor() {}
+
+  cartItems: ItemCarrito[] = [];
+
+  ngOnInit(): void {
     const currentUrl = `${this.domain}${this.router.url}`;
     const title = 'Carrito Compras | Bunna Accesorios para Café'
     const description = 'Consulta tus productos en nuestro carrito de compras'
@@ -56,11 +59,6 @@ export default class ShopingCartComponent implements OnInit {
       'Carrito de compras',
       description);
     this.schemaService.injectSchema(schema, 'ContentPage');
-  }
-
-  cartItems: ItemCarrito[] = [];
-
-  ngOnInit(): void {
     this.carritoService.carrito$.subscribe(carrito => {
       this.cartItems = carrito.items;
       this.clarity.event('Carrito abierto');
@@ -100,7 +98,7 @@ export default class ShopingCartComponent implements OnInit {
   }
 
   goToCheckout() {
-    this.router.navigate(['/checkout']).then(r => {
+    this.router.navigate(['/checkout']).then(() => {
       this.clarity.event('Ir a checkout');
       this.clarity.setTag('cartValue', this.calcularTotal().toString());
       this.clarity.setTag('cartStatus', this.cartItems.length > 0 ? 'con_productos' : 'vacío');

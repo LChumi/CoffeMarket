@@ -38,7 +38,9 @@ export default class OrderReceivedComponent implements OnInit {
   pedido: Pedido | null = null
   cliente: Cliente = {} as Cliente;
 
-  constructor() {
+  constructor() {}
+
+  ngOnInit() {
     const currentUrl = `${this.domain}${this.router.url}`;
 
     const title = 'Resumen de Pedido Generado | Bunna Accesorios para Café'
@@ -65,9 +67,6 @@ export default class OrderReceivedComponent implements OnInit {
     this.route.data.subscribe(data => {
       this.pedido = data['pedido'];
     })
-  }
-
-  ngOnInit() {
     if (this.pedido) {
       this.clienteService.getById(this.pedido.clienteId).subscribe({
         next: data => {

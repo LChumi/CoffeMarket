@@ -1,4 +1,4 @@
-import {Component, inject} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {FooterComponent} from "@shared/footer/footer.component";
 import {NavbarComponent} from "@shared/navbar/navbar.component";
 import {Router} from "@angular/router";
@@ -17,7 +17,7 @@ import {NgOptimizedImage} from "@angular/common";
   templateUrl: './privacy-policy.component.html',
   styles: ``
 })
-export default class PrivacyPolicyComponent {
+export default class PrivacyPolicyComponent implements OnInit {
 
   private router = inject(Router);
   private seoService = inject(MetaService)
@@ -26,7 +26,7 @@ export default class PrivacyPolicyComponent {
 
   protected emailInfo: string = 'bunnacoffeemp@gmail.com';
 
-  constructor() {
+  ngOnInit() {
     const currentUrl = `${this.domain}${this.router.url}`;
 
     const title = 'Pagina de Politica de privacidad | Bunna Shop';

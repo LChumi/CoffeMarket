@@ -1,9 +1,12 @@
-import {afterNextRender, Component, computed, ElementRef, inject, signal} from '@angular/core';
+import {afterNextRender, Component, computed, ElementRef, inject, OnInit, signal} from '@angular/core';
 import {CAFETERIA_MENU, MenuCategoria} from "@pages/cafeteria/mocks/menu-categoria.mock";
 import {toSignal} from "@angular/core/rxjs-interop";
 import {map} from "rxjs";
-import {ActivatedRoute, RouterLink} from "@angular/router";
+import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {CurrencyPipe, NgOptimizedImage} from "@angular/common";
+import {environment} from "@environments/environment";
+import {SchemaService} from "@services/seo/schema.service";
+import {MetaService} from "@services/seo/meta.service";
 
 @Component({
   selector: 'app-menus',
@@ -15,7 +18,12 @@ import {CurrencyPipe, NgOptimizedImage} from "@angular/common";
   templateUrl: './menus.component.html',
   styles: ``
 })
-export class MenusComponent {
+export class MenusComponent implements OnInit {
+
+  private domain = environment.domain;
+  private router = inject(Router)
+  private schemaService = inject(SchemaService)
+  private seoService = inject(MetaService)
   private route = inject(ActivatedRoute);
   private elRef = inject(ElementRef<HTMLElement>);
 
@@ -33,7 +41,32 @@ export class MenusComponent {
     () => this.categorias.find((c) => c.slug === this.categoriaActiva()) ?? this.categorias[0],
   );
 
-  constructor() {
+  constructor() {}
+
+  ngOnInit(): void {
+    const currentUrl = `${this.domain}${this.router.url}`;
+
+    const title = 'Bunna Coffee Shop | Menú de Café de Especialidad';
+    const description = 'Explora el menú de Bunna Coffee Shop: cafés de especialidad, bebidas artesanales y opciones dulces y saladas para acompañar tu experiencia única en Cuenca.'
+
+    this.seoService.updateMetaTags({
+      title,
+      description,
+      canonicalUrl: currentUrl,
+      og: {
+        title,
+        description,
+        url: currentUrl,
+        image: `${this.domain}/images/logos/bunnaCirc.webp`
+      }
+    });
+
+    const schema = this.schemaService.generateContentPageSchema(
+      currentUrl,
+      'Menú | Bunna Coffee Shop',
+      description,
+      true);
+    this.schemaService.injectSchema(schema, 'Menu');
     const inicial = this.slugInicial();
     if (inicial && this.categorias.some((c) => c.slug === inicial)) {
       this.categoriaActiva.set(inicial);

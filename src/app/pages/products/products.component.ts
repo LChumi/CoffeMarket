@@ -39,7 +39,9 @@ export default class ProductsComponent implements OnInit {
   searchTerm: string = "";
   titulo: string = "";
 
-  constructor() {
+  constructor() {}
+
+  ngOnInit(): void {
     const currentUrl = `${this.domain}${this.router.url}`;
     const title = 'Catálogo de Accesorios para Café | Bunna Shop'
     const description = 'Explora nuestro catálogo: cafeteras V60, molinos manuales, filtros, balanzas y todo lo que necesitas para preparar café en casa.'
@@ -61,9 +63,7 @@ export default class ProductsComponent implements OnInit {
       'Catalogo Bunna Shop',
       description);
     this.schemaService.injectSchema(schema, 'CollectionPage');
-  }
 
-  ngOnInit(): void {
     const categoryId = this.route.snapshot.paramMap.get('categoryId');
     const searchQuery = this.route.snapshot.queryParamMap.get('q')?.trim().toLowerCase();
 
@@ -86,7 +86,7 @@ export default class ProductsComponent implements OnInit {
   }
 
   goToProducts(productoId: any) {
-    this.router.navigate(['/producto', productoId]).then(r => {
+    this.router.navigate(['/producto', productoId]).then(() => {
       window.scrollTo({top: 0, behavior: 'smooth'});
     })
   }

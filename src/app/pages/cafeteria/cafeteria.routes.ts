@@ -7,7 +7,7 @@ export const CafeteriaRoutes: Route[] = [
   },
   {
     path: 'horarios-ubicacion', loadComponent: () => import('./ubicacion/ubicacion.component').then(m => m.UbicacionComponent),
-    title: 'Ubicanos | Bunna Cuenca',
+    title: 'Ubicanos - Horarios | Bunna Cuenca',
   },
   {
     path: 'menu', loadComponent: () => import('./menus/menus.component').then(m => m.MenusComponent),

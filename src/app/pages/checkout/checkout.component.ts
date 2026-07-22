@@ -54,8 +54,9 @@ export default class CheckoutComponent implements OnInit {
   invoiceForm !: FormGroup;
   lastIdConsulted: string | null = null;
 
-  constructor() {
+  constructor() {}
 
+  ngOnInit(): void {
     const currentUrl = `${this.domain}${this.router.url}`;
 
     const title = 'Pagina de Pago| Bunna Accesorios para Café'
@@ -92,9 +93,6 @@ export default class CheckoutComponent implements OnInit {
       email: ['', Validators.required],
       acepta: [false]
     })
-  }
-
-  ngOnInit(): void {
     this.carritoService.carrito$.subscribe(carrito => {
       this.cartItems = carrito.items;
     })
@@ -221,7 +219,7 @@ export default class CheckoutComponent implements OnInit {
   onProvinciaChange(provincia: string) {
     const ubicacion = this.ubicaciones.find(u => u.nombre === provincia);
     this.selectedCiudades = ubicacion?.ciudades || [];
-    this, this.invoiceForm.get('ciudad')?.setValue(null)
+    this.invoiceForm.get('ciudad')?.setValue(null)
   }
 
   calcularSubtotal(): number {
@@ -250,10 +248,10 @@ export default class CheckoutComponent implements OnInit {
   }
 
   goToOrder(numDoc: string) {
-    this.router.navigate(['/checkout', 'order', numDoc]).then(r => {
+    this.router.navigate(['/checkout', 'order', numDoc]).then(() => {
       this.loading = false;
       this.pedidoService.sendMail(numDoc).subscribe({
-        next: (result) => {
+        next: () => {
           this.carritoService.limpiarCarrito()
         }
       })
