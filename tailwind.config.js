@@ -36,6 +36,10 @@ module.exports = {
           '0%': { transform: 'translateX(-100%)', opacity: '0' },
           '100%': { transform: 'translateX(0)', opacity: '1' },
         },
+        'pulse-slow': {
+          '0%, 100%': { opacity: '1', boxShadow: '0 0 0 0 rgba(37, 211, 102, 0.7)' },
+          '50%': { opacity: '1', boxShadow: '0 0 0 15px rgba(37, 211, 102, 0)' },
+        },
       },
       animation: {
         'zoom-in': 'zoomIn 0.3s ease-out forwards',
@@ -46,6 +50,7 @@ module.exports = {
         'slide-up': 'slideUp 0.5s ease-in forwards',
         'slide-in-right': 'slideInRight 0.4s ease-out forwards',
         'slide-in-left': 'slideInLeft 0.4s ease-out forwards',
+        'pulse-slow': 'pulse-slow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
       },
       zIndex: {
         base: '0',
