@@ -1,6 +1,5 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {Router, RouterOutlet} from '@angular/router';
-import {ConsentModalComponent} from "@components/consent-modal/consent-modal.component";
 import {SchemaService} from "@services/seo/schema.service";
 import {environment} from "@environments/environment";
 import {MetaService} from "@services/seo/meta.service";
@@ -9,7 +8,7 @@ import {ClarityService} from "@services/data/clarity.service";
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, ConsentModalComponent],
+  imports: [RouterOutlet],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

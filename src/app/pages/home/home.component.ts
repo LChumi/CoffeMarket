@@ -10,11 +10,12 @@ import {Router} from "@angular/router";
 import {MetaService} from "@services/seo/meta.service";
 import {SchemaService} from "@services/seo/schema.service";
 import {PopUsComponent} from "@components/pop-us/pop-us.component";
+import {ConsentModalComponent} from "@components/consent-modal/consent-modal.component";
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [NavbarComponent, CarouselComponent, FooterComponent, BoxesIconsComponent, CategoriesGridComponent, WhatsappButtonComponent, PopUsComponent],
+  imports: [NavbarComponent, CarouselComponent, FooterComponent, BoxesIconsComponent, CategoriesGridComponent, WhatsappButtonComponent, PopUsComponent, ConsentModalComponent],
   templateUrl: './home.component.html',
   styles: ``
 })

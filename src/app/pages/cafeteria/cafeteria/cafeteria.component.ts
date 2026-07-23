@@ -6,13 +6,15 @@ import {environment} from "@environments/environment";
 import {SchemaService} from "@services/seo/schema.service";
 import {MetaService} from "@services/seo/meta.service";
 import {WhatsappButtonComponent} from "@components/whatsapp-button/whatsapp-button.component";
+import {ConsentModalComponent} from "@components/consent-modal/consent-modal.component";
 
 @Component({
   selector: 'app-cafeteria',
   imports: [
     RouterLink,
     NgOptimizedImage,
-    WhatsappButtonComponent
+    WhatsappButtonComponent,
+    ConsentModalComponent
   ],
   templateUrl: './cafeteria.component.html',
   standalone: true,
