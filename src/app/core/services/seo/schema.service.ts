@@ -67,7 +67,8 @@ export class SchemaService {
           "datePublished": "2021-08-26T12:13:00-05:00",
           "dateModified": new Date().toISOString()
         },
-        this.generateWebsiteSchema()
+        this.generateWebsiteSchema(),
+        this.generateCafeSchema()
       ]
     };
   }
