@@ -59,8 +59,8 @@ export default class CheckoutComponent implements OnInit {
   ngOnInit(): void {
     const currentUrl = `${this.domain}${this.router.url}`;
 
-    const title = 'Pagina de Pago| Bunna Accesorios para Café'
-    const description = 'Completa tu compra con seguridad y rapidez. Envíos a todo Ecuador.'
+    const title = 'Pagina de Pago| Bunna Accesorios para Cafe'
+    const description = 'Completa tu compra con seguridad y rapidez. Envios a todo Ecuador.'
 
     this.seoService.updateMetaTags({
       title,

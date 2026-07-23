@@ -51,8 +51,8 @@ export default class SingleProductComponent implements OnInit {
       if (producto) {
         this.producto = producto;
 
-        const title = `${producto.descripcion} | Accesorio para Café | Bunna`;
-        const description = `${producto.descripcion} en Bunna Shop: calidad premium, ideal para baristas caseros y amantes del café.`
+        const title = `${producto.descripcion} | Accesorio para Cafe | Bunna`;
+        const description = `${producto.descripcion} en Bunna Shop: calidad premium, ideal para baristas caseros y amantes del cafe.`
 
         this.seoService.updateMetaTags({
           title,
@@ -73,7 +73,7 @@ export default class SingleProductComponent implements OnInit {
 
         this.loadProductsByCategory(producto.categoriaId);
       } else {
-        const title = `Accesorio para Café | Bunna`;
+        const title = `Accesorio para Cafe | Bunna`;
         const description = `Nuestros productos cuentan con la mejor calidad y buen precio`
 
         this.seoService.updateMetaTags({

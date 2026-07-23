@@ -43,8 +43,8 @@ export default class ProductsComponent implements OnInit {
 
   ngOnInit(): void {
     const currentUrl = `${this.domain}${this.router.url}`;
-    const title = 'Catálogo de Accesorios para Café | Bunna Shop'
-    const description = 'Explora nuestro catálogo: cafeteras V60, molinos manuales, filtros, balanzas y todo lo que necesitas para preparar café en casa.'
+    const title = 'Catalogo de Accesorios para Cafe | Bunna Shop'
+    const description = 'Explora nuestro catálogo: cafeteras V60, molinos manuales, filtros, balanzas y todo lo que necesitas para preparar cafe en casa.'
 
     this.seoService.updateMetaTags({
       title,
@@ -80,8 +80,8 @@ export default class ProductsComponent implements OnInit {
       }
 
       this.titulo = categoryId
-        ? `Explora Nuestros Productos de Café ☕| Variedad, Estilo y Funcionalidad `
-        : 'Productos para Amantes del Café ☕ | Encuentra Todo lo que Necesitas';
+        ? `Explora Nuestros Productos de Cafe | Variedad, Estilo y Funcionalidad `
+        : 'Productos para Amantes del Cafe | Encuentra Todo lo que Necesitas';
     });
   }
 

@@ -31,8 +31,8 @@ export default class HomeComponent implements OnInit {
   ngOnInit(): void {
     const currentUrl = `${this.domain}${this.router.url}`;
 
-    const title = 'Bienvenido a Bunna Shop ☕| Accesorios para Cafe ';
-    const description = 'Bienvenido a Bunna Shop: cafeteras, molinos, filtros V60 y más para preparar café como un experto en casa.'
+    const title = 'Bienvenido a Bunna Shop | Accesorios para Cafe ';
+    const description = 'Bienvenido a Bunna Shop: cafeteras, molinos, filtros V60 y más para preparar cafe como un experto en casa.'
 
     this.seoService.updateMetaTags({
       title,

@@ -43,7 +43,7 @@ export default class OrderReceivedComponent implements OnInit {
   ngOnInit() {
     const currentUrl = `${this.domain}${this.router.url}`;
 
-    const title = 'Resumen de Pedido Generado | Bunna Accesorios para Café'
+    const title = 'Resumen de Pedido Generado | Bunna Accesorios para Cafe'
     const description = 'Observa el Resumen de tu Pedido Generado '
 
     this.seoService.updateMetaTags({

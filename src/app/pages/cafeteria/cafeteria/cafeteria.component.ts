@@ -42,8 +42,8 @@ export class CafeteriaComponent implements OnInit {
   ngOnInit(): void {
     const currentUrl = `${this.domain}${this.router.url}`;
 
-    const title = 'Bienvenido a Bunna Coffee 🍵| Café de Especialidad en Cuenca ';
-    const description = 'Bunna Coffee Shop: disfruta café de especialidad, bebidas artesanales y un ambiente único en nuestra cafetería en Cuenca.';
+    const title = 'Bienvenido a Bunna Coffee | Cafe de Especialidad en Cuenca ';
+    const description = 'Bunna Coffee Shop: disfruta cafe de especialidad, bebidas artesanales y un ambiente unico en nuestra cafeteria en Cuenca.';
 
     this.seoService.updateMetaTags({
       title,

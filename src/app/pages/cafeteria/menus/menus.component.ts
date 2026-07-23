@@ -52,8 +52,8 @@ export class MenusComponent implements OnInit {
   ngOnInit(): void {
     const currentUrl = `${this.domain}${this.router.url}`;
 
-    const title = 'Bunna Coffee Shop | Menú de Café de Especialidad';
-    const description = 'Explora el menú de Bunna Coffee Shop: cafés de especialidad, bebidas artesanales y opciones dulces y saladas para acompañar tu experiencia única en Cuenca.'
+    const title = 'Bunna Coffee Shop | Menu de Cafe de Especialidad';
+    const description = 'Explora el menu de Bunna Coffee Shop: cafes de especialidad, bebidas artesanales y opciones dulces y saladas para acompañar tu experiencia unica en Cuenca.'
 
     this.seoService.updateMetaTags({
       title,

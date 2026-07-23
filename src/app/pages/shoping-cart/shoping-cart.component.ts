@@ -40,7 +40,7 @@ export default class ShopingCartComponent implements OnInit {
 
   ngOnInit(): void {
     const currentUrl = `${this.domain}${this.router.url}`;
-    const title = 'Carrito Compras | Bunna Accesorios para Café'
+    const title = 'Carrito Compras | Bunna Accesorios para Cafe'
     const description = 'Consulta tus productos en nuestro carrito de compras'
     this.seoService.updateMetaTags({
       title,

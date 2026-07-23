@@ -30,7 +30,7 @@ export default class PrivacyPolicyComponent implements OnInit {
     const currentUrl = `${this.domain}${this.router.url}`;
 
     const title = 'Pagina de Politica de privacidad | Bunna Shop';
-    const description = 'Política de Privacidad En Bunna shop, valoramos la privacidad de nuestros usuarios'
+    const description = 'Politica de Privacidad En Bunna shop, valoramos la privacidad de nuestros usuarios'
 
     this.seoService.updateMetaTags({
       title,

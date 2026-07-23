@@ -40,8 +40,8 @@ export class UbicacionComponent implements OnInit {
   ngOnInit(): void {
     const currentUrl = `${this.domain}${this.router.url}`;
 
-    const title = 'Bunna Coffee Shop | Horarios y Ubicación en Cuenca';
-    const description = 'Encuentra Bunna Coffee Shop en Cuenca: conoce nuestros horarios de atención y ubicación para disfrutar café de especialidad en un ambiente único.'
+    const title = 'Bunna Coffee Shop | Horarios y Ubicacion en Cuenca';
+    const description = 'Encuentra Bunna Coffee Shop en Cuenca: conoce nuestros horarios de atencion y ubicacion para disfrutar cafe de especialidad en un ambiente unico.'
 
     this.seoService.updateMetaTags({
       title,
