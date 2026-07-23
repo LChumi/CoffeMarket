@@ -28,8 +28,8 @@ export default class AboutComponent implements OnInit {
   ngOnInit(): void {
     const currentUrl = `${this.domain}${this.router.url}`;
 
-    const title ='Quiénes Somos | Bunna Accesorios para Café'
-    const description ='Conoce la historia de Bunna y nuestra pasión por los accesorios de café: calidad, diseño y experiencia barista.'
+    const title ='Quiénes Somos | Bunna Accesorios para Cafe'
+    const description ='Conoce la historia de Bunna y nuestra pasión por los accesorios de cafe: calidad, diseño y experiencia barista.'
 
     this.seoService.updateMetaTags({
       title,
