@@ -24,23 +24,14 @@ export class SchemaService {
    * Inyecta el schema en el <head> del documento
    */
   injectSchema(schema: object, type: string): void {
-    this.document.head
-      .querySelectorAll(`script[data-schema-type="${type}"]`)
+    // Elimina cualquier script previo con el mismo tipo
+    this.document.head.querySelectorAll(`script[data-schema-type="${type}"]`)
       .forEach(script => this.renderer.removeChild(this.document.head, script));
 
     const script = this.renderer.createElement('script');
     script.type = 'application/ld+json';
-
-    const json = JSON.stringify(schema, null, 2);
-
-    const policy = (window as any).trustedTypes?.createPolicy('schema-policy', {
-      createScript: (input: string) => input
-    });
-
-    script.text = policy ? policy.createScript(json) : json;
-
+    script.text = JSON.stringify(schema, null, 2);
     script.setAttribute('data-schema-type', type);
-
     this.renderer.appendChild(this.document.head, script);
   }
 
