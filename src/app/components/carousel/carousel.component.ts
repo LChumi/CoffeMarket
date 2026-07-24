@@ -1,6 +1,6 @@
-import {Component, NgZone, OnDestroy, OnInit} from '@angular/core';
+import {Component, inject, NgZone, OnDestroy, OnInit, PLATFORM_ID} from '@angular/core';
 import {RouterLink} from "@angular/router";
-import {NgClass, NgStyle} from "@angular/common";
+import {isPlatformBrowser, NgClass, NgStyle} from "@angular/common";
 
 interface Slide {
   id: number;
@@ -23,6 +23,8 @@ interface Slide {
   styleUrl: './carousel.component.css'
 })
 export class CarouselComponent implements OnInit, OnDestroy {
+
+  private platformId = inject(PLATFORM_ID);
 
   slides: Slide[] = [
     {
@@ -64,12 +66,14 @@ export class CarouselComponent implements OnInit, OnDestroy {
 
   private readonly autoDelay = 5000;
   private rafId: number | null = null;
-  private autoTimer: any = null;
   private progressStart: number | null = null;
 
   constructor(private ngZone: NgZone) {}
 
   ngOnInit() {
+    if (!isPlatformBrowser(this.platformId)) {
+      return
+    }
     this.ngZone.runOutsideAngular(() => this.startProgress());
   }
 
@@ -80,6 +84,11 @@ export class CarouselComponent implements OnInit, OnDestroy {
   goTo(index: number) {
     this.currentSlide = (index + this.slides.length) % this.slides.length;
     this.clearTimers();
+
+    if (!isPlatformBrowser(this.platformId)) {
+      return;
+    }
+
     this.ngZone.runOutsideAngular(() => {
       requestAnimationFrame(() => this.startProgress());
     });
@@ -89,6 +98,9 @@ export class CarouselComponent implements OnInit, OnDestroy {
   prev() { this.goTo(this.currentSlide - 1); }
 
   private startProgress() {
+    if (!isPlatformBrowser(this.platformId)) {
+      return;
+    }
     this.progressStart = null;
     const animate = (ts: number) => {
       if (!this.progressStart) this.progressStart = ts;
@@ -104,7 +116,13 @@ export class CarouselComponent implements OnInit, OnDestroy {
   }
 
   private clearTimers() {
-    if (this.rafId) cancelAnimationFrame(this.rafId);
-    if (this.autoTimer) clearTimeout(this.autoTimer);
+    if (!isPlatformBrowser(this.platformId)) {
+      return;
+    }
+
+    if (this.rafId !== null) {
+      cancelAnimationFrame(this.rafId);
+      this.rafId = null;
+    }
   }
 }

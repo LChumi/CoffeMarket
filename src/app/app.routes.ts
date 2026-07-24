@@ -14,48 +14,48 @@ export const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
-    title: 'Bienvenido a Bunna Shop ☕| Accesorios para Cafe',
+    title: 'Bunna Shop Cafe de Especialidad | Tienda de cafe y cafeteria en Cuenca',
   },
   {
     path: 'about',
     component: AboutComponent,
-    title: 'Quiénes Somos | Bunna Accesorios para Café'
+    title: 'Quienes Somos | Bunna Accesorios para Cafe'
   },
   {
     path: 'products',
     loadComponent: () => import("./pages/products/products.component"),
     resolve: {productos: productosResolver},
-    title: 'Catálogo de Accesorios para Café | Bunna Shop',
+    title: 'Catalogo de Accesorios para Cafe | Bunna Shop',
     runGuardsAndResolvers: "always"
   },
   {
     path: 'productos/:categoryId',
     loadComponent: () => import('./pages/products/products.component'),
     resolve: {productos: productosCategoryResolver},
-    title: 'Catálogo de Accesorios para Café por categoria | Bunna Shop',
+    title: 'Catalogo de Accesorios para Cafe por categoria | Bunna Shop',
     runGuardsAndResolvers: 'always'
   },
   {
     path: 'producto/:productoId',
     loadComponent: () => import('./pages/single-product/single-product.component'),
     resolve: {producto: productoResolver},
-    title: 'Producto unico | Accesorio para Café | Bunna',
+    title: 'Producto unico | Accesorio para Cafe | Bunna',
     runGuardsAndResolvers: 'always'
   },
   {
     path: 'cart',
     loadComponent: () => import('./pages/shoping-cart/shoping-cart.component'),
-    title: 'Carrito Compras | Bunna Accesorios para Café',
+    title: 'Carrito Compras | Bunna Accesorios para Cafe',
   },
   {
     path: 'checkout',
     children: [
-      {path: '', component: CheckoutComponent, title: 'Pagina de Pago| Bunna Accesorios para Café'},
+      {path: '', component: CheckoutComponent, title: 'Pagina de Pago| Bunna Accesorios para Cafe'},
       {
         path: 'order/:orderId',
         loadComponent: () => import('./pages/order-received/order-received.component'),
         resolve: {pedido: pedidoResolver},
-        title: 'Resumen de Pedido Generado | Bunna Accesorios para Café',
+        title: 'Resumen de Pedido Generado | Bunna Accesorios para Cafe',
         runGuardsAndResolvers: 'always'
       },
     ]

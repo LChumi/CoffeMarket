@@ -1,4 +1,4 @@
-import {inject, Injectable} from '@angular/core';
+import {inject, Injectable, PLATFORM_ID} from '@angular/core';
 import {environment} from "@environments/environment";
 import {HttpClient} from "@angular/common/http";
 import {AuthenticationRequest} from "@models/auth/authentication-request";
@@ -7,6 +7,7 @@ import {ServiceResponse} from "@models/auth/service-response";
 import {UserInfo} from "@models/auth/user-info";
 import {getSessionItem, setSessionItem} from "@utils/storage-utils";
 import {ClarityService} from "@services/data/clarity.service";
+import {isPlatformBrowser} from "@angular/common";
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,7 @@ export class AuthService {
   private baseUrl = environment.apiUrl + 'auth';
   private http = inject(HttpClient);
   private clarity = inject(ClarityService)
+  private platformId = inject(PLATFORM_ID);
 
   private user: UserInfo | null = null;
 
@@ -46,7 +48,11 @@ export class AuthService {
   }
 
   isAuthenticated(): boolean {
-    return getSessionItem('isLoggedIn') === 'true';
+    if (!isPlatformBrowser(this.platformId)) {
+      return false;
+    }
+
+    return sessionStorage.getItem('isLoggedIn') === 'true';
   }
 
   getUsername(): string | null {

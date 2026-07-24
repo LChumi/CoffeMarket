@@ -1,33 +1,62 @@
 //Funciones para sessionStorage
+import {isPlatformBrowser} from "@angular/common";
+import {inject, PLATFORM_ID} from "@angular/core";
+
 export function getSessionItem(key: string): string | null {
-  return sessionStorage.getItem(key);
+  const platformId = inject(PLATFORM_ID);
+  if (isPlatformBrowser(platformId)) {
+    return sessionStorage.getItem(key);
+  }
+  return null;
 }
 
 export function setSessionItem(key: string, value: string): void {
-  sessionStorage.setItem(key, value);
+  const platformId = inject(PLATFORM_ID);
+  if (isPlatformBrowser(platformId)) {
+    sessionStorage.setItem(key, value);
+  }
 }
 
 export function removeSessionItem(key: string): void {
-  sessionStorage.removeItem(key);
+  const platformId = inject(PLATFORM_ID);
+  if (isPlatformBrowser(platformId)) {
+    sessionStorage.removeItem(key);
+  }
 }
 
 export function clearSessionItems(): void {
-  sessionStorage.clear();
+  const platformId = inject(PLATFORM_ID);
+  if (isPlatformBrowser(platformId)) {
+    sessionStorage.clear();
+  }
 }
 
 //Funciones para localStorage
 export function getLocalItem(key: string): string | null {
-  return localStorage.getItem(key);
+  const platformId = inject(PLATFORM_ID);
+  if (isPlatformBrowser(platformId)) {
+    return localStorage.getItem(key);
+  }
+  return null;
 }
 
 export function setLocalItem(key: string, value: string): void {
-  localStorage.setItem(key, value);
+  const platformId = inject(PLATFORM_ID);
+  if (isPlatformBrowser(platformId)) {
+    localStorage.setItem(key, value);
+  }
 }
 
 export function removeLocalItem(key: string): void {
-  localStorage.removeItem(key);
+  const platformId = inject(PLATFORM_ID);
+  if (isPlatformBrowser(platformId)) {
+    localStorage.removeItem(key);
+  }
 }
 
 export function clearLocalItems(): void {
-  localStorage.clear();
+  const platformId = inject(PLATFORM_ID);
+  if (isPlatformBrowser(platformId)) {
+    localStorage.clear();
+  }
 }

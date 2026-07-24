@@ -24,19 +24,31 @@ export class SchemaService {
    * Inyecta el schema en el <head> del documento
    */
   injectSchema(schema: object, type: string): void {
-    // Elimina cualquier script previo con el mismo tipo
-    this.document.head.querySelectorAll(`script[data-schema-type="${type}"]`)
-      .forEach(script => this.renderer.removeChild(this.document.head, script));
+    // En SSR, buscamos el placeholder y lo reemplazamos
+    const placeholder = this.document.querySelector('#schema-placeholder');
 
-    const script = this.renderer.createElement('script');
-    script.type = 'application/ld+json';
-    script.text = JSON.stringify(schema, null, 2);
-    script.setAttribute('data-schema-type', type);
-    this.renderer.appendChild(this.document.head, script);
+    if (placeholder) {
+      // Reemplazar placeholder (funciona en SSR y browser)
+      this.renderer.setProperty(placeholder, 'textContent', JSON.stringify(schema, null, 2));
+      this.renderer.removeAttribute(placeholder, 'id');
+      // Agregar data-schema-type para identificarlo
+      this.renderer.setAttribute(placeholder, 'data-schema-type', type);
+    } else {
+      // Si no hay placeholder (navegacion cliente), crear nuevo script
+      // Primero eliminar el anterior del mismo tipo
+      this.document.head.querySelectorAll(`script[data-schema-type="${type}"]`)
+        .forEach(script => this.renderer.removeChild(this.document.head, script));
+
+      const script = this.renderer.createElement('script');
+      script.type = 'application/ld+json';
+      script.text = JSON.stringify(schema, null, 2);
+      script.setAttribute('data-schema-type', type);
+      this.renderer.appendChild(this.document.head, script);
+    }
   }
 
   /**
-   * Schema para la página principal (index)
+   * Schema para la pagina principal (index)
    */
   generateIndexSchema(): object {
     return {
@@ -60,7 +72,7 @@ export class SchemaService {
           "@id": `${this.domain}/#webpage`,
           "url": this.domain,
           "name": "Bunna Cafe de Especialidad | Accesorios para Cafe",
-          "description": "Explora nuestro universo cafetero: cafeteras, jarros, molinillos y más. Calidad y sabor desde Cuenca.",
+          "description": "Explora nuestro universo cafetero: cafeteras, jarros, molinillos y mas. Calidad y sabor desde Cuenca.",
           "inLanguage": "es-EC",
           "isPartOf": {"@id": `${this.domain}/#website`},
           "breadcrumb": {"@id": `${this.domain}/#breadcrumblist`},
@@ -147,7 +159,7 @@ export class SchemaService {
   }
 
   /**
-   * Schema para páginas de contenido genéricas
+   * Schema para paginas de contenido genericas
    */
   generateContentPageSchema(
     currentUrl: string,
@@ -182,7 +194,7 @@ export class SchemaService {
         "@type": "WebPage",
         "@id": `${currentUrl}#webpage`,
         "url": currentUrl,
-        "name": `${pageName} | Bunna Café de Especialidad`,
+        "name": `${pageName} | Bunna Cafe de Especialidad`,
         "description": description,
         "inLanguage": "es-EC",
         "isPartOf": {
@@ -212,7 +224,7 @@ export class SchemaService {
       "@type": "Organization",
       "@id": `${this.domain}/#organization`,
       "name": "Bunna Cafe de Especialidad",
-      "description": "Cafe de especialidad y accesorios únicos desde Cuenca, Ecuador.",
+      "description": "Cafe de especialidad y accesorios unicos desde Cuenca, Ecuador.",
       "url": this.domain,
       "email": "bunnacoffeemp@gmail.com",
       "telephone": "+593979126861",
@@ -349,3 +361,4 @@ export class SchemaService {
     };
   }
 }
+
