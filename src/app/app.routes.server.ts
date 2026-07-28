@@ -11,9 +11,9 @@ export const serverRoutes: ServerRoute[] = [
   {path: 'cafeteria/horarios-ubicacion', renderMode: RenderMode.Prerender},
   {path: 'cart', renderMode: RenderMode.Prerender},
   {path: 'checkout', renderMode: RenderMode.Prerender},
-  {path: 'products', renderMode: RenderMode.Prerender},
 
   // Dinámicas en Client
+  {path: 'products', renderMode: RenderMode.Client},
   {path: 'producto/:productoId', renderMode: RenderMode.Client},
   {path: 'productos/:categoryId', renderMode: RenderMode.Client},
   {path: 'checkout/order/:orderId', renderMode: RenderMode.Client},
