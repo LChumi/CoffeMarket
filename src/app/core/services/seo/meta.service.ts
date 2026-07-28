@@ -20,14 +20,14 @@ export class MetaService {
     this.title.setTitle(config.title);
 
     // Meta tags - updateTag reemplaza los existentes del index.html
-    this.meta.updateTag({ name: 'description', content: config.description });
+    this.meta.updateTag({name: 'description', content: config.description});
 
     // Open Graph - reemplazar placeholders
     if (config.og) {
-      this.meta.updateTag({ property: 'og:title', content: config.og.title });
-      this.meta.updateTag({ property: 'og:description', content: config.og.description });
-      this.meta.updateTag({ property: 'og:url', content: config.og.url });
-      this.meta.updateTag({ property: 'og:image', content: config.og.image });
+      this.meta.updateTag({property: 'og:title', content: config.og.title});
+      this.meta.updateTag({property: 'og:description', content: config.og.description});
+      this.meta.updateTag({property: 'og:url', content: config.og.url});
+      this.meta.updateTag({property: 'og:image', content: config.og.image});
     }
 
     // Canonical - solo actualizar en browser (en SSR queda el del index.html) actualizado
