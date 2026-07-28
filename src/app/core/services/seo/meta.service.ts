@@ -32,11 +32,9 @@ export class MetaService {
     }
 
     // Canonical - solo actualizar en browser (en SSR queda el del index.html)
-    if (isPlatformBrowser(this.platformId)) {
-      const canonical = this.document.querySelector('link[rel="canonical"]');
-      if (canonical) {
-        canonical.setAttribute('href', config.canonicalUrl);
-      }
+    const canonical = this.document.querySelector('link[rel="canonical"]');
+    if (canonical) {
+      canonical.setAttribute('href', config.canonicalUrl);
     }
   }
 }
