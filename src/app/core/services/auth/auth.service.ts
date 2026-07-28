@@ -40,8 +40,10 @@ export class AuthService {
     return this.http.get<UserInfo>(this.baseUrl + '/me').pipe(
       tap(user => {
         this.user = user;
-        setSessionItem('isLoggedIn', 'true');
-        setSessionItem('username', user.username);
+        if (isPlatformBrowser(this.platformId)) {
+          setSessionItem('isLoggedIn', 'true');
+          setSessionItem('username', user.username);
+        }
         this.clarity.identify(user.username,'')
       })
     );
@@ -50,12 +52,15 @@ export class AuthService {
   isAuthenticated(): boolean {
     if (!isPlatformBrowser(this.platformId)) {
       return false;
+    }else{
+      return sessionStorage.getItem('isLoggedIn') === 'true';
     }
-
-    return sessionStorage.getItem('isLoggedIn') === 'true';
   }
 
   getUsername(): string | null {
+    if (!isPlatformBrowser(this.platformId)) {
+      return null;
+    }
     return getSessionItem('username');
   }
 }

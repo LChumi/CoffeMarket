@@ -14,7 +14,7 @@ declare global {
 })
 export class ConsentService {
 
-  private isBrowser: boolean;
+  private readonly isBrowser: boolean;
   private consentKey = 'user-consent';
 
   constructor(@Inject(PLATFORM_ID) platformId: Object) {

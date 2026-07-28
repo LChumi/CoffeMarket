@@ -1,8 +1,9 @@
-import {Component, HostListener, inject} from '@angular/core';
+import {Component, HostListener, inject, OnInit, PLATFORM_ID} from '@angular/core';
 import {Router, RouterLink} from "@angular/router";
 import {SidebarService} from "@services/data/sidebar.service";
 import {clearSessionItems, getSessionItem} from "@utils/storage-utils";
 import {AuthService} from "@services/auth/auth.service";
+import {isPlatformBrowser} from "@angular/common";
 
 @Component({
   selector: 'app-admin-navbar',
@@ -12,15 +13,18 @@ import {AuthService} from "@services/auth/auth.service";
   templateUrl: './admin-navbar.component.html',
   styles: ``
 })
-export class AdminNavbarComponent {
+export class AdminNavbarComponent implements OnInit {
 
   private sidebarService = inject(SidebarService);
   private authService = inject(AuthService);
   private router = inject(Router);
   protected username: string | null = '';
+  private platformId = inject(PLATFORM_ID);
 
-  constructor() {
-    this.username = getSessionItem('username')
+  ngOnInit() {
+    if (isPlatformBrowser(this.platformId)) {
+      this.username = getSessionItem('username')
+    }
   }
 
   sidebarOpen() {
@@ -34,7 +38,9 @@ export class AdminNavbarComponent {
   }
 
   logout() {
-    clearSessionItems()
+    if (isPlatformBrowser(this.platformId)) {
+      clearSessionItems()
+    }
     this.authService.logout().subscribe({
       next: () => {
         this.router.navigate(['/auth']).then(() => {

@@ -1,8 +1,9 @@
-import {Injectable} from '@angular/core';
+import {inject, Injectable, PLATFORM_ID} from '@angular/core';
 import {Carrito} from "@models/carrito";
 import {getLocalItem} from "@utils/storage-utils";
 import {BehaviorSubject} from "rxjs";
 import {Producto} from "@models/producto";
+import {isPlatformBrowser} from "@angular/common";
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +11,7 @@ import {Producto} from "@models/producto";
 export class CarritoService {
   private carrito: Carrito = {} as Carrito;
   private carritoSubject: BehaviorSubject<Carrito>;
+  private platformId = inject(PLATFORM_ID);
   carrito$ = new BehaviorSubject<Carrito>({} as Carrito).asObservable();
 
   constructor() {
@@ -19,24 +21,28 @@ export class CarritoService {
   }
 
   private inicializarCarrito(): Carrito {
-    const data = getLocalItem("carrito");
-    if (data) {
-      this.carrito = JSON.parse(data);
-    } else {
-      this.carrito = {
-        id: crypto.randomUUID(),
-        usuarioId: 'user-client',
-        items: [],
-        actualizadoEn: new Date().toISOString()
-      };
+    if (isPlatformBrowser(this.platformId)) {
+      const data = getLocalItem("carrito");
+      if (data) {
+        this.carrito = JSON.parse(data);
+      } else {
+        this.carrito = {
+          id: crypto.randomUUID(),
+          usuarioId: 'user-client',
+          items: [],
+          actualizadoEn: new Date().toISOString()
+        };
+      }
     }
     return this.carrito;
   }
 
   private guardarCarrito() {
-    this.carrito.actualizadoEn = new Date().toISOString();
-    localStorage.setItem('carrito', JSON.stringify(this.carrito));
-    this.carritoSubject.next(this.carrito);
+    if (isPlatformBrowser(this.platformId)) {
+      this.carrito.actualizadoEn = new Date().toISOString();
+      localStorage.setItem('carrito', JSON.stringify(this.carrito));
+      this.carritoSubject.next(this.carrito);
+    }
   }
 
   agregarProducto(producto: Producto, cantidad: number = 1) {
