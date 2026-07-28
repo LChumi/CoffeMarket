@@ -42,7 +42,8 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     if (this.authService.isAuthenticated()) {
-      this.router.navigate(['/admin/dashboard']).then(() => {
+      this.router.navigate(['/admin/dashboard']).then(r => {
+        console.log('navigate', r);
         this.toastr.info('Bienvenido')
       });
     }
@@ -62,6 +63,7 @@ export class LoginComponent implements OnInit {
             next: response => {
               if (response) {
                 this.router.navigate(['/admin/dashboard']).then(r => {
+                  console.log('navigate', r);
                   this.toastr.info('Bienvenido');
                   this.clarity.event('Ingreso panel Administracion')
                 });
@@ -73,11 +75,10 @@ export class LoginComponent implements OnInit {
           this.loginForm.reset()
         }
       },
-      error: error => {
+      error: () => {
         this.toastr.error('Ocurrio un problema, Servicio no disponible');
         this.loginForm.reset()
       }
     })
   }
-
 }
