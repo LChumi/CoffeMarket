@@ -18,5 +18,4 @@ export const AdminRoutes: Route[] = [
   },
   { path: 'login', loadComponent: () => import('./pages/login/login.component').then(m => m.LoginComponent), title: 'Inicio Sesion | Admin Bunna Shop' },
   { path: '**', redirectTo: 'login', pathMatch: 'full' },
-  { path: '', redirectTo: 'login', pathMatch: 'full' }
 ];

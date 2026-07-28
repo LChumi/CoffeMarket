@@ -17,8 +17,6 @@ export const serverRoutes: ServerRoute[] = [
   {path: 'producto/:productoId', renderMode: RenderMode.Client},
   {path: 'productos/:categoryId', renderMode: RenderMode.Client},
   {path: 'checkout/order/:orderId', renderMode: RenderMode.Client},
-  {path: 'admin', renderMode: RenderMode.Client},
-  {path: 'admin/login', renderMode: RenderMode.Client},
 
   // Fallback
   {path: '**', renderMode: RenderMode.Server}
