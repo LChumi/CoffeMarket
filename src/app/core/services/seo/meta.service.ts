@@ -1,5 +1,5 @@
-import {inject, Injectable, PLATFORM_ID} from '@angular/core';
-import {DOCUMENT, isPlatformBrowser} from "@angular/common";
+import {inject, Injectable} from '@angular/core';
+import {DOCUMENT} from "@angular/common";
 import {Meta, Title} from "@angular/platform-browser";
 
 @Injectable({
@@ -9,7 +9,6 @@ export class MetaService {
   private title = inject(Title);
   private meta = inject(Meta);
   private document = inject(DOCUMENT);
-  private platformId = inject(PLATFORM_ID);
 
   updateMetaTags(config: {
     title: string;
@@ -31,7 +30,7 @@ export class MetaService {
       this.meta.updateTag({ property: 'og:image', content: config.og.image });
     }
 
-    // Canonical - solo actualizar en browser (en SSR queda el del index.html)
+    // Canonical - solo actualizar en browser (en SSR queda el del index.html) actualizado
     const canonical = this.document.querySelector('link[rel="canonical"]');
     if (canonical) {
       canonical.setAttribute('href', config.canonicalUrl);
