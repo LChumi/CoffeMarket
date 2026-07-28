@@ -9,6 +9,8 @@ import {productosResolver} from "@resolvers/productos.resolver";
 import {AdminRoutes} from "@admin/admin.routes";
 import {CafeteriaRoutes} from "@pages/cafeteria/cafeteria.routes";
 import {CafeteriaLayoutComponent} from "@pages/cafeteria/cafeteria-layout/cafeteria-layout.component";
+import {authGuardGuard} from "@guards/auth-guard.guard";
+import {LayoutComponent} from "@admin/layout/layout.component";
 
 export const routes: Routes = [
   {
@@ -71,7 +73,18 @@ export const routes: Routes = [
     title: 'Pagina de Politica de Devoluciones | Bunna Shop'
   },
   {path: 'cafeteria', component: CafeteriaLayoutComponent, children: CafeteriaRoutes},
-  {path: 'admin', children: AdminRoutes},
+  {
+    path: 'auth',
+    loadComponent: () => import('./admin/pages/login/login.component').then(m => m.LoginComponent),
+    title: 'Inicio Sesion | Admin Bunna Shop'
+  },
+  {
+    path: 'admin',
+    canActivate: [authGuardGuard],
+    component: LayoutComponent,
+    children:
+    AdminRoutes
+  },
   {path: 'producto', redirectTo: 'products', pathMatch: 'full'},
   {path: 'productos', redirectTo: 'products', pathMatch: 'full'},
   {path: '**', redirectTo: '', pathMatch: 'full'}

@@ -3,7 +3,6 @@ import {Router, RouterLink} from "@angular/router";
 import {SidebarService} from "@services/data/sidebar.service";
 import {clearSessionItems, getSessionItem} from "@utils/storage-utils";
 import {AuthService} from "@services/auth/auth.service";
-import {NgOptimizedImage} from "@angular/common";
 
 @Component({
   selector: 'app-admin-navbar',
@@ -38,7 +37,7 @@ export class AdminNavbarComponent {
     clearSessionItems()
     this.authService.logout().subscribe({
       next: () => {
-        this.router.navigate(['/admin/login']).then(() => {
+        this.router.navigate(['/auth']).then(() => {
         })
       }
     })

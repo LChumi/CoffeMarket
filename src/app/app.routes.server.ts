@@ -19,7 +19,7 @@ export const serverRoutes: ServerRoute[] = [
   {path: 'checkout/order/:orderId', renderMode: RenderMode.Client},
 
   //Admin
-  { path: 'admin/login', renderMode: RenderMode.Client },
+  { path: 'auth', renderMode: RenderMode.Client },
   { path: 'admin/dashboard', renderMode: RenderMode.Client },
   { path: 'admin/users', renderMode: RenderMode.Client },
   { path: 'admin/products', renderMode: RenderMode.Client },
