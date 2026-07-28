@@ -1,5 +1,5 @@
-import {inject, Injectable, PLATFORM_ID} from '@angular/core';
-import {DOCUMENT, isPlatformBrowser} from "@angular/common";
+import {inject, Injectable} from '@angular/core';
+import {DOCUMENT} from "@angular/common";
 import {Meta, Title} from "@angular/platform-browser";
 
 @Injectable({
@@ -9,7 +9,6 @@ export class MetaService {
   private title = inject(Title);
   private meta = inject(Meta);
   private document = inject(DOCUMENT);
-  private platformId = inject(PLATFORM_ID);
 
   updateMetaTags(config: {
     title: string;
@@ -21,22 +20,20 @@ export class MetaService {
     this.title.setTitle(config.title);
 
     // Meta tags - updateTag reemplaza los existentes del index.html
-    this.meta.updateTag({ name: 'description', content: config.description });
+    this.meta.updateTag({name: 'description', content: config.description});
 
     // Open Graph - reemplazar placeholders
     if (config.og) {
-      this.meta.updateTag({ property: 'og:title', content: config.og.title });
-      this.meta.updateTag({ property: 'og:description', content: config.og.description });
-      this.meta.updateTag({ property: 'og:url', content: config.og.url });
-      this.meta.updateTag({ property: 'og:image', content: config.og.image });
+      this.meta.updateTag({property: 'og:title', content: config.og.title});
+      this.meta.updateTag({property: 'og:description', content: config.og.description});
+      this.meta.updateTag({property: 'og:url', content: config.og.url});
+      this.meta.updateTag({property: 'og:image', content: config.og.image});
     }
 
-    // Canonical - solo actualizar en browser (en SSR queda el del index.html)
-    if (isPlatformBrowser(this.platformId)) {
-      const canonical = this.document.querySelector('link[rel="canonical"]');
-      if (canonical) {
-        canonical.setAttribute('href', config.canonicalUrl);
-      }
+    // Canonical - solo actualizar en browser (en SSR queda el del index.html) actualizado
+    const canonical = this.document.querySelector('link[rel="canonical"]');
+    if (canonical) {
+      canonical.setAttribute('href', config.canonicalUrl);
     }
   }
 }
