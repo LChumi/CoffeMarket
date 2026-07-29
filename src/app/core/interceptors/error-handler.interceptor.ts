@@ -47,7 +47,7 @@ export const errorHandlerInterceptor: HttpInterceptorFn = (req, next) => {
             toastr.error(msg, 'Error del servidor');
             break;
           default:
-            toastr.error(msg, `Error ${e.status}`);
+            console.error('Error de servidor o ruta dañada')
             break;
         }
       }
