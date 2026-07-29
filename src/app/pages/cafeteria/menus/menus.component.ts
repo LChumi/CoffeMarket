@@ -7,6 +7,7 @@ import {CurrencyPipe, NgOptimizedImage} from "@angular/common";
 import {environment} from "@environments/environment";
 import {SchemaService} from "@services/seo/schema.service";
 import {MetaService} from "@services/seo/meta.service";
+import {ClarityService} from "@services/data/clarity.service";
 
 @Component({
   selector: 'app-menus',
@@ -26,6 +27,7 @@ export class MenusComponent implements OnInit {
   private seoService = inject(MetaService)
   private route = inject(ActivatedRoute);
   private elRef = inject(ElementRef<HTMLElement>);
+  private clarity=  inject(ClarityService)
 
   categorias: MenuCategoria[] = CAFETERIA_MENU;
 
@@ -77,6 +79,7 @@ export class MenusComponent implements OnInit {
     if (inicial && this.categorias.some((c) => c.slug === inicial)) {
       this.categoriaActiva.set(inicial);
     }
+    this.clarity.event("Menu")
   }
 
   seleccionar(slug: string): void {
