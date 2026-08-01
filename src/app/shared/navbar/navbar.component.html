@@ -69,20 +69,75 @@
                   clip-rule="evenodd"/>
           </svg>
         </a>
-        <a [routerLink]="['/cafeteria']" routerLinkActive="!text-[#8B6E56] !bg-[#B3977E]/10 font-semibold"
-           class="flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-sm font-medium
-                  text-[#5C4A3A] dark:text-[#D4C0AF]
-                  hover:bg-[#B3977E]/10 hover:text-[#B3977E]
-                  dark:hover:bg-[#B3977E]/15 dark:hover:text-[#D4A98A]
-                  transition-all duration-150">
-          Cafeteria
-          <svg class="w-5 h-5 opacity-70"  fill="currentColor" viewBox="0 0 24 24">
-            <path  fill-rule="evenodd"
-                   d="M5 5c-.28252 0-.55187.11951-.74145.32899-.18958.20949-.2817.48939-.25358.77051l.6398 6.398C4.90037 15.0535 7.0512 17 9.61995 17h.76015c2.3975 0 4.431-1.6957 4.8992-4H17c1.6569 0 3-1.3431 3-3 0-1.65685-1.3431-3-3-3h-1.095l.09-.9005c.0282-.28112-.064-.56102-.2535-.77051C15.5519 5.11951 15.2825 5 15 5H5Zm12 6h-1.495l.2-2H17c.5523 0 1 .44772 1 1 0 .5523-.4477 1-1 1Z"
-                   clip-rule="evenodd"/>
-            <path fill="currentColor" d="M5 18c-.55228 0-1 .4477-1 1s.44772 1 1 1h11c.5523 0 1-.4477 1-1s-.4477-1-1-1H5Z"/>
-          </svg>
-        </a>
+
+        <div class="relative inline-block group">
+
+          <!-- Botón -->
+          <button
+            class="flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-sm font-medium
+           text-[#5C4A3A] dark:text-[#D4C0AF]
+           hover:bg-[#B3977E]/10 hover:text-[#B3977E]
+           dark:hover:bg-[#B3977E]/15 dark:hover:text-[#D4A98A]
+           transition-all duration-200">
+            Cafetería
+            <svg
+              class="w-4 h-4 transition-transform duration-200 group-hover:rotate-180"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              viewBox="0 0 24 24">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M19 9l-7 7-7-7"/>
+            </svg>
+
+          </button>
+
+          <!-- Submenú -->
+          <div
+            class="absolute left-0 top-full pt-1
+           opacity-0 invisible translate-y-2
+           group-hover:opacity-100
+           group-hover:visible
+           group-hover:translate-y-0
+           transition-all duration-200
+           z-50">
+
+            <div
+              class="w-56 overflow-hidden rounded-xl
+             border border-gray-200 dark:border-[#444]
+             bg-white dark:bg-[#2A2A2A]
+             shadow-xl">
+              <a
+                [routerLink]="['/cafeteria/inicio']"
+                class="block px-4 py-3 text-sm
+               text-[#5C4A3A] dark:text-[#D4C0AF]
+               hover:bg-[#B3977E]/10
+               transition-colors">
+                Inicio
+              </a>
+              <a
+                [routerLink]="['/cafeteria/menu']"
+                class="block px-4 py-3 text-sm
+               text-[#5C4A3A] dark:text-[#D4C0AF]
+               hover:bg-[#B3977E]/10
+               transition-colors">
+                Menús
+              </a>
+
+              <a
+                [routerLink]="['/cafeteria/horarios-ubicacion']"
+                class="block px-4 py-3 text-sm
+               text-[#5C4A3A] dark:text-[#D4C0AF]
+               hover:bg-[#B3977E]/10
+               transition-colors">
+                Horarios y Ubicación
+              </a>
+            </div>
+          </div>
+        </div>
+
       </div>
 
       <!-- Acciones -->

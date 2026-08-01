@@ -31,6 +31,8 @@ export class NavbarComponent {
   visibleSidebar = false;
   cantidadItems = 0;
 
+  openCafe = false;
+
   constructor() {
     this.carritoService.carrito$.subscribe(carrito => {
       this.cantidadItems = carrito.items?.length || 0;
