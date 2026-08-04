@@ -45,9 +45,9 @@ export class ShoppingCartSidebarComponent implements OnInit {
   }
 
   calcularTotal(): number {
-    return this.cartItems.reduce((total, item) => {
-      const precio = item.pvp;
-      const cantidad = item.cantidad;
+    return (this.cartItems ?? []).reduce((total, item) => {
+      const precio = item?.pvp ?? 0;
+      const cantidad = item?.cantidad ?? 0;
       return total + precio * cantidad;
     }, 0);
   }
@@ -57,12 +57,12 @@ export class ShoppingCartSidebarComponent implements OnInit {
   }
 
   goToCart() {
-    this.router.navigate(['/cart']).then(r => {
+    this.router.navigate(['/cart']).then(() => {
     })
   }
 
   goToCheckOut() {
-    this.router.navigate(['/checkout']).then(r => {})
+    this.router.navigate(['/checkout']).then(() => {})
   }
 
   protected readonly getUrlImage = getUrlImage;

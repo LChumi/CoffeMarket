@@ -9,86 +9,126 @@ import {isPlatformBrowser} from "@angular/common";
   providedIn: 'root'
 })
 export class CarritoService {
-  private carrito: Carrito = {} as Carrito;
-  private carritoSubject: BehaviorSubject<Carrito>;
-  private platformId = inject(PLATFORM_ID);
-  carrito$ = new BehaviorSubject<Carrito>({} as Carrito).asObservable();
+
+  private readonly platformId = inject(PLATFORM_ID);
+
+  private carrito: Carrito = this.crearCarritoVacio();
+
+  private carritoSubject = new BehaviorSubject<Carrito>(this.carrito);
+
+  readonly carrito$ = this.carritoSubject.asObservable();
 
   constructor() {
-    const carritoInicial = this.inicializarCarrito();
-    this.carritoSubject = new BehaviorSubject<Carrito>(carritoInicial);
-    this.carrito$ = this.carritoSubject.asObservable();
+    this.carrito = this.inicializarCarrito();
+    this.carritoSubject.next(this.carrito);
+  }
+
+  private crearCarritoVacio(): Carrito {
+    return {
+      id: isPlatformBrowser(this.platformId)
+        ? crypto.randomUUID()
+        : 'server-cart',
+      usuarioId: 'user-client',
+      items: [],
+      actualizadoEn: new Date().toISOString()
+    };
   }
 
   private inicializarCarrito(): Carrito {
-    if (isPlatformBrowser(this.platformId)) {
-      const data = getLocalItem("carrito");
-      if (data) {
-        this.carrito = JSON.parse(data);
-      } else {
-        this.carrito = {
-          id: crypto.randomUUID(),
-          usuarioId: 'user-client',
-          items: [],
-          actualizadoEn: new Date().toISOString()
-        };
-      }
+
+    const carritoVacio = this.crearCarritoVacio();
+
+    if (!isPlatformBrowser(this.platformId)) {
+      return carritoVacio;
     }
-    return this.carrito;
+
+    const data = getLocalItem('carrito');
+
+    if (!data) {
+      return carritoVacio;
+    }
+
+    try {
+      const carrito = JSON.parse(data) as Partial<Carrito>;
+
+      return {
+        ...carritoVacio,
+        ...carrito,
+        items: carrito.items ?? []
+      };
+
+    } catch {
+      return carritoVacio;
+    }
   }
 
-  private guardarCarrito() {
+  private guardarCarrito(): void {
+
+    this.carrito.actualizadoEn = new Date().toISOString();
+
+    this.carritoSubject.next(this.carrito);
+
     if (isPlatformBrowser(this.platformId)) {
-      this.carrito.actualizadoEn = new Date().toISOString();
       localStorage.setItem('carrito', JSON.stringify(this.carrito));
-      this.carritoSubject.next(this.carrito);
     }
   }
 
-  agregarProducto(producto: Producto, cantidad: number = 1) {
+  agregarProducto(producto: Producto, cantidad = 1): void {
+
     const existente = this.carrito.items.find(i => i.productoId === producto.sku);
+
     if (existente) {
-      existente.cantidad = (existente.cantidad + cantidad)
+      existente.cantidad += cantidad;
     } else {
       this.carrito.items.push({
         productoId: producto.sku,
         descripcion: producto.descripcion,
-        cantidad: cantidad,
+        cantidad,
         pvp: producto.precio
       });
     }
+
     this.guardarCarrito();
   }
 
-  agregarCantidad(id: string) {
-    const existente = this.carrito.items.find(i => i.productoId === id);
-    if (existente) {
-      existente.cantidad = (existente.cantidad + 1);
-      this.guardarCarrito()
-    }
+  agregarCantidad(id: string): void {
+
+    const item = this.carrito.items.find(i => i.productoId === id);
+
+    if (!item) return;
+
+    item.cantidad++;
+
+    this.guardarCarrito();
   }
 
-  retirarCantidad(id: string) {
+  retirarCantidad(id: string): void {
+
     const item = this.carrito.items.find(i => i.productoId === id);
+
     if (!item) return;
 
     if (item.cantidad > 1) {
-      item.cantidad -= 1;
+      item.cantidad--;
       this.guardarCarrito();
     }
   }
 
+  eliminarProducto(productoId: string): void {
+
+    this.carrito.items = this.carrito.items.filter(i => i.productoId !== productoId);
+
+    this.guardarCarrito();
+  }
+
+  limpiarCarrito(): void {
+
+    this.carrito.items = [];
+
+    this.guardarCarrito();
+  }
+
   obtenerCarrito(): Carrito {
     return this.carrito;
-  }
-
-  eliminarProducto(productoId: string) {
-    this.carrito.items = this.carrito.items.filter(item => item.productoId !== productoId);
-    this.guardarCarrito();
-  }
-
-  limpiarCarrito() {
-    this.carrito.items = [];
-    this.guardarCarrito();
   }
 }

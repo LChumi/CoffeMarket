@@ -32,11 +32,14 @@ export class CafeteriaComponent implements OnInit {
   /** Ligera rotación pseudo-aleatoria pero estable por índice, para el efecto "puesto a mano" */
   rotacion(i: number): string {
     const angulos = ['-rotate-1', 'rotate-1', '-rotate-2', 'rotate-2', 'rotate-0'];
-    return angulos[i % angulos.length];
+    return angulos[i % angulos?.length];
   }
 
   totalBebidas(): number {
-    return this.categorias.reduce((acc, c) => acc + c.items.length, 0);
+    return (this.categorias ?? []).reduce((acc, c) => {
+      const items = c.items ?? [];
+      return acc + items.length;
+    }, 0);
   }
 
   ngOnInit(): void {

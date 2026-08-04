@@ -82,6 +82,10 @@ export class CarouselComponent implements OnInit, OnDestroy {
   }
 
   goTo(index: number) {
+    const total = this.slides?.length ?? 0;
+    if (total === 0) {
+      return; // no hay slides
+    }
     this.currentSlide = (index + this.slides.length) % this.slides.length;
     this.clearTimers();
 
