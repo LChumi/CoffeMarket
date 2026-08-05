@@ -7,7 +7,7 @@ import {ClarityService} from "@services/data/clarity.service";
   templateUrl: './whatsapp-button.component.html',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.Eager,
-  styleUrl: './whatsapp-button.component.css'
+  styleUrl: './whatsapp-button.component.scss'
 })
 export class WhatsappButtonComponent {
 

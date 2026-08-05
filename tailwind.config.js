@@ -3,6 +3,14 @@ module.exports = {
   content: ['./src/**/*.{html,ts}'],
   theme: {
     extend: {
+      fontFamily: {
+        body: ['BricolageGrotesque', 'sans-serif'],
+        heading: ['GillSans', 'sans-serif'],
+        display: ['TAN-PEARL', 'serif'],
+        serif: ['TimesNewRomma', 'serif'],
+        sans: ['Inter', 'sans-serif'],
+        fraunces: ['Fraunces', 'serif'],
+      },
       keyframes: {
         zoomIn: {
           '0%': { opacity: '0', transform: 'scale(0.95)' },
@@ -59,16 +67,19 @@ module.exports = {
         overlay: '1000',
         modal: '1100',
         critical: '9999',
-      }
+      },
     },
   },
+
   plugins: [
-    function({ addUtilities }) {
+    function ({ addUtilities }) {
       addUtilities({
         '.scrollbar-hide': {
           '-ms-overflow-style': 'none',
           'scrollbar-width': 'none',
-          '&::-webkit-scrollbar': { display: 'none' },
+          '&::-webkit-scrollbar': {
+            display: 'none',
+          },
         },
       });
     },

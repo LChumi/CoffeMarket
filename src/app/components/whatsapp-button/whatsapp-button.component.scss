@@ -1,0 +1,28 @@
+// Variables para colores y tamaños
+$float-size: 60px;
+$float-bg: #25d366;
+$float-color: #fff;
+$shadow-color: #999;
+$hover-scale: 1.1;
+
+.float {
+  position: fixed;
+  width: $float-size;
+  height: $float-size;
+  bottom: 50px;
+  right: 30px;
+  background-color: $float-bg;
+  color: $float-color;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  box-shadow: 2px 2px 3px $shadow-color;
+  z-index: 100;
+  transition: transform 0.3s;
+
+  &:hover {
+    transform: scale($hover-scale);
+  }
+}

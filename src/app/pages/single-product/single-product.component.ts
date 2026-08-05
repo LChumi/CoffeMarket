@@ -10,6 +10,7 @@ import {FooterComponent} from "@shared/footer/footer.component";
 import {Producto} from "@models/producto";
 import {ProductoService} from "@services/producto.service";
 import {getUrlImage} from "@utils/image-util";
+import {NgOptimizedImage} from "@angular/common";
 
 @Component({
   selector: 'app-single-product',
@@ -17,7 +18,8 @@ import {getUrlImage} from "@utils/image-util";
     NavbarComponent,
     ShoppingCartSidebarComponent,
     FooterComponent,
-    RouterLink
+    RouterLink,
+    NgOptimizedImage
   ],
   templateUrl: './single-product.component.html',
   standalone: true,

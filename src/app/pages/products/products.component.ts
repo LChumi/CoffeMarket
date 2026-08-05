@@ -10,6 +10,7 @@ import {SchemaService} from "@services/seo/schema.service";
 import {FooterComponent} from "@shared/footer/footer.component";
 import {Producto} from "@models/producto";
 import {getUrlImage} from "@utils/image-util";
+import {NgOptimizedImage} from "@angular/common";
 
 @Component({
   selector: 'app-products',
@@ -19,7 +20,9 @@ import {getUrlImage} from "@utils/image-util";
     FormsModule,
     ShoppingCartSidebarComponent,
     FooterComponent,
-    RouterLink],
+    RouterLink,
+    NgOptimizedImage
+  ],
   templateUrl: './products.component.html',
   changeDetection: ChangeDetectionStrategy.Eager,
   styles: ``
