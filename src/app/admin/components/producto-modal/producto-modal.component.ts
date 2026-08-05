@@ -5,14 +5,15 @@ import {
   Input,
   OnInit,
   Output,
+  ChangeDetectionStrategy
 } from '@angular/core';
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {ProductoService} from "@services/producto.service";
-import {ToastrService} from "ngx-toastr";
 import {Categorias} from "@models/data/categorias";
 import {DataService} from "@services/data/data.service";
 import {Atributos} from "@models/dto/atributos";
 import {Producto} from "@models/producto";
+import {MessageService} from "primeng/api";
 
 @Component({
   selector: 'app-producto-modal',
@@ -21,6 +22,7 @@ import {Producto} from "@models/producto";
     FormsModule
   ],
   templateUrl: './producto-modal.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styles: ``
 })
 export class ProductoModalComponent implements OnInit {
@@ -57,7 +59,7 @@ export class ProductoModalComponent implements OnInit {
   private productoService = inject(ProductoService);
   private dataService = inject(DataService);
   private fb = inject(FormBuilder);
-  private toastr = inject(ToastrService);
+  private toastr = inject(MessageService);
   protected categorias: Categorias[] = []
   protected etiquetasNuevas: string[] = []
   protected atributosNuevo: Atributos[] = []
@@ -135,7 +137,7 @@ export class ProductoModalComponent implements OnInit {
 
   agregarEditarProducto(){
     if (this.productoForm.invalid) {
-      this.toastr.warning('Pro favor llene los campos del formulario');
+      this.toastr.add({severity: 'warn', summary: 'Atencion', detail: 'Por favor llene los campos del formulario'})
       return;
     }
     const sku = this.productoForm.get('sku')?.value;
@@ -163,7 +165,7 @@ export class ProductoModalComponent implements OnInit {
     if (this._idProducto) {
       this.productoService.update(this._idProducto, producto).subscribe({
         next: data => {
-          this.toastr.success('Producto actualizado con exito!');
+          this.toastr.add({severity: 'succes', detail: 'Producto actualizado con exito!'})
           this.visibleChange.emit(false);
           this.saveRequest.emit({editUpdate: true});
         }
@@ -171,7 +173,7 @@ export class ProductoModalComponent implements OnInit {
     } else {
       this.productoService.save(producto).subscribe({
         next: data => {
-          this.toastr.success('Producto guardado con exito');
+          this.toastr.add({severity: 'succes', detail: 'Producto actualizado con exito!'})
           this.visibleChange.emit(false);
           this.saveRequest.emit({editUpdate: true});
         }

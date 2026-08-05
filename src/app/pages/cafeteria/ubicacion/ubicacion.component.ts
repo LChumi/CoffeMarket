@@ -1,4 +1,4 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, inject, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {DomSanitizer, SafeResourceUrl} from "@angular/platform-browser";
 import {HORARIO_DIA} from "@pages/cafeteria/mocks/horario-dia.mock";
 import {NgOptimizedImage} from "@angular/common";
@@ -14,6 +14,7 @@ import {MetaService} from "@services/seo/meta.service";
   ],
   templateUrl: './ubicacion.component.html',
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.Eager,
   styles: ``
 })
 export class UbicacionComponent implements OnInit {

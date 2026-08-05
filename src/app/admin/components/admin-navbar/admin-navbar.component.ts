@@ -1,4 +1,4 @@
-import {Component, HostListener, inject, OnInit, PLATFORM_ID} from '@angular/core';
+import {Component, HostListener, inject, OnInit, PLATFORM_ID, ChangeDetectionStrategy} from '@angular/core';
 import {Router, RouterLink} from "@angular/router";
 import {SidebarService} from "@services/data/sidebar.service";
 import {clearSessionItems, getSessionItem} from "@utils/storage-utils";
@@ -11,6 +11,7 @@ import {isPlatformBrowser} from "@angular/common";
     RouterLink
   ],
   templateUrl: './admin-navbar.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styles: ``
 })
 export class AdminNavbarComponent implements OnInit {

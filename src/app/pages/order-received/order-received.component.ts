@@ -1,4 +1,4 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, inject, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {NavbarComponent} from "@shared/navbar/navbar.component";
 import {FooterComponent} from "@shared/footer/footer.component";
 import {ActivatedRoute, Router, RouterLink} from "@angular/router";
@@ -22,6 +22,7 @@ import {ClarityService} from "@services/data/clarity.service";
     DatePipe
   ],
   templateUrl: './order-received.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styles: ``
 })
 export default class OrderReceivedComponent implements OnInit {

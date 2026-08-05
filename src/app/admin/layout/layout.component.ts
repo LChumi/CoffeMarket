@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, ChangeDetectionStrategy} from '@angular/core';
 import {RouterOutlet} from "@angular/router";
 import {AdminNavbarComponent} from "../components/admin-navbar/admin-navbar.component";
 import {AdminSidebarComponent} from "../components/admin-sidebar/admin-sidebar.component";
@@ -19,6 +19,7 @@ import {AdminSidebarComponent} from "../components/admin-sidebar/admin-sidebar.c
       </div>
     </div>
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   styles: ``
 })
 export class LayoutComponent {

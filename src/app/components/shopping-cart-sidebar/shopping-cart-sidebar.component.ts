@@ -1,4 +1,4 @@
-import {Component, EventEmitter, inject, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, inject, Input, OnInit, Output, ChangeDetectionStrategy} from '@angular/core';
 import {CurrencyPipe, NgClass} from "@angular/common";
 import {ItemCarrito} from "@models/dto/item-carrito";
 import {CarritoService} from "@services/carrito.service";
@@ -13,6 +13,7 @@ import {getUrlImage} from "@utils/image-util";
   ],
   templateUrl: './shopping-cart-sidebar.component.html',
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.Eager,
   styles: ``
 })
 export class ShoppingCartSidebarComponent implements OnInit {

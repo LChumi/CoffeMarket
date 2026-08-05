@@ -1,4 +1,4 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, inject, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {environment} from "@environments/environment";
 import {Router} from "@angular/router";
 import {SchemaService} from "@services/seo/schema.service";
@@ -8,6 +8,7 @@ import {MetaService} from "@services/seo/meta.service";
   selector: 'app-dashboard',
   imports: [],
   templateUrl: './dashboard.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styles: ``
 })
 export class DashboardComponent implements OnInit {

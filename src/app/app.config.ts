@@ -1,29 +1,24 @@
-import {ApplicationConfig, provideZoneChangeDetection} from '@angular/core';
+import {ApplicationConfig, importProvidersFrom, provideZoneChangeDetection} from '@angular/core';
 import {provideRouter, withViewTransitions} from '@angular/router';
 
 import {routes} from './app.routes';
-import {provideAnimations} from "@angular/platform-browser/animations";
-import {provideHttpClient, withFetch, withInterceptors} from "@angular/common/http";
-import {provideClientHydration, withEventReplay} from '@angular/platform-browser';
-import {provideToastr} from "ngx-toastr";
+import {provideHttpClient, withInterceptors} from "@angular/common/http";
+import {provideClientHydration, withEventReplay, withNoIncrementalHydration} from '@angular/platform-browser';
 import {errorHandlerInterceptor} from "@handler/error-handler.interceptor";
 import {credentialsInterceptor} from "@handler/credentials.interceptor";
+import {ConfirmationService, MessageService} from "primeng/api";
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideAnimations(),
-    provideToastr({
-      timeOut: 10000,
-      preventDuplicates: true,
-    }),
     provideZoneChangeDetection({eventCoalescing: true}),
     provideRouter(routes, withViewTransitions()),
+    MessageService,
+    ConfirmationService,
     provideHttpClient(
-      withFetch(),
       withInterceptors([
         errorHandlerInterceptor,
         credentialsInterceptor
       ])),
-    provideClientHydration(withEventReplay()),
+    provideClientHydration(withEventReplay(), withNoIncrementalHydration()),
   ]
 };

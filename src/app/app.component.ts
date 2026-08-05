@@ -1,15 +1,17 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, inject, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {Router, RouterOutlet} from '@angular/router';
 import {SchemaService} from "@services/seo/schema.service";
 import {environment} from "@environments/environment";
 import {MetaService} from "@services/seo/meta.service";
 import {ClarityService} from "@services/data/clarity.service";
+import {Toast} from "primeng/toast";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, Toast],
   templateUrl: './app.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './app.component.css'
 })
 export class AppComponent implements OnInit {

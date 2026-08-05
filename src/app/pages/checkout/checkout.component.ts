@@ -1,4 +1,4 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, inject, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {NavbarComponent} from "@shared/navbar/navbar.component";
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {Ubicacion, UBICACIONES_MOCK} from "@mocks/ubicaciones";
@@ -28,6 +28,7 @@ import {ClarityService} from "@services/data/clarity.service";
     RouterLink,
   ],
   templateUrl: './checkout.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styles: ``
 })
 export default class CheckoutComponent implements OnInit {

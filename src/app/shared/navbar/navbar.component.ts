@@ -1,4 +1,4 @@
-import {Component, inject} from '@angular/core';
+import {Component, inject, ChangeDetectionStrategy} from '@angular/core';
 import {Router, RouterLink, RouterLinkActive} from "@angular/router";
 import {NgClass, NgOptimizedImage} from "@angular/common";
 import {ShoppingCartSidebarComponent} from "@components/shopping-cart-sidebar/shopping-cart-sidebar.component";
@@ -15,6 +15,7 @@ import {CarritoService} from "@services/carrito.service";
     ShoppingCartSidebarComponent
   ],
   templateUrl: './navbar.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styles: [`
     svg-shop {
       color: #c4b89b;

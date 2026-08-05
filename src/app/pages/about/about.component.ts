@@ -1,4 +1,4 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, inject, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {FooterComponent} from "@shared/footer/footer.component";
 import {NavbarComponent} from "@shared/navbar/navbar.component";
 import {environment} from "@environments/environment";
@@ -16,6 +16,7 @@ import {NgOptimizedImage} from "@angular/common";
     NgOptimizedImage
   ],
   templateUrl: './about.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styles: ``
 })
 export default class AboutComponent implements OnInit {

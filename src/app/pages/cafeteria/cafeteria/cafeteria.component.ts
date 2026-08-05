@@ -1,4 +1,4 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, inject, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {Router, RouterLink} from "@angular/router";
 import {CAFETERIA_MENU, MenuCategoria} from "@pages/cafeteria/mocks/menu-categoria.mock";
 import {NgOptimizedImage} from "@angular/common";
@@ -18,6 +18,7 @@ import {ConsentModalComponent} from "@components/consent-modal/consent-modal.com
   ],
   templateUrl: './cafeteria.component.html',
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.Eager,
   styles: ``
 })
 export class CafeteriaComponent implements OnInit {

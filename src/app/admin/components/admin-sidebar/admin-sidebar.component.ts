@@ -1,4 +1,4 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, inject, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {RouterLink} from "@angular/router";
 import {NgClass} from "@angular/common";
 import {SidebarService} from "@services/data/sidebar.service";
@@ -10,6 +10,7 @@ import {SidebarService} from "@services/data/sidebar.service";
     NgClass
   ],
   templateUrl: './admin-sidebar.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styles: ``
 })
 export class AdminSidebarComponent implements OnInit {

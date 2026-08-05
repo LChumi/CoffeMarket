@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import {NavbarComponent} from "@shared/navbar/navbar.component";
 import {RouterOutlet} from "@angular/router";
 import {FooterComponent} from "@shared/footer/footer.component";
@@ -11,6 +11,7 @@ import {FooterComponent} from "@shared/footer/footer.component";
     FooterComponent
   ],
   templateUrl: './cafeteria-layout.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styles: ``
 })
 export class CafeteriaLayoutComponent {

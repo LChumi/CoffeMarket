@@ -1,4 +1,4 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, inject, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {NavbarComponent} from "@shared/navbar/navbar.component";
 import {CarritoService} from "@services/carrito.service";
 import {Router, RouterLink, RouterLinkActive} from "@angular/router";
@@ -22,6 +22,7 @@ import {ClarityService} from "@services/data/clarity.service";
     FooterComponent
   ],
   templateUrl: './shoping-cart.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styles: ``
 })
 export default class ShopingCartComponent implements OnInit {
