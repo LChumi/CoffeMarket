@@ -1,6 +1,5 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, inject, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {NavbarComponent} from "@shared/navbar/navbar.component";
-import {ItemCarrito} from "@models/dto/item-carrito";
 import {CarritoService} from "@services/carrito.service";
 import {Router, RouterLink, RouterLinkActive} from "@angular/router";
 import {CurrencyPipe} from "@angular/common";
@@ -23,6 +22,7 @@ import {ClarityService} from "@services/data/clarity.service";
     FooterComponent
   ],
   templateUrl: './shoping-cart.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styles: ``
 })
 export default class ShopingCartComponent implements OnInit {
@@ -36,63 +36,55 @@ export default class ShopingCartComponent implements OnInit {
 
   constructor() {}
 
-  cartItems: ItemCarrito[] = [];
+  cartItems: any[] = []; // inicialización segura
 
   ngOnInit(): void {
     const currentUrl = `${this.domain}${this.router.url}`;
-    const title = 'Carrito Compras | Bunna Accesorios para Cafe'
-    const description = 'Consulta tus productos en nuestro carrito de compras'
-    this.seoService.updateMetaTags({
-      title,
-      description,
-      canonicalUrl: currentUrl,
-      og: {
-        title,
-        description,
-        url: currentUrl,
-        image: `${this.domain}/images/logos/bunnaCirc.webp`
-      }
-    });
+    const title = 'Carrito Compras | Bunna Accesorios para Cafe';
+    const description = 'Consulta tus productos en nuestro carrito de compras';
 
-    const schema = this.schemaService.generateContentPageSchema(
-      currentUrl,
-      'Carrito de compras',
-      description);
+    this.seoService.updateMetaTags({ title, description, canonicalUrl: currentUrl, og: { title, description, url: currentUrl, image: `${this.domain}/images/logos/bunnaCirc.webp` } });
+
+    const schema = this.schemaService.generateContentPageSchema(currentUrl, 'Carrito de compras', description);
     this.schemaService.injectSchema(schema, 'ContentPage');
+
     this.carritoService.carrito$.subscribe(carrito => {
-      this.cartItems = carrito.items;
+      this.cartItems = carrito.items ?? []; // blindaje
       this.clarity.event('Carrito abierto');
-      this.clarity.setTag('cartItems', carrito.items.length.toString());
+      this.clarity.setTag('cartItems', (this.cartItems?.length ?? 0).toString());
       this.clarity.setTag('cartValue', this.calcularTotal().toString());
-      this.clarity.setTag('cartStatus', carrito.items.length > 0 ? 'con_productos' : 'vacío');
-    })
+      this.clarity.setTag('cartStatus', (this.cartItems?.length ?? 0) > 0 ? 'con_productos' : 'vacío');
+    });
   }
 
   addQuantity(id: string) {
-    this.carritoService.agregarCantidad(id)
+    this.carritoService.agregarCantidad(id);
     this.clarity.event('Cantidad aumentada');
-    this.clarity.setTag('cartItems', this.cartItems.length.toString());
+    this.clarity.setTag('cartItems', (this.cartItems?.length ?? 0).toString());
     this.clarity.setTag('cartValue', this.calcularTotal().toString());
   }
 
   removeQuantity(id: string) {
-    this.carritoService.retirarCantidad(id)
+    this.carritoService.retirarCantidad(id);
     this.clarity.event('Cantidad reducida');
-    this.clarity.setTag('cartItems', this.cartItems.length.toString());
+    this.clarity.setTag('cartItems', (this.cartItems?.length ?? 0).toString());
     this.clarity.setTag('cartValue', this.calcularTotal().toString());
   }
 
   removeProduct(id: string) {
-    this.carritoService.eliminarProducto(id)
+    this.carritoService.eliminarProducto(id);
     this.clarity.event('Producto eliminado del carrito');
-    this.clarity.setTag('cartItems', this.cartItems.length.toString());
+    this.clarity.setTag('cartItems', (this.cartItems?.length ?? 0).toString());
     this.clarity.setTag('cartValue', this.calcularTotal().toString());
   }
 
   calcularTotal(): number {
+    if (!this.cartItems || this.cartItems.length === 0) {
+      return 0;
+    }
     return this.cartItems.reduce((total, item) => {
-      const precio = item.pvp;
-      const cantidad = item.cantidad;
+      const precio = item?.pvp ?? 0;
+      const cantidad = item?.cantidad ?? 0;
       return total + precio * cantidad;
     }, 0);
   }
@@ -101,14 +93,15 @@ export default class ShopingCartComponent implements OnInit {
     this.router.navigate(['/checkout']).then(() => {
       this.clarity.event('Ir a checkout');
       this.clarity.setTag('cartValue', this.calcularTotal().toString());
-      this.clarity.setTag('cartStatus', this.cartItems.length > 0 ? 'con_productos' : 'vacío');
-      this.clarity.setTag('cartItems', this.cartItems.length.toString());
+      this.clarity.setTag('cartStatus', (this.cartItems?.length ?? 0) > 0 ? 'con_productos' : 'vacío');
+      this.clarity.setTag('cartItems', (this.cartItems?.length ?? 0).toString());
 
       if (this.calcularTotal() > 100) {
         this.clarity.prioritize('Carrito de alto valor');
       }
     });
   }
+
 
   protected readonly getUrlImage = getUrlImage;
 }

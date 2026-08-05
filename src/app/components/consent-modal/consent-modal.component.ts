@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, inject} from '@angular/core';
+import {AfterViewInit, Component, inject, ChangeDetectionStrategy} from '@angular/core';
 import {ConsentService} from "@services/seo/consent.service";
 
 @Component({
@@ -6,6 +6,7 @@ import {ConsentService} from "@services/seo/consent.service";
   standalone: true,
   imports: [],
   templateUrl: './consent-modal.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styles: ``
 })
 export class ConsentModalComponent implements AfterViewInit{

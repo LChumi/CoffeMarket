@@ -1,5 +1,4 @@
-import {Component, inject, OnInit} from '@angular/core';
-import {DataService} from "@services/data/data.service";
+import {Component, inject, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {Categorias} from "@models/data/categorias";
 import {Router} from "@angular/router";
 import {CATEGORIAS_MOCK} from "@mocks/categorias";
@@ -9,6 +8,7 @@ import {CATEGORIAS_MOCK} from "@mocks/categorias";
   standalone: true,
   imports: [],
   templateUrl: './categories-grid.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styles: ``
 })
 export class CategoriesGridComponent implements OnInit {
@@ -22,7 +22,7 @@ export class CategoriesGridComponent implements OnInit {
   }
 
   goToProducts(categoryId: number) {
-    this.router.navigate(['/productos', categoryId]).then(r => {
+    this.router.navigate(['/productos', categoryId]).then(() => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     })
   }

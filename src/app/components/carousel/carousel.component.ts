@@ -1,4 +1,4 @@
-import {Component, inject, NgZone, OnDestroy, OnInit, PLATFORM_ID} from '@angular/core';
+import {Component, inject, NgZone, OnDestroy, OnInit, PLATFORM_ID, ChangeDetectionStrategy} from '@angular/core';
 import {RouterLink} from "@angular/router";
 import {isPlatformBrowser, NgClass, NgStyle} from "@angular/common";
 
@@ -20,6 +20,7 @@ interface Slide {
     NgStyle
   ],
   templateUrl: './carousel.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './carousel.component.css'
 })
 export class CarouselComponent implements OnInit, OnDestroy {
@@ -82,6 +83,10 @@ export class CarouselComponent implements OnInit, OnDestroy {
   }
 
   goTo(index: number) {
+    const total = this.slides?.length ?? 0;
+    if (total === 0) {
+      return; // no hay slides
+    }
     this.currentSlide = (index + this.slides.length) % this.slides.length;
     this.clearTimers();
 

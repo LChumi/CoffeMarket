@@ -1,4 +1,4 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, inject, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {FooterComponent} from "@shared/footer/footer.component";
 import {NavbarComponent} from "@shared/navbar/navbar.component";
 import {Router} from "@angular/router";
@@ -15,6 +15,7 @@ import {NgOptimizedImage} from "@angular/common";
     NgOptimizedImage
   ],
   templateUrl: './privacy-policy.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styles: ``
 })
 export default class PrivacyPolicyComponent implements OnInit {

@@ -10,34 +10,39 @@
     "serve:ssr:coffe-market": "node dist/coffe-market/server/server.mjs"
   },
   "private": true,
+  "engines": {
+    "node": ">=22.22.3"
+  },
   "dependencies": {
-    "@angular-devkit/build-angular": "^19.2.14",
-    "@angular/animations": "^19.2.14",
-    "@angular/common": "^19.2.14",
-    "@angular/compiler": "^19.2.14",
-    "@angular/core": "^19.2.14",
-    "@angular/forms": "^19.2.14",
-    "@angular/platform-browser": "^19.2.14",
-    "@angular/platform-browser-dynamic": "^19.2.14",
-    "@angular/platform-server": "^19.2.14",
-    "@angular/router": "^19.2.14",
-    "@angular/ssr": "^19.2.15",
+    "@angular/animations": "^22.1.0",
+    "@angular/common": "^22.1.0",
+    "@angular/compiler": "^22.1.0",
+    "@angular/core": "^22.1.0",
+    "@angular/forms": "^22.1.0",
+    "@angular/platform-browser": "^22.1.0",
+    "@angular/platform-browser-dynamic": "^22.1.0",
+    "@angular/platform-server": "^22.1.0",
+    "@angular/router": "^22.1.0",
+    "@angular/ssr": "^22.1.2",
     "@microsoft/clarity": "^1.0.0",
     "@vercel/speed-insights": "^1.2.0",
     "express": "^4.18.2",
-    "ngx-toastr": "^19.1.0",
+    "primeicons": "^8.0.0",
+    "primeng": "^22.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.15.0"
   },
   "devDependencies": {
-    "@angular/cli": "^19.2.14",
-    "@angular/compiler-cli": "^19.2.14",
+    "@angular/build": "^22.1.2",
+    "@angular/cli": "^22.1.2",
+    "@angular/compiler-cli": "^22.1.0",
     "@types/express": "^4.17.17",
     "@types/jasmine": "~5.1.0",
-    "@types/node": "^18.18.0",
+    "@types/node": "^26.1.2",
     "angular-cli-ghpages": "^2.0.3",
     "autoprefixer": "^10.4.19",
+    "istanbul-lib-instrument": "^6.0.3",
     "jasmine-core": "~5.1.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
@@ -46,6 +51,6 @@
     "karma-jasmine-html-reporter": "~2.1.0",
     "postcss": "8.5.18",
     "tailwindcss": "^3.4.4",
-    "typescript": "~5.7.3"
+    "typescript": "~6.0.3"
   }
 }

@@ -1,4 +1,4 @@
-import {Component, EventEmitter, inject, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, inject, Input, OnInit, Output, ChangeDetectionStrategy} from '@angular/core';
 import {CurrencyPipe, NgClass} from "@angular/common";
 import {ItemCarrito} from "@models/dto/item-carrito";
 import {CarritoService} from "@services/carrito.service";
@@ -13,6 +13,7 @@ import {getUrlImage} from "@utils/image-util";
   ],
   templateUrl: './shopping-cart-sidebar.component.html',
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.Eager,
   styles: ``
 })
 export class ShoppingCartSidebarComponent implements OnInit {
@@ -45,9 +46,9 @@ export class ShoppingCartSidebarComponent implements OnInit {
   }
 
   calcularTotal(): number {
-    return this.cartItems.reduce((total, item) => {
-      const precio = item.pvp;
-      const cantidad = item.cantidad;
+    return (this.cartItems ?? []).reduce((total, item) => {
+      const precio = item?.pvp ?? 0;
+      const cantidad = item?.cantidad ?? 0;
       return total + precio * cantidad;
     }, 0);
   }
@@ -57,12 +58,12 @@ export class ShoppingCartSidebarComponent implements OnInit {
   }
 
   goToCart() {
-    this.router.navigate(['/cart']).then(r => {
+    this.router.navigate(['/cart']).then(() => {
     })
   }
 
   goToCheckOut() {
-    this.router.navigate(['/checkout']).then(r => {})
+    this.router.navigate(['/checkout']).then(() => {})
   }
 
   protected readonly getUrlImage = getUrlImage;

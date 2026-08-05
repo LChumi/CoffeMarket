@@ -1,4 +1,4 @@
-import {afterNextRender, Component, computed, ElementRef, inject, OnInit, signal} from '@angular/core';
+import {afterNextRender, Component, computed, ElementRef, inject, OnInit, signal, ChangeDetectionStrategy} from '@angular/core';
 import {CAFETERIA_MENU, MenuCategoria} from "@pages/cafeteria/mocks/menu-categoria.mock";
 import {toSignal} from "@angular/core/rxjs-interop";
 import {map} from "rxjs";
@@ -17,6 +17,7 @@ import {ClarityService} from "@services/data/clarity.service";
     RouterLink
   ],
   templateUrl: './menus.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styles: ``
 })
 export class MenusComponent implements OnInit {

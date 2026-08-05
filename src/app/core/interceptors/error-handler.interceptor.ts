@@ -1,11 +1,11 @@
 import {HttpErrorResponse, HttpInterceptorFn} from '@angular/common/http';
-import {ToastrService} from "ngx-toastr";
 import {inject} from "@angular/core";
 import {catchError, throwError} from "rxjs";
 import {ClarityService} from "@services/data/clarity.service";
+import {MessageService} from "primeng/api";
 
 export const errorHandlerInterceptor: HttpInterceptorFn = (req, next) => {
-  const toastr = inject(ToastrService);
+  const toastr = inject(MessageService);
   const clarity = inject(ClarityService)
 
   return next(req).pipe(
@@ -32,19 +32,19 @@ export const errorHandlerInterceptor: HttpInterceptorFn = (req, next) => {
         // Mostrar error al usuario
         switch (e.status) {
           case 400:
-            toastr.error(msg, 'Solicitud inválida');
+            toastr.add({ severity: 'error', summary: msg, detail: 'Solicitud inválida'})
             break;
           case 401:
-            toastr.error(msg, 'No autorizado');
+            toastr.add({ severity: 'error', summary: msg, detail: 'No autorizado'})
             break;
           case 403:
-            toastr.error('No tienes permitido hacer esto.', 'Prohibido');
+            toastr.add({ severity: 'error', summary: msg, detail: 'No tienes permitido hacer esto.\', \'Prohibido'})
             break;
           case 404:
-            toastr.error(msg, 'No encontrado');
+            toastr.add({ severity: 'error', summary: msg, detail: 'No encontrado'})
             break;
           case 500:
-            toastr.error(msg, 'Error del servidor');
+            toastr.add({ severity: 'error', summary: msg, detail: 'Error del servidor'})
             break;
           default:
             console.error('Error de servidor o ruta dañada')

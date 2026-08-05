@@ -1,4 +1,4 @@
-import {Component, inject} from '@angular/core';
+import {Component, inject, ChangeDetectionStrategy} from '@angular/core';
 import {ClarityService} from "@services/data/clarity.service";
 
 @Component({
@@ -6,6 +6,7 @@ import {ClarityService} from "@services/data/clarity.service";
   imports: [],
   templateUrl: './whatsapp-button.component.html',
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './whatsapp-button.component.css'
 })
 export class WhatsappButtonComponent {

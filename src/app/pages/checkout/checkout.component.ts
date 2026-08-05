@@ -1,4 +1,4 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, inject, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {NavbarComponent} from "@shared/navbar/navbar.component";
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {Ubicacion, UBICACIONES_MOCK} from "@mocks/ubicaciones";
@@ -28,6 +28,7 @@ import {ClarityService} from "@services/data/clarity.service";
     RouterLink,
   ],
   templateUrl: './checkout.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styles: ``
 })
 export default class CheckoutComponent implements OnInit {
@@ -223,9 +224,9 @@ export default class CheckoutComponent implements OnInit {
   }
 
   calcularSubtotal(): number {
-    return this.cartItems.reduce((total, item) => {
-      const precio = item.pvp;
-      const cantidad = item.cantidad;
+    return (this.cartItems ?? []).reduce((total, item) => {
+      const precio = item?.pvp ?? 0;
+      const cantidad = item?.cantidad ?? 0;
       return total + precio * cantidad;
     }, 0);
   }
@@ -260,19 +261,19 @@ export default class CheckoutComponent implements OnInit {
   }
 
   getNames() {
-
     const id = this.invoiceForm.get("identificacion")?.value;
     if (!id) return;
 
-    if (!(id.length === 10 || id.length === 13)) return;
+    const idStr = String(id);
 
-    if (this.lastIdConsulted === id){
+    if (!(idStr.length === 10 || idStr.length === 13)) return;
+
+    if (this.lastIdConsulted === idStr) {
       return;
     }
-    this.lastIdConsulted = id;
+    this.lastIdConsulted = idStr;
 
-    this.clientService.getNames(id).subscribe(nombreCompleto => {
-
+    this.clientService.getNames(idStr).subscribe(nombreCompleto => {
       if (!nombreCompleto) return;
 
       const partes = nombreCompleto.trim().split(/\s+/);
@@ -285,9 +286,7 @@ export default class CheckoutComponent implements OnInit {
         nombre,
         apellido
       });
-
     });
-
   }
 
 }

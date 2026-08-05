@@ -1,5 +1,5 @@
-import {Inject, Injectable, Renderer2, RendererFactory2} from '@angular/core';
-import {DOCUMENT} from "@angular/common";
+import {Inject, Injectable, Renderer2, RendererFactory2, DOCUMENT} from '@angular/core';
+
 import {environment} from "@environments/environment";
 import {Producto} from "@models/producto";
 

@@ -1,4 +1,4 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, inject, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {ClienteService} from "@services/cliente.service";
 import {Cliente} from "@models/cliente";
 
@@ -6,6 +6,7 @@ import {Cliente} from "@models/cliente";
   selector: 'app-admin-clients',
   imports: [],
   templateUrl: './admin-clients.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styles: ``
 })
 export class AdminClientsComponent implements OnInit {

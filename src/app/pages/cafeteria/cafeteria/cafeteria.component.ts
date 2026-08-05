@@ -1,4 +1,4 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, inject, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {Router, RouterLink} from "@angular/router";
 import {CAFETERIA_MENU, MenuCategoria} from "@pages/cafeteria/mocks/menu-categoria.mock";
 import {NgOptimizedImage} from "@angular/common";
@@ -18,6 +18,7 @@ import {ConsentModalComponent} from "@components/consent-modal/consent-modal.com
   ],
   templateUrl: './cafeteria.component.html',
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.Eager,
   styles: ``
 })
 export class CafeteriaComponent implements OnInit {
@@ -32,11 +33,14 @@ export class CafeteriaComponent implements OnInit {
   /** Ligera rotación pseudo-aleatoria pero estable por índice, para el efecto "puesto a mano" */
   rotacion(i: number): string {
     const angulos = ['-rotate-1', 'rotate-1', '-rotate-2', 'rotate-2', 'rotate-0'];
-    return angulos[i % angulos.length];
+    return angulos[i % angulos?.length];
   }
 
   totalBebidas(): number {
-    return this.categorias.reduce((acc, c) => acc + c.items.length, 0);
+    return (this.categorias ?? []).reduce((acc, c) => {
+      const items = c.items ?? [];
+      return acc + items.length;
+    }, 0);
   }
 
   ngOnInit(): void {

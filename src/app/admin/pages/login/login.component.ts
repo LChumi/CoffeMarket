@@ -1,4 +1,4 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, inject, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -10,9 +10,9 @@ import {AuthenticationRequest} from "@models/auth/authentication-request";
 import {usernameValidator} from "@utils/form-utils";
 import {AuthService} from "@services/auth/auth.service";
 import {Router} from "@angular/router";
-import {ToastrService} from "ngx-toastr";
 import {ClarityService} from "@services/data/clarity.service";
 import {NgOptimizedImage} from "@angular/common";
+import {MessageService} from "primeng/api";
 
 @Component({
   selector: 'app-login',
@@ -22,6 +22,7 @@ import {NgOptimizedImage} from "@angular/common";
     NgOptimizedImage
   ],
   templateUrl: './login.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styles: ``
 })
 export class LoginComponent implements OnInit {
@@ -29,7 +30,7 @@ export class LoginComponent implements OnInit {
   private fb = inject(FormBuilder);
   private authService = inject(AuthService);
   private router = inject(Router);
-  private toastr = inject(ToastrService);
+  private toastr = inject(MessageService);
   private clarity = inject(ClarityService);
   loginForm!: FormGroup;
 
@@ -44,7 +45,8 @@ export class LoginComponent implements OnInit {
     if (this.authService.isAuthenticated()) {
       this.router.navigate(['/admin/dashboard']).then(r => {
         console.log('navigate', r);
-        this.toastr.info('Bienvenido')
+
+        this.toastr.add({ severity: 'success', summary: 'Autenticado', detail: 'Bienvenido'})
       });
     }
   }
@@ -64,19 +66,19 @@ export class LoginComponent implements OnInit {
               if (response) {
                 this.router.navigate(['/admin/dashboard']).then(r => {
                   console.log('navigate', r);
-                  this.toastr.info('Bienvenido');
+                  this.toastr.add({ severity: 'success', summary: 'Exito', detail: 'Bienvenido'})
                   this.clarity.event('Ingreso panel Administracion')
                 });
               }
             }
           })
         } else {
-          this.toastr.warning('Usuario no identificado por favor vuelva a iniciar sesion')
+          this.toastr.add({ severity: 'warn', summary: 'Atencion', detail: 'Usuario no identificado por favor vuelva a iniciar sesion'})
           this.loginForm.reset()
         }
       },
       error: () => {
-        this.toastr.error('Ocurrio un problema, Servicio no disponible');
+        this.toastr.add({ severity: 'error', summary: 'Error', detail: 'Ocurrio un problema, Servicio no disponible'})
         this.loginForm.reset()
       }
     })

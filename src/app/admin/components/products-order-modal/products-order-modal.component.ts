@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output, ChangeDetectionStrategy} from '@angular/core';
 import {ItemCarrito} from "@models/dto/item-carrito";
 import {CurrencyPipe} from "@angular/common";
 import {getUrlImage} from "@utils/image-util";
@@ -9,6 +9,7 @@ import {getUrlImage} from "@utils/image-util";
     CurrencyPipe
   ],
   templateUrl: './products-order-modal.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styles: ``
 })
 export class ProductsOrderModalComponent {

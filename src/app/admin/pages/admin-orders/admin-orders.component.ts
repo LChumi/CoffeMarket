@@ -1,6 +1,5 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, inject, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {PedidoService} from "@services/pedido.service";
-import {ToastrService} from "ngx-toastr";
 import {Pedido} from "@models/pedido";
 import {DatePipe, DecimalPipe} from "@angular/common";
 import {FormsModule} from "@angular/forms";
@@ -8,6 +7,7 @@ import {ProductsOrderModalComponent} from "@admin/components/products-order-moda
 import {ItemCarrito} from "@models/dto/item-carrito";
 import {finalize} from "rxjs";
 import {EstadoCountPipe} from "@shared/pipes/estado-count.pipe";
+import {MessageService} from "primeng/api";
 
 @Component({
   selector: 'app-admin-orders',
@@ -19,12 +19,13 @@ import {EstadoCountPipe} from "@shared/pipes/estado-count.pipe";
     DecimalPipe
   ],
   templateUrl: './admin-orders.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styles: ``
 })
 export class AdminOrdersComponent implements OnInit {
 
   private pedidoService = inject(PedidoService);
-  private toastr = inject(ToastrService)
+  private toastr = inject(MessageService);
 
   pedidos: Pedido[] = [];
   pedidoSelected: Pedido | null = null;
@@ -108,9 +109,9 @@ export class AdminOrdersComponent implements OnInit {
           const idx = this.pedidos.findIndex((p) => p.id === value.id);
           if (idx !== -1) this.pedidos[idx] = value; // usar el objeto real del backend
           this.modalPedido = false;
-          this.toastr.success('Pedido actualizado');
+          this.toastr.add({ severity: 'success', summary: 'Exito', detail: 'Pedido actualizado'})
         },
-        error: () => this.toastr.error('No se pudo guardar'),
+        error: () => this.toastr.add({ severity: 'error', summary: 'Error', detail: 'No se pudo guardar'}),
       });
   }
 

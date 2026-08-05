@@ -1,4 +1,4 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, inject, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {NavbarComponent} from "@shared/navbar/navbar.component";
 import {FooterComponent} from "@shared/footer/footer.component";
 import {Router} from "@angular/router";
@@ -13,6 +13,7 @@ import {environment} from "@environments/environment";
     FooterComponent
   ],
   templateUrl: './returns-and-refunds-policy.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styles: ``
 })
 export default class ReturnsAndRefundsPolicyComponent implements OnInit {

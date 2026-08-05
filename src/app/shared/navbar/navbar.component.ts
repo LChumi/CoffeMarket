@@ -1,4 +1,4 @@
-import {Component, inject} from '@angular/core';
+import {Component, inject, ChangeDetectionStrategy, OnInit} from '@angular/core';
 import {Router, RouterLink, RouterLinkActive} from "@angular/router";
 import {NgClass, NgOptimizedImage} from "@angular/common";
 import {ShoppingCartSidebarComponent} from "@components/shopping-cart-sidebar/shopping-cart-sidebar.component";
@@ -15,6 +15,7 @@ import {CarritoService} from "@services/carrito.service";
     ShoppingCartSidebarComponent
   ],
   templateUrl: './navbar.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styles: [`
     svg-shop {
       color: #c4b89b;
@@ -23,7 +24,7 @@ import {CarritoService} from "@services/carrito.service";
 
   `]
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit {
 
   private carritoService = inject(CarritoService);
   router = inject(Router)
@@ -31,12 +32,14 @@ export class NavbarComponent {
   visibleSidebar = false;
   cantidadItems = 0;
 
-  openCafe = false;
-
-  constructor() {
+  ngOnInit() {
     this.carritoService.carrito$.subscribe(carrito => {
-      this.cantidadItems = carrito.items?.length || 0;
+      this.cantidadItems = carrito.items.length;
     })
+  }
+
+  openSidebar() {
+    this.visibleSidebar = true;
   }
 
 }

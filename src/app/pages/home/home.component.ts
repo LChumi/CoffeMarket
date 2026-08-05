@@ -1,4 +1,4 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, inject, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {NavbarComponent} from '@shared/navbar/navbar.component';
 import {CarouselComponent} from '@components/carousel/carousel.component';
 import {FooterComponent} from '@shared/footer/footer.component';
@@ -16,6 +16,7 @@ import {ConsentModalComponent} from "@components/consent-modal/consent-modal.com
   standalone: true,
   imports: [NavbarComponent, CarouselComponent, FooterComponent, BoxesIconsComponent, CategoriesGridComponent, WhatsappButtonComponent, ConsentModalComponent],
   templateUrl: './home.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styles: ``
 })
 export default class HomeComponent implements OnInit {

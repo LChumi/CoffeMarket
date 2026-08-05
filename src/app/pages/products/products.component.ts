@@ -1,4 +1,4 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, inject, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {NavbarComponent} from "@shared/navbar/navbar.component";
 import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {environment} from "@environments/environment";
@@ -21,6 +21,7 @@ import {getUrlImage} from "@utils/image-util";
     FooterComponent,
     RouterLink],
   templateUrl: './products.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styles: ``
 })
 export default class ProductsComponent implements OnInit {

@@ -5,16 +5,7 @@ import {Pedido} from "@models/pedido";
   name: 'estadoCount'
 })
 export class EstadoCountPipe implements PipeTransform {
-
-  transform(
-    pedidos: Pedido[] | null | undefined,
-    estado: boolean | null
-  ): number {
-
-    if (!pedidos) {
-      return 0;
-    }
-
-    return pedidos.filter(p => p.estado === estado).length;
+  transform(pedidos: Pedido[] | null | undefined, estado: boolean | null): number {
+    return (pedidos ?? []).filter(p => p.estado === estado).length;
   }
 }
