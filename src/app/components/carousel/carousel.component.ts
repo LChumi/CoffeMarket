@@ -21,7 +21,7 @@ interface Slide {
   ],
   templateUrl: './carousel.component.html',
   changeDetection: ChangeDetectionStrategy.Eager,
-  styleUrl: './carousel.component.css'
+  styleUrl: './carousel.component.scss'
 })
 export class CarouselComponent implements OnInit, OnDestroy {
 

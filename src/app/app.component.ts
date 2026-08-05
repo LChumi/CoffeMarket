@@ -12,7 +12,7 @@ import {Toast} from "primeng/toast";
   imports: [RouterOutlet, Toast],
   templateUrl: './app.component.html',
   changeDetection: ChangeDetectionStrategy.Eager,
-  styleUrl: './app.component.css'
+  styleUrl: './app.component.scss'
 })
 export class AppComponent implements OnInit {
 

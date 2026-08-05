@@ -1,2 +1,23 @@
-<p-toast></p-toast>
+<p-toast position="top-right">
+  <ng-template #message let-message>
+    <div
+      class="flex items-start gap-3 rounded-xl shadow-lg p-4 w-80
+             bg-[#B3977E]/20 backdrop-blur-md
+             border border-[#B3977E]/40">
+
+      <i class="pi pi-bell text-[#8B6E56] text-xl mt-1"></i>
+
+      <div class="flex-1">
+        <div class="font-semibold text-[#5C4033]">
+          {{ message.summary }}
+        </div>
+
+        <div class="text-sm text-[#6B5748]">
+          {{ message.detail }}
+        </div>
+      </div>
+
+    </div>
+  </ng-template>
+</p-toast>
 <router-outlet />
