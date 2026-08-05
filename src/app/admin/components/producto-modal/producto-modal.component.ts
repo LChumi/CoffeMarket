@@ -164,7 +164,7 @@ export class ProductoModalComponent implements OnInit {
 
     if (this._idProducto) {
       this.productoService.update(this._idProducto, producto).subscribe({
-        next: data => {
+        next: () => {
           this.toastr.add({severity: 'succes', detail: 'Producto actualizado con exito!'})
           this.visibleChange.emit(false);
           this.saveRequest.emit({editUpdate: true});
@@ -172,7 +172,7 @@ export class ProductoModalComponent implements OnInit {
       })
     } else {
       this.productoService.save(producto).subscribe({
-        next: data => {
+        next: () => {
           this.toastr.add({severity: 'succes', detail: 'Producto actualizado con exito!'})
           this.visibleChange.emit(false);
           this.saveRequest.emit({editUpdate: true});
