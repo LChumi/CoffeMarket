@@ -23,7 +23,7 @@
       </div>
 
       <!-- Logo -->
-      <a [routerLink]="['home']" aria-label="Ir a Inicio"
+      <a [routerLink]="['/home']" aria-label="Ir a Inicio"
          class="flex items-center gap-2.5 group">
         <div class="w-9 h-9 rounded-[10px]
                     flex items-center justify-center
@@ -176,7 +176,7 @@
 
         <!-- Carrito -->
         <div class="relative">
-          <button (click)="visibleSidebar = true"
+          <button (click)="openSidebar()"
                   class="flex items-center gap-2 px-3.5 py-2 rounded-[10px] text-sm font-semibold
                          bg-[#B3977E] text-white
                          dark:bg-[#B3977E]/20 dark:text-[#D4A98A] dark:border dark:border-[#B3977E]/35
