@@ -14,6 +14,7 @@ import {REDES_MOCK} from "@mocks/redes";
 export class FooterComponent {
 
   date = new Date().getFullYear();
+  email = "luischumi.9@gmail.com"
 
   scrollToTop(): void {
     window.scrollTo({top: 0, behavior: 'smooth'});
