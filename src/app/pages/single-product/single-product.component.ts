@@ -11,6 +11,7 @@ import {Producto} from "@models/producto";
 import {ProductoService} from "@services/producto.service";
 import {getUrlImage} from "@utils/image-util";
 import {NgOptimizedImage} from "@angular/common";
+import {MetaPixelService} from "@services/meta-pixel.service";
 
 @Component({
   selector: 'app-single-product',
@@ -34,6 +35,7 @@ export default class SingleProductComponent implements OnInit {
   private seoService = inject(MetaService)
   private schemaService = inject(SchemaService);
   private carritoService = inject(CarritoService);
+  private pixel = inject(MetaPixelService);
 
   private domain = environment.domain;
 
@@ -73,6 +75,14 @@ export default class SingleProductComponent implements OnInit {
           producto,
           currentUrl);
         this.schemaService.injectSchema(schema, 'Product');
+
+        this.pixel.track('ViewContent', {
+          content_ids: [producto.sku],
+          content_name: producto.descripcion,
+          content_type: 'product',
+          value: producto.precio,
+          currency: 'USD'
+        });
 
         this.loadProductsByCategory(producto.categoriaId);
       } else {

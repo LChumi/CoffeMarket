@@ -1,5 +1,6 @@
 import {Component, inject, ChangeDetectionStrategy} from '@angular/core';
 import {ClarityService} from "@services/data/clarity.service";
+import {MetaPixelService} from "@services/meta-pixel.service";
 
 @Component({
   selector: 'app-whatsapp-button',
@@ -12,8 +13,10 @@ import {ClarityService} from "@services/data/clarity.service";
 export class WhatsappButtonComponent {
 
   private clarity=  inject(ClarityService)
+  private pixel = inject(MetaPixelService);
 
   openWhatsApp() {
+    this.pixel.track('Contact', { content_name: 'WhatsApp' });
     const telefono = '593979126861';
     const mensaje = 'Hola, quiero más información sobre Bunna Cafe.';
     const encoded = encodeURIComponent(mensaje);

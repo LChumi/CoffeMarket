@@ -4,6 +4,7 @@ import {getLocalItem} from "@utils/storage-utils";
 import {BehaviorSubject} from "rxjs";
 import {Producto} from "@models/producto";
 import {isPlatformBrowser} from "@angular/common";
+import {MetaPixelService} from "@services/meta-pixel.service";
 
 @Injectable({
   providedIn: 'root'
@@ -11,9 +12,9 @@ import {isPlatformBrowser} from "@angular/common";
 export class CarritoService {
 
   private readonly platformId = inject(PLATFORM_ID);
+  private pixel = inject(MetaPixelService);
 
   private carrito: Carrito = this.crearCarritoVacio();
-
   private carritoSubject = new BehaviorSubject<Carrito>(this.carrito);
 
   readonly carrito$ = this.carritoSubject.asObservable();
@@ -85,6 +86,13 @@ export class CarritoService {
         descripcion: producto.descripcion,
         cantidad,
         pvp: producto.precio
+      });
+      this.pixel.track('AddToCart', {
+        content_ids: [producto.sku],
+        content_name: producto.descripcion,
+        content_type: 'product',
+        value: producto.precio,
+        currency: 'USD'
       });
     }
 

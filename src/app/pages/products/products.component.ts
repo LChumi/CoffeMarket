@@ -34,6 +34,7 @@ export default class ProductsComponent implements OnInit {
   private seoService = inject(MetaService)
   private schemaService = inject(SchemaService)
   private carritoService = inject(CarritoService);
+
   private domain = environment.domain;
 
   showCart = false;

@@ -15,6 +15,8 @@ import {MetaService} from "@services/seo/meta.service";
 import {SchemaService} from "@services/seo/schema.service";
 import {environment} from "@environments/environment";
 import {ClarityService} from "@services/data/clarity.service";
+import {take} from "rxjs";
+import {MetaPixelService} from "@services/meta-pixel.service";
 
 @Component({
   selector: 'app-checkout',
@@ -43,6 +45,7 @@ export default class CheckoutComponent implements OnInit {
   private pedidoService = inject(PedidoService);
   private carritoService = inject(CarritoService);
   private clarity = inject(ClarityService)
+  private pixel = inject(MetaPixelService);
 
   protected envio = 5.11
   protected message = ''
@@ -97,6 +100,19 @@ export default class CheckoutComponent implements OnInit {
     this.carritoService.carrito$.subscribe(carrito => {
       this.cartItems = carrito.items;
     })
+
+    this.carritoService.carrito$.pipe(take(1)).subscribe(carrito => {
+      if (carrito.items.length === 0) return;
+
+      this.pixel.track('InitiateCheckout', {
+        content_ids: carrito.items.map(i => i.productoId),
+        content_type: 'product',
+        num_items: carrito.items.reduce((s, i) => s + i.cantidad, 0),
+        value: carrito.items.reduce((s, i) => s + i.pvp * i.cantidad, 0),
+        currency: 'USD'
+      });
+    });
+
     this.invoiceForm.get('tipo_documento')?.valueChanges.subscribe(tipo => {
       const control = this.invoiceForm.get('identificacion');
       if (!control) return;

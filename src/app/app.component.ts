@@ -1,10 +1,12 @@
 import {Component, inject, OnInit, ChangeDetectionStrategy} from '@angular/core';
-import {Router, RouterOutlet} from '@angular/router';
+import {NavigationEnd, Router, RouterOutlet} from '@angular/router';
 import {SchemaService} from "@services/seo/schema.service";
 import {environment} from "@environments/environment";
 import {MetaService} from "@services/seo/meta.service";
 import {ClarityService} from "@services/data/clarity.service";
 import {Toast} from "primeng/toast";
+import {MetaPixelService} from "@services/meta-pixel.service";
+import {filter, skip} from "rxjs";
 
 @Component({
   selector: 'app-root',
@@ -20,13 +22,19 @@ export class AppComponent implements OnInit {
   private projectId = environment.clarityId;
 
   private router = inject(Router)
+  private pixel = inject(MetaPixelService)
   private schemaService = inject(SchemaService)
   private seoService = inject(MetaService)
   private clarity = inject(ClarityService)
 
   title = 'coffe-market';
 
-  constructor() {}
+  constructor() {
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd),
+      skip(1),
+    ).subscribe(() => this.pixel.track('PageView'))
+  }
 
   ngOnInit(): void {
     const currentUrl = `${this.domain}${this.router.url}`;
