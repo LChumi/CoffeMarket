@@ -15,12 +15,11 @@ export class MetaPixelService {
   track(event: string, params: Record<string, unknown> = {}, eventId?: string){
     if (!isPlatformBrowser(this.platformId) || typeof window.fbq !== 'function') return;
 
-    if (eventId){
-      window.fbq('track', event, params, { eventID: eventId });
-    } else {
-      window.fbq('track', event, params);
-    }
+    const id = eventId ?? crypto.randomUUID();
 
+    window.fbq('track', event, params, {
+      eventID: id
+    });
   }
 
 }
