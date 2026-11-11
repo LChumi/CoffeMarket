@@ -16,7 +16,6 @@ type FiltroStock = 'todos' | 'conStock' | 'sinStock';
   ],
   templateUrl: './admin-products.component.html',
   changeDetection: ChangeDetectionStrategy.Eager,
-  styles: ``
 })
 export class AdminProductsComponent implements OnInit {
 
