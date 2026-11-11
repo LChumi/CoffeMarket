@@ -1,140 +1,218 @@
 @defer {
-  <div class="relative overflow-x-auto sm:rounded-xl bg-white shadow-md p-6">
+  <div class="rounded-xl bg-white shadow-sm border border-[#c6b89b]/30 overflow-hidden">
 
-    <!-- Header -->
-    <div class="flex items-center justify-between mb-6 bg-gray-50 p-4 rounded-lg">
-
-    <div>
+    <!-- Encabezado -->
+    <div class="flex flex-col gap-4 p-5 sm:flex-row sm:items-center sm:justify-between">
+      <div>
         <h1 class="text-2xl font-bold text-gray-800">Productos</h1>
-        <p class="text-sm text-gray-500">Total: {{ productos.length }} items</p>
+        <p class="text-sm text-gray-500">
+          {{ productos().length }} en total ·
+          {{ conteo().conStock }} con stock ·
+          {{ conteo().sinStock }} agotados
+        </p>
       </div>
 
-      <button
-        type="button"
-        (click)="abrirModal()"
-        class="flex items-center gap-2 bg-[#c6b89b] hover:bg-[#b1a487]
-             text-lime-950 font-semibold px-5 py-2.5 rounded-lg
-             shadow-md transition transform hover:scale-105">
-
-        <svg class="w-5 h-5" fill="none" stroke="currentColor"
-             stroke-width="2" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round"
-                d="M12 5v14m7-7H5"/>
+      <button type="button"
+              (click)="abrirModal()"
+              class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg
+                     bg-[#c6b89b] hover:bg-[#b1a487] text-lime-950 font-semibold shadow-sm
+                     transition-colors active:scale-95
+                     focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#8B6E56]">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14m7-7H5"/>
         </svg>
-
-        <span>Agregar producto</span>
+        Agregar producto
       </button>
     </div>
 
-    <div class="border-b border-gray-200 mb-4"></div>
+    <!-- Herramientas: buscar y filtrar por stock -->
+    <div class="flex flex-col gap-3 px-5 pb-4 lg:flex-row lg:items-center border-b border-gray-200">
+
+      <div class="relative w-full lg:max-w-sm">
+        <svg class="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400"
+             fill="none" viewBox="0 0 20 20" aria-hidden="true">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+        </svg>
+        <input type="text"
+               aria-label="Buscar producto"
+               [value]="busqueda()"
+               (input)="busqueda.set($any($event.target).value)"
+               placeholder="Buscar por código, item o descripción"
+               class="w-full pl-9 pr-3 py-2 text-sm rounded-lg border border-gray-300 bg-white
+                      focus:outline-none focus-visible:ring-2 focus-visible:ring-[#8B6E56]/40 focus:border-[#8B6E56]"/>
+      </div>
+
+      <div class="inline-flex rounded-lg bg-gray-100 p-1 text-sm" role="group" aria-label="Filtrar por stock">
+        @for (f of filtros; track f.valor) {
+          <button type="button"
+                  (click)="filtroStock.set(f.valor)"
+                  [attr.aria-pressed]="filtroStock() === f.valor"
+                  class="px-3 py-1.5 rounded-md font-medium transition-colors
+                         focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B6E56]/50"
+                  [class]="filtroStock() === f.valor
+                    ? 'bg-white text-gray-900 shadow-sm'
+                    : 'text-gray-500 hover:text-gray-800'">
+            {{ f.etiqueta }}
+            <span class="ml-1 text-xs text-gray-400">{{ conteo()[f.conteo] }}</span>
+          </button>
+        }
+      </div>
+
+      <p class="text-sm text-gray-500 lg:ml-auto" aria-live="polite">
+        Mostrando {{ productosFiltrados().length }}
+      </p>
+    </div>
 
     <!-- Tabla -->
-    <table class="w-full text-sm text-left text-gray-700 border-t">
-      <thead>
-      <tr>
-        <th scope="col" class="px-6 py-3 bg-[#c6b89b] text-black">Barra</th>
-        <th scope="col" class="px-6 py-3 bg-[#c6b89b] text-black">Item</th>
-        <th scope="col" class="px-6 py-3 bg-[#c6b89b] text-black">Descripcion</th>
-        <th scope="col" class="px-6 py-3 bg-[#c6b89b] text-black">Precio</th>
-        <th scope="col" class="px-6 py-3 bg-[#c6b89b] text-black">Stock</th>
-        <th scope="col" class="px-6 py-3 bg-[#c6b89b] text-black">Disponible</th>
-        <th scope="col" class="px-6 py-3 bg-[#c6b89b] text-black">Accion</th>
-      </tr>
-      </thead>
-      <tbody>
-        @for (producto of productos; track $index) {
-          <tr class="border-b hover:bg-gray-50 transition">
-            <th scope="row" class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
-              <img class="w-10 h-10 rounded-full" [src]="getUrlImage(producto.sku)" [alt]="producto.sku" loading="lazy" decoding="async">
-              <div class="ps-3">
-                <div class="text-gray-800 font-semibold">{{ producto.sku }}</div>
-              </div>
-            </th>
-            <td class="px-6 py-4">{{ producto.item }}</td>
-            <td class="px-6 py-4">{{ producto.descripcion }}</td>
-            <td class="px-6 py-4">{{ producto.precio | currency }}</td>
-            <td class="px-6 py-4">{{ producto.stock }}</td>
-            <td class="px-6 py-4">
-              @if (producto.disponible) {
-                <span class="text-[#103320] font-semibold">Disponible</span>
-              } @else {
-                <span class="text-[#a3866f] font-medium">No disponible</span>
-              }
-            </td>
-            <td class="px-6 py-4">
-              <div class="flex items-center gap-2 justify-center">
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm text-left text-gray-700">
+        <thead class="bg-[#c6b89b] text-black">
+        <tr>
+          <th scope="col" class="px-6 py-3 font-semibold">Código</th>
+          <th scope="col" class="px-6 py-3 font-semibold">Item</th>
+          <th scope="col" class="px-6 py-3 font-semibold">Descripción</th>
+          <th scope="col" class="px-6 py-3 font-semibold text-right">Precio</th>
+          <th scope="col" class="px-6 py-3 font-semibold">Stock</th>
+          <th scope="col" class="px-6 py-3 font-semibold">En tienda</th>
+          <th scope="col" class="px-6 py-3 font-semibold text-center">Acciones</th>
+        </tr>
+        </thead>
 
-                @if (removeIndex !== $index) {
+        <tbody class="divide-y divide-gray-100">
+          @for (producto of productosFiltrados(); track producto.id) {
+            <tr class="hover:bg-gray-50 transition-colors"
+                [class]="producto.stock <= 0 ? 'bg-gray-50/60' : ''">
 
-                  <!-- Editar -->
-                  <button
-                    type="button"
-                    (click)="abrirModalProducto(producto)"
-                    class="flex items-center justify-center w-9 h-9
-               rounded-lg bg-[#B3977E] hover:bg-[#a3866f]
-               text-white shadow transition">
-                  <svg class="w-4 h-4 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                    <path fill-rule="evenodd" d="M14 4.182A4.136 4.136 0 0 1 16.9 3c1.087 0 2.13.425 2.899 1.182A4.01 4.01 0 0 1 21 7.037c0 1.068-.43 2.092-1.194 2.849L18.5 11.214l-5.8-5.71 1.287-1.31.012-.012Zm-2.717 2.763L6.186 12.13l2.175 2.141 5.063-5.218-2.141-2.108Zm-6.25 6.886-1.98 5.849a.992.992 0 0 0 .245 1.026 1.03 1.03 0 0 0 1.043.242L10.282 19l-5.25-5.168Zm6.954 4.01 5.096-5.186-2.218-2.183-5.063 5.218 2.185 2.15Z" clip-rule="evenodd"/>
-                  </svg>
-                </button>
+              <th scope="row" class="px-6 py-3 whitespace-nowrap">
+                <div class="flex items-center gap-3">
+                  <img class="w-10 h-10 rounded-full object-cover"
+                       [class.grayscale]="producto.stock <= 0"
+                       [src]="getUrlImage(producto.sku)"
+                       [alt]="producto.sku"
+                       loading="lazy" decoding="async">
+                  <span class="font-semibold text-gray-800">{{ producto.sku }}</span>
+                </div>
+              </th>
 
-                  <!-- Eliminar -->
-                  <button
-                    type="button"
-                    (click)="removeIndex = $index"
-                    class="flex items-center justify-center w-9 h-9
-               rounded-lg bg-orange-400 hover:bg-red-500
-               text-white shadow transition">
-                  <svg class="w-4 h-4 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z"/>
-                  </svg>
-                </button>
+              <td class="px-6 py-3">{{ producto.item }}</td>
+              <td class="px-6 py-3 max-w-xs">
+                <span class="line-clamp-2">{{ producto.descripcion }}</span>
+              </td>
+              <td class="px-6 py-3 text-right tabular-nums">{{ producto.precio | currency }}</td>
 
+              <!-- Stock con estado -->
+              <td class="px-6 py-3 whitespace-nowrap">
+                @if (producto.stock <= 0) {
+                  <span class="inline-flex items-center rounded-md bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-200">
+                    Agotado
+                  </span>
+                } @else if (producto.stock <= stockBajo) {
+                  <span class="inline-flex items-center gap-1.5 rounded-md bg-amber-50 px-2 py-1 text-xs font-medium text-amber-800 ring-1 ring-inset ring-amber-200">
+                    <span class="tabular-nums">{{ producto.stock }}</span> · Pocas unidades
+                  </span>
                 } @else {
+                  <span class="tabular-nums font-medium text-gray-800">{{ producto.stock }}</span>
+                }
+              </td>
 
-                  <!-- Texto -->
-                  <span class="text-xs text-gray-600 mr-1">¿Eliminar?</span>
+              <!-- Visibilidad en tienda -->
+              <td class="px-6 py-3 whitespace-nowrap">
+                @if (producto.disponible) {
+                  <span class="inline-flex items-center rounded-md bg-emerald-50 px-2 py-1 text-xs font-medium text-emerald-800 ring-1 ring-inset ring-emerald-200">
+                    Disponible
+                  </span>
+                } @else {
+                  <span class="inline-flex items-center rounded-md bg-gray-100 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-200">
+                    No disponible
+                  </span>
+                }
+              </td>
 
-                  <!-- Sí -->
-                  <button
-                    type="button"
-                    (click)="deleteProduct(producto)"
-                    class="flex items-center justify-center w-9 h-9
-               rounded-lg bg-red-600 hover:bg-red-700
-               text-white shadow transition">
-                    ✔
-                  </button>
+              <!-- Acciones -->
+              <td class="px-6 py-3">
+                <div class="flex items-center justify-center gap-2">
+                  @if (confirmandoId() !== producto.id) {
 
-                  <!-- No -->
-                  <button
-                    type="button"
-                    (click)="removeIndex = null"
-                    class="flex items-center justify-center w-9 h-9
-               rounded-lg bg-gray-300 hover:bg-gray-400
-               text-gray-800 shadow transition">
-                    ✖
+                    <button type="button"
+                            (click)="abrirModalProducto(producto)"
+                            [attr.aria-label]="'Editar ' + producto.sku"
+                            title="Editar"
+                            class="flex items-center justify-center w-9 h-9 rounded-lg
+                                   bg-[#B3977E] hover:bg-[#a3866f] text-white shadow-sm transition-colors
+                                   focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#8B6E56]">
+                      <svg class="w-4 h-4" aria-hidden="true" fill="currentColor" viewBox="0 0 24 24">
+                        <path fill-rule="evenodd" d="M14 4.182A4.136 4.136 0 0 1 16.9 3c1.087 0 2.13.425 2.899 1.182A4.01 4.01 0 0 1 21 7.037c0 1.068-.43 2.092-1.194 2.849L18.5 11.214l-5.8-5.71 1.287-1.31.012-.012Zm-2.717 2.763L6.186 12.13l2.175 2.141 5.063-5.218-2.141-2.108Zm-6.25 6.886-1.98 5.849a.992.992 0 0 0 .245 1.026 1.03 1.03 0 0 0 1.043.242L10.282 19l-5.25-5.168Zm6.954 4.01 5.096-5.186-2.218-2.183-5.063 5.218 2.185 2.15Z" clip-rule="evenodd"/>
+                      </svg>
+                    </button>
+
+                    <button type="button"
+                            (click)="confirmandoId.set(producto.id)"
+                            [attr.aria-label]="'Eliminar ' + producto.sku"
+                            title="Eliminar"
+                            class="flex items-center justify-center w-9 h-9 rounded-lg
+                                   bg-white border border-red-200 text-red-600 hover:bg-red-600 hover:text-white
+                                   shadow-sm transition-colors
+                                   focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-red-500">
+                      <svg class="w-4 h-4" aria-hidden="true" fill="none" viewBox="0 0 24 24">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z"/>
+                      </svg>
+                    </button>
+
+                  } @else {
+
+                    <span class="text-xs font-medium text-gray-700 mr-1">¿Eliminar?</span>
+
+                    <button type="button"
+                            (click)="deleteProduct(producto)"
+                            aria-label="Confirmar eliminación"
+                            class="px-3 h-9 rounded-lg bg-red-600 hover:bg-red-700 text-white text-xs font-semibold shadow-sm transition-colors
+                                   focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-red-500">
+                      Sí, eliminar
+                    </button>
+
+                    <button type="button"
+                            (click)="confirmandoId.set(null)"
+                            aria-label="Cancelar eliminación"
+                            class="px-3 h-9 rounded-lg bg-gray-200 hover:bg-gray-300 text-gray-800 text-xs font-semibold transition-colors
+                                   focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-gray-400">
+                      Cancelar
+                    </button>
+                  }
+                </div>
+              </td>
+            </tr>
+          } @empty {
+            <tr>
+              <td colspan="7" class="px-6 py-16 text-center">
+                @if (cargando()) {
+                  <p class="text-gray-500">Cargando productos…</p>
+                } @else if (productos().length === 0) {
+                  <p class="font-semibold text-gray-800">Aún no hay productos</p>
+                  <p class="mt-1 text-sm text-gray-500">Agrega el primero para verlo en la tienda.</p>
+                } @else {
+                  <p class="font-semibold text-gray-800">Ningún producto coincide con los filtros</p>
+                  <button type="button" (click)="limpiarFiltros()"
+                          class="mt-3 text-sm font-semibold text-[#8B6E56] hover:underline">
+                    Quitar filtros
                   </button>
                 }
-              </div>
-            </td>
-
-            <td class="px-6 py-4"></td>
-          </tr>
-        }
-      </tbody>
-    </table>
-
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
   </div>
 
   <app-producto-modal
-    [(visible)] = modalProducto
+    [(visible)]="modalProducto"
     [modo]="modo"
     (saveRequest)="handleSaveRequest($event)"
-    [idProduct]="idProducto"
-  >
+    [idProduct]="idProducto">
   </app-producto-modal>
 
-} @loading (minimum 1000ms){
+} @loading (minimum 1000ms) {
   <div class="absolute inset-0 flex items-center justify-center">
     <img [src]="'images/loading/loading.gif'" alt="Cargando..."
          class="w-60 h-60 rounded-full object-cover object-center"/>
