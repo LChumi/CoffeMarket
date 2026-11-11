@@ -39,7 +39,7 @@ export class AdminProductsComponent implements OnInit {
     { valor: 'sinStock', etiqueta: 'Agotados', conteo: 'sinStock' }
   ];
 
-  conteo = _i2.computed(() => {
+  conteo = computed(() => {
     const lista = this.productos();
     const conStock = lista.filter(p => p.stock > 0).length;
     return { total: lista.length, conStock, sinStock: lista.length - conStock };
