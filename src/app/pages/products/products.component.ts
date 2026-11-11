@@ -1,4 +1,4 @@
-import {Component, inject, OnInit, ChangeDetectionStrategy} from '@angular/core';
+import {Component, inject, OnInit, ChangeDetectionStrategy, signal, computed, DestroyRef} from '@angular/core';
 import {NavbarComponent} from "@shared/navbar/navbar.component";
 import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {environment} from "@environments/environment";
@@ -10,7 +10,8 @@ import {SchemaService} from "@services/seo/schema.service";
 import {FooterComponent} from "@shared/footer/footer.component";
 import {Producto} from "@models/producto";
 import {getUrlImage} from "@utils/image-util";
-import {NgOptimizedImage} from "@angular/common";
+import {CurrencyPipe, NgOptimizedImage} from "@angular/common";
+import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 
 @Component({
   selector: 'app-products',
@@ -21,35 +22,51 @@ import {NgOptimizedImage} from "@angular/common";
     ShoppingCartSidebarComponent,
     FooterComponent,
     RouterLink,
-    NgOptimizedImage
+    NgOptimizedImage,
+    CurrencyPipe
   ],
   templateUrl: './products.component.html',
   changeDetection: ChangeDetectionStrategy.Eager,
-  styles: ``
 })
 export default class ProductsComponent implements OnInit {
 
-  private route = inject(ActivatedRoute)
-  private router = inject(Router)
-  private seoService = inject(MetaService)
-  private schemaService = inject(SchemaService)
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
+  private seoService = inject(MetaService);
+  private schemaService = inject(SchemaService);
   private carritoService = inject(CarritoService);
+  private destroyRef = inject(DestroyRef);
 
   private domain = environment.domain;
 
   showCart = false;
-  productos: Producto[] = []
-  productosFiltrados: Producto[] = [];
-  categoryId!: number;
-  searchTerm: string = "";
-  titulo: string = "";
 
-  constructor() {}
+  // Estado
+  productos = signal<Producto[]>([]);
+  searchTerm = signal('');
+  soloDisponibles = signal(false);
+  titulo = signal('');
+
+  // Filtrado + orden: con stock primero, agotados al final.
+  // Array.prototype.sort es estable, así que dentro de cada grupo se respeta el orden original.
+  productosFiltrados = computed(() => {
+    const filtro = this.searchTerm().trim().toLowerCase();
+    const soloStock = this.soloDisponibles();
+
+    return this.productos()
+      .filter(p => !soloStock || p.disponible)
+      .filter(p =>
+        !filtro ||
+        p.item?.toLowerCase().includes(filtro) ||
+        p.descripcion?.toLowerCase().includes(filtro)
+      )
+      .sort((a, b) => Number(b.disponible) - Number(a.disponible));
+  });
 
   ngOnInit(): void {
     const currentUrl = `${this.domain}${this.router.url}`;
-    const title = 'Catalogo de Accesorios para Cafe | Bunna Shop'
-    const description = 'Explora nuestro catálogo: cafeteras V60, molinos manuales, filtros, balanzas y todo lo que necesitas para preparar cafe en casa.'
+    const title = 'Catalogo de Accesorios para Cafe | Bunna Shop';
+    const description = 'Explora nuestro catálogo: cafeteras V60, molinos manuales, filtros, balanzas y todo lo que necesitas para preparar cafe en casa.';
 
     this.seoService.updateMetaTags({
       title,
@@ -66,65 +83,61 @@ export default class ProductsComponent implements OnInit {
     const schema = this.schemaService.generateContentPageSchema(
       currentUrl,
       'Catalogo Bunna Shop',
-      description);
+      description
+    );
     this.schemaService.injectSchema(schema, 'CollectionPage');
 
-    const categoryId = this.route.snapshot.paramMap.get('categoryId');
-    const searchQuery = this.route.snapshot.queryParamMap.get('q')?.trim().toLowerCase();
+    // Se vuelve a ejecutar cada vez que cambia la categoría (el resolver emite de nuevo),
+    // por eso ya no hace falta window.location.reload().
+    this.route.data
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(({ productos }) => {
+        this.productos.set(productos);
 
-    this.route.data.subscribe(({productos}) => {
-      this.productos = productos;
-      this.productosFiltrados = productos;
+        const categoryId = this.route.snapshot.paramMap.get('categoryId');
+        const q = this.route.snapshot.queryParamMap.get('q')?.trim().toLowerCase();
+        this.searchTerm.set(q ?? '');
 
-      if (searchQuery) {
-        this.productosFiltrados = this.productos.filter(p =>
-          p.item?.toLowerCase().includes(searchQuery) ||
-          p.descripcion?.toLowerCase().includes(searchQuery)
+        this.titulo.set(
+          categoryId
+            ? 'Explora nuestros productos de café: variedad, estilo y funcionalidad'
+            : 'Productos para amantes del café: encuentra todo lo que necesitas'
         );
-        this.searchTerm = searchQuery; // Para mostrar en el input
-      }
-
-      this.titulo = categoryId
-        ? `Explora Nuestros Productos de Cafe | Variedad, Estilo y Funcionalidad `
-        : 'Productos para Amantes del Cafe | Encuentra Todo lo que Necesitas';
-    });
+      });
   }
 
-  goToProducts(productoId: any) {
-    this.router.navigate(['/producto', productoId]).then(() => {
-      window.scrollTo({top: 0, behavior: 'smooth'});
-    })
+  limpiarBusqueda() {
+    this.searchTerm.set('');
+  }
+
+  limpiarFiltros() {
+    this.searchTerm.set('');
+    this.soloDisponibles.set(false);
+  }
+
+  goToProducts(productoId: number | string) {
+    this.router.navigate(['/producto', productoId]).then(() => this.scrollArriba());
   }
 
   agregarAlCarrito(producto: Producto) {
     this.carritoService.agregarProducto(producto);
-    this.abrirSidebarCarrito()
-  }
-
-  abrirSidebarCarrito() {
-    this.showCart = true
+    this.showCart = true;
   }
 
   goToCafeteras() {
-    this.router.navigate(['/productos', 1]).then(() => {
-      window.location.reload();
-      window.scrollTo({top: 0, behavior: 'smooth'});
-    });
+    this.irACategoria(1);
   }
 
   goToAccesorios() {
-    this.router.navigate(['/productos', 5]).then(() => {
-      window.location.reload();
-      window.scrollTo({top: 0, behavior: 'smooth'});
-    });
+    this.irACategoria(5);
   }
 
-  filtrarProductos() {
-    const filtro = this.searchTerm.trim().toLowerCase();
-    this.productosFiltrados = this.productos.filter(p =>
-      p.item.toLowerCase().includes(filtro) ||
-      p.descripcion.toLowerCase().includes(filtro)
-    );
+  private irACategoria(id: number) {
+    this.router.navigate(['/productos', id]).then(() => this.scrollArriba());
+  }
+
+  private scrollArriba() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   protected readonly getUrlImage = getUrlImage;
