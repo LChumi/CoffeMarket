@@ -190,7 +190,7 @@
             <span class="hidden sm:inline">Carrito</span>
           </button>
 
-          @if (cantidadItems > 0) {
+          @if (cantidadItems() > 0) {
             <span class="absolute -top-1.5 -right-1.5
                          bg-red-500 text-white
                          text-[10px] font-bold
@@ -198,7 +198,7 @@
                          flex items-center justify-center
                          rounded-full
                          ring-2 ring-white dark:ring-[#1F1B19]">
-              {{ cantidadItems }}
+              {{ cantidadItems() }}
             </span>
           }
         </div>

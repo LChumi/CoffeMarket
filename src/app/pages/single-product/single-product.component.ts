@@ -1,12 +1,10 @@
 import {Component, inject, OnInit, ChangeDetectionStrategy} from '@angular/core';
-import {NavbarComponent} from "@shared/navbar/navbar.component";
 import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {environment} from "@environments/environment";
 import {MetaService} from "@services/seo/meta.service";
 import {SchemaService} from "@services/seo/schema.service";
 import {CarritoService} from "@services/carrito.service";
 import {ShoppingCartSidebarComponent} from "@components/shopping-cart-sidebar/shopping-cart-sidebar.component";
-import {FooterComponent} from "@shared/footer/footer.component";
 import {Producto} from "@models/producto";
 import {ProductoService} from "@services/producto.service";
 import {getUrlImage} from "@utils/image-util";
@@ -16,9 +14,7 @@ import {MetaPixelService} from "@services/meta-pixel.service";
 @Component({
   selector: 'app-single-product',
   imports: [
-    NavbarComponent,
     ShoppingCartSidebarComponent,
-    FooterComponent,
     RouterLink,
     NgOptimizedImage
   ],

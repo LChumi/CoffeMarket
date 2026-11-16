@@ -1,5 +1,4 @@
 import {Component, inject, OnInit, ChangeDetectionStrategy, signal, computed, DestroyRef} from '@angular/core';
-import {NavbarComponent} from "@shared/navbar/navbar.component";
 import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {environment} from "@environments/environment";
 import {MetaService} from "@services/seo/meta.service";
@@ -7,7 +6,6 @@ import {FormsModule} from "@angular/forms";
 import {CarritoService} from "@services/carrito.service";
 import {ShoppingCartSidebarComponent} from "@components/shopping-cart-sidebar/shopping-cart-sidebar.component";
 import {SchemaService} from "@services/seo/schema.service";
-import {FooterComponent} from "@shared/footer/footer.component";
 import {Producto} from "@models/producto";
 import {getUrlImage} from "@utils/image-util";
 import {CurrencyPipe, NgOptimizedImage} from "@angular/common";
@@ -17,10 +15,8 @@ import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
   selector: 'app-products',
   standalone: true,
   imports: [
-    NavbarComponent,
     FormsModule,
     ShoppingCartSidebarComponent,
-    FooterComponent,
     RouterLink,
     NgOptimizedImage,
     CurrencyPipe

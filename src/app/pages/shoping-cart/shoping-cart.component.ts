@@ -1,5 +1,4 @@
 import {Component, inject, OnInit, ChangeDetectionStrategy} from '@angular/core';
-import {NavbarComponent} from "@shared/navbar/navbar.component";
 import {CarritoService} from "@services/carrito.service";
 import {Router, RouterLink, RouterLinkActive} from "@angular/router";
 import {CurrencyPipe} from "@angular/common";
@@ -7,19 +6,16 @@ import {ProductLoadingComponent} from "@components/product-loading/product-loadi
 import {SchemaService} from "@services/seo/schema.service";
 import {environment} from "@environments/environment";
 import {MetaService} from "@services/seo/meta.service";
-import {FooterComponent} from "@shared/footer/footer.component";
 import {getUrlImage} from "@utils/image-util";
 import {ClarityService} from "@services/data/clarity.service";
 
 @Component({
   selector: 'app-shoping-cart',
   imports: [
-    NavbarComponent,
     RouterLinkActive,
     RouterLink,
     CurrencyPipe,
     ProductLoadingComponent,
-    FooterComponent
   ],
   templateUrl: './shoping-cart.component.html',
   changeDetection: ChangeDetectionStrategy.Eager,

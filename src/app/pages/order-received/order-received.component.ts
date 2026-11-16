@@ -1,6 +1,4 @@
 import {Component, inject, OnInit, ChangeDetectionStrategy, PLATFORM_ID} from '@angular/core';
-import {NavbarComponent} from "@shared/navbar/navbar.component";
-import {FooterComponent} from "@shared/footer/footer.component";
 import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {MetaService} from "@services/seo/meta.service";
 import {SchemaService} from "@services/seo/schema.service";
@@ -16,8 +14,6 @@ import {MetaPixelService} from "@services/meta-pixel.service";
 @Component({
   selector: 'app-order-received',
   imports: [
-    NavbarComponent,
-    FooterComponent,
     RouterLink,
     CurrencyPipe,
     DatePipe

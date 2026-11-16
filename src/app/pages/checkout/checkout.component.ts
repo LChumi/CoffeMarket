@@ -1,5 +1,4 @@
 import {Component, inject, OnInit, ChangeDetectionStrategy} from '@angular/core';
-import {NavbarComponent} from "@shared/navbar/navbar.component";
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {Ubicacion, UBICACIONES_MOCK} from "@mocks/ubicaciones";
 import {CarritoService} from "@services/carrito.service";
@@ -9,7 +8,6 @@ import {ClienteService} from "@services/cliente.service";
 import {PedidoService} from "@services/pedido.service";
 import {Cliente} from "@models/cliente";
 import {Pedido} from "@models/pedido";
-import {FooterComponent} from "@shared/footer/footer.component";
 import {Router, RouterLink, RouterLinkActive} from "@angular/router";
 import {MetaService} from "@services/seo/meta.service";
 import {SchemaService} from "@services/seo/schema.service";
@@ -21,11 +19,9 @@ import {MetaPixelService} from "@services/meta-pixel.service";
 @Component({
   selector: 'app-checkout',
   imports: [
-    NavbarComponent,
     ReactiveFormsModule,
     FormsModule,
     CurrencyPipe,
-    FooterComponent,
     RouterLinkActive,
     RouterLink,
   ],

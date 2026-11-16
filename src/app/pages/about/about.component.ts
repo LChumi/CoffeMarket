@@ -1,6 +1,4 @@
 import {Component, inject, OnInit, ChangeDetectionStrategy} from '@angular/core';
-import {FooterComponent} from "@shared/footer/footer.component";
-import {NavbarComponent} from "@shared/navbar/navbar.component";
 import {environment} from "@environments/environment";
 import {Router} from "@angular/router";
 import {MetaService} from "@services/seo/meta.service";
@@ -11,8 +9,6 @@ import {NgOptimizedImage} from "@angular/common";
   selector: 'app-about',
   standalone: true,
   imports: [
-    FooterComponent,
-    NavbarComponent,
     NgOptimizedImage
   ],
   templateUrl: './about.component.html',

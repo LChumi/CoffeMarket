@@ -1,6 +1,4 @@
 import {Component, inject, OnInit, ChangeDetectionStrategy} from '@angular/core';
-import {FooterComponent} from "@shared/footer/footer.component";
-import {NavbarComponent} from "@shared/navbar/navbar.component";
 import {Router} from "@angular/router";
 import {MetaService} from "@services/seo/meta.service";
 import {SchemaService} from "@services/seo/schema.service";
@@ -10,8 +8,6 @@ import {NgOptimizedImage} from "@angular/common";
 @Component({
   selector: 'app-privacy-policy',
   imports: [
-    FooterComponent,
-    NavbarComponent,
     NgOptimizedImage
   ],
   templateUrl: './privacy-policy.component.html',

@@ -1,55 +1,40 @@
-import {Component, inject, OnInit, ChangeDetectionStrategy} from '@angular/core';
-import {NavbarComponent} from '@shared/navbar/navbar.component';
+import {Component, inject, ChangeDetectionStrategy} from '@angular/core';
 import {CarouselComponent} from '@components/carousel/carousel.component';
-import {FooterComponent} from '@shared/footer/footer.component';
 import {BoxesIconsComponent} from '@components/boxes-icons/boxes-icons.component';
 import {CategoriesGridComponent} from '@components/categories-grid/categories-grid.component';
-import {WhatsappButtonComponent} from "@components/whatsapp-button/whatsapp-button.component";
 import {environment} from "@environments/environment";
-import {Router} from "@angular/router";
 import {MetaService} from "@services/seo/meta.service";
 import {SchemaService} from "@services/seo/schema.service";
-import {ConsentModalComponent} from "@components/consent-modal/consent-modal.component";
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [NavbarComponent, CarouselComponent, FooterComponent, BoxesIconsComponent, CategoriesGridComponent, WhatsappButtonComponent, ConsentModalComponent],
+  imports: [CarouselComponent, BoxesIconsComponent,
+    CategoriesGridComponent],
   templateUrl: './home.component.html',
-  changeDetection: ChangeDetectionStrategy.Eager,
-  styles: ``
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class HomeComponent implements OnInit {
+export default class HomeComponent {
+  private readonly domain = environment.domain;
+  private readonly seo = inject(MetaService);
+  private readonly schema = inject(SchemaService);
 
-  private domain = environment.domain;
-  private router = inject(Router)
-  private schemaService = inject(SchemaService)
-  private seoService = inject(MetaService)
+  constructor() {
+    const url = `${this.domain}/`;
+    const title = 'Bunna Shop | Café de especialidad y accesorios en Ecuador';
+    const description =
+      'Compra café de especialidad tostado en Ecuador y accesorios: cafeteras, molinos, filtros V60 y prensas francesas. Envíos a todo el país.';
 
-  constructor() {}
-
-  ngOnInit(): void {
-    const currentUrl = `${this.domain}${this.router.url}`;
-
-    const title = 'Bienvenido a Bunna Shop | Accesorios para Cafe ';
-    const description = 'Bienvenido a Bunna Shop: cafeteras, molinos, filtros V60 y más para preparar cafe como un experto en casa.'
-
-    this.seoService.updateMetaTags({
-      title,
-      description,
-      canonicalUrl: currentUrl,
-      og: {
-        title,
-        description,
-        url: currentUrl,
-        image: `${this.domain}/images/logos/bunnaCirc.webp`
-      }
+    this.seo.updateMetaTags({
+      title, description, canonicalUrl: url,
+      og: { title, description, url, image: `${this.domain}/images/logos/bunnaCirc.webp` },
     });
 
-    const schema = this.schemaService.generateContentPageSchema(
-      currentUrl,
+    const schema = this.schema.generateContentPageSchema(
+      url,
       'Bunna Shop inicio',
       description);
-    this.schemaService.injectSchema(schema, 'ContentPage');
-    }
+    this.schema.injectSchema(schema, 'home');
+
+  }
 }

@@ -1,6 +1,4 @@
 import {Component, inject, OnInit, ChangeDetectionStrategy} from '@angular/core';
-import {NavbarComponent} from "@shared/navbar/navbar.component";
-import {FooterComponent} from "@shared/footer/footer.component";
 import {Router} from "@angular/router";
 import {MetaService} from "@services/seo/meta.service";
 import {SchemaService} from "@services/seo/schema.service";
@@ -9,8 +7,6 @@ import {environment} from "@environments/environment";
 @Component({
   selector: 'app-returns-and-refunds-policy',
   imports: [
-    NavbarComponent,
-    FooterComponent
   ],
   templateUrl: './returns-and-refunds-policy.component.html',
   changeDetection: ChangeDetectionStrategy.Eager,

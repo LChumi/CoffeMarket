@@ -1,4 +1,4 @@
-import {Component, inject, OnInit, ChangeDetectionStrategy} from '@angular/core';
+import {Component, inject, ChangeDetectionStrategy} from '@angular/core';
 import {Categorias} from "@models/data/categorias";
 import {Router} from "@angular/router";
 import {CATEGORIAS_MOCK} from "@mocks/categorias";
@@ -11,15 +11,11 @@ import {CATEGORIAS_MOCK} from "@mocks/categorias";
   changeDetection: ChangeDetectionStrategy.Eager,
   styles: ``
 })
-export class CategoriesGridComponent implements OnInit {
+export class CategoriesGridComponent {
 
   private router = inject(Router)
 
   protected categorias: Categorias[] = CATEGORIAS_MOCK
-
-  ngOnInit(): void {
-
-  }
 
   goToProducts(categoryId: number) {
     this.router.navigate(['/productos', categoryId]).then(() => {

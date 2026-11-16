@@ -1,24 +1,11 @@
-<div id="page-container"
-     class="mx-auto flex min-h-screen w-full flex-col bg-[#FAF8F5] dark:bg-[#0F0D0C] dark:text-gray-100">
+<main id="contenido" class="flex-1">
+  <h1 class="sr-only">Bunna Shop: café de especialidad y accesorios para prepararlo en casa</h1>
+  <app-carousel/>
 
-  <header id="page-header" class="flex-none w-full">
-    <app-navbar></app-navbar>
-  </header>
-
-  <main class="flex-1">
-    <h1 class="sr-only">Bienvenido a Bunna Shop</h1>
-    <div>
-      <app-carousel></app-carousel>
-      <section class="mt-8 space-y-0">
-        <app-boxes-icons></app-boxes-icons>
-        <app-categories-grid></app-categories-grid>
-      </section>
-    </div>
-    <app-whatsapp-button></app-whatsapp-button>
-    <app-consent-modal></app-consent-modal>
-  </main>
-
-  <footer class="mt-auto w-full bg-white dark:bg-[#1A1512] border-t border-[#B3977E]/15">
-    <app-footer></app-footer>
-  </footer>
-</div>
+  @defer (hydrate on viewport) {
+    <app-boxes-icons/>
+    <app-categories-grid/>
+  } @placeholder {
+    <div class="min-h-[600px]"></div>
+  }
+</main>
