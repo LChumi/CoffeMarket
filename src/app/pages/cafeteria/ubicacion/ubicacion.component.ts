@@ -25,10 +25,10 @@ export class UbicacionComponent implements OnInit {
   private seoService = inject(MetaService)
 
   private readonly mapEmbedUrl =
-    'https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d861.6803945916535!2d-78.91815510476818!3d-2.8551567420372943!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1ses!2sec!4v1784643592904!5m2!1ses!2sec';
+    'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1277.6996622493873!2d-78.91865598320818!3d-2.854891059916093!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91cd117bd3a77bed%3A0x4b5ef702f9876e49!2sBunna%20Coffee%20Shop!5e1!3m2!1ses!2sec!4v1794842245095!5m2!1ses!2sec';
 
   readonly directionsUrl =
-    'https://www.google.com/maps/dir/?api=1&destination=-2.8551567420372943,-78.91815510476818';
+    'https://www.google.com/maps/dir/?api=1&destination=-2.8548924,-78.9174396';
 
   readonly horario = HORARIO_DIA;
 

@@ -49,3 +49,6 @@ $transition-time: 0.6s;
     }
   }
 }
+.progress { transform-origin: left; animation: progress 5s linear forwards; }
+@keyframes progress { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@media (prefers-reduced-motion: reduce) { .progress { display: none; } }

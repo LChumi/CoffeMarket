@@ -15,19 +15,10 @@ export class WhatsappButtonComponent {
   private clarity=  inject(ClarityService)
   private pixel = inject(MetaPixelService);
 
-  openWhatsApp() {
+  protected readonly url = `https://wa.me/593979126861?text=${encodeURIComponent('Hola, quiero más información sobre Bunna Café.')}`;
+  protected track() {
     this.pixel.track('Contact', { content_name: 'WhatsApp' });
-    const telefono = '593979126861';
-    const mensaje = 'Hola, quiero más información sobre Bunna Cafe.';
-    const encoded = encodeURIComponent(mensaje);
-    const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-
-    const url = isMobile
-      ? `https://wa.me/${telefono}?text=${encoded}`
-      : `https://web.whatsapp.com/send?phone=${telefono}&text=${encoded}`;
-
-    this.clarity.event("Redirect to WhatsApp")
-    window.open(url, '_blank', 'noopener,noreferrer');
+    this.clarity.event('Redirect to WhatsApp');
   }
 
 }
