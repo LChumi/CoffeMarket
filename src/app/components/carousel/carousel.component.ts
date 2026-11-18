@@ -7,6 +7,7 @@ interface Slide {
   image: string;
   eyebrow: string;
   title: string;
+  sub: string;
   cta: string;
   route: string;
 }
@@ -33,6 +34,7 @@ export class CarouselComponent implements OnInit, OnDestroy {
       image: 'images/slidebar/coffe_slide1.webp',
       eyebrow: 'Bunna Café',
       title: 'Bienvenidos a nuestro rincón del café',
+      sub: 'Café de especialidad tostado artesanalmente en Cuenca',
       cta: 'Explorar productos',
       route: '/products'
     },
@@ -41,6 +43,7 @@ export class CarouselComponent implements OnInit, OnDestroy {
       image: 'images/slidebar/coffe_slide2.webp',
       eyebrow: 'Especialidad',
       title: 'Explora, saborea y disfruta',
+      sub: 'Cada taza cuenta una historia de sabor y tradición',
       cta: 'Ver selección',
       route: '/products'
     },
@@ -49,6 +52,7 @@ export class CarouselComponent implements OnInit, OnDestroy {
       image: 'images/slidebar/coffe_slide4.webp',
       eyebrow: 'Cada día',
       title: 'Café, la mejor parte de cada día',
+      sub: 'Despierta con el aroma que marca la diferencia',
       cta: 'Conocer más',
       route: '/products'
     },
@@ -57,6 +61,7 @@ export class CarouselComponent implements OnInit, OnDestroy {
       image: 'images/slidebar/cafeteria.webp',
       eyebrow: 'Tu nueva experiencia de café en Cuenca',
       title: 'El rincón perfecto para tu café favorito',
+      sub: 'Visita nuestra cafetería y descubre cada sabor',
       cta: 'Conocer más',
       route: '/cafeteria'
     },
